@@ -1,0 +1,154 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+ </ngx-spinner>
+ 
+ <div class="card col">
+     <h1>{{title}}</h1>
+     <hr>
+ 
+     <form #solicitudForm="ngForm" class="p-fluid p-formgrid p-grid" autocomplete="off">
+         <div class="p-field p-col-12 p-md-2 p-sm-2">
+             <label for="id" >Id:</label>
+             <input id="id" type="text" pInputText [(ngModel)]="solicitud.id" name="id" #id="ngModel" [disabled]="true" >
+         </div>
+         
+         <div class="p-field p-col-12 p-md-10 p-sm-10">
+             <label for="descripcion">Descripción:</label>
+             <input id="descripcion" type="text" pInputText [(ngModel)]="solicitud.descripcion" name="descripcion" #descripcion="ngModel" [disabled]="true">
+         </div>
+
+          <div class="p-field p-col-12 p-md-4 p-sm-4" *ngIf="solicitud.estado === 'X' || solicitud.estado === 'F'">
+               <label for="diem">DIEN: </label>
+               <input id="diem" type="text" pInputText [(ngModel)]="solicitud.diem" name="diem" #diem="ngModel" [disabled]="true">
+          </div>
+
+          <div class="p-field p-col-12 p-md-4 p-sm-4" *ngIf="solicitud.estado === 'X' || solicitud.estado === 'F'">
+               <label for="usuarioDiem">Usuario: </label>
+               <input id="usuarioDiem" type="text" pInputText [(ngModel)]="solicitud.usuarioDiem" name="usuarioDiem" #usuarioDiem="ngModel" [disabled]="true">
+          </div>
+
+          <div class="p-field p-col-12 p-md-4 p-sm-4" *ngIf="solicitud.estado === 'X' || solicitud.estado === 'F'">
+               <label for="fechaDiem">Fecha: </label>
+               <input id="fechaDiem" type="text" pInputText [ngModel]="solicitud.fechaDiem | date: 'dd/MM/yyyy HH:mm:ss'" name="fechaDiem" #fechaDiem="ngModel" [disabled]="true">
+          </div>
+
+          <div class="p-field p-col-12 p-md-4 p-sm-4" *ngIf="solicitud.estado === 'F'">
+               <label for="prefijo">Prefijo: (*)</label>
+               <input id="prefijo" type="text" pInputText [(ngModel)]="solicitud.prefijo" name="prefijo" #prefijo="ngModel" [disabled]="true">
+          </div>
+
+          <div class="p-field p-col-12 p-md-4 p-sm-4" *ngIf="solicitud.estado === 'F'">
+               <label for="usuarioPrefijo">Usuario: </label>
+               <input id="usuarioPrefijo" type="text" pInputText [(ngModel)]="solicitud.usuarioPrefijo" name="usuarioPrefijo" #usuarioPrefijo="ngModel" [disabled]="true">
+          </div>
+
+          <div class="p-field p-col-12 p-md-4 p-sm-4" *ngIf="solicitud.estado === 'F'">
+               <label for="fechaPrefijo">Fecha: </label>
+               <input id="fechaPrefijo" type="text" pInputText [ngModel]="solicitud.fechaPrefijo | date: 'dd/MM/yyyy HH:mm:ss'" name="fechaPrefijo" #fechaPrefijo="ngModel" [disabled]="true">
+          </div>
+        
+
+          <div class="p-fluid p-formgrid p-grid p-col-12 p-md-12 p-sm-12">
+               <div class="p-field p-col-9 p-md-10 p-sm-10">
+                    <p-table #dt [value]="detalleList" [responsive]="true" [rowHover]="true" dataKey="id.idDetalle" [scrollable]="true" scrollHeight="40vh" 
+                             styleClass="p-datatable-sm" editMode="row" selectionMode="single" [(selection)]="detalleSeleccionado">
+                         <ng-template pTemplate="colgroup">
+                              <colgroup >
+                                   <col style="width:15%;">
+                                   <col style="width:15%;">
+                                   <col style="width:10%;">
+                                   <col style="width:40%;">
+                              </colgroup>
+                         </ng-template>
+                         <ng-template pTemplate="header">
+                              <tr>
+                                   <th>Cód.Pixel </th>
+                                   <th>Cód.SAP </th>
+                                   <th>Cantidad </th>
+                                   <th>Nombre Artículo </th>
+                                   <th>Precio </th>
+                                   <th></th>
+                              </tr>
+                         </ng-template>
+                         <ng-template pTemplate="body" let-detalle let-editing="editing" let-ri="rowIndex">
+                              <tr [pEditableRow]="detalle" [pSelectableRow]="detalle">
+                                   <td *ngIf="detalle.first">
+                                        <p-cellEditor>
+                                             <ng-template pTemplate="input">
+                                                  <p-inputNumber [(ngModel)]="detalle.copixel" name="copixel" [useGrouping]="false" id="copixel"></p-inputNumber>
+                                             </ng-template>
+                                             <ng-template pTemplate="output">
+                                                  {{detalle.copixel}}
+                                             </ng-template>
+                                        </p-cellEditor>
+                                   </td>
+                                   <td *ngIf="!detalle.first">{{detalle.copixel}}</td>
+                                   <td *ngIf="detalle.first">
+                                        <p-cellEditor>
+                                             <ng-template pTemplate="input">
+                                                  <p-inputNumber [(ngModel)]="detalle.codsap" name="codsap" [useGrouping]="false"></p-inputNumber>
+                                             </ng-template>
+                                             <ng-template pTemplate="output">
+                                                  {{detalle.codsap}}
+                                             </ng-template>
+                                        </p-cellEditor>
+                                   </td>
+                                   <td *ngIf="!detalle.first">{{detalle.copixel}}</td>
+                                   <td *ngIf="detalle.first">{{detalle.cantidad}}</td>
+                                   <td *ngIf="!detalle.first">
+                                        <p-cellEditor>
+                                             <ng-template pTemplate="input">
+                                                  <p-inputNumber [(ngModel)]="detalle.cantidad" name="monto" locale="es-PE" id="cantidad"></p-inputNumber>
+                                             </ng-template>
+                                             <ng-template pTemplate="output">
+                                                  {{detalle.cantidad}}
+                                             </ng-template>
+                                        </p-cellEditor>
+                                   </td>
+                                   <td>
+                                        <p-cellEditor>
+                                             <ng-template pTemplate="input">
+                                                  <input pInputText  [(ngModel)]="detalle.descripcion" name="descripcion">
+                                             </ng-template>
+                                             <ng-template pTemplate="output">
+                                                  {{detalle.descripcion}}
+                                             </ng-template>
+                                        </p-cellEditor>
+                                   </td>
+                                   <td *ngIf="detalle.first">
+                                        <p-cellEditor>
+                                             <ng-template pTemplate="input">
+                                                  <p-inputNumber mode="decimal" [(ngModel)]="detalle.monto" name="monto" locale="es-PE" [minFractionDigits]="2" [maxFractionDigits]="2"></p-inputNumber>
+                                             </ng-template>
+                                             <ng-template pTemplate="output">
+                                                  {{detalle.monto | number: '.2-2'}}
+                                             </ng-template>
+                                        </p-cellEditor>
+                                   </td>
+                                   <td *ngIf="!detalle.first">{{detalle.monto | number: '.2-2'}}</td>
+                                   <td style="text-align:center">
+                                        <button *ngIf="editing" pButton pRipple type="button" icon="pi pi-check" (click)="onRowEditSave(detalle)" class="p-button-rounded p-button-success p-mr-2"></button>
+                                        <button *ngIf="editing" pButton pRipple type="button" icon="pi pi-times" (click)="onRowEditCancel(detalle)" class="p-button-rounded p-button-danger"></button>
+                                    </td>
+                              </tr>
+                         </ng-template>
+                    </p-table>
+               </div>
+               <div class="p-field p-col-3 p-md-2 p-sm-2 p-d-flex p-flex-column" *ngIf="type=='N'">
+                    <div class="p-d-flex p-flex-column">
+                         <div class="p-mb-2">
+                              <button pButton pRipple pTooltip="Agregar" tooltipPosition="bottom" label="Agregar" icon="pi pi-plus" class="p-button-success" (click)="addDetalle()" [disabled]="agregando"></button>
+                         </div>
+                         <div class="p-mb-2">
+                              <button pButton pRipple pTooltip="Eliminar" tooltipPosition="bottom" label="Eliminar" icon="pi pi-times" class="p-button-danger" (click)="removeDetalle()" [disabled]="agregando"></button>
+                         </div>
+                     </div>
+               </div>
+          </div>
+     </form>
+ 
+     <div class="p-d-flex p-jc-end p-mt-3">
+         <button pButton pRipple pTooltip="Guardar"  tooltipPosition="bottom" label="Guardar"  icon="pi pi-save"  class="p-button-success p-mr-2" (click)="save()" [disabled]="agregando" *ngIf="type !== 'V'"></button>
+         <button pButton pRipple pTooltip="Cancelar" tooltipPosition="bottom" label="Cancelar" icon="pi pi-times" class="p-button-secondary" (click)="cancelar()"></button>
+     </div>
+ </div>

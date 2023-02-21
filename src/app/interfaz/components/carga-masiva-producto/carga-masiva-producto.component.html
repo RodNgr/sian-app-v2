@@ -1,0 +1,80 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+     <p-toolbar styleClass="p-mb-4">
+          <ng-template pTemplate="left">
+               <p-fileUpload #fileUpload styleClass="p-button-help" mode="basic" accept=".xlsx" [auto]="true" [maxFileSize]="1000000" [customUpload]="true" chooseLabel="Buscar Formato" 
+                    pTooltip="Buscar Formato" tooltipPosition="bottom" (uploadHandler)="customUpload($event, fileUpload)" ></p-fileUpload>
+          </ng-template>
+ 
+          <ng-template pTemplate="right">
+               <button pButton pRipple class="p-button-success" type="button" pTooltip="Actualizar Información" tooltipPosition="bottom" label="Actualizar Información" icon="pi pi-upload" (click)="loadData()"></button>
+          </ng-template>
+     </p-toolbar>
+
+     <div *ngIf="empresaService.getEmpresaSeleccionada().idEmpresa === 8">
+          <p-table [value]="dto.articuloList" [responsive]="true" [rowHover]="true" dataKey="prodNum" [scrollable]="true" scrollHeight="40vh" 
+                    styleClass="p-datatable-sm p-datatable-striped">
+               <ng-template pTemplate="colgroup">
+                    <colgroup *ngIf="!isMobile">
+                         <col style="width: 10%;">
+                         <col style="width: 20%;">
+                         <col style="width: 15%;">
+                         <col style="width: 10%;">
+                         <col style="width: 10%;">
+                    </colgroup>
+               </ng-template>
+               <ng-template pTemplate="header">
+                    <tr>
+                         <th [ngClass]="{'p-text-center': !isMobile}">Cód.Pixel </th>
+                         <th>Nombre Pixel </th>
+                         <th>Tipo Consumo </th>
+                         <th>C.Clásicas </th>
+                         <th>C.Premium </th>
+                         <th>Familia </th>
+                    </tr>
+               </ng-template>
+               <ng-template pTemplate="body" let-producto>
+                    <tr>
+                         <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Cód.Pixel</span>{{producto.coPixel}}</td>
+                         <td><span class="p-column-title">Nombre Pixel</span>{{producto.descripcionArticulo}}</td>
+                         <td><span class="p-column-title">Tipo Consumo</span>{{producto.tipoConsumo?.descripcion}}</td>
+                         <td><span class="p-column-title">Tipo Consumo</span>{{producto.clasica}}</td>
+                         <td><span class="p-column-title">Tipo Consumo</span>{{producto.premium}}</td>
+                         <td><span class="p-column-title">Familia</span>{{producto.jerarquia}}</td>
+                    </tr>
+               </ng-template>
+          </p-table>
+     </div>
+
+     <div *ngIf="empresaService.getEmpresaSeleccionada().idEmpresa !== 8">
+          <p-table [value]="dto.articuloList" [responsive]="true" [rowHover]="true" dataKey="prodNum" [scrollable]="true" scrollHeight="40vh" 
+                    styleClass="p-datatable-sm p-datatable-striped">
+               <ng-template pTemplate="colgroup">
+                    <colgroup *ngIf="!isMobile">
+                         <col style="width: 10%;">
+                         <col style="width: 25%;">
+                         <col style="width: 15%;">
+                    </colgroup>
+               </ng-template>
+               <ng-template pTemplate="header">
+                    <tr>
+                         <th [ngClass]="{'p-text-center': !isMobile}">Cód.Pixel </th>
+                         <th>Nombre Pixel </th>
+                         <th>Tipo Consumo </th>
+                         <th>Familia </th>
+                    </tr>
+               </ng-template>
+               <ng-template pTemplate="body" let-producto>
+                    <tr>
+                         <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Cód.Pixel</span>{{producto.coPixel}}</td>
+                         <td><span class="p-column-title">Nombre Pixel</span>{{producto.descripcionArticulo}}</td>
+                         <td><span class="p-column-title">Tipo Consumo</span>{{producto.tipoConsumo?.descripcion}}</td>
+                         <td><span class="p-column-title">Familia</span>{{producto.jerarquia}}</td>
+                    </tr>
+               </ng-template>
+          </p-table>
+     </div>
+</div>

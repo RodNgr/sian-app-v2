@@ -1,0 +1,84 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+     <p-toolbar styleClass="p-mb-4">
+          <ng-template pTemplate="left">
+               <button pButton pRipple pTooltip="Nuevo" tooltipPosition="bottom" label="Nuevo" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="newSolicitud()" *ngIf="authService.hasRole('ROL_SIAN_MKT_GENERA_SOLICITUD')"></button>
+               <button pButton pRipple pTooltip="Consultar" tooltipPosition="bottom" label="Consultar" icon="pi pi-eye" class="p-button-help p-mr-4" (click)="viewSolicitud()" ></button>
+
+               <button pButton pRipple pTooltip="Reenviar Correo" tooltipPosition="bottom" label="Reenviar correo" icon="pi pi-envelope" class="p-button-primary p-mr-2" (click)="reenviar()" *ngIf="authService.hasRole('ROL_SIAN_MKT_GENERA_SOLICITUD')"></button>
+               <button pButton pRipple pTooltip="Asignar DIEN" tooltipPosition="bottom" label="Asignar DIEN" icon="pi pi-cog" class="p-button-info p-mr-2" (click)="registrarDien()" *ngIf="authService.hasRole('ROL_SIAN_MKT_REGISTRAR_DIEM')"></button>
+               <button pButton pRipple pTooltip="Asignar Prefijo" tooltipPosition="bottom" label="Asignar Prefijo" icon="pi pi-table" class="p-button-secondary p-mr-4" (click)="asignarPrefijo()" *ngIf="authService.hasRole('ROL_SIAN_MKT_ASIGNAR_DIEM')"></button>
+
+               <button pButton pRipple pTooltip="Anular" tooltipPosition="bottom" label="Anular" icon="pi pi-minus-circle" class="p-button-danger p-mr-2" (click)="anularSolicitud()" *ngIf="authService.hasRole('ROL_SIAN_MKT_SOLICITUD_ANULAR')"></button>
+          </ng-template>
+
+          <ng-template pTemplate="right">
+               <button pButton pRipple pTooltip="Exportar" tooltipPosition="bottom" label="Exportar" icon="pi pi-upload" (click)="exportXLS()" styleClass="p-button-info"></button>
+          </ng-template>
+     </p-toolbar>
+
+     <p-table #dt [value]="solicitudList" [responsive]="true" [rows]="25" [paginator]="true" [rowHover]="true" dataKey="id"
+               [scrollable]="true" scrollHeight="40vh" [rowsPerPageOptions]="[15,25,50,100]" selectionMode="single" [(selection)]="solicitudSelected" 
+               currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+               styleClass="p-datatable-sm p-datatable-striped">
+          <ng-template pTemplate="caption">
+               <div class="p-d-flex p-jc-between">
+                    <div class="p-grid p-ai-center vertical-container">
+                         <h1 class="p-col p-m-0">Solicitudes</h1>
+                    </div>
+
+                    <div class="p-fluid p-form-grid p-grid p-jc-end">
+                         <div class="p-field p-col">
+                              <label for="inicio">Inicio:</label>
+                              <p-calendar id="inicio" [(ngModel)]="rangeDates[0]" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" [touchUI]="isMobile"></p-calendar>
+                         </div>
+                         <div class="p-field p-col">
+                              <label for="fin">Fin:</label>
+                              <p-calendar id="fin" [(ngModel)]="rangeDates[1]" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" [touchUI]="isMobile"></p-calendar>
+                         </div>
+
+                         <div class="p-field p-mr-2 p-ml-2">
+                              <button pButton pRipple pTooltip="Buscar" tooltipPosition="bottom" type="button" label="Buscar" style="margin-top: 2.3rem" icon="pi pi-search" (click)="buscar()"></button>
+                         </div>
+                    </div>
+               </div>
+          </ng-template>
+          <ng-template pTemplate="colgroup">
+               <colgroup *ngIf="!isMobile">
+                    <col style="width:8%;">
+                    <col style="width:40%;">
+                    <col style="width:12%;">
+                    <col style="width:12%;">
+                    <col style="width:12%;">
+               </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header">
+               <tr>
+                    <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
+                    <th pSortableColumn="descripcion">Descripción <p-sortIcon field="descripcion"></p-sortIcon></th>
+                    <th pSortableColumn="fechaCreacion">Fecha <p-sortIcon field="fechaCreacion"></p-sortIcon></th>
+                    <th pSortableColumn="diem">DIEN <p-sortIcon field="diem"></p-sortIcon></th>
+                    <th pSortableColumn="prefijo">Prefijo <p-sortIcon field="prefijo"></p-sortIcon></th>
+                    <th pSortableColumn="estado">Estado <p-sortIcon field="estado"></p-sortIcon></th>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-solicitud>
+               <tr [pSelectableRow]="solicitud">
+                    <td><span class="p-column-title">Id</span>{{solicitud.id}}</td>
+                    <td><span class="p-column-title">Descripción</span>{{solicitud.descripcion}}</td>
+                    <td><span class="p-column-title">Fecha</span>{{solicitud.fechaCreacion | date: 'dd/MM/yyyy'}}</td>
+                    <td><span class="p-column-title">DIEN</span>{{solicitud.diem}}</td>
+                    <td><span class="p-column-title">Prefijo</span>{{solicitud.prefijo}}</td>
+                    <td><span class="p-column-title">Estado</span>{{solicitud.estado | estadoSolicitud}}</td>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="summary">
+               <div class="p-d-flex p-ai-center p-jc-between">
+                    {{(solicitudList ? solicitudList.length : 0) | i18nPlural: cantidadMap}}
+               </div>
+          </ng-template>
+     </p-table>
+</div>

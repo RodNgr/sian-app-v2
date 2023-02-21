@@ -1,0 +1,64 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+     <p-toolbar styleClass="p-mb-4">
+          <ng-template pTemplate="left">
+               <button pButton pRipple label="Consultar" icon="pi pi-eye" class="p-button-help p-mr-5" (click)="viewUsuario()" pTooltip="Consultar" tooltipPosition="bottom"></button>
+               <button pButton pRipple label="Ver Dispositivos" icon="pi pi-tablet" class="p-button-secondary p-mr-5" (click)="viewDevice()" pTooltip="Ver Dispositivos" tooltipPosition="bottom"></button>
+               <button pButton pRipple label="Asignar Permisos" icon="pi pi-tag" class="p-button-info p-mr-2" (click)="asignarPermisos()" pTooltip="Asignar Permisos" tooltipPosition="bottom"></button>
+               <button pButton pRipple label="Copiar Permisos" icon="pi pi-copy" class="p-button-help p-mr-5" (click)="copiarPermisos()" pTooltip="Copiar Permisos" tooltipPosition="bottom"></button>
+               <button pButton pRipple label="Asignar Grupos" icon="pi pi-home" class="p-button-primary" (click)="asignarGrupo()" pTooltip="Asignar Grupos" tooltipPosition="bottom"></button>
+          </ng-template>
+     </p-toolbar>
+
+     <p-table #dt [value]="usuarioList" [responsive]="true" [rows]="25" [paginator]="true" [rowHover]="true" dataKey="codigo" [scrollable]="true" scrollHeight="40vh"
+               selectionMode="single" [(selection)]="usuarioSelected" styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
+               currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+               [rowsPerPageOptions]="[15,25,50,100]">
+          <ng-template pTemplate="caption">
+               <div class="p-d-flex p-jc-between">
+                    <div class="p-grid p-ai-center vertical-container">
+                         <h1 class="p-m-0">Usuario</h1>
+                    </div>
+                    
+                    <div class="p-fluid p-form-grid p-grid p-jc-end">
+                         <div class="p-field p-col p-lg-8 p-md-8- psm-8">
+                              <label for="cantidad">Buscar Usuario:</label>
+                              <input type="text" [(ngModel)]="filtro" class="p-text-uppercase" pInputText>
+                         </div>
+                         <div class="p-field p-col">
+                              <button pButton pRipple pTooltip="Buscar" tooltipPosition="bottom" type="button" label="Buscar" style="margin-top: 1.75rem" icon="pi pi-search" (click)="buscar()"></button>
+                         </div>
+                    </div>
+               </div>
+          </ng-template>
+          <ng-template pTemplate="colgroup">
+               <colgroup *ngIf="!isMobile">
+                    <col style="width:15%;">
+               </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header">
+               <tr>
+                    <th pSortableColumn="id">Código <p-sortIcon field="id"></p-sortIcon></th>
+                    <th pSortableColumn="fullname">Nombre <p-sortIcon field="fullname"></p-sortIcon></th>
+                    <th pSortableColumn="razsoc">Empresa <p-sortIcon field="razsoc"></p-sortIcon></th>
+                    <th pSortableColumn="despue">Cargo <p-sortIcon field="despue"></p-sortIcon></th>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-usuario>
+               <tr [pSelectableRow]="usuario">
+                    <td><span class="p-column-title">Código</span>{{usuario.codigo}}</td>
+                    <td ><span class="p-column-title">Nombre </span>{{usuario.fullName}}</td>
+                    <td ><span class="p-column-title">Empresa </span>{{usuario.razsoc}}</td>
+                    <td ><span class="p-column-title">Cargo </span>{{usuario.despue}}</td>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="summary">
+               <div class="p-d-flex p-ai-center p-jc-between">
+                    {{(usuarioList ? usuarioList.length : 0) | i18nPlural: cantidadMap}}
+               </div>
+          </ng-template>
+     </p-table>
+</div>

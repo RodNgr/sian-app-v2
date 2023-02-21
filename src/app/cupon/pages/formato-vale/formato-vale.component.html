@@ -1,0 +1,43 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+ </ngx-spinner>
+ 
+ <div class="card col">
+     <h1>{{title}}</h1>
+     <hr>
+ 
+     <form #formatoForm="ngForm" class="p-fluid p-formgrid p-grid" autocomplete="off">
+         <div class="p-field p-col-12">
+               <label for="descripcion" [ngClass] = "{' p-error ': descripcion.invalid && (descripcion.dirty || descripcion.touched)}">Descripcion: (*)</label>
+               <input id="descripcion" type="text" pInputText class="p-text-uppercase" required maxlength="100"
+                     [ngClass] = "{' ng-invalid ng-dirty ': descripcion.invalid && (descripcion.dirty || descripcion.touched)}"  
+                     [(ngModel)]="formatoVale.descripcion" name="descripcion" #descripcion="ngModel"
+                     [disabled]="type === 'V'" tabindex="3" onfocus="this.select()">
+               <small *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" id="password-help" class="p-error">
+                    La <strong>descripción</strong> es requerida.
+               </small>
+         </div>
+         
+         <div class="p-field p-col-12">
+               <label for="imagen">Imagen: (*)</label>
+               <p-fileUpload *ngIf="type !== 'V'" name="archivo" [auto]="false" accept=".png,.jpg" (onSelect)="onUpload($event)"
+                    [maxFileSize]="6000000" [showCancelButton]="false" [showUploadButton]="false">
+                    <ng-template let-file pTemplate="file">
+                         <img [src]="file.objectURL.changingThisBreaksApplicationSecurity | safe" alt="Imagen" style="width: 50%; height: auto;">
+                    </ng-template> 
+                    <ng-template pTemplate="content" let-files>
+                        <div *ngIf="!uploadedFile && type === 'E'">
+                            <img [src]="url + '/api/formato-vale/upload/' + formatoVale.nombreAlmacenado | safe" alt="Imagen" style="width: 50%; height: auto;">
+                        </div>
+                    </ng-template>
+                </p-fileUpload>
+                <br>
+               <img *ngIf="type === 'V'"[src]="url + '/api/formato-vale/upload/' + formatoVale.nombreAlmacenado| safe" alt="Imagen" style="width: 50%; height: auto;">
+         </div>
+     </form>
+ 
+     <div class="p-d-flex p-jc-end p-mt-3">
+         <button pButton pRipple pTooltip="Guardar"  tooltipPosition="bottom" label="Guardar"  icon="pi pi-save"  class="p-button-success p-mr-2" (click)="save()" [disabled]="!formatoForm.form.valid" *ngIf="type !== 'V'"></button>
+         <button pButton pRipple pTooltip="Cancelar" tooltipPosition="bottom" label="Cancelar" icon="pi pi-times" class="p-button-secondary" (click)="cancelar()"></button>
+     </div>
+ </div>

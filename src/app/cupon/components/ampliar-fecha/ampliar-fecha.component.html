@@ -1,0 +1,37 @@
+<div id="container" class="p-d-flex p-flex-column">
+     <div style="display: grid; justify-content: center;">
+          <h2>Ampliar Fecha</h2>
+          <div class="p-mb-2" style="color: #4e8fb8;">
+               <div class="p-grid p-col-12 p-lg-12 p-md-12 p-sm-12 ">
+                    <label for="inicio" style="font-weight: bold;">Campaña {{Campanha}}</label>
+               </div>
+          </div>
+
+          <div class="p-mb-2">
+               <div class="p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12 ">
+                    <label for="inicio" class="p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12 ">Inicio:</label>
+                    <div class="p-col p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12">
+                         <p-calendar appendTo="body" id="inicio" [(ngModel)]="fecha" name="vdesde" #vdesde="ngModel" dateFormat="dd/mm/yy" inputStyleClass="p-text-center">
+                         </p-calendar>
+                    </div>
+               </div>
+          </div>
+
+          <div class="p-mb-2">
+               <div class="p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12 ">
+                    <label for="inicio" class="p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12 ">Fin:</label>
+                    <div class="p-col p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12 ">
+                         <p-calendar appendTo="body" id="Fin" [(ngModel)]="fin" name="vdesde" #vdesde="ngModel" dateFormat="dd/mm/yy" inputStyleClass="p-text-center">
+                         </p-calendar>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+     <div class="p-mb-2 p-d-flex p-jc-center">
+          <div class="p-d-flex p-jc-end">
+               <button pButton pRipple pTooltip="Ampliar" tooltipPosition="bottom" label="Guardar"  (click)="Confirmar()" icon="pi pi-calendar-plus" class="p-button-success p-mr-2"></button>
+               <button pButton pRipple pTooltip="Cancelar" tooltipPosition="bottom" label="Cancelar" (click)="cancelar()" icon="pi pi-times" class="p-button-secondary"></button>
+          </div>    
+     </div>
+</div>

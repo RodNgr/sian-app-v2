@@ -1,0 +1,72 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+     <p-toolbar styleClass="p-mb-4">
+          <ng-template pTemplate="left">
+          </ng-template>
+
+          <ng-template pTemplate="right">
+               <button pButton pRipple pTooltip="Exportar" tooltipPosition="bottom" label="Exportar" icon="pi pi-upload" (click)="exportList()"></button>
+          </ng-template>
+     </p-toolbar>
+
+     <p-table #dt [responsive]="true" [rowHover]="true" [scrollable]="true" scrollHeight="40vh" [columns]="resultadoDto.childColumnNames"
+               [value]="resultadoDto.valores" styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
+          <ng-template pTemplate="caption">
+               <div class="p-d-flex p-grid">
+                    <div class="p-col-12 p-ai-center vertical-container">
+                         <h1 class="p-m-0">Resumen de Ejecución de Interfaces</h1>
+                    </div>
+                    
+                    <div class="p-col-12">
+                         <div class="p-fluid p-formgrid p-grid">
+                              <div class="p-field p-lg-4 p-md-2 p-sm-12">
+                                   <label for="cantidad">Tiendas:</label>
+                                   <p-multiSelect [options]="tiendaList" [(ngModel)]="tiendasSeleccionadas" defaultLabel="Seleccione las Tiendas" optionLabel="nombreTienda" selectedItemsLabel="{0} tiendas seleccionadas"></p-multiSelect>
+                              </div>
+
+                              <div class="p-field p-lg-2 p-md-2 p-sm-12">
+                                   <label for="cantidad">Fecha Inicial:</label>
+                                   <p-calendar [(ngModel)]="rangeDates[0]" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" 
+                                   (ngModelChange)="changeFecIni()">
+                                   </p-calendar>
+                              </div>
+
+                              <div class="p-field p-lg-2 p-md-2 p-sm-12">
+                                   <label for="cantidad">Fecha Final:</label>
+                                   <p-calendar [(ngModel)]="rangeDates[1]" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" 
+                                   (ngModelChange)="changeFecFin()">
+                                   </p-calendar>
+                              </div>
+
+                              <div class="p-field p-lg-2 p-md-3 p-sm-3">
+                                   <button pButton pRipple pTooltip="Buscar" tooltipPosition="bottom" type="button" label="Buscar" style="margin-top: 1.75rem" icon="pi pi-search" (click)="buscar()"></button>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+               <tr>
+                    <th rowspan="2" style="width: 250px">Tienda </th>
+                    <th colspan="4" style="width: 180px" class="p-text-center" *ngFor="let parent of resultadoDto.parentColumnNames">{{parent}}</th>
+               </tr>
+               <tr>
+                    <th style="width: 45px" class="p-text-center" *ngFor="let child of resultadoDto.childColumnNames">{{child.name}}</th>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+               <tr>
+                    <td style="width: 250px">{{rowData.data['nombre']}}</td>
+                    <td *ngFor="let col of columns" style="width: 45px;" class="p-text-center" 
+                         [style.background]="rowData.data[col.busqueda] == '' ? '#d3d3d3' : (rowData.data[col.busqueda] == 'P' ? '#d3d3d3' : '')">
+                         <!--- Juan Ramos - funcion getDetallesInterface -->
+                         <span style="color: green; cursor: pointer;" (click)="getDetallesInterface(resultadoDto, col.busqueda)" [ngClass]="{'pi pi-check-circle': rowData.data[col.busqueda] === 'C'}"></span>
+                         <span style="color: red; cursor: pointer;" (click)="getDetallesInterface(resultadoDto, col.busqueda)" [ngClass]="{'pi pi-times-circle': rowData.data[col.busqueda] === 'E'}"></span>
+                    </td>
+               </tr>
+          </ng-template>
+     </p-table>
+</div>

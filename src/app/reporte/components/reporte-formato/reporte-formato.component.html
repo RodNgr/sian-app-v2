@@ -1,0 +1,70 @@
+<div class="card col ">
+     <div class="p-grid">
+          <div class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+               <p-fieldset legend="Seleccione Reporte" id="msg">
+                    <div class="p-fluid p-formgrid p-grid">
+                         <div class="p-field p-col-6 p-lg-6 p-md-6 p-sm-12">
+                              <label for="grupoReporte" [ngClass] = "{' p-error ': grupoReporte.invalid && (grupoReporte.dirty || grupoReporte.touched)}">Grupo: (*)</label>
+                              <!-- <p-dropdown appendTo="body" optionLabel="nombre" placeholder="Todos" [showClear]="true" > -->
+                              <p-dropdown appendTo="body" [options]="grupoReporteList" [autofocus]="true" [required]="true" [(ngModel)]="grupoReporteSelected" 
+                                   optionLabel="descripcion" [filter]="true" filterBy="descripcion" placeholder="Seleccione un Grupo" 
+                                   [ngClass] = "{' p-error ': grupoReporte.invalid && (grupoReporte.dirty || grupoReporte.touched)}"
+                                   name="grupoReporte" #grupoReporte="ngModel" [tabindex]="1" (onChange)="loadTipoReporte()"></p-dropdown>
+                              <small *ngIf="grupoReporte.invalid && (grupoReporte.dirty || grupoReporte.touched)" id="password-help" class="p-error">
+                                   Debe seleccionar el <strong>grupo</strong>.
+                              </small>
+                         </div>
+                         <div class="p-field p-col-6 p-lg-6 p-md-6 p-sm-12">
+                              <label for="tipoReporte" [ngClass] = "{' p-error ': tipoReporte.invalid && (tipoReporte.dirty || tipoReporte.touched)}">Reporte: (*)</label>
+                              <!-- <p-dropdown appendTo="body" optionLabel="nombre" placeholder="Todos" [showClear]="true" > -->
+                              <p-dropdown appendTo="body" [options]="tipoReporteList" [required]="true" [(ngModel)]="tipoReporteSelected" 
+                                   optionLabel="descripcion" [filter]="true" filterBy="descripcion" placeholder="Seleccione un Reporte"
+                                   [ngClass] = "{' p-error ': tipoReporte.invalid && (tipoReporte.dirty || tipoReporte.touched)}" 
+                                   name="tipoReporte" #tipoReporte="ngModel" [tabindex]="2" (onChange)="onChangeTipoReporte()" ></p-dropdown>
+                              <small *ngIf="tipoReporte.invalid && (tipoReporte.dirty || tipoReporte.touched)" id="password-help" class="p-error">
+                                   Debe seleccionar el <strong>reporte</strong>.
+                              </small>
+                         </div>
+                    </div>
+               </p-fieldset>
+          </div>
+
+          <div class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+               <p-fieldset legend="Filtros">
+                    <div class="p-fluid p-formgrid p-grid">
+                         <div *ngFor="let param of parametros"   [ngClass] = "param.tipo === 'T' || param.tipo === 'C' || param.tipo === 'X' ? 'p-field p-col-12 p-lg-12 p-md-12 p-sm-12' : 'p-field p-col-4 p-lg-4 p-md-4 p-sm-12'" >
+                              <label [for]="param.pk.idTipoReporteParametro" >{{param.descripcion}}: (*)</label>
+                              
+                              <div *ngIf="param.tipo === 'C'">
+                                   <p-multiSelect [options]="empresaService.getAllEmpresas()" [selectedItemsLabel]="'{0} items selected'" ></p-multiSelect>
+                              </div>
+
+                              <div *ngIf="param.tipo === 'T'">
+                                   <p-multiSelect [options]="tiendaList" optionLabel="nombre" [selectedItemsLabel]="'{0} items selected'" (onChange)="onSelectStores($event, param)"></p-multiSelect>
+                              </div>
+
+                              <div *ngIf="param.tipo === 'X'">
+                                  <!-- <input pInputText type="number" class="p-text-center" > -->
+                                  
+                              </div>
+
+                              <div *ngIf="param.tipo === 'F'">
+                                   <p-calendar appendTo="body" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" [readonlyInput]="true" [required]="true" [showButtonBar]="true" (onSelect)="onSelectDate($event, param)"></p-calendar>
+                              </div>
+                    
+                              <div *ngIf="param.tipo === 'N'">
+                                   <p-inputNumber [useGrouping]="false" [min]="0"  (onInput)="onSelectNumber($event, param)"> </p-inputNumber>
+                              </div>
+                         </div>
+                    </div>
+               </p-fieldset>
+          </div>
+     </div>    
+
+     <div class="p-mb-2">
+          <div class="p-d-flex p-jc-end">
+               <button pButton pRipple pTooltip="Aprobar" tooltipPosition="bottom" label="Aprobar"  icon="pi pi-check-circle" (click)="aceptar()" class="p-button-success p-mr-2"></button>
+               <button pButton pRipple pTooltip="Cancelar" tooltipPosition="bottom" label="Cancelar" icon="pi pi-times" (click)="cancelar()" class="p-button-secondary"></button>
+          </div>
+     </div>
+</div>

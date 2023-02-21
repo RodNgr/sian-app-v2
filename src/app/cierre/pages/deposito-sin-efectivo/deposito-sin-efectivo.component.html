@@ -1,0 +1,100 @@
+<div class="card col">
+    <div class="p-fluid p-grid" >
+         <div class="p-fluid p-grid p-col-6">
+              
+                   <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+                        <label for="nBanco">Banco / Institución:</label>
+                        <p-dropdown [options]="bancosList" [autofocus]="true" [(ngModel)]="bancoSeleccionado" optionLabel="nombre" 
+                             [filter]="true" filterBy="nombre" placeholder="Seleccione un banco" name="nBanco"
+                             (onChange)="changeBanco()">
+                        </p-dropdown>
+                   </div>
+         </div>        
+    </div>
+    <div class="p-fluid p-grid" >        
+                  <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-6">
+                       <label for="nMoneda">Moneda: </label>
+                       <p-dropdown [options]="monedaList" [autofocus]="true" [(ngModel)]="monedaSeleccionada" optionLabel="nombre" 
+                            [filter]="true" filterBy="nombre" placeholder="Seleccione una moneda" name="nMoneda"
+                            (onChange)="changeMoneda()">
+                        </p-dropdown>
+                  </div>
+                  <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-6">
+                    <label for="nTiendaBanco">No. de cuenta: </label>
+                    <p-dropdown [options]="tiendaBancoList" [autofocus]="true" [(ngModel)]="tiendaBancoSeleccionado" optionLabel="numero" 
+                         [filter]="true" filterBy="numero" placeholder="Seleccione una cuenta" name="nTiendaBanco"
+                     ></p-dropdown>
+                  </div>        
+   </div>
+   <div class="p-fluid p-grid" > 
+        <div class="p-field p-col-12 p-lg-3 p-md-3 p-sm-3">
+            <label for="txtMonto">Monto del voucher:</label>
+            <p-inputNumber #monto id="txtMonto" locale="es-PE" [min]="0" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2"
+                    [(ngModel)]="montoIngresado"></p-inputNumber>
+        </div>       
+        <div class="p-field p-col-12 p-lg-3 p-md-3 p-sm-3">
+            <label for="">Fecha:</label>
+            <p-calendar [(ngModel)]="fechaSeleccionada" dateFormat="dd/mm/yy" inputStyleClass="p-text-center"></p-calendar>
+       </div>
+       <div class="p-field p-col-12 p-lg-3 p-md-3 p-sm-3">
+            <label for="">No. de Ope/Tra. :</label>
+            <input pInputText type="text" [(ngModel)]="operacionIngresada">
+       </div> 
+       <div class="p-field p-col-12 p-lg-3 p-md-3 p-sm-3">
+        <label for="">Oficina :</label>
+        <input pInputText type="text" [(ngModel)]="oficinaIngresada">
+       </div>       
+    </div>
+    <div class="p-fluid p-grid" >
+        <div class="p-field p-col-4 p-lg-4 p-md-4 p-sm-4">
+            <button (click)="agregarDeposito()" pButton pRipple label="Agregar a la lista el depósito" icon="pi pi-plus" class="p-button-primary p-mr-2"></button>
+        </div>
+    </div>
+
+    <div class="p-fluid p-grid" >
+            <p-table id="table" [value]="depositosList"  [responsive]="true" styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped"
+            selectionMode="single" [(selection)]="depositoSeleccionado" dataKey="idEmpresa">
+            <ng-template pTemplate="colgroup">
+                <colgroup>
+                     <col style="width:18%;">
+                     <col style="width:10%;">
+                     <col style="width:18%;">
+                     <col style="width:13%;">
+                     <col style="width:11%;">
+                     <col style="width:10%;">
+                     <col style="width:10%;">
+                     <col style="width:10%;">
+                </colgroup>
+           </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Banco</th>
+                    <th>Moneda</th>
+                    <th>No.Cuenta</th>
+                    <th>Monto del voucher</th>
+                    <th>Fec. voucher</th>
+                    <th>No. operacion</th>
+                    <th>Oficina</th>
+                    <th>Accion</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-deposito>
+                <tr>
+                    <td>{{deposito.banco.nombre}}</td>
+                    <td>{{deposito.moneda.nombre}}</td>
+                    <td>{{deposito.cuentaBancaria.numero}}</td>
+                    <td style="text-align: right">{{deposito.monto | number:'1.2'}}</td>
+                    <td>{{deposito.fechaEnTabla | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{deposito.noTransaccion}}</td>
+                    <td>{{deposito.oficina}}</td>
+                    <td><button pButton (click)="eliminaDeposito(deposito)" pRipple icon="pi pi-minus-circle" class="p-button-danger p-mr-2"></button></td>
+                </tr>
+            </ng-template>
+        </p-table   >
+    </div>
+  
+</div>
+
+ <div class="p-d-flex p-jc-end p-mt-3">
+     <button pButton pRipple label="Cancelar" (click)="cancelar()" icon="pi pi-times" class="p-button-secondary"></button>
+ </div>

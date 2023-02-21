@@ -1,0 +1,57 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+     <p-toolbar styleClass="p-mb-4">
+          <ng-template pTemplate="left">
+               <button pButton pRipple pTooltip="Nuevo" tooltipPosition="bottom" label="Nuevo" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="newFormato()"></button>
+               <button pButton pRipple pTooltip="Editar" tooltipPosition="bottom" label="Editar" icon="pi pi-pencil" class="p-button-info p-mr-4" (click)="editFormato()"></button>
+               <button pButton pRipple pTooltip="Consultar" tooltipPosition="bottom" label="Consultar" icon="pi pi-eye" class="p-button-help p-mr-4" (click)="viewFormato()"></button>
+          </ng-template>
+
+          <ng-template pTemplate="right">
+               <button pButton pRipple pTooltip="Exportar" tooltipPosition="bottom" label="Exportar" icon="pi pi-upload" (click)="exportXLS()" styleClass="p-button-info"></button>
+          </ng-template>
+     </p-toolbar>
+
+     <p-table #dt [value]="formatoValeList" [responsive]="true" [rows]="25" [paginator]="true" [rowHover]="true" dataKey="id"
+               [scrollable]="true" scrollHeight="40vh" [rowsPerPageOptions]="[15,25,50,100]" selectionMode="single" [(selection)]="formatoValeSelected" 
+               currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+               styleClass="p-datatable-sm p-datatable-striped">
+          <ng-template pTemplate="caption">
+               <div class="p-d-flex p-grid">
+                    <div class="p-col-12 p-ai-center vertical-container">
+                         <h1 class="p-m-0">Formatos de Vales</h1>
+                    </div>
+               </div>
+          </ng-template>
+          <ng-template pTemplate="colgroup">
+               <colgroup *ngIf="!isMobile">
+                    <col style="width:8%;">
+                    <col style="width:60%;">
+               </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header">
+               <tr>
+                    <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th>
+                    <th pSortableColumn="descripcion">Descripción <p-sortIcon field="descripcion"></p-sortIcon></th>
+                    <th>Imagen </th>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-formatoVale>
+               <tr [pSelectableRow]="formatoVale">
+                    <td><span class="p-column-title">Id</span>{{formatoVale.id}}</td>
+                    <td><span class="p-column-title">Descripción</span>{{formatoVale.descripcion}}</td>
+                    <td><span class="p-column-title">Imagen</span>
+                         <img [src]="url + '/api/formato-vale/upload/' + formatoVale.nombreAlmacenado | safe" [alt]="formatoVale.imagen" style="width: 50%; height: auto;">
+                    </td>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="summary">
+               <div class="p-d-flex p-ai-center p-jc-between">
+                    {{(formatoValeList ? formatoValeList.length : 0) | i18nPlural: cantidadMap}}
+               </div>
+          </ng-template>
+     </p-table>
+</div>

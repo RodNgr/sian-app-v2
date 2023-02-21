@@ -1,0 +1,62 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+    <p-toolbar styleClass="p-mb-4">
+         <ng-template pTemplate="left">
+              <button pButton pRipple label="Ejecutar" icon="pi pi-book" class="p-button-success p-mr-2" pTooltip="Ejecutar" tooltipPosition="bottom" (click)="ejecutarReporte()"></button>
+              <button pButton pRipple label="Ver Detalle" icon="pi pi-list" class="p-button-help p-mr-5" pTooltip="Ver Detalle" tooltipPosition="bottom" (click)="detalleReporte()" ></button>
+              <button pButton pRipple label="Descargar" icon="pi pi-download" class="p-button-primary" pTooltip="Descargar" tooltipPosition="bottom" (click)="downloadReporte()"></button>
+         </ng-template>
+    </p-toolbar>
+
+    <p-table [value]="reporteList"[responsive]="true" [rows]="25" [paginator]="true" [rowHover]="true" [scrollable]="true" scrollHeight="40vh"
+              selectionMode="single" styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
+              [(selection)]="reporteSelected" [showCurrentPageReport]="true" [rowsPerPageOptions]="[25,50,100,150]"
+              currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" >
+         <ng-template pTemplate="caption">
+              <div class="p-d-flex p-ai-center p-jc-between">
+                   <h1 class="p-m-0">Transacciones</h1>
+              </div>
+         </ng-template>
+         <ng-template pTemplate="colgroup">
+              <colgroup>
+                   <col style="width:5%;">
+                   <col style="width:25%;">
+                   <col style="width:14%;">
+                   <col style="width:14%;">
+                   <col style="width:14%;">
+              </colgroup>
+         </ng-template>
+         <ng-template pTemplate="header">
+              <tr>
+                   <th>Id </th>
+                   <th>Query </th>
+                   <th>F. Creación </th>
+                   <th>F. Inicio </th>
+                   <th>F. Fin </th>
+                   <th>Tipo </th>
+                   <th>B. Datos </th>
+                   <th>Estado </th>
+              </tr>
+         </ng-template>
+         <ng-template pTemplate="body" let-reporte>
+               <tr [pSelectableRow]="reporte">
+                    <td >{{reporte.idReporte}}</td>
+                    <td class="wrap">{{reporte.query}}</td>
+                    <td >{{reporte.feCreacion | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+                    <td >{{reporte.feInicio | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+                    <td >{{reporte.feFin | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+                    <td class="wrap">{{reporte.tiReporte | tipoReporte}}</td>
+                    <td class="wrap">{{reporte.inBaseDatos | tipoBaseDatos}}</td>
+                    <td class="wrap">{{reporte.estado | estadoReporte}}</td>
+              </tr>
+         </ng-template>
+         <ng-template pTemplate="summary">
+              <div class="p-d-flex p-ai-center p-jc-between">
+                   {{(reporteList ? reporteList.length : 0) | i18nPlural: cantidadMap}}
+              </div>
+         </ng-template>
+    </p-table>
+</div>

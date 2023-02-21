@@ -1,0 +1,88 @@
+.wrapper {
+     display: grid;
+     grid-gap: 10px;
+     grid-template-areas:
+       "store"
+       "query"
+       "result"
+       "no-process"
+       "footer";
+}
+
+.store-list {
+     grid-area: store;
+     border-style: solid solid solid solid;
+     border-width: 1px;
+     max-height: 80vh;
+}
+
+.result-list {
+     grid-area: result;
+     border-style: solid solid solid solid;
+     border-width: 1px;
+     max-height: 40vh;
+}
+
+.query {
+     grid-area: query;
+     max-height: 35vh;
+}
+
+.no-process {
+     grid-area: no-process;
+     border-style: solid solid solid solid;
+     border-width: 1px;
+     max-height: 35vh;
+}
+
+.footer {
+     grid-area: footer;
+     max-height: 5vh;
+}
+
+.find-button {
+     margin-top: 0px;
+}
+
+@media (min-width: 500px) {
+     .wrapper {
+       grid-template-columns: 30% 70%;
+       grid-template-areas:
+         "store     query"
+         "store     no-process"
+         "result    result"
+         "footer    footer";
+       grid-template-rows: 50vh 25vh 35vh 5vh;
+     }
+
+     .find-button {
+          margin-top: 0px;
+     }
+}
+
+@media (min-width: 700px) {
+     .wrapper {
+          grid-template-columns: 23% 50% 25%;
+          grid-template-areas:
+          "store    query     no-process"
+          "store    result    result"
+          "store    footer    footer";
+
+          grid-template-rows: 35vh 35vh 5vh;
+     }
+
+     .find-button {
+          margin-top: 1.75rem;
+     }
+}
+
+::ng-deep .ql-toolbar.ql-snow {
+     padding: 0px;
+     border: none;
+}
+
+.wrap {
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
+}

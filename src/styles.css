@@ -1,0 +1,215 @@
+html, body {
+    background-color: var(--surface-b);
+    font-family: var(--font-family);
+    font-size: 13px;
+    padding: 0;
+    margin: 0;
+    min-height: 100%;
+}
+
+.swal2-container {
+    z-index: 30000 !important;
+  }
+
+.text-layout {
+    color: var(--text-color)
+}
+
+.login--enlace {
+    color: #16ab95;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.form-subtitle {
+    color: #4D4D4D;
+    font-size: 20px;
+    width: 290px;
+}
+
+
+@media screen and (max-width: 40rem) {
+    .hide-column {
+         display: none !important;
+    }
+
+    :host ::ng-deep .p-button-label  {
+         display: none !important;
+    }
+
+    :host ::ng-deep .p-button-icon-left  {
+         margin-right: 0rem;
+    }
+}
+
+
+
+.login-body {
+    background-size: cover;
+    height: auto;
+    min-height: 100vh;
+    padding-top: 100px;
+    font-family: "Roboto", "Helvetica Neue", sans-serif;
+    font-size: 13px;
+    color: #757575;
+    -webkit-font-smoothing: antialiased;
+}
+
+@media (max-width: 640px) {
+    .login-body .login-panel {
+        margin-top: 100px;
+        width: 100%;
+    }
+
+    .login-body .login-panel .p-col-12 {
+        padding: 15px 50px;
+    }
+}
+
+.login-body .login-panel {
+    width: 600px;
+    margin: 0 auto;
+    background-color: #ffffff;
+}
+
+.login-body .login-panel .p-col-12.logo-container {
+    padding: 50px 50px 25px 50px;
+    border-bottom: 8px solid #dee4e9;
+    margin-bottom: 20px;
+}
+
+.login-body .login-panel .p-col-12.logo-container h2 {
+    color: #7d8286;
+    font-size: 16px;
+    font-weight: 300;
+    margin-top: 12px;
+    margin-bottom: 0;
+}
+
+.login-body .login-panel .p-col-12.logo-container .logo {
+    height: 50px;
+}
+
+.login-body .login-panel .p-col-12.logo-container .login-icon {
+    float: right;
+    height: 50px;
+}
+
+.login-body .login-panel .p-col-12 {
+    padding: 15px 100px;
+}
+
+.login-body .login-panel label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.login-body .login-panel .input-wrapper {
+    position: relative;
+}
+
+.login-body .login-panel .input-wrapper input {
+    width: 100%;
+    padding: 0.385em;
+    padding-right: 22px;
+}
+
+.login-body .login-panel .input-wrapper .p-inputtext {
+    font-family: "Roboto", "Helvetica Neue", sans-serif;
+    font-size: 13px;
+    color: #64686A;
+    background: #ffffff;
+    border: 1px solid #CACCCD;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+    border-radius: 3px;
+}
+
+.login-body .login-panel button {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.login-body .login-panel .input-wrapper img {
+    position: absolute;
+    width: 14px;
+    right: 8px;
+}
+
+.login-body .login-panel .input-wrapper img.user-icon {
+    top: 6px;
+}
+
+.login-body .login-panel .input-wrapper img.lock-icon {
+    top: 5px;
+}
+
+.login-button {
+    color: #ffffff; 
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    font-size: 13px;
+    background-color: #3984b8;
+}
+
+.layout-content {
+    margin-left: 250px;
+}
+
+.content-section {
+    background-color: var(--surface-b);
+    color: var(--text-color);
+}
+
+.layout-content .content-section {
+    padding: 1rem;
+}
+
+.layout-content .content-section.implementation {
+    background-color: var(--surface-b);
+    color: var(--text-color);
+}
+
+.layout-content .card {
+    background: var(--surface-e);
+    padding: 1rem;
+    box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+    border-radius: 4px;
+}
+
+.layout-footer {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 1rem;
+    background-color: var(--surface-a);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 960px) {
+.layout-content {
+    margin-left: 0;
+}
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    transition: all 0.3s;
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+    transform-origin: bottom left;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+    transform: rotateY(100deg);
+}
+
+.wrap {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

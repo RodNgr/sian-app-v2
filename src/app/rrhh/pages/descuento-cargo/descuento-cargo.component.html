@@ -1,0 +1,48 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+    <h1>{{title}}</h1>
+    <hr>
+
+    <form #descuentoForm="ngForm" class="p-fluid p-formgrid p-grid" autocomplete="off">
+        <div class="p-field p-col-12 p-md-6 p-sm-6">
+            <label for="codigo" [ngClass] = "{' p-error ': codigo.invalid && (codigo.dirty || codigo.touched)}" >Cod. Puesto: (*)</label>
+            <input id="codigo" type="text" pInputText class="p-text-uppercase" required maxlength="7"
+                    [ngClass] = "{' ng-invalid ng-dirty ': codigo.invalid && (codigo.dirty || codigo.touched)}"  
+                    [(ngModel)]="descuento.coPuesto" required length="5" name="codigo" #codigo="ngModel"
+                    [disabled]="type === 'V'" tabindex="1" [autofocus] onfocus="this.select()">
+            <small *ngIf="codigo.invalid && (codigo.dirty || codigo.touched)" id="password-help" class="p-error">
+                El <strong>Código del Puesto</strong> es requerido.
+            </small>
+        </div>
+
+        <div class="p-field p-col-12 p-md-6 p-sm-6">
+            <label for="puesto" [ngClass] = "{' p-error ': puesto.invalid && (puesto.dirty || puesto.touched)}">Puesto: (*)</label>
+            <input id="puesto" type="text" pInputText class="p-text-uppercase" required maxlength="50"
+                    [ngClass] = "{' ng-invalid ng-dirty ': puesto.invalid && (puesto.dirty || puesto.touched)}"  
+                    [(ngModel)]="descuento.dePuesto" name="puesto" #puesto="ngModel"
+                    [disabled]="type === 'V'" tabindex="2" onfocus="this.select()">
+            <small *ngIf="puesto.invalid && (puesto.dirty || puesto.touched)" id="password-help" class="p-error">
+                El <strong>Puesto</strong> es requerido.
+            </small>
+        </div>
+
+        <div class="p-field p-col-6">
+            <label for="empresa" [ngClass] = "{' p-error ': empresa.invalid && (empresa.dirty || empresa.touched)}">Empresa: (*)</label>
+            <p-dropdown id="empresa" [options]="empresaList" [(ngModel)]="empresaSelected" optionLabel="deEmpresa"
+                        [ngClass] = "{' ng-invalid ng-dirty ': empresa.invalid && (empresa.dirty || empresa.touched)}" 
+                        name="empresa" #empresa="ngModel" [disabled]="type === 'V'" [tabindex]="3">
+            </p-dropdown>
+            <small *ngIf="empresa.invalid && (empresa.dirty || empresa.touched)" id="password-help" class="p-error">
+                La <strong>Empresa</strong> es requerida.
+            </small>
+        </div>  
+    </form>
+
+    <div class="p-d-flex p-jc-end p-mt-3">
+        <button pButton pRipple pTooltip="Guardar"  tooltipPosition="bottom" label="Guardar"  icon="pi pi-save"  class="p-button-success p-mr-2" (click)="save()" [disabled]="!descuentoForm.form.valid" *ngIf="type !== 'V'"></button>
+        <button pButton pRipple pTooltip="Cancelar" tooltipPosition="bottom" label="Cancelar" icon="pi pi-times" class="p-button-secondary" (click)="cancelar()"></button>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+    <p-toolbar styleClass="p-mb-4">
+         <ng-template pTemplate="left">
+              <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="newDescuento()" pTooltip="Nuevo" tooltipPosition="bottom"></button>
+              <button pButton pRipple label="Editar" icon="pi pi-pencil" class="p-button-info p-mr-5" (click)="editDescuento()" pTooltip="Editar" tooltipPosition="bottom"></button>
+              <button pButton pRipple label="Eliminar" icon="pi pi-times" class="p-button-danger p-mr-2" (click)="inactivar()" pTooltip="Eliminar" tooltipPosition="bottom"></button>
+         </ng-template>
+
+         <ng-template pTemplate="right">
+         </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="descuentoList" [responsive]="true" [rows]="25" [paginator]="true" [rowHover]="true" dataKey="idDescuentoCargo"  
+              [globalFilterFields]="['dePuesto','coPuesto']" [scrollable]="true" scrollHeight="40vh"
+              selectionMode="single" [(selection)]="descuentoSelected" styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
+              currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+              [rowsPerPageOptions]="[25,50,100]">
+         <ng-template pTemplate="caption">
+              <div class="p-d-flex p-ai-center p-jc-between">
+                   <h1 class="p-m-0">Descuentos por Cargo</h1>
+
+                   <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText #txtFind type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Buscar..."  autocomplete="off"/>
+                    </span>
+              </div>
+         </ng-template>
+         <ng-template pTemplate="colgroup">
+              <colgroup *ngIf="!isMobile">
+                   <col style="width:20%;">
+                   <col style="width:15%;">
+                   <col style="width:40%;">
+              </colgroup>
+         </ng-template>
+         <ng-template pTemplate="header">
+              <tr>
+                   <th pSortableColumn="empresa">Empresa <p-sortIcon field="empresa"></p-sortIcon></th>
+                   <th pSortableColumn="coPuesto">Cod. Puesto <p-sortIcon field="coPuesto"></p-sortIcon></th>
+                   <th pSortableColumn="dePuesto">Puesto <p-sortIcon field="dePuesto"></p-sortIcon></th>
+                   <th pSortableColumn="estado">Estado <p-sortIcon field="estado"></p-sortIcon></th>
+              </tr>
+         </ng-template>
+         <ng-template pTemplate="body" let-descuento>
+              <tr [pSelectableRow]="descuento">
+                   <td><span class="p-column-title">Empresa</span>{{descuento.empresa}}</td>
+                   <td ><span class="p-column-title">Cod. Puesto</span>{{descuento.coPuesto}}</td>
+                   <td ><span class="p-column-title">Puesto</span>{{descuento.dePuesto}}</td>
+                   <td ><span class="p-column-title">Estado</span>{{descuento.estado | estado}}</td>
+              </tr>
+         </ng-template>
+         <ng-template pTemplate="summary">
+              <div class="p-d-flex p-ai-center p-jc-between">
+                   {{(descuentoList ? descuentoList.length : 0) | i18nPlural: cantidadMap}}
+              </div>
+         </ng-template>
+    </p-table>
+</div>

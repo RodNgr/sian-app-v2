@@ -1,0 +1,100 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+  <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+    <div class="p-d-flex p-jc-between">
+      <div>
+        <h1>Cupón Omnicanal</h1>
+      </div>
+      <div class="menu-cupon-o p-d-flex p-ai-center">
+        <div class="">
+          <button pButton pRipple pTooltip="Nuevo" tooltipPosition="bottom" label="Nuevo" icon="pi pi-plus"
+            class="p-button-success p-mr-2" (click)="newVale()"></button>
+          <!-- <button pButton pRipple pTooltip="Selecciona un cupón" tooltipPosition="bottom" label="Consultar" icon="pi pi-eye"
+            class="p-button-help p-mr-2" (click)="viewValeOmnicanal()"></button> -->
+            <button pButton pRipple pTooltip="Selecciona un cupón" tooltipPosition="bottom" (click)="actualizarFecha()" label="Ampliar Fecha" icon="pi pi-calendar-plus"
+            class="p-button-primary p-mr-2" ></button>
+          <button pButton pRipple pTooltip="Selecciona un cupón" tooltipPosition="bottom" (click)="AnularCupon()" label="Anular" icon="pi pi-times"
+            class="p-button-danger p-mr-4"></button>
+        </div>
+      </div>
+    </div>
+  
+    <hr>
+  
+    <div>
+        <p-table #dt [value]="Campanhas" [responsive]="true" [rows]="15" [paginator]="true" [rowHover]="true" dataKey="cdNombreCampanha"  
+          [globalFilterFields]="['cdNombreCampanha']" [scrollable]="true" scrollHeight="40vh"
+          selectionMode="single" [(selection)]="CampanhasSelected" styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
+          currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+          [rowsPerPageOptions]="[15,25,50,100]" (onRowSelect)="onRowSelect($event)">
+        
+        <ng-template pTemplate="caption">
+          <div class="p-d-flex p-grid">
+            <div class="p-col-12 p-ai-center vertical-container">
+              <h1 class="p-m-0"></h1>
+            </div>
+  
+            <div class="p-col-12">
+              <div class="p-fluid p-formgrid p-grid">
+  
+                <div class="p-field p-lg-3 p-md-3 p-sm-6">
+                  <label for="cantidad">Campaña:</label>
+                  <input type="text" pInputText id="Campanha"/>
+                </div>
+                <div class="p-field p-lg-2 p-md-2 p-sm-12">
+                  <label for="cantidad">Fecha de Inicio:</label>
+                  <p-calendar dateFormat="dd/mm/yy" id="Desde" inputStyleClass="p-text-center"></p-calendar>
+                </div>
+  
+                <div class="p-field p-lg-2 p-md-2 p-sm-12">
+                  <label for="cantidad">Fecha de Fin:</label>
+                  <p-calendar dateFormat="dd/mm/yy" inputStyleClass="p-text-center" id="Hasta"></p-calendar>
+                </div>
+  
+                <div class="p-field p-lg-2 p-md-2 p-sm-2  ">
+                  <button pButton type="button" label="Buscar" icon="pi pi-search" class="p-button" (click)="Buscar()"
+                    style="margin-top: 1.75rem"></button>
+  
+                </div>
+                <div class="p-field p-lg-2 p-md-2 p-sm-2  ">
+                  <button pButton type="button" label="Exportar" icon="pi pi-download" [disabled]="(visualizaExportar)" class="p-button p-button-info" (click)="exportXLS()"
+                    style="margin-top: 1.75rem"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="campanha">Nombre Campaña<p-sortIcon field="campanha"></p-sortIcon>
+            </th>
+            <th pSortableColumn="tipo">Desde<p-sortIcon field="tipo"></p-sortIcon>
+            </th>
+            <th pSortableColumn="nombreCupon">Hasta<p-sortIcon field="nombreCupon"></p-sortIcon>
+            </th>
+            <th pSortableColumn="desde">Alianza<p-sortIcon field="desde"></p-sortIcon>
+            </th>            
+            <th pSortableColumn="desde">Estado Descarga<p-sortIcon field="desde"></p-sortIcon>
+            </th>            
+          </tr>
+        </ng-template>
+  
+        <ng-template pTemplate="body" let-CuponListaOmnicanal>
+          
+          <tr [pSelectableRow]="CuponListaOmnicanal">
+             <td>{{CuponListaOmnicanal.cdNombreCampanha}}</td>            
+            <td>{{CuponListaOmnicanal.dtFecInicio | date : 'dd/MM/y'}}</td>
+            <td>{{CuponListaOmnicanal.dtFecFin | date : 'dd/MM/y'}}</td>
+            <td>{{CuponListaOmnicanal.cdAlianza}}</td>
+            <td>{{CuponListaOmnicanal.validacionDescarga}}</td>
+          </tr> 
+
+        </ng-template>
+      
+      </p-table> 
+    </div>
+  
+  </div>
+  

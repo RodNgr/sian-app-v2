@@ -1,0 +1,212 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+     <div class="p-fluid p-grid" >
+          <div class="p-fluid p-grid p-col-6">
+               <div class="p-fluid f-formgrid p-grid p-col-12">
+                    <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-6">
+                         <label for="idFamilia">Tienda:</label>
+                         <p-dropdown #dpTienda [options]="tiendaList" [autofocus]="true" [(ngModel)]="tiendaSeleccionada" optionLabel="nombreTienda" 
+                              [filter]="true" filterBy="nombreTienda" placeholder="Seleccione una Tienda" name="idFamilia" #tienda="ngModel"
+                              (onChange)="changeTienda()"></p-dropdown>
+                    </div>
+                    <div class="p-field p-col-12 p-lg-3 p-md-3 p-sm-3">
+                         <label for="">Fecha:</label>
+                         <p-calendar [(ngModel)]="fechaSeleccionada" dateFormat="dd/mm/yy" inputStyleClass="p-text-center"
+                         (ngModelChange)="changeDate()" [selectOtherMonths]="true"></p-calendar>
+                    </div>
+                    <div class="p-field p-col-12 p-lg-3 p-md-3 p-sm-3" style="margin-top: 1.75rem">
+                         <button pButton pRipple label="Obtener" icon="pi pi-upload" (click)="onClickObtener()"></button>
+                    </div>
+               </div>
+               <div class="p-fluid p-grid p-col-12" style="height: 60vh;">
+                    <p-table [value]="cierreDia.cierreTurnoList" [responsive]="true" [rowHover]="true" [scrollable]="true" scrollHeight="40vh" 
+                         styleClass="p-col-12 p-datatable-sm p-datatable-striped" columnResizeMode="expand"> 
+                         <ng-template pTemplate="caption">
+                              <strong>Venta del Sistema por Turno</strong>
+                         </ng-template>
+                         <ng-template pTemplate="header">
+                              <tr style="font-size: 0.8rem;">
+                                   <th style="width:35px;">Turno</th>
+                                   <th style="width:120px;">Cajero</th>
+                                   <th style="text-align: right">T.Boleta</th>
+                                   <th style="text-align: right">T.Factura</th>
+                                   <th style="text-align: right">T.N/C</th>
+                                   <th style="text-align: right">Total</th>
+                              </tr>
+                         </ng-template>
+                         <ng-template pTemplate="body" let-turno>
+                              <tr style="font-size: 0.8rem;">                                   
+                                   <td style="width:35px;">{{turno.turno}}</td>
+                                   <td style="width:120px;" class="wrap">{{turno.cajero}}</td>
+                                   <td style="text-align: right">{{turno.tboleta | number:'1.2'}}</td>
+                                   <td style="text-align: right">{{turno.tfactura | number:'1.2'}}</td>
+                                   <td style="text-align: right">{{turno.tnotaCredito | number:'1.2'}}</td>
+                                   <td style="text-align: right">{{turno.ttotal | number:'1.2'}}</td>
+                              </tr>
+                         </ng-template>
+                    </p-table>
+               </div>
+               <div class="p-fluid p-grid p-col-12" style="height: 45vh;">
+                    <p-table [value]="cierreDia.resumenVentaList" [responsive]="true" [rowHover]="true" [scrollable]="true" scrollHeight="30vh"
+                         styleClass="p-col-12 p-datatable-sm p-datatable-striped" columnResizeMode="expand">
+                         <ng-template pTemplate="caption">
+                              <strong>Resumen de Ventas por Caja</strong>
+                         </ng-template>
+                         <ng-template pTemplate="header">
+                              <tr style="font-size: 0.8rem">
+                                   <th >Documento</th>
+                                   <th style="text-align: right">Monto</th>
+                              </tr>
+                         </ng-template>
+                         <ng-template pTemplate="body" let-resVenta>
+                              <tr style="font-size: 0.8rem;"
+                                   [style.background]="resVenta.documento == 'TOTAL VENTAS' ? '#000' : ''"
+                                   [style.color]="resVenta.documento == 'TOTAL VENTAS' ? 'white' : ''">
+                                   <td>{{resVenta.documento}}</td>
+                                   <td style="text-align: right" [style.color]="resVenta.documento == 'EXCEDENTE' ? 'blue' : (resVenta.documento == 'FALTANTE' ? 'red' : '')">{{resVenta.monto | number:'1.2'}}</td>
+                              </tr>
+                         </ng-template>
+                    </p-table>
+               </div>
+               <div class="p-fluid p-formgrid p-grid p-col-12">
+                    <div class="p-field p-col-12">
+                         <label for=""><strong>Observación:</strong></label>
+                         <textarea pInputTextarea rows="1">{{cierreDia.observacion}}</textarea>
+                    </div>
+                    <div class="p-field p-col-6">
+                         <label for=""><strong>Creado por:</strong></label>
+                         <input style="font-size: 0.9rem" pInputText type="text" disabled value="{{cierreDia.usuarioCreacionNombre}}">
+                    </div>
+                    <div class="p-field p-col-6">
+                         <label for=""><strong>Cerrado por:</strong></label>
+                         <input style="font-size: 0.9rem" pInputText type="text" disabled value="{{cierreDia.usuarioCierreNombre}}">
+                    </div>
+               </div>
+          </div>
+          <div class="p-fluid p-grid p-col-6" style="height: 50px !important">
+               <div class="p-fluid f-formgrid p-grid p-col-12">
+                    <div class="p-field p-col-12 p-lg-3 p-md-3 p-sm-3">
+                         <label for="">Estado:</label>
+                         <input pInputText type="text" disabled value="{{cierreDia.estadoNombre}}">
+                    </div>
+                    <div class="p-field p-col-12 p-lg-4 p-md-4 p-sm-4" style="margin-top: 1.75rem">
+                         <input pInputText type="text" [ngModel]="tipoDeposito" disabled>
+                    </div>
+                    <div class="p-field p-col-12 p-lg-4 p-md-4 p-sm-4" style="margin-top: 1.75rem">
+                         <p-button (click)="onClickVerDeposito()" label="Depósitos Pixel" *ngIf="verDeposito"></p-button>
+                    </div>
+               </div>
+               <div class="p-fluid p-grid p-col-12" style="height: 60vh;">
+                    <p-table [value]="cierreDia.cierreArqueoList" [responsive]="true" [rowHover]="true" [scrollable]="true" scrollHeight="35vh"
+                         styleClass="p-col-12 p-datatable-sm p-datatable-striped" columnResizeMode="expand">
+                         <ng-template pTemplate="caption">
+                              <strong>Arqueo de Caja</strong>
+                         </ng-template>
+                         <ng-template pTemplate="header">
+                              <tr style="font-size: 0.8rem;">
+                                   <th style="width:35px">Id</th>
+                                   <th style="width:145px">Forma</th>
+                                   <th>Moneda</th>
+                                   <th style="text-align: right">Monto (S/.)</th>
+                                   <th style="text-align: right">Monto (USD)</th>
+                              </tr>
+                         </ng-template>
+                         <ng-template pTemplate="body" let-arqueo>
+                              <tr style="font-size: 0.8rem">                                   
+                                   <td style="width:35px">{{arqueo.idForma}}</td>
+                                   <td style="width:145px" class="wrap">{{arqueo.formaPago}}</td>
+                                   <td>{{arqueo.moneda.nombre}}</td>
+                                   <td style="text-align: right">{{arqueo.rendidoSoles | number:'1.2'}}</td>
+                                   <td style="text-align: right">{{arqueo.rendidoDolares | number:'1.2'}}</td>
+                              </tr>
+                         </ng-template>
+                         <ng-template pTemplate="summary">
+                              <div style="text-align: right; background-color: black; color: #fff;">
+                                   SUB TOTAL ARQUEO: S/. {{cierreDia.subTotalArqueo | number:'1.2'}}
+                              </div>
+                         </ng-template>
+                    </p-table>
+               </div>               
+               <div class="p-fluid p-grid p-col-12" style="height: 30vh;">
+                    <div class="p-col-11">
+                         <p-table [value]="cierreDia.cierreOtroList" [responsive]="true" [rowHover]="true" [scrollable]="true" scrollHeight="25vh"
+                              styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
+                              selectionMode="single" [(selection)]="cuadraturaSeleccionada">
+                              <ng-template pTemplate="caption">
+                                   <strong>Otras Cuadraturas</strong>
+                              </ng-template>
+                              <ng-template pTemplate="header">
+                                   <tr style="font-size: 0.8rem">
+                                        <th >Motivo</th>
+                                        <th >Moneda</th>
+                                        <th >Monto</th>
+                                        <th >Responsable</th>
+                                        <th >Doc. Identidad</th>
+                                   </tr>
+                              </ng-template>
+                              <ng-template pTemplate="body" let-otras>
+                                   <tr style="font-size: 0.8rem"
+                                   [pSelectableRow]="otras">                                   
+                                        <td>{{otras.motivo.nombre}}</td>
+                                        <td>{{otras.moneda.nombre}}</td>
+                                        <td style="text-align: right">{{otras.monto | number:'1.2'}}</td>
+                                        <td>{{otras.empleadoCajaChica}}</td>
+                                        <td>{{otras.numeroDocumentoEmpleado}}</td>
+                                   </tr>
+                              </ng-template>
+                         </p-table>
+                    </div>
+                    <div class="p-col-1">
+                         <button (click)="onClickAddCuadratura()" #btnAddCuadratura pButton pRipple icon="pi pi-plus" class="p-mt-5 p-button-success" [disabled]="!addCuadratura"></button>
+                         <button (click)="onClickDelCuadratura()" #btnDelCuadratura pButton pRipple icon="pi pi-minus" class="p-mt-2 p-button-danger" [disabled]="!delCuadratura"></button>
+                    </div>
+               </div>
+               <div class="p-fluid p-grid p-col-12" style="height: 60vh;">
+                    <div class="p-col-11">
+                         <p-table [value]="cierreDia.resumenArqueoList" [responsive]="true" [rowHover]="true" [scrollable]="true" scrollHeight="30vh"
+                              styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand">
+                              <ng-template pTemplate="caption">
+                                   <strong>Cuadre de Efectivo</strong>
+                              </ng-template>
+                              <ng-template pTemplate="header">
+                                   <tr style="font-size: 0.8rem">
+                                        <th >Operación</th>
+                                        <th style="text-align: right">Rendido (S/.)</th>
+                                        <th style="text-align: right">Rendido (USD)</th>
+                                   </tr>
+                              </ng-template>
+                              <ng-template pTemplate="body" let-resArqueo>
+                                   <tr style="font-size: 0.8rem;"
+                                        [style.background]="resArqueo.operacion == 'MONTO RENDIDO' ? '#000' : (resArqueo.hijo == 1 ? '#338DFF' : '')"
+                                        [style.color]="(resArqueo.operacion == 'MONTO RENDIDO' || resArqueo.hijo == 1) ? 'white' : ''"
+                                        >
+                                        <td>{{resArqueo.operacion}}</td>
+                                        <td style="text-align: right">{{resArqueo.montoSOL | number:'1.2'}}</td>
+                                        <td style="text-align: right">{{resArqueo.montoUSD | number:'1.2'}}</td>
+                                   </tr>
+                              </ng-template>
+                         </p-table>
+                    </div>
+                    <div class="p-col-1">
+                         <button (click)="onClickAddDeposito()" #btnAddDeposito pButton pRipple icon="pi pi-plus" class="p-mt-5 p-button-success" [disabled]="!addDeposito"></button>
+                    </div>
+               </div>
+          </div>
+     </div>
+     <p-toolbar class="p-col-12">
+          <ng-template pTemplate="left">
+               <button (click)="onClickGrabar()" pButton pRipple icon="pi pi-save" label="Grabar" class="p-button-info p-button-sm p-mr-2" pTooltip="Grabar" tooltipPosition="bottom" [disabled]="!grabar"></button>
+               <button (click)="onClickLimpiar()" pButton pRipple icon="pi pi-trash" label="Limpiar" class="p-button-info p-button-sm p-mr-2" pTooltip="Limpiar" tooltipPosition="bottom" [disabled]="!limpiar"></button>
+               <button (click)="onClickCierreDia()" pButton pRipple icon="pi pi-save" label="Grbar Cierre de Día" class="p-button-info p-button-sm p-mr-2" pTooltip="Cierre de Día" tooltipPosition="bottom" [disabled]="!cierre"></button>
+               <button (click)="onClickCierreImprimir()" pButton pRipple icon="pi pi-print" label="Imprimir" class="p-button-info p-button-sm p-mr-2" pTooltip="Imprimir" tooltipPosition="bottom" [disabled]="!imprimir"></button>
+               <button (click)="onClickCierreAbrir()" pButton pRipple icon="pi pi-folder" label="Abrir" class="p-button-info p-button-sm p-mr-2" pTooltip="Abrir" tooltipPosition="bottom" *ngIf="verAbrir" [disabled]="!abrir"></button>
+          </ng-template>
+
+          <ng-template pTemplate="right">
+               <div><strong>F3:Obtener&nbsp;&nbsp;&nbsp;F4:Grabar&nbsp;&nbsp;&nbsp;F11:Cuadraturas&nbsp;&nbsp;&nbsp;F12:Depósitos</strong></div>
+          </ng-template>
+     </p-toolbar>
+</div>

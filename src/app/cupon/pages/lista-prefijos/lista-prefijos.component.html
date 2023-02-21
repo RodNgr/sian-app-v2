@@ -1,0 +1,66 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+     <p-toolbar styleClass="p-mb-4">
+          <ng-template pTemplate="left">
+               <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="newPrefijo()" pTooltip="Nuevo" tooltipPosition="bottom"></button>
+               <button pButton pRipple label="Editar" icon="pi pi-pencil" class="p-button-info p-mr-2" (click)="editPrefijo()" pTooltip="Editar" tooltipPosition="bottom"></button>
+               <button pButton pRipple label="Consultar" icon="pi pi-eye" class="p-button-help p-mr-5" (click)="viewPrefijo()" pTooltip="Consultar" tooltipPosition="bottom"></button>
+          </ng-template>
+
+          <ng-template pTemplate="right">
+               <button pButton pRipple label="Exportar" icon="pi pi-upload" styleClass="p-button-info" (click)="exportList()" pTooltip="Exportar" tooltipPosition="bottom"></button>
+          </ng-template>
+     </p-toolbar>
+
+     <p-table #dt [value]="prefijoList" [responsive]="true" [rows]="25" [paginator]="true" [rowHover]="true" dataKey="prefijo"  
+               [globalFilterFields]="['prefijo','grupo', 'descripcion', 'prodnum']" [scrollable]="true" scrollHeight="40vh"
+               selectionMode="single" [(selection)]="prefijoSelected" styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
+               currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+               [rowsPerPageOptions]="[15,25,50,100]">
+          <ng-template pTemplate="caption">
+               <div class="p-d-flex p-ai-center p-jc-between">
+                    <h1 class="p-m-0">Prefijos</h1>
+
+                    <span class="p-input-icon-left">
+                         <i class="pi pi-search"></i>
+                         <input pInputText #txtFind type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Buscar..."  autocomplete="off"/>
+                     </span>
+               </div>
+          </ng-template>
+          <ng-template pTemplate="colgroup">
+               <colgroup *ngIf="!isMobile">
+                    <col style="width:15%;">
+                    <col style="width:15%;">
+                    <col style="width:40%;">
+                    <col style="width:15%;">
+                    <col style="width:15%;">
+               </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header">
+               <tr>
+                    <th pSortableColumn="prefijo">Prefijo <p-sortIcon field="prefijo"></p-sortIcon></th>
+                    <th pSortableColumn="grupo">Grupo <p-sortIcon field="grupo"></p-sortIcon></th>
+                    <th pSortableColumn="descripcion">Descripción <p-sortIcon field="descripcion"></p-sortIcon></th>
+                    <th [ngClass]="{'p-text-right': !isMobile}" pSortableColumn="lenCodBar">Longitud <p-sortIcon field="lenCodBar"></p-sortIcon></th>
+                    <th [ngClass]="{'p-text-center': !isMobile}"pSortableColumn="prodnum">Cod. Producto <p-sortIcon field="prodnum"></p-sortIcon></th>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-prefijo>
+               <tr [pSelectableRow]="prefijo">
+                    <td><span class="p-column-title">Prefijo</span>{{prefijo.prefijo}}</td>
+                    <td class="hide-column">{{prefijo.grupo}}</td>
+                    <td ><span class="p-column-title">Descripción</span>{{prefijo.descripcion}}</td>
+                    <td class="hide-column p-text-right"><span class="p-column-title">Longitud</span>{{prefijo.lenCodBar}}</td>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Cod. Producto</span>{{prefijo.prodnum}}</td>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="summary">
+               <div class="p-d-flex p-ai-center p-jc-between">
+                    {{(prefijoList ? prefijoList.length : 0) | i18nPlural: cantidadMap}}
+               </div>
+          </ng-template>
+     </p-table>
+</div>

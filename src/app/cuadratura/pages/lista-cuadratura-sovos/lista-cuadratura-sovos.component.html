@@ -1,0 +1,98 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+     <p-toolbar styleClass="p-mb-4">
+          <ng-template pTemplate="left">
+               <div class="p-fluid p-form-grid p-grid p-jc-end">
+                    <div class="p-field p-col">
+                         <label for="inicio">Marca:</label>
+                         <p-dropdown name="marca" [options]="marcas" [(ngModel)]="marcaSelected" optionLabel="nombre" [showClear]="true" placeholder="Todas"
+                              #marca="ngModel">
+                         </p-dropdown>
+                    </div>
+                    <div class="p-field p-col">
+                         <label for="inicio">F. Inicio:</label>
+                         <p-calendar id="inicio" [(ngModel)]="rangeDates[0]" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" ></p-calendar>
+                    </div>
+                    <div class="p-field p-col">
+                         <label for="fin">F. Fin:</label>
+                         <p-calendar id="fin" [(ngModel)]="rangeDates[1]" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" ></p-calendar>
+                    </div>
+
+                    <div class="p-field p-mr-2 p-ml-2">
+                         <button pButton pRipple pTooltip="Buscar" tooltipPosition="bottom" type="button" label="Buscar" style="margin-top: 2.3rem" icon="pi pi-search" (click)="buscar()"></button>
+                    </div>
+               </div>
+          </ng-template>
+     </p-toolbar>
+
+     <p-dataView [value]="resumenList">
+          <ng-template let-resumen pTemplate="listItem">
+               <div class="item-list-item">
+                    <div class="item-list-detail">
+                        <div class="item-list-name">{{resumen.nombreComercial}}</div>
+                        <div class="item-list-description">{{resumen.ruc}}</div>
+                    </div>
+                    <div class="item-list-data list-card">
+                         <div class="item-list-title">Comprobantes</div>
+                         <div class="item-list-total">{{resumen.totalComprobante | number: '.0-0'}}</div>
+                    </div>
+                    <div class="item-list-data list-card">
+                         <div class="item-list-title">Cuadrados</div>
+                         <div class="item-list-cuadrado">{{resumen.totalCuadratura | number: '.0-0'}}</div>
+                    </div>
+                    <div class="item-list-data list-card">
+                         <div class="item-list-title">Sobrantes</div>
+                         <div class="item-list-sobrante">{{resumen.totalSobrante | number: '.0-0'}}</div>
+                    </div>
+                    <div class="item-list-data list-card ">
+                         <div class="item-list-title">Rechazados</div>
+                         <div class="item-list-rechazado">{{resumen.totalRechazado | number: '.0-0'}}</div>
+                    </div>
+                    <div class="item-list-action">
+                        <p-button icon="pi pi-file" label="Detalle" pTooltip="Detalle" tooltipPosition="bottom" (click)="showDetalle(resumen.ruc)"></p-button>
+                    </div>
+                </div>
+           </ng-template>
+           <ng-template let-resumen pTemplate="gridItem">
+               <div class="p-col-12 p-md-4">
+                    <div class="item-grid card-grid">
+                         <div class="grid-section-card ">
+                              <div class="border-title-card grid-card-header">
+                                   <div style="display: grid;grid-template-columns: 1fr .5fr;">
+                                        <p class="p-mb-0 p-mt-0 grid-item-name">{{resumen.nombreComercial}}</p>
+                                        <p-button icon="pi pi-file" label="Detalle" pTooltip="Detalle" tooltipPosition="bottom" (click)="showDetalle(resumen.ruc)"></p-button>
+                                   </div>
+                                   <p class="p-mt-2 p-mb-2"><span class="grid-item-description">RUC:</span> {{resumen.ruc}}</p>
+                              </div>
+                         </div>
+          
+                         <div>
+                         <div class="border-bot-card align-center-card p-mt-2">
+                              <div class="w-items"><p>Comprobantes Recibidos : </p></div>
+                              <div><p class="item-grid-total">{{resumen.totalComprobante | number: '.0-0'}} </p></div>
+                         </div>
+                         <div class="border-bot-card align-center-card">
+                              <div class="w-items"><p>Comprobantes Cuadrados : </p></div>
+                              <div><p class="item-grid-cuadrado">{{resumen.totalCuadratura | number:'.0-0'}} </p></div>
+                         </div>
+                         <div class="border-bot-card align-center-card">
+                              <div class="w-items"><p>Comprobantes Sobrantes : </p></div>
+                              <div><p class="item-grid-sobrante">{{resumen.totalSobrante | number:'.0-0'}} </p></div>
+                         </div>
+                         <div class="align-center-card">
+                              <div class="w-items"><p>Comprobantes Rechazados : </p></div>
+                              <div><p class="item-grid-rechazado">{{resumen.totalRechazado | number: '.0-0'}} </p></div>
+                         </div>
+                         </div>
+                    </div>
+               </div>
+           </ng-template>
+           <ng-template pTemplate="header">
+               <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+           </ng-template>
+     </p-dataView>
+</div>
+ 

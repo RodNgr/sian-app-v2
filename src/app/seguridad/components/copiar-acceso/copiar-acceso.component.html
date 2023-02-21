@@ -1,0 +1,45 @@
+<div class="container">
+    <p-table #dt [value]="usuarioList" [responsive]="true" [rows]="25" [paginator]="true" [rowHover]="true" dataKey="codigo" [scrollable]="true" scrollHeight="40vh"
+              selectionMode="single" [(selection)]="usuarioSelected" styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
+              currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+              [rowsPerPageOptions]="[15,25,50,100]">
+         <ng-template pTemplate="caption">
+              <div class="p-d-flex p-jc-between">
+                   <div class="p-fluid p-form-grid p-grid p-jc-end">
+                        <div class="p-field p-col p-lg-6 p-md-6 p-sm-6">
+                             <label for="cantidad">Apellidos y Nombre:</label>
+                             <input type="text" [(ngModel)]="filtro" class="p-text-uppercase" pInputText>
+                        </div>
+
+                        <div class="p-field p-col p-lg-3 p-md-3 p-sm-3">
+                            <label for="cantidad">Aplicación:</label>
+                            <p-dropdown appendTo="body" [options]="aplicacionList" [(ngModel)]="aplicacionSelected" optionLabel="name"></p-dropdown>
+                       </div>
+                        
+                        <div class="p-field p-col">
+                             <button pButton pRipple pTooltip="Buscar" tooltipPosition="bottom" type="button" label="Buscar" style="margin-top: 1.75rem" icon="pi pi-search" (click)="buscar()"></button>
+                        </div>
+                   </div>
+              </div>
+         </ng-template>
+         <ng-template pTemplate="header">
+              <tr>
+                   <th pSortableColumn="fullname">Nombre <p-sortIcon field="fullname"></p-sortIcon></th>
+                   <th pSortableColumn="razsoc">Empresa <p-sortIcon field="razsoc"></p-sortIcon></th>
+                   <th pSortableColumn="despue">Cargo <p-sortIcon field="despue"></p-sortIcon></th>
+              </tr>
+         </ng-template>
+         <ng-template pTemplate="body" let-usuario>
+              <tr [pSelectableRow]="usuario">
+                   <td ><span class="p-column-title">Nombre </span>{{usuario.fullName}}</td>
+                   <td ><span class="p-column-title">Empresa </span>{{usuario.razsoc}}</td>
+                   <td ><span class="p-column-title">Cargo </span>{{usuario.despue}}</td>
+              </tr>
+         </ng-template>
+    </p-table>
+</div>
+
+<div class="p-d-flex p-jc-end p-mt-3">
+    <button pButton pRipple label="Aceptar" (click)="aceptar()" icon="pi pi-check-circle" class="p-button-success p-mr-2"></button>
+     <button pButton pRipple label="Cerrar" (click)="cerrar()" icon="pi pi-times" class="p-button-secondary"></button>
+</div>

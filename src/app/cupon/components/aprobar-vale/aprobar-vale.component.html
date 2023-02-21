@@ -1,0 +1,44 @@
+<div id="container" class="p-d-flex p-flex-column">
+     <div class="p-mb-2">
+          <div class="p-fluid p-formgrid p-grid">
+               <div class="p-field p-col-12">
+                    <label for="descripcion">Descripción:</label>
+                    <input id="descripcion" type="text" pInputText disabled [ngModel]="vale.observacion" name="observacion" #observacion="ngModel">
+               </div>
+          </div>
+
+          <div class="p-fluid p-formgrid p-grid">
+               <div class="p-field p-col-12 p-lg-2 p-md-6 p-sm-6 ">
+                    <label for="cantidad">Cantidad:</label>
+                    <input id="cantidad" type="text" pInputText disabled [ngModel]="vale.cantidad | number: '0.0-0'" class="p-text-right" name="cantidad" #cantidad="ngModel">
+               </div>
+
+               <div class="p-field p-col-12 p-lg-3 p-md-6 p-sm-6">
+                    <label for="total">Total:</label>
+                    <input id="total" type="text" pInputText disabled [ngModel]="vale.montoTotal | number: '0.2-2'" class="p-text-right" name="total" #total="ngModel">
+               </div>
+
+               <div class="p-field p-col-12 p-lg-3 p-md-6 p-sm-6">
+                    <label for="cobranza">D. Cobranza:</label>
+                    <input id="cobranza" type="text" pInputText disabled [ngModel]="vale.nrofactura" name="cobranza" class="p-text-center" #cobranza="ngModel">
+               </div>
+
+               <div class="p-field p-col-12 p-lg-4 p-md-6 p-sm-6">
+                    <label for="estado">Tipo:</label>
+                    <p-dropdown appendTo="body" [options]="tipos" [(ngModel)]="tipoSelected" [required]="true" optionLabel="name" [showClear]="true" placeholder="Seleccionar" 
+                                   name="tipo" #tipo="ngModel" [autofocus]="true"
+                                   [ngClass] = "{' ng-invalid ng-dirty ': tipo.invalid && (tipo.dirty || tipo.touched)}"></p-dropdown>
+                    <small *ngIf="tipo.invalid && (tipo.dirty || tipo.touched)" id="password-help" class="p-error">
+                         El <strong>tipo</strong> es requerido.
+                    </small>
+               </div>
+          </div>
+     </div>
+
+     <div class="p-mb-2">
+          <div class="p-d-flex p-jc-end">
+               <button pButton pRipple pTooltip="Aprobar" tooltipPosition="bottom" label="Aprobar"  (click)="aceptar()" icon="pi pi-check-circle" class="p-button-success p-mr-2"></button>
+               <button pButton pRipple pTooltip="Cancelar" tooltipPosition="bottom" label="Cancelar" (click)="cancelar()" icon="pi pi-times" class="p-button-secondary"></button>
+          </div>
+     </div>
+</div>

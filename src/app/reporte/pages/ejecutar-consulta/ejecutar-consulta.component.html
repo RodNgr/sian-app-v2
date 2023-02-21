@@ -1,0 +1,91 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="wrapper">
+     <div class="store-list" >
+          <p-table [value]="tiendaList" [(selection)]="tiendasSeleccionadas" [rowHover]="true" [responsive]="true" dataKey="codigo" 
+               responsiveLayout="scroll" [scrollable]="true" styleClass="p-datatable-sm">
+               <ng-template pTemplate="header">
+                    <tr>
+                         <th style="width: 3rem"><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
+                         <th>Tienda</th>
+                    </tr>
+               </ng-template>
+               <ng-template pTemplate="body" let-tienda>
+                    <tr>
+                         <td style="width: 3rem"><p-tableCheckbox [value]="tienda"></p-tableCheckbox></td>
+                         <td>{{tienda.nombre}}</td>
+                    </tr>
+               </ng-template>
+          </p-table>
+     </div>
+     <div class="query" >
+          <div class="p-fluid p-formgrid p-grid p-col-12 p-lg-12 p-md-12 p-sm-12">
+               <div class="p-field p-lg-4 p-md-4 p-sm-12">
+                    <label for="tipo">Tipo:</label>
+                    <p-dropdown id="tipo" [options]="tipoList" [(ngModel)]="tipoSeleccionado" optionLabel="descripcion" name="tipo"></p-dropdown>
+               </div>
+
+               <div class="p-field p-lg-4 p-md-4 p-sm-12">
+                    <label for="baseDatos">Base de Datos:</label>
+                    <p-dropdown id="baseDatos" [options]="baseDatosList" [(ngModel)]="baseDatosSeleccionada" optionLabel="descripcion" name="baseDatos"></p-dropdown>
+               </div>
+
+               <div class="p-lg-4 p-md-4 p-sm-12">
+                    <button pButton pRipple label="Cambiar Usuario" class="p-button-info find-button" icon="pi pi-user"></button>
+               </div>
+          </div>
+          <div class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+               <textarea pInputTextarea [style]="{'width':'100%'}" [(ngModel)]="sql" name="editor" rows="6"></textarea>
+          </div>
+     </div>
+     <div class="no-process">
+          <!--
+          <p-table [value]="resultadoDto.tiendaSinConexionList" [responsive]="true" [rowHover]="true" [scrollable]="true" scrollHeight="45vh"
+               styleClass="p-datatable-sm p-datatable-striped ">
+               <ng-template pTemplate="header">
+                    <tr>
+                         <th style="width: 90px;">IP</th>
+                         <th style="width: 200px;">Tienda</th>
+                         <th style="width: 300px;">Mensaje</th>
+                    </tr>
+               </ng-template>
+               <ng-template pTemplate="body" let-tienda>
+                    <tr>
+                         <td style="width: 90px;">{{tienda.ip}}</td>
+                         <td style="width: 200px;">{{tienda.nombre}}</td>
+                         <td class="wrap" style="width: 300px;">{{tienda.mensaje}}</td>
+                    </tr>
+               </ng-template>
+          </p-table>
+          -->
+          <div class="p-mt-3 p-d-flex p-jc-center">
+               <button pButton pRipple pTooltip="Exportar No Procesadas" tooltipPosition="bottom" label="Exportar No Procesadas" icon="pi pi-file-excel" (click)="exportarTienda()" class="p-button-success"></button>     
+          </div>
+     </div>
+     <div class="result-list">
+          <!--
+          <p-table [responsive]="true" [rowHover]="true" dataKey="id" [scrollable]="true" scrollHeight="40vh"
+               [value]="resultadoDto.valores" [columns]="resultadoDto.columnNames"
+               styleClass="p-datatable-sm p-datatable-striped">
+               <ng-template pTemplate="header" let-columns>
+                    <tr>
+                         <th *ngFor="let col of columns" style="width: 200px;" >{{col}}</th>
+                         </tr>
+               </ng-template>
+               <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <tr>
+                         <td *ngFor="let col of columns" style="width: 200px;">
+                              {{rowData.data[col]}}
+                         </td>
+                    </tr>
+               </ng-template>
+          </p-table>
+          -->
+     </div>
+     <div class="footer p-d-flex p-jc-between" >
+          <button pButton pRipple pTooltip="Ejecutar" tooltipPosition="bottom" label="Ejecutar" icon="pi pi-cog" (click)="ejecutar()" class="p-button-success"></button>
+          <button pButton pRipple pTooltip="Exportar Resultados" tooltipPosition="bottom" label="Exportar Resultados" icon="pi pi-file-excel" (click)="exportarResultado()" ></button>
+     </div>
+</div>

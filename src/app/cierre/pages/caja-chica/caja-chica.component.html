@@ -1,0 +1,81 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+     <div class="p-mb-2">
+          <div class="p-fluid p-formgrid p-grid">
+               <div class="p-field p-col-4">
+                    <label for="cmbTienda">Tienda:</label>
+                    <p-dropdown  id="cmbTienda" [options]="tiendaList" [(ngModel)]="tiendaSeleccionada" optionLabel="nombreTienda" [filter]="true" (onChange)="listarCajaChica()" [autofocus]="true"></p-dropdown>
+                </div>
+               <div class="p-field p-col-2">
+                   <label for="dtpInicial">Fecha Inicial:</label>
+                   <p-calendar id="dtpInicial" [(ngModel)]="fechaSeleccionada" dateFormat="dd/mm/yy" 
+                   (ngModelChange)="listarCajaChica()"></p-calendar>
+               </div>
+               <div class="p-field p-col-2">
+                    <label for="txtMoneda">Moneda:</label>
+                    <input pInputText type="text" id="txtMoneda" [disabled]="true" value="SOLES">
+               </div>
+               <div class="p-field p-col-2">
+                    <label for="txtMonto">Monto:</label>
+                    <p-inputNumber #monto id="txtMonto" locale="es-PE" [min]="0" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2"
+                    [(ngModel)]="montoIngresado"></p-inputNumber>
+               </div>
+           </div> 
+           <div class="p-fluid p-formgrid p-grid">
+               <div class="p-field p-col-4">
+                    <label for="txtCodAutorizacion">Código Autorización:</label>
+                    <input pInputText type="text" id="txtCodAutorizacion" [disabled]="true" [ngModel]="codAutorizacion">
+                </div>
+               <div class="p-field p-col-2">
+                   <label for="txtMotivo">Motivo:</label>
+                   <input pInputText type="text" id="txtMotivo" [disabled]="true" value="CAJA CHICA">
+               </div>
+               <div class="p-field p-col-2 p-mt-4">
+                    <button pButton pRipple label="Aceptar" icon="pi pi-check" class="p-button-success" (click)="aceptarCajaChica()"></button>
+               </div>
+               <div class="p-field p-col-2 p-mt-4">
+                    <button pButton pRipple label="Anular" icon="pi pi-times" class="p-button-danger" (click)="anularCajaChica()"></button>
+               </div>
+           </div>
+     </div>
+     <p-table #dt [responsive]="true" [rowHover]="true" [scrollable]="true" scrollHeight="40vh"
+               styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
+               [value]="cajaChicaList" selectionMode="single" [(selection)]="cuadraturaSeleccionada">
+          <ng-template pTemplate="colgroup">
+               <colgroup *ngIf="!isMobile">
+                    <col style="width:240px;">
+                    <col style="width:100px;">
+                    <col style="width:110px;">
+                    <col style="width:100px;">
+                    <col style="width:200px;">
+                    <col style="width:100px;">
+                    <col style="width:70px;">
+               </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header">
+               <tr>
+                    <th>Tienda </th>
+                    <th [ngClass]="{'p-text-center': !isMobile}">Fecha Venta </th>
+                    <th [ngClass]="{'p-text-center': !isMobile}">Cod. Autorización </th>
+                    <th [ngClass]="{'p-text-center': !isMobile}">Monto </th>
+                    <th>Registrado Por </th>
+                    <th [ngClass]="{'p-text-center': !isMobile}">Fecha Registro </th>
+                    <th>Estado </th>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-cierreotro>
+               <tr [pSelectableRow]="cierreotro">
+                    <td>{{cierreotro.tienda.nombreTienda}}</td>
+                    <td>{{cierreotro.fechaVenta | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{cierreotro.codigoAutorizacion}}</td>
+                    <td style="text-align: right">{{cierreotro.monto | number:'1.2'}}</td>
+                    <td>{{cierreotro.empleadoCajaChica}}</td>
+                    <td>{{cierreotro.fechaRegistro | date: 'dd/MM/yyyy HH:mm'}}</td>
+                    <td>{{cierreotro.descEstado}}</td>
+               </tr>
+          </ng-template>
+     </p-table>
+</div>

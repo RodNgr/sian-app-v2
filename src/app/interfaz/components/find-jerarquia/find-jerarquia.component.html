@@ -1,0 +1,72 @@
+<div class="p-fluid p-formgrid p-grid" autocomplete="off">
+    <div class="p-field p-col-12 p-md-12 p-sm-12" *ngIf="editarDescripcion">
+        <label for="desc" [ngClass] = "{' p-error ': desc.invalid && (desc.dirty || desc.touched)}">Descripción del Producto: (*)</label>
+        <input pInputText required id="desc" name="desc" #desc="ngModel" [(ngModel)]="descripcion" tabindex="1">
+        <small *ngIf="desc.invalid && (desc.dirty || desc.touched)" id="password-help" class="p-error">
+            La <strong>descripción</strong> es requerida.
+        </small>
+    </div>
+
+    <div class="p-field p-col-12 p-md-6 p-sm-6" *ngIf="empresaService.getEmpresaSeleccionada().idEmpresa === 8">
+        <label for="clasica" [ngClass] = "{' p-error ': clasica.invalid && (clasica.dirty || clasica.touched)}">Clásicas: </label>
+        <input pInputText id="clasica" name="clasica" #clasica="ngModel" [(ngModel)]="clasicas" >
+    </div>
+
+    <div class="p-field p-col-12 p-md-6 p-sm-6" *ngIf="empresaService.getEmpresaSeleccionada().idEmpresa === 8">
+        <label for="premium" [ngClass] = "{' p-error ': premium.invalid && (premium.dirty || premium.touched)}">Premiums: </label>
+        <input pInputText id="premium" name="premium" #premium="ngModel" [(ngModel)]="premiums" >
+    </div>
+
+    <div class="p-field p-col-12 p-md-6 p-sm-6">
+        <label for="id" [ngClass] = "{' p-error ': idTipoConsumo.invalid && (idTipoConsumo.dirty || idTipoConsumo.touched)}">TipoConsumo: (*)</label>
+        <p-dropdown appendTo="body" [options]="tipoConsumoList" [required]="true" [(ngModel)]="tipoConsumo"  id="id"
+                    optionLabel="descripcion" [filter]="true" filterBy="descripcion" [showClear]="true" placeholder="Seleccione un Tipo de Consumo" 
+                    name="idTipoConsumo" #idTipoConsumo="ngModel" [tabindex]="2"></p-dropdown>
+        <small *ngIf="idTipoConsumo.invalid && (idTipoConsumo.dirty || idTipoConsumo.touched)" id="password-help" class="p-error">
+            El <strong>tipo de consumo</strong> es requerido.
+        </small>
+    </div>
+
+    <div class="p-field p-col-12 p-md-6 p-sm-6">
+        <label for="id" [ngClass] = "{' p-error ': idFamilia.invalid && (idFamilia.dirty || idFamilia.touched)}">Familia: (*)</label>
+        <p-dropdown appendTo="body" [options]="familiaList" [required]="true" [(ngModel)]="familia"  (onChange)="changeFamilia()"
+                    optionLabel="descripcion" [filter]="true" filterBy="descripcion" [showClear]="true" placeholder="Seleccione una Familia" 
+                    name="idFamilia" #idFamilia="ngModel" [tabindex]="3"></p-dropdown>
+        <small *ngIf="idFamilia.invalid && (idFamilia.dirty || idFamilia.touched)" id="password-help" class="p-error">
+            La <strong>familia</strong> es requerida.
+        </small>
+    </div>
+
+    <div class="p-field p-col-12 p-md-6 p-sm-6">
+        <label for="descripcion">Sub Familia 1:</label>
+        <p-dropdown appendTo="body" [options]="subFamilia1List" [(ngModel)]="subFamilia1" (onChange)="changeSubFamilia1()"
+                    optionLabel="descripcion" [filter]="true" filterBy="descripcion" [showClear]="true" placeholder="Seleccione una Sub Familia 1" 
+                    name="idSubFamilia1" #idSubFamilia1="ngModel" [tabindex]="4"></p-dropdown>
+    </div>
+ 
+    <div class="p-field p-col-12 p-md-6 p-sm-6">
+        <label for="descripcion">Sub Familia 2:</label>
+        <p-dropdown appendTo="body" [options]="subFamilia2List" [(ngModel)]="subFamilia2" (onChange)="changeSubFamilia2()"
+                    optionLabel="descripcion" [filter]="true" filterBy="descripcion" [showClear]="true" placeholder="Seleccione una Sub Familia 2" 
+                    name="idSubFamilia2" #idSubFamilia2="ngModel" [tabindex]="5"></p-dropdown>
+    </div>
+
+    <div class="p-field p-col-12 p-md-6 p-sm-6">
+        <label for="descripcion">Sub Familia 3:</label>
+        <p-dropdown appendTo="body" [options]="subFamilia3List" [(ngModel)]="subFamilia3" (onChange)="changeSubFamilia3()"
+                    optionLabel="descripcion" [filter]="true" filterBy="descripcion" [showClear]="true" placeholder="Seleccione una Sub Familia 3" 
+                    name="idSubFamilia3" #idSubFamilia3="ngModel" [tabindex]="6"></p-dropdown>
+    </div>
+
+    <div class="p-field p-col-12 p-md-6 p-sm-6">
+        <label for="descripcion">Sub Familia 4:</label>
+        <p-dropdown appendTo="body" [options]="subFamilia4List" [(ngModel)]="subFamilia4" 
+                    optionLabel="descripcion" [filter]="true" filterBy="descripcion" [showClear]="true" placeholder="Seleccione una Sub Familia 4" 
+                    name="idSubFamilia4" #idSubFamilia4="ngModel" [tabindex]="7"></p-dropdown>
+    </div>
+</div>
+
+ <div class="p-d-flex p-jc-end p-mt-3">
+    <button pButton pRipple pTooltip="Aceptar"  tooltipPosition="bottom" label="Guardar"  icon="pi pi-save"  class="p-button-success p-mr-2" (click)="aceptar()"></button>
+    <button pButton pRipple pTooltip="Cancelar" tooltipPosition="bottom" label="Cancelar" icon="pi pi-times" class="p-button-secondary" (click)="cancelar()"></button>
+</div>

@@ -1,0 +1,90 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+     <p-toolbar styleClass="p-mb-4">
+          <ng-template pTemplate="left">
+          </ng-template>
+
+          <ng-template pTemplate="right">
+               <button pButton pRipple pTooltip="Exportar" tooltipPosition="bottom" label="Exportar" icon="pi pi-upload" (click)="exportXLS()" styleClass="p-button-info"></button>
+          </ng-template>
+     </p-toolbar>
+
+     <div class="p-mb-2">
+          <div class="p-fluid p-formgrid p-grid">
+               <div class="p-field p-col-2">
+                   <label for="cmbEmpresa">Empresa:</label>
+                   <p-dropdown id="cmbEmpresa" [options]="empresaList" [(ngModel)]="empresaSeleccionada" optionLabel="nombreComercial" (onChange)="onChangeEmpresa()"></p-dropdown>
+               </div>
+               <div class="p-field p-col-2">
+                    <label for="cmbTienda">Tienda:</label>
+                    <p-multiSelect  id="cmbTienda" [options]="tiendaList" [(ngModel)]="tiendasSeleccionadas" optionLabel="nombreTienda" [filter]="true" (onChange)="limpiarDepositos()" [disabled]="!enableDropDownTienda"></p-multiSelect >
+                </div>
+                <div class="p-field p-col-2">
+                    <label for="cmbBanco">Banco:</label>
+                    <p-dropdown id="cmbBanco" [options]="bancoList" [(ngModel)]="bancoSeleccionado" optionLabel="nombre" (onChange)="limpiarDepositos()"></p-dropdown>
+                </div>
+               <div class="p-field p-col-2">
+                   <label for="dtpInicial">Fecha Inicial:</label>
+                   <p-calendar id="dtpInicial" [(ngModel)]="fechaIniSeleccionada" dateFormat="dd/mm/yy" (onSelect)="limpiarDepositos()" (onInput)="limpiarDepositos()"></p-calendar>
+               </div>
+               <div class="p-field p-col-2">
+                    <label for="dtpFinal">Fecha Final:</label>
+                    <p-calendar id="dtpFinal" [(ngModel)]="fechaFinSeleccionada" dateFormat="dd/mm/yy" (onSelect)="limpiarDepositos()" (onInput)="limpiarDepositos()"></p-calendar>
+               </div>
+               <div class="p-field p-col-1 p-mt-4">
+                    <button pButton pRipple label="Listar" icon="pi pi-list" (click)="listarDepositos()"></button>
+                </div>
+           </div>
+     </div>
+     <p-table #dt [value]="depositoList" [responsive]="true" [rowHover]="true" [scrollable]="true" scrollHeight="40vh"
+               styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand">
+          <ng-template pTemplate="colgroup">
+               <colgroup *ngIf="!isMobile">
+                    <col style="width:120px;">
+                    <col style="width:100px;">
+                    <col style="width:100px;">
+                    <col style="width:240px;">
+                    <col style="width:200px;">
+                    <col style="width:120px;">
+                    <col style="width:70px;">
+                    <col style="width:100px;">
+                    <col style="width:100px;">
+                    <col style="width:120px;">
+                    <col style="width:150px;">
+               </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header">
+               <tr>
+                    <th pSortableColumn="empresa.nombreComercial" >Empresa <p-sortIcon field="empresa.nombreComercial"></p-sortIcon></th>
+                    <th pSortableColumn="cierreFecha" [ngClass]="{'p-text-center': !isMobile}">Día Venta <p-sortIcon field="cierreFecha"></p-sortIcon></th>
+                    <th pSortableColumn="fecha" [ngClass]="{'p-text-center': !isMobile}">Fecha de Voucher <p-sortIcon field="fecha"></p-sortIcon></th>
+                    <th pSortableColumn="tienda.nombreTienda" >Tienda <p-sortIcon field="tienda.nombreTienda"></p-sortIcon></th>
+                    <th pSortableColumn="banco.nombre" >Banco y Cuenta <p-sortIcon field="banco.nombre"></p-sortIcon></th>
+                    <th pSortableColumn="noTransaccion" >Nro Ope/Tra <p-sortIcon field="noTransaccion"></p-sortIcon></th>
+                    <th pSortableColumn="moneda.nombreCorto" [ngClass]="{'p-text-center': !isMobile}">Tipo <p-sortIcon field="moneda.nombreCorto"></p-sortIcon></th>
+                    <th pSortableColumn="montoOriginal" [ngClass]="{'p-text-right': !isMobile}">Monto Original <p-sortIcon field="montoOriginal"></p-sortIcon></th>
+                    <th pSortableColumn="monto" [ngClass]="{'p-text-right': !isMobile}">Monto <p-sortIcon field="monto"></p-sortIcon></th>
+                    <th pSortableColumn="cierreFechaCierre" [ngClass]="{'p-text-center': !isMobile}">Fecha Cierre <p-sortIcon field="cierreFechaCierre"></p-sortIcon></th>
+                    <th pSortableColumn="tienda.ciudad" >Departamento <p-sortIcon field="tienda.ciudad"></p-sortIcon></th>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-deposito>
+               <tr >
+                    <td><span class="p-column-title">Empresa</span>{{deposito.empresa.nombreComercial}}</td>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Día Venta</span>{{deposito.cierreFecha}}</td>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Fecha de Voucher</span>{{deposito.fecha}}</td>
+                    <td ><span class="p-column-title">Tienda</span>{{deposito.tienda.nombreTienda}}</td>
+                    <td ><span class="p-column-title">Banco y Cuenta</span>{{deposito.banco.nombre}}</td>
+                    <td ><span class="p-column-title">Nro Ope/Tra</span>{{deposito.noTransaccion}}</td>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Tipo</span>{{deposito.moneda.nombreCorto}}</td>
+                    <td [ngClass]="{'p-text-right': !isMobile}"><span class="p-column-title">Monto Original</span>{{deposito.montoOriginal | number: '.2-2'}}</td>
+                    <td [ngClass]="{'p-text-right': !isMobile}"><span class="p-column-title">Monto</span>{{deposito.monto | number: '.2-2'}}</td>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Fecha Cierre</span>{{deposito.cierreFechaCierre}}</td>
+                    <td ><span class="p-column-title">Departamento</span>{{deposito.tienda.ciudad}}</td>
+               </tr>
+          </ng-template>
+     </p-table>
+</div>

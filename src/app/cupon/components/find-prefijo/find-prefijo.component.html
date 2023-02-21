@@ -1,0 +1,35 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="p-grid">
+     <div class="p-col-12">
+          <p-table #dt id="table" [value]="prefijoList" [responsive]="true" [rowHover]="true" dataKey="prefijo" selectionMode="single" [(selection)]="prefijoSelected" 
+               [scrollable]="true" scrollHeight="50vh" styleClass="p-datatable-sm p-datatable-striped">
+               <ng-template pTemplate="header">
+                    <tr ps>
+                         <th>Prefijo </th>
+                         <th>Grupo </th>
+                         <th>Descripción </th>
+                    </tr>
+               </ng-template>
+               <ng-template pTemplate="body" let-prefijo>
+                    <tr [pSelectableRow]="prefijo">
+                         <td><span class="p-column-title">Prefijo</span>{{prefijo.prefijo}}</td>
+                         <td><span class="p-column-title">Grupo</span>{{prefijo.grupo}}</td>
+                         <td><span class="p-column-title">Descripción</span>{{prefijo.descripcion}}</td>
+                    </tr>
+               </ng-template>
+          </p-table>
+     </div>
+     <div class="p-col-12 p-mt-4">
+          <div class="p-d-flex p-jc-center">
+               <div>
+                    <button pButton pRipple pTooltip="Aceptar" tooltipPosition="bottom" label="Aceptar" (click)="aceptar()" icon="pi pi-check-circle" class="p-button-success p-mr-2"></button>
+               </div>
+               <div>
+                    <button pButton pRipple pTooltip="Cancelar" tooltipPosition="bottom" label="Cancelar" (click)="cancelar()" icon="pi pi-times" class="p-button-secondary"></button>
+               </div>
+          </div>
+     </div>
+</div>

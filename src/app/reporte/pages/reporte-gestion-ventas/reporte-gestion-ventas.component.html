@@ -1,0 +1,289 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+    <div class="p-grid">
+        <div class="p-col-5 p-lg-5 p-md-5 p-sm-12">
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+                    <label for="estado">Reportes:</label>
+                    <p-listbox [options]="reporteList" [(ngModel)]="reporteSeleccionado" optionLabel="descripcion" [listStyle]="{'max-height':'165px', 'height':'165px'}" (onChange)="onChangeReporte()"></p-listbox>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-col-7 p-lg-7 p-md-7 p-sm-12">
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+                    <label for="estado">Tiendas:</label>
+                    <p-multiSelect [options]="tiendaList" [(ngModel)]="tiendasSeleccionadas" optionLabel="nombre" defaultLabel="Seleccione las tiendas" selectedItemsLabel="{0} tiendas seleccionadas"></p-multiSelect>
+                </div>
+                <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+                    <label for="estado">Fecha Inicio:</label>
+                    <p-calendar [(ngModel)]="feInicio" dateFormat="dd/mm/yy" inputStyleClass="p-text-center"></p-calendar>
+                </div>
+                <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+                    <label for="estado">Fecha Fin:</label>
+                    <p-calendar [(ngModel)]="feFin" dateFormat="dd/mm/yy" inputStyleClass="p-text-center"></p-calendar>
+                </div>
+                <div *ngIf="showTipoVenta" class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+                    <label for="estado">Tipo Venta:</label>
+                    <p-dropdown [options]="tipoVentaList" [(ngModel)]="tipoVentaSeleccionado" optionLabel="descripcion"></p-dropdown>
+                </div>
+                <div *ngIf="!showTipoVenta" class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12"></div>
+                <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12 p-mt-4">
+                    <button pRipple pButton label="Buscar" icon="pi pi-search" (click)="buscar()"> </button>
+                </div>
+                <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+                    <label for="estado">Int. de Minutos:</label>
+                    <p-dropdown [options]="minutoList" [(ngModel)]="minutoSeleccionado" optionLabel="descripcion" [disabled]="!enableMinutos"></p-dropdown>
+                </div>
+                <div *ngIf="showResumen" class="p-field p-col-5 p-lg-5 p-md-5 p-sm-12 p-mt-4">
+                    <div class="p-formgroup-inline">
+                        <div class="p-field-checkbox">
+                            <p-checkbox id="city3" [(ngModel)]="resumen" [binary]="true"></p-checkbox>
+                            <label for="city3" >Mostrar Resumen</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p-tabView class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <p-tabPanel header="Resultados" leftIcon="pi pi-chart-bar">
+                <p-table *ngIf="reporteSeleccionado?.codigo === 1" [value]="resultVentaList" [responsive]="true" [rowHover]="true" [scrollable]="true" 
+                        scrollHeight="40vh" dataKey="tienda" styleClass="p-datatable-sm p-datatable-striped">
+                    <ng-template pTemplate="colgroup">
+                        <col style="width:5%;">
+                        <col style="width:85%;">
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Nro </th>
+                            <th>Descripción </th>
+                            <th>SubTotal </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-resultado >
+                        <tr>
+                            <td [ngClass]="{'summarize': resultado.formato === '2'}" [ngStyle]="{'font-weight': resultado.formato === '1' ? 'normal': 'bold'}">{{resultado.orden}}</td>
+                            <td [ngClass]="{'summarize': resultado.formato === '2'}" [ngStyle]="{'font-weight': resultado.formato === '1' ? 'normal': 'bold'}"><div [innerHtml]="resultado.descripcion | safe: 'html'"></div></td>
+                            <td [ngClass]="{'summarize': resultado.formato === '2'}" [ngStyle]="{'font-weight': resultado.formato === '1' ? 'normal': 'bold'}" *ngIf="resultado.formato === '0'"></td>
+                            <td style="text-align: right;" [ngClass]="{'summarize': resultado.formato === '2'}" [ngStyle]="{'font-weight': resultado.formato === '1' ? 'normal': 'bold'}" *ngIf="resultado.formato !== '0'">{{resultado.total | number: '.2-2'}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <p-table *ngIf="reporteSeleccionado?.codigo === 2" [value]="ventaFinalList" [responsive]="true" [rowHover]="true" [scrollable]="true" 
+                        scrollHeight="40vh" dataKey="tienda" styleClass="p-datatable-sm p-datatable-striped">
+                    <ng-template pTemplate="colgroup">
+                        <col style="width:30%;">
+                        <col style="width:10%;">
+                        <col style="width:10%;">
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Fecha </th>
+                            <th style="text-align: right;">Venta </th>
+                            <th style="text-align: right;">Comandas </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-venta let-rowIndex="rowIndex" let-expanded="expanded">
+                        <tr *ngIf="rowGroupMetadata[venta.tienda].index === rowIndex">
+                            <td>
+                                <button type="button" pButton pRipple [pRowToggler]="venta" [label]="'Tienda: ' + venta.tiendaNombre + ' (' + rowGroupMetadata[venta.tienda].size + ')'" class="p-button-text p-button-rounded p-button-plain p-mr-2 p-text-bold" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                            </td>
+                            <td style="text-align: right;">
+                                <span class="p-text-bold ">{{rowGroupMetadata[venta.tienda].tender | number: '.2-2'}} </span>
+                            </td>
+                            <td style="text-align: right;">
+                                <span class="p-text-bold ">{{rowGroupMetadata[venta.tienda].comandas | number: '.0-0'}} </span>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="rowexpansion" let-ventas>
+                        <tr>
+                            <td>{{ventas.fecha}}</td>
+                            <td style="text-align: right;">{{ventas.tender | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{ventas.comandas | number: '.0-0'}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <p-table *ngIf="reporteSeleccionado?.codigo === 3 && resumen" [value]="gestionVentaHoraList" [responsive]="true" [rowHover]="true" [scrollable]="true" 
+                        scrollHeight="40vh" dataKey="tiendaNombre" styleClass="p-datatable-sm p-datatable-striped">
+                    <ng-template pTemplate="colgroup">
+                        <col style="width:40%;">
+                        <col style="width:15%;">
+                        <col style="width:15%;">
+                        <col style="width:15%;">
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Fecha </th>
+                            <th style="text-align: right;">Venta </th>
+                            <th style="text-align: right;">Porcentaje </th>
+                            <th style="text-align: right;">Transacciones </th>
+                            <th style="text-align: right;">Porcentaje </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-venta let-rowIndex="rowIndex" let-expanded="expanded">
+                        <tr *ngIf="rowGroupMetadata[venta.tiendaNombre].index === rowIndex">
+                            <td>
+                                <button type="button" pButton pRipple [pRowToggler]="venta" [label]="'Tienda: ' + venta.tiendaNombre + ' (' + rowGroupMetadata[venta.tiendaNombre].size + ')'" class="p-button-text p-button-rounded p-button-plain p-mr-2 p-text-bold" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                            </td>
+                            <td style="text-align: right;">
+                                <span class="p-text-bold ">{{rowGroupMetadata[venta.tiendaNombre].venta | number: '.2-2'}} </span>
+                            </td>
+                            <td></td>
+                            <td style="text-align: right;">
+                                <span class="p-text-bold ">{{rowGroupMetadata[venta.tiendaNombre].transaccion | number: '.0-0'}} </span>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="rowexpansion" let-ventas>
+                        <tr>
+                            <td>{{ventas.openDate}}</td>
+                            <td style="text-align: right;">{{ventas.totalVenta | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{(ventas.totalVenta* 100)/rowGroupMetadata[ventas.tiendaNombre].venta | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{ventas.transacciones | number: '.0-0'}}</td>
+                            <td style="text-align: right;">{{(ventas.transacciones* 100)/rowGroupMetadata[ventas.tiendaNombre].transaccion | number: '.2-2'}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <p-treeTable *ngIf="reporteSeleccionado?.codigo === 3 && !resumen" [value]="ventaHoraList" [scrollable]="true" scrollHeight="40vh">
+                    <ng-template pTemplate="colgroup">
+                        <col style="width:40%;">
+                        <col style="width:15%;">
+                        <col style="width:15%;">
+                        <col style="width:15%;">
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Hora</th>
+                            <th style="text-align: right;">Transacciones</th>
+                            <th style="text-align: right;">Porcentaje</th>
+                            <th style="text-align: right;">Venta</th>
+                            <th style="text-align: right;">Porcentaje</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+                        <tr>
+                            <td>
+                                <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                                {{rowData.hora}}
+                            </td>
+                            <td style="text-align: right;">{{(rowData.formato === 2 ? rowData.transacciones : '') | number: '.0-0'}}</td> 
+                            <td style="text-align: right;">{{(rowData.formato === 2 ? rowData.porcentaje1 : '') | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{rowData.ventas | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{(rowData.formato === 2 ? rowData.porcentaje2 : '') | number: '.2-2'}}</td>
+                        </tr>
+                    </ng-template>
+                </p-treeTable>
+                <p-table *ngIf="reporteSeleccionado?.codigo === 4" [value]="resultVentaList" [responsive]="true" [rowHover]="true" [scrollable]="true" 
+                        scrollHeight="40vh" dataKey="tienda" styleClass="p-datatable-sm p-datatable-gridlines">
+                    <ng-template pTemplate="colgroup">
+                        <col style="width:70%;">
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Descripción </th>
+                            <th> </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-resultado >
+                        <tr>
+                            <td ><div [innerHtml]="resultado.descripcion | safe: 'html'"></div></td>
+                            <td ><div [innerHtml]="resultado.motivo | safe: 'html'"></div></td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <p-table *ngIf="reporteSeleccionado?.codigo === 6" [value]="ventaAgregadorList" [responsive]="true" [rowHover]="true" [scrollable]="true" 
+                        scrollHeight="40vh" dataKey="tienda" styleClass="p-datatable-sm p-datatable-striped" [rows]="100" [paginator]="true"
+                        [rowsPerPageOptions]="[100,200,500]" currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" 
+                        [showCurrentPageReport]="true">
+                    <ng-template pTemplate="colgroup">
+                        <col style="width:60px;">
+                        <col style="width:200px;">
+                        <col style="width:80px;">
+                        <col style="width:80px;">
+                        <col style="width:80px;">
+                        <col style="width:120px;">
+                        <col style="width:70px;">
+                        <col style="width:80px;">
+                        <col style="width:170px;">
+                        <col style="width:170px;">
+                        <col style="width:200px;">
+                        <col style="width:150px;">
+                        <col style="width:50px;">
+                        <col style="width:170px;">
+                        <col style="width:90px;">
+                        <col style="width:150px;">
+                        <col style="width:150px;">
+                        <col style="width:70px;">
+                        <col style="width:70px;">
+                        <col style="width:70px;">
+                        <col style="width:100px;">
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Código </th>
+                            <th>Tienda </th>
+                            <th>Fecha </th>
+                            <th>Correlativo </th>
+                            <th>Transacción </th>
+                            <th>Tipo </th>
+                            <th>Serie </th>
+                            <th>Nro </th>
+                            <th>Cajero </th>
+                            <th>Tipo Venta </th>
+                            <th>Forma de Pago </th>
+                            <th>Transdate </th>
+                            <th>Cent </th>
+                            <th>Administrador </th>
+                            <th>Venta </th>
+                            <th>Tarjeta </th>
+                            <th>Aprobación </th>
+                            <th>Ref. </th>
+                            <th>Lote </th>
+                            <th>Tipo </th>
+                            <th>Nro Pedido </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-formapago >
+                        <tr>
+                            <td>{{formapago.tienda}}</td>
+                            <td>{{formapago.tiendaNombre}}</td>
+                            <td>{{formapago.openDate}}</td>
+                            <td>{{formapago.correlativo}}</td>
+                            <td>{{formapago.transact}}</td>
+                            <td>{{formapago.docTipo}}</td>
+                            <td>{{formapago.docSerie}}</td>
+                            <td>{{formapago.docNro}}</td>
+                            <td>{{formapago.posName}}</td>
+                            <td>{{formapago.tipoVentaNombre}}</td>
+                            <td>{{formapago.descript}}</td>
+                            <td>{{formapago.transdate}}</td>
+                            <td>{{formapago.ccenter}}</td>
+                            <td>{{formapago.administrador}}</td>
+                            <td style="text-align: right;">{{formapago.tenderDbl | number: '.2-2'}}</td>
+                            <td>{{formapago.tarjeta}}</td>
+                            <td>{{formapago.aprobacion}}</td>
+                            <td>{{formapago.referencia}}</td>
+                            <td>{{formapago.lote}}</td>
+                            <td>{{formapago.tipo}}</td>
+                            <td>{{formapago.numeroPedido}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-tabPanel>
+            <p-tabPanel header="Tiendas no Conectadas" leftIcon="pi pi-home">
+                <app-tienda-error [tiendaErrorList]="tiendaErrorList"></app-tienda-error>
+            </p-tabPanel>
+        </p-tabView>
+
+        <div class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <button pRipple pButton label="Exportar" icon="pi pi-file-excel" (click)="export()"> </button>      
+        </div>
+    </div>
+</div>

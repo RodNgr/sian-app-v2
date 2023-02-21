@@ -1,0 +1,57 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+        </ng-template>
+        <ng-template pTemplate="right">
+            <button pButton pRipple label="Exportar" icon="pi pi-upload" styleClass="p-button-info" (click)="exportList()" pTooltip="Exportar" tooltipPosition="bottom"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table [value]="usuarioRolDtoList" styleClass="p-datatable-sm " sortField="representative.name" sortMode="single" 
+             (onSort)="onSort()" dataKey="applicationName">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-jc-between">
+                <div class="p-grid p-ai-center vertical-container">
+                    <h1 class="p-m-0">Consulta de Roles por Usuario</h1>
+                </div>
+                <div>
+                    <input type="text" pInputText [disabled]="true" [(ngModel)]="usuario.shortName" class="p-mr-2" style="width:250px">
+                    <button pButton pRipple label="Seleccionar" icon="pi pi-search" (click)="buscar()" pTooltip="Buscar" tooltipPosition="bottom" ></button>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="colgroup">
+            <colgroup >
+                 <col style="width:40%;">
+                 <col style="width:30%;">
+                 <col style="width:30%;">
+            </colgroup>
+       </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Descripción </th>
+                <th>Código </th>
+                <th>Observación </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-usuarioRol let-rowIndex="rowIndex" let-expanded="expanded">
+            <tr *ngIf="rowGroupMetadata[usuarioRol.applicationName].index === rowIndex">
+                <td colspan="3">
+                    <button type="button" pButton pRipple [pRowToggler]="usuarioRol" class="p-button-text p-button-rounded p-button-plain p-mr-2" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                    <span class="p-text-bold p-ml-2" style="vertical-align: middle">{{usuarioRol.applicationName}}</span>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="rowexpansion" let-usuarioRol>
+            <tr>
+                <td>{{usuarioRol.rol.name}}</td>
+                <td>{{usuarioRol.rol.id}}</td>
+                <td>{{usuarioRol.rol.idPadre}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

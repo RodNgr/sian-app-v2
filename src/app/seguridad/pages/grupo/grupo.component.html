@@ -1,0 +1,31 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+ </ngx-spinner>
+ 
+ <div class="card col">
+     <h1>{{title}}</h1>
+     <hr>
+ 
+     <form #formulario="ngForm" class="p-fluid p-formgrid p-grid" autocomplete="off">
+          <div class="p-field p-col-12 p-lg-1 p-md-1 p-sm-12">
+               <label for="id">Id: </label>
+               <input id="id" type="text" pInputText [(ngModel)]="grupo.id"  name="id" #id="ngModel" disabled="true">
+          </div>
+                  
+          <div class="p-field p-col-12 p-lg-11 p-md-11 p-sm-12">
+               <label for="descripcion" [ngClass] = "{' p-error ': descripcion.invalid && (descripcion.dirty || descripcion.touched)}">Descripción: (*)</label>
+               <input id="descripcion" type="text" pInputText required maxlength="100"
+                     [ngClass] = "{' ng-invalid ng-dirty ': descripcion.invalid && (descripcion.dirty || descripcion.touched)}"  
+                     [(ngModel)]="grupo.descripcion" name="descripcion" #descripcion="ngModel"
+                     [disabled]="type === 'V'" tabindex="1" autofocus>
+               <small *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" id="password-help" class="p-error">
+                    La <strong>descripción</strong> es requerida.
+               </small>
+          </div>
+     </form>
+ 
+     <div class="p-d-flex p-jc-end p-mt-3">
+         <button pButton pRipple pTooltip="Guardar"  tooltipPosition="bottom" label="Guardar"  icon="pi pi-save"  class="p-button-success p-mr-2" (click)="save()" [disabled]="!formulario.form.valid" *ngIf="type !== 'V'"></button>
+         <button pButton pRipple pTooltip="Cancelar" tooltipPosition="bottom" label="Cancelar" icon="pi pi-times" class="p-button-secondary" (click)="cancelar()"></button>
+     </div>
+ </div>

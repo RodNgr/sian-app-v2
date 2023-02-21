@@ -1,0 +1,115 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+ </ngx-spinner>
+
+<div class="card col">
+     <h1>Crear Proceso Cuadratura: Agregador Rappi</h1>
+     <hr>
+
+     <form #formulario="ngForm" class="p-grid" autocomplete="off">
+          <div class="p-md-6 p-lg-6">
+               <div class="p-grid">
+                    <div class="p-col-12">
+                         <p-fieldset legend="Información">
+                              <div class="p-fluid p-formgrid p-grid">
+                                   <div class="p-field p-col-6">
+                                        <label for="inicio" [ngClass] = "{' p-error ': inicio.invalid && (inicio.dirty || inicio.touched)}">Inicio: (*)</label>
+                                        <p-calendar inputId="inicio" inputStyleClass="p-text-center" [touchUI]="isMobile"
+                                             [(ngModel)]="proceso.feInicioPeriodo" [required]="true" name="inicio" #inicio="ngModel" dateFormat="dd/mm/yy"
+                                             [ngClass] = "{' ng-invalid ng-dirty ': inicio.invalid && (inicio.dirty || inicio.touched)}">
+                                        </p-calendar>
+                                        <small *ngIf="inicio.invalid && (inicio.dirty || inicio.touched)" id="password-help" class="p-error">
+                                             La <strong>fecha de inicio</strong> es requerida.
+                                        </small>
+                                   </div>
+                                   <div class="p-field p-col-6">
+                                        <label for="fin" [ngClass] = "{' p-error ': fin.invalid && (fin.dirty || fin.touched)}">Fin: (*)</label>
+                                        <p-calendar inputId="fin" inputStyleClass="p-text-center" [touchUI]="isMobile"
+                                             [(ngModel)]="proceso.feFinPeriodo" [required]="true" name="fin" #fin="ngModel" dateFormat="dd/mm/yy"
+                                             [ngClass] = "{' ng-invalid ng-dirty ': fin.invalid && (fin.dirty || fin.touched)}">
+                                        </p-calendar>
+                                        <small *ngIf="fin.invalid && (fin.dirty || fin.touched)" id="password-help" class="p-error">
+                                             La <strong>fecha de fin</strong> es requerida.
+                                        </small>
+                                   </div>
+                                   <div class="p-field p-col-6">
+                                        <label for="marca" [ngClass] = "{' p-error ': marca.invalid && (marca.dirty || marca.touched)}">Marca: (*)</label>
+                                        <p-dropdown name="marca" [options]="marcas" [(ngModel)]="marcaSelected" optionLabel="nombre" [showClear]="true" placeholder="Seleccione una empresa"
+                                             [ngClass]="{' ng-invalid ng-dirty ': marca.invalid && (marca.dirty || marca.touched)}" #marca="ngModel" [required]="true" (onChange)="cambiarEmpresa()">
+                                        </p-dropdown>
+                                        <small *ngIf="marca.invalid && (marca.dirty || marca.touched)" id="password-help" class="p-error">
+                                             La <strong>marca</strong> es requerida.
+                                        </small>
+                                   </div>
+                                   <div class="p-field p-col-6">
+                                        <label for="formato" [ngClass] = "{' p-error ': formato.invalid && (formato.dirty || formato.touched)}">Formato: (*)</label>
+                                        <p-dropdown name="formato" [options]="formatos" [(ngModel)]="formatoSelected" optionLabel="nombre"
+                                             [ngClass]="{' ng-invalid ng-dirty ': formato.invalid && (formato.dirty || formato.touched)}" #formato="ngModel" [required]="true">
+                                        </p-dropdown>
+                                        <small *ngIf="formato.invalid && (formato.dirty || formato.touched)" id="password-help" class="p-error">
+                                             El <strong>formato</strong> es requerido.
+                                        </small>
+                                   </div>
+                                   <div class="p-field p-col-12">
+                                        <label for="correos">Correos: </label>
+                                        <input type="text" pInputText name="correos" #correos="ngModel" [(ngModel)]="proceso.deCorreos" >
+                                   </div>
+                                   <div class="p-field p-col-6">
+                                        <label for="bolsa" [ngClass]="{' p-error ': bolsa.invalid && (bolsa.dirty || bolsa.touched)}">Valor Bolsa: (*)</label>
+                                        <p-inputNumber type="text" name="bolsa" #bolsa="ngModel" [(ngModel)]="proceso.vaBolsa" locale="es-PE" [min]="0" mode="decimal" [minFractionDigits]="2" 
+                                             id="bolsa" [maxFractionDigits]="2" [ngClass] = "{' ng-invalid ng-dirty ': bolsa.invalid && (bolsa.dirty || bolsa.touched)}"></p-inputNumber>
+                                        <small *ngIf="bolsa.invalid && (bolsa.dirty || bolsa.touched)" id="password-help" class="p-error">
+                                             El <strong>valor de la bolsa</strong> es requerida.
+                                        </small>
+                                   </div>
+                                   <div class="p-field p-col-6">
+                                        <label for="comision" [ngClass]="{' p-error ': comision.invalid && (comision.dirty || comision.touched)}">%Comisión: (*)</label>
+                                        <p-inputNumber type="text" name="comision" #comision="ngModel" [(ngModel)]="proceso.pcComision" locale="es-PE" [required]="true" [min]="0" mode="decimal" [minFractionDigits]="2" 
+                                             id="comision" [maxFractionDigits]="2" [ngClass] = "{' ng-invalid ng-dirty ': comision.invalid && (comision.dirty || comision.touched)}"></p-inputNumber>
+                                        <small *ngIf="comision.invalid && (comision.dirty || comision.touched)" id="password-help" class="p-error">
+                                             El <strong>porcentaje de comisión</strong> es requerida.
+                                        </small>
+                                   </div>
+                              </div>
+                         </p-fieldset>
+                    </div>
+               </div>
+          </div>
+
+          <div class="p-md-6 p-lg-6">
+               <div class="p-grid">
+                    <div class="p-col-12">
+                         <p-fieldset legend="Archivos">
+                              <div class="p-fluid p-formgrid p-grid">
+                                   <div class="p-field p-col-12">
+                                        <label for="Excel">Archivo Resumen (Excel): (*)</label>  
+                                        <p-fileUpload (onSelect)="onSelectResumen($event)" (onError)="onError($event)" (onClear)="onCancelResumen()" accept=".xlsx" 
+                                             [maxFileSize]="10000000" [multiple]="true" chooseLabel="Buscar" [showUploadButton]="false">
+                                             <ng-template pTemplate="file" let-resumen>
+                                                  <strong><i class="pi pi-file-excel"></i> {{resumen.name}} </strong>({{resumen.size | bytes: 2:'B':'MB'}} )<br>
+                                             </ng-template>
+                                        </p-fileUpload>
+                                   </div>
+
+                                   <div class="p-field p-col-12">
+                                        <label for="Xml">Comprobante (Xml): (*)</label>
+                                        <p-fileUpload (onSelect)="onSelectComprobante($event)" (onError)="onError($event)" (onClear)="onCancelComprobante()" accept=".xml" 
+                                             [maxFileSize]="1000000" [multiple]="true" chooseLabel="Buscar" [showUploadButton]="false">
+                                             <ng-template pTemplate="file" let-comprobante>
+                                                  <strong><i class="pi pi-file"></i> {{comprobante.name}} </strong>({{comprobante.size | bytes: 2:'B':'MB'}} )<br>
+                                             </ng-template>
+                                        </p-fileUpload>
+                                   </div>
+                              </div>
+                         </p-fieldset>
+                    </div>
+                    <div class="p-col-12">
+                         <div class="p-d-flex p-jc-end">
+                              <button pButton pRipple pTooltip="Guardar" tooltipPosition="bottom" label="Guardar"  icon="pi pi-save"  class="p-button-success p-mr-2" (click)="save()" [disabled]="!formulario.form.valid"></button>
+                              <button pButton pRipple pTooltip="Cancelar" tooltipPosition="bottom" label="Cancelar" icon="pi pi-times" class="p-button-secondary" (click)="cancelar()"></button>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </form>
+</div>

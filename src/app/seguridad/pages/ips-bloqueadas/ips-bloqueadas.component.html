@@ -1,0 +1,36 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+     <p-table #dt id="dt" [value]="ips" [responsive]="true" [rowHover]="true" [scrollable]="true" scrollHeight="40vh"
+               styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand">
+          <ng-template pTemplate="caption">
+               <div class="p-formgroup-inline">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                         <h1 class="p-m-0">IPs Bloqueadas</h1>
+                    </div>
+               </div>
+          </ng-template>
+          <ng-template pTemplate="colgroup">
+               <colgroup *ngIf="!isMobile">
+                    <col style="width:40%;">
+                    <col style="width:40%;">
+               </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header">
+               <tr>
+                    <th pSortableColumn="id">IP <p-sortIcon field="id"></p-sortIcon></th>
+                    <th pSortableColumn="contador">Intentos <p-sortIcon field="contador"></p-sortIcon></th>
+                    <th >Acción</th>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-ip>
+               <tr>
+                    <td><span class="p-column-title">IP </span>{{ip.id}}</td>
+                    <td><span class="p-column-title">Intentos </span>{{ip.contador}}</td>
+                    <td><span class="p-column-title">Acción </span><button pButton pRipple label="Eliminar" class="p-button-danger" (click)="delete(ip)"></button></td>
+               </tr>
+          </ng-template>
+     </p-table>
+</div>

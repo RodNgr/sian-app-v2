@@ -1,0 +1,22 @@
+[{
+    "carta": "Web",
+    "codigo": "1",
+    "nombre": "La Churrita",
+    "detalle": "hamburguesas clasica + papas medianas"
+
+  },
+  {
+    "carta": "Web",
+    "codigo": "2",
+    "nombre": "A lo Pobre",
+    "detalle": "hamburguesas a lo pobre + papas medianas"
+
+  },
+  {
+    "carta": "Web",
+    "codigo": "3",
+    "nombre": "Hawaiana",
+    "detalle": "hamburguesas hawaiana + papas medianas"
+  }
+
+]

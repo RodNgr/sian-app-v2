@@ -1,0 +1,12 @@
+<div id="container">
+     <p-tree [value]="accesosNodes" [filter]="true" selectionMode="checkbox" [(selection)]="selectedNodes" scrollHeight="250px">
+          <ng-template pTemplate="default" let-node>
+               <b>{{node.label}}</b>
+          </ng-template>
+     </p-tree>
+</div>
+
+<div class="p-d-flex p-jc-end p-mt-3">
+     <button pButton pRipple label="Aplicar" (click)="aplicar()" icon="pi pi-check-circle" class="p-button-success p-mr-2"></button>
+     <button pButton pRipple label="Cerrar" (click)="cancelar()" icon="pi pi-times" class="p-button-secondary"></button>
+</div>

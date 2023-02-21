@@ -1,0 +1,98 @@
+
+.layout-sidebar, .layout-sidebar .logo {
+     border-right: 1px solid var(--surface-d);
+     display: flex;
+ }
+ 
+ .layout-sidebar {
+     position: fixed;
+     left: 0;
+     top: 0;
+     height: 100%;
+     background-color: var(--surface-a);
+     width: 250px;
+     -webkit-user-select: none;
+     -ms-user-select: none;
+     user-select: none;
+     transition: transform .4s cubic-bezier(.05,.74,.2,.99);
+     flex-direction: column;
+ }
+ 
+ .layout-sidebar .logo {
+     min-height: 70px;
+     justify-content: center;
+     align-items: center;
+     border-bottom: 1px solid var(--surface-d);
+     z-index: 1;
+ }
+ 
+ .layout-sidebar .logo img {
+     width: 150px;
+ }
+ 
+ .layout-sidebar, .layout-sidebar .logo {
+     border-right: 1px solid var(--surface-d);
+     display: flex;
+ }
+ 
+ * {
+     box-sizing: border-box;
+ }
+ 
+ .layout-sidebar .layout-sidebar-filter {
+     padding: 1.25rem 1rem;
+     border-bottom: 1px solid var(--surface-d);
+     background-color: var(--surface-a);
+     display: flex;
+ }
+ 
+ .layout-sidebar .layout-menu {
+     overflow-y: auto;
+     flex-grow: 1;
+     border-right: 1px solid var(--surface-d);
+ }
+ 
+ .layout-sidebar .layout-menu .menu-category:first-child {
+     border-top: 0;
+     padding-top: 1rem;
+ }
+ 
+ .layout-sidebar .layout-menu .menu-category {
+     display: block;
+     color: var(--text-color-secondary);
+     font-weight: 600;
+     -webkit-user-select: none;
+     -ms-user-select: none;
+     user-select: none;
+     padding: 1.5rem 0 1rem;
+     font-size: .857rem;
+     text-transform: uppercase;
+     border-top: 1px solid var(--surface-d);
+ }
+ 
+ .layout-sidebar .layout-menu .menu-items {
+     padding: 0 0 1rem;
+     display: flex;
+     flex-direction: column;
+ }
+ 
+ .layout-sidebar .layout-menu .menu-items a {
+     color: var(--text-color);
+     display: block;
+     padding: .5rem;
+     border-radius: 3px;
+     cursor: pointer;
+     text-decoration: none;
+ }
+ 
+ @media screen and (max-width: 960px) {
+     .layout-sidebar {
+         transform: translateX(-100%);
+         z-index: 999;
+     }
+ 
+     .layout-sidebar.active {
+         transform: translateX(0);
+     }
+ }
+ 

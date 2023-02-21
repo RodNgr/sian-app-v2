@@ -1,0 +1,36 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+     <p-toolbar styleClass="p-mb-4">
+          <ng-template pTemplate="left">
+               <button pButton pRipple class="p-button-secondary" type="button" pTooltip="Cerrar" tooltipPosition="bottom" label="Cerrar" icon="pi pi-times" (click)="cerrar()"></button>
+          </ng-template>
+          <ng-template pTemplate="right">
+               <button pButton pRipple class="p-button" type="button" pTooltip="Exportar" tooltipPosition="bottom" label="Exportar" icon="pi pi-upload" (click)="exportar()"></button>
+          </ng-template>
+     </p-toolbar>
+     
+     <p-table [value]="rowInvalidList" [responsive]="true" [rowHover]="true" dataKey="index" [scrollable]="true" scrollHeight="40vh" 
+              styleClass="p-datatable-sm p-datatable-striped">
+          <ng-template pTemplate="colgroup">
+               <colgroup *ngIf="!isMobile">
+                    <col style="width: 10%;">
+                    <col style="width: 90%;">
+               </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header">
+               <tr>
+                    <th [ngClass]="{'p-text-center': !isMobile}">Línea </th>
+                    <th>Descripción </th>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowInvalid>
+               <tr>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Cód.Pixel</span>{{rowInvalid.index}}</td>
+                    <td><span class="p-column-title">Descripción</span>{{rowInvalid.descripcion}}</td>
+               </tr>
+          </ng-template>
+     </p-table>
+</div>

@@ -1,0 +1,70 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+    <h1>{{title}}</h1>
+    <hr>
+
+    <form #prefijoForm="ngForm" class="p-fluid p-formgrid p-grid" autocomplete="off">
+        <div class="p-field p-col-12 p-md-6 p-sm-6">
+            <label for="name" [ngClass] = "{' p-error ': name.invalid && (name.dirty || name.touched)}" >Prefijo: (*)</label>
+            <input id="name" type="text" pInputText class="p-text-uppercase" required maxlength="7"
+                    [ngClass] = "{' ng-invalid ng-dirty ': name.invalid && (name.dirty || name.touched)}"  
+                    [(ngModel)]="prefijo.prefijo" required length="5" name="name" #name="ngModel"
+                    [disabled]="type === 'V' || type === 'E'" tabindex="1" [autofocus]="type === 'N'">
+            <small *ngIf="name.invalid && (name.dirty || name.touched)" id="password-help" class="p-error">
+                El <strong>prefijo</strong> es requerido.
+            </small>
+        </div>
+        
+        <div class="p-field p-col-12 p-md-6 p-sm-6">
+            <label for="grupo" [ngClass] = "{' p-error ': grupo.invalid && (grupo.dirty || grupo.touched)}">Grupo: (*)</label>
+            <input id="grupo" type="text" pInputText class="p-text-uppercase" required maxlength="50"
+                    [ngClass] = "{' ng-invalid ng-dirty ': grupo.invalid && (grupo.dirty || grupo.touched)}"  
+                    [(ngModel)]="prefijo.grupo" name="grupo" #grupo="ngModel"
+                    [disabled]="type === 'V'" tabindex="2" [autofocus]="type === 'E'" onfocus="this.select()">
+            <small *ngIf="grupo.invalid && (grupo.dirty || grupo.touched)" id="password-help" class="p-error">
+                El <strong>grupo</strong> es requerido.
+            </small>
+        </div>
+        
+        <div class="p-field p-col-12">
+            <label for="descripcion" [ngClass] = "{' p-error ': descripcion.invalid && (descripcion.dirty || descripcion.touched)}">Descripcion: (*)</label>
+            <input id="descripcion" type="text" pInputText class="p-text-uppercase" required maxlength="100"
+                    [ngClass] = "{' ng-invalid ng-dirty ': descripcion.invalid && (descripcion.dirty || descripcion.touched)}"  
+                    [(ngModel)]="prefijo.descripcion" name="descripcion" #descripcion="ngModel"
+                    [disabled]="type === 'V'" tabindex="3" onfocus="this.select()">
+            <small *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" id="password-help" class="p-error">
+                La <strong>descripción</strong> es requerida.
+            </small>
+        </div>
+        
+        <div class="p-field p-col-12 p-md-6 p-sm-6">
+            <label for="lenCodBar" [ngClass] = "{' p-error ': lenCodBar.invalid && (lenCodBar.dirty || lenCodBar.touched)}">Longitud: (*)</label>
+            <input id="lenCodBar" type="number" pInputText class="p-text-uppercase" required
+                    [ngClass] = "{' ng-invalid ng-dirty ': lenCodBar.invalid && (lenCodBar.dirty || lenCodBar.touched)}"  
+                    [(ngModel)]="prefijo.lenCodBar" min="1" max="13" name="lenCodBar" #lenCodBar="ngModel"
+                    [disabled]="type === 'V'" tabindex="4" onfocus="this.select()">
+            <small *ngIf="lenCodBar.invalid && (lenCodBar.dirty || lenCodBar.touched)" id="password-help" class="p-error">
+                La <strong>longitud</strong> válida es <strong>entre 1 y 13</strong>.
+            </small>
+        </div>
+
+        <div class="p-field p-col-12 p-md-6 p-sm-6">
+            <label for="prodnum" [ngClass] = "{' p-error ': prodnum.invalid && (prodnum.dirty || prodnum.touched)}">Código Producto: (*)</label>
+            <input id="prodnum" type="number" pInputText class="p-text-uppercase"
+                    [ngClass] = "{' ng-invalid ng-dirty ': prodnum.invalid && (prodnum.dirty || prodnum.touched)}"  
+                    [(ngModel)]="prefijo.prodnum" required name="prodnum" #prodnum="ngModel"
+                    [disabled]="type === 'V'" tabindex="5" onfocus="this.select()">
+            <small *ngIf="prodnum.invalid && (prodnum.dirty || prodnum.touched)" id="password-help" class="p-error">
+                El <strong>código del producto</strong> es requerido.
+            </small>
+        </div>
+    </form>
+
+    <div class="p-d-flex p-jc-end p-mt-3">
+        <button pButton pRipple pTooltip="Guardar"  tooltipPosition="bottom" label="Guardar"  icon="pi pi-save"  class="p-button-success p-mr-2" (click)="save()" [disabled]="!prefijoForm.form.valid" *ngIf="type !== 'V'"></button>
+        <button pButton pRipple pTooltip="Cancelar" tooltipPosition="bottom" label="Cancelar" icon="pi pi-times" class="p-button-secondary" (click)="cancelar()"></button>
+    </div>
+</div>

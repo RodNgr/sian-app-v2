@@ -1,0 +1,124 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+    <div class="p-grid">
+        <div class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-6 p-lg-6 p-md-6 p-sm-12">
+                    <label for="estado">Empresa:</label>
+                    <p-multiSelect [options]="empresaList" [(ngModel)]="empresasSeleccionadas" optionLabel="nombre" defaultLabel="Seleccione las empresas" selectedItemsLabel="{0} empresas seleccionadas" (onChange)="onChangeEmpresa()"></p-multiSelect>
+                </div>
+                <div class="p-field p-col-6 p-lg-6 p-md-6 p-sm-12">
+                    <label for="estado" *ngIf="showSelectorTienda" >Tiendas:</label>
+                    <p-multiSelect *ngIf="showSelectorTienda" [options]="tiendaList" [(ngModel)]="tiendasSeleccionadas" optionLabel="nombre" defaultLabel="Seleccione las tiendas" selectedItemsLabel="{0} tiendas seleccionadas"></p-multiSelect>
+                </div>
+                <div class="p-field p-col-2 p-lg-2 p-md-2 p-sm-12">
+                    <label for="estado">Fecha Inicio:</label>
+                    <p-calendar [(ngModel)]="feInicio" dateFormat="dd/mm/yy" inputStyleClass="p-text-center"></p-calendar>
+                </div>
+                <div class="p-field p-col-2 p-lg-2 p-md-2 p-sm-12">
+                    <label for="estado">Fecha Fin:</label>
+                    <p-calendar [(ngModel)]="feFin" dateFormat="dd/mm/yy" inputStyleClass="p-text-center"></p-calendar>
+                </div>
+                <div class="p-field p-col-2 p-lg-2 p-md-2 p-sm-12 p-mt-4">
+                    <button pRipple pButton label="Buscar" icon="pi pi-search" (click)="buscar()"> </button>
+                </div>
+            </div>
+        </div>
+
+        <p-tabView class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <p-tabPanel header="Resultados" leftIcon="pi pi-chart-bar">
+                <p-table [value]="ventaList" [responsive]="true" [rowHover]="true" [scrollable]="true" 
+                        scrollHeight="40vh" styleClass="p-datatable-sm p-datatable-striped" [rows]="100" [paginator]="true"
+                        [rowsPerPageOptions]="[100,200,500]" currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" 
+                        [showCurrentPageReport]="true">
+                    <ng-template pTemplate="colgroup">
+                        <col style="width:110px;">
+                        <col style="width:60px;">
+                        <col style="width:200px;">
+                        <col style="width:80px;">
+                        <col style="width:80px;">
+                        <col style="width:80px;">
+                        <col style="width:120px;">
+                        <col style="width:70px;">
+                        <col style="width:80px;">
+                        <col style="width:170px;">
+                        <col style="width:170px;">
+                        <col style="width:200px;">
+                        <col style="width:150px;">
+                        <col style="width:50px;">
+                        <col style="width:170px;">
+                        <col style="width:90px;">
+                        <col style="width:150px;">
+                        <col style="width:150px;">
+                        <col style="width:70px;">
+                        <col style="width:70px;">
+                        <col style="width:70px;">
+                        <col style="width:100px;">
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Empresa </th>
+                            <th>Código </th>
+                            <th>Tienda </th>
+                            <th>Fecha </th>
+                            <th>Correlativo </th>
+                            <th>Transacción </th>
+                            <th>Tipo </th>
+                            <th>Serie </th>
+                            <th>Nro </th>
+                            <th>Cajero </th>
+                            <th>Tipo Venta </th>
+                            <th>Forma de Pago </th>
+                            <th>Transdate </th>
+                            <th>Cent </th>
+                            <th>Administrador </th>
+                            <th>Venta </th>
+                            <th>Tarjeta </th>
+                            <th>Aprobación </th>
+                            <th>Ref. </th>
+                            <th>Lote </th>
+                            <th>Tipo </th>
+                            <th>Nro Pedido </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-formapago >
+                        <tr>
+                            <td>{{formapago.empresa}}</td>
+                            <td>{{formapago.tienda}}</td>
+                            <td>{{formapago.tiendaNombre}}</td>
+                            <td>{{formapago.openDate}}</td>
+                            <td>{{formapago.correlativo}}</td>
+                            <td>{{formapago.transact}}</td>
+                            <td>{{formapago.docTipo}}</td>
+                            <td>{{formapago.docSerie}}</td>
+                            <td>{{formapago.docNro}}</td>
+                            <td>{{formapago.posName}}</td>
+                            <td>{{formapago.tipoVentaNombre}}</td>
+                            <td>{{formapago.descript}}</td>
+                            <td>{{formapago.transdate}}</td>
+                            <td>{{formapago.ccenter}}</td>
+                            <td>{{formapago.administrador}}</td>
+                            <td style="text-align: right;">{{formapago.tenderDbl | number: '.2-2'}}</td>
+                            <td>{{formapago.tarjeta}}</td>
+                            <td>{{formapago.aprobacion}}</td>
+                            <td>{{formapago.referencia}}</td>
+                            <td>{{formapago.lote}}</td>
+                            <td>{{formapago.tipo}}</td>
+                            <td>{{formapago.numeroPedido}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-tabPanel>
+            <p-tabPanel header="Tiendas no Conectadas" leftIcon="pi pi-home">
+                <app-tienda-error [tiendaErrorList]="tiendaErrorList"></app-tienda-error>
+            </p-tabPanel>
+        </p-tabView>
+
+        <div class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <button pRipple pButton label="Exportar" icon="pi pi-file-excel" class="p-mr-2"> </button>
+        </div>
+    </div>
+</div>

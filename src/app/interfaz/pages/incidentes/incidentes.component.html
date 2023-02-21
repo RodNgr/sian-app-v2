@@ -1,0 +1,89 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+     <p-toolbar styleClass="p-mb-4">
+          <ng-template pTemplate="left">
+               <button pButton pRipple label="Ver Detalle" icon="pi pi-list" class="p-button-help p-mr-5" (click)="verDetalle()" pTooltip="Ver Detalle" tooltipPosition="bottom"></button>
+               <button pButton pRipple label="Asumir" icon="pi pi-thumbs-up" class="p-button-info" (click)="asumir()" pTooltip="Asumir" tooltipPosition="bottom"></button>
+          </ng-template>
+
+          <ng-template pTemplate="right">
+               <button pButton pRipple pTooltip="Exportar" tooltipPosition="bottom" label="Exportar" icon="pi pi-upload" styleClass="p-button-info"></button>
+          </ng-template>
+     </p-toolbar>
+
+     <p-table  #dt [value]="incidenteList" [responsive]="true" [rows]="25" [paginator]="true" [rowHover]="true" dataKey="idCorrelativo"  
+               [scrollable]="true" scrollHeight="40vh" selectionMode="single" [(selection)]="incidenteSelected" 
+               styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
+               currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+               [rowsPerPageOptions]="[25,50,100,150]">
+          <ng-template pTemplate="caption">
+               <div class="p-d-flex p-grid">
+                    <div class="p-col-12 p-ai-center vertical-container">
+                         <h1 class="p-m-0">Incidentes</h1>
+                    </div>
+                    
+                    <div class="p-col-12">
+                         <div class="p-fluid p-formgrid p-grid">
+                              <div class="p-field p-lg-2 p-md-2 p-sm-12">
+                                   <label for="cantidad">Fecha Inicial:</label>
+                                   <p-calendar [(ngModel)]="rangeDates[0]" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" ></p-calendar>
+                              </div>
+
+                              <div class="p-field p-lg-2 p-md-2 p-sm-12">
+                                   <label for="cantidad">Fecha Final:</label>
+                                   <p-calendar [(ngModel)]="rangeDates[1]" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" ></p-calendar>
+                              </div>
+
+                              <div class="p-field p-lg-2 p-md-2 p-sm-12">
+                                   <label for="cantidad">Tipo:</label>
+                                   <p-dropdown [options]="tipoList" [(ngModel)]="tipoSelected" optionLabel="descripcion"></p-dropdown>
+                              </div>
+
+                              <div class="p-field p-lg-2 p-md-2 p-sm-12">
+                                   <label for="cantidad">Estado:</label>
+                                   <p-dropdown [options]="estadoList" [(ngModel)]="estadoSelected" optionLabel="descripcion"></p-dropdown>
+                              </div>
+
+                              <div class="p-field p-lg-1 p-md-2 p-sm-2">
+                                   <button pButton pRipple pTooltip="Buscar" tooltipPosition="bottom" type="button" label="Buscar" (click)="buscar()" style="margin-top: 1.75rem" icon="pi pi-search"></button>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </ng-template>
+          <ng-template pTemplate="colgroup">
+               <colgroup *ngIf="!isMobile">
+                    <col style="width:25%;">
+                    <col style="width:10%;">
+                    <col style="width:10%;">
+                    <col style="width:10%;">
+               </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header">
+               <tr>
+                    <th pSortableColumn="nombreTienda">Tienda <p-sortIcon field="nombreTienda"></p-sortIcon></th>
+                    <th pSortableColumn="fechaVenta">Fecha <p-sortIcon field="fechaVenta"></p-sortIcon></th>
+                    <th pSortableColumn="tipo">Tipo <p-sortIcon field="tipo"></p-sortIcon></th>
+                    <th pSortableColumn="estatus">Estado <p-sortIcon field="estatus"></p-sortIcon></th>
+                    <th pSortableColumn="mensaje">Mensaje <p-sortIcon field="mensaje"></p-sortIcon></th>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-incidente>
+               <tr [pSelectableRow]="incidente">
+                    <td><span class="p-column-title">Tienda</span>{{incidente.nombreTienda}}</td>
+                    <td><span class="p-column-title">Fecha</span>{{incidente.fechaVenta}}</td>
+                    <td><span class="p-column-title">Tipo</span>{{incidente.tipo}}</td>
+                    <td><span class="p-column-title">Estado</span>{{incidente.estatus | estadoInterface}}</td>
+                    <td><span class="p-column-title">Mensaje</span>{{incidente.mensaje}}</td>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="summary">
+               <div class="p-d-flex p-ai-center p-jc-between">
+                    {{(incidenteList ? incidenteList.length : 0) | i18nPlural: cantidadMap}}
+               </div>
+          </ng-template>
+     </p-table>
+</div>

@@ -1,0 +1,300 @@
+--"Request de generacion cupon Precio Fijo"
+-- "UNO USO"
+{
+	"nombre": "campanha cyber",
+	"activoCompraMin": 1,
+	"marca": "1002",
+	"monto": 12.2,
+	"tipoCupon": 1,
+	"descripcion": "test",
+	"user": "gianka",
+	"fecInicio": "2022-07-04 08:22:02",
+	"fecFin": "2022-07-09 08:23:02",
+	"nroUso": 1,
+	"nroCuponAGenerar": 3,
+	"canaldetalle": [
+	  {
+		"canal": 1,
+		"producto": "1002",
+		"cantidad": 3
+	  },
+	  {
+		"canal": 2,
+		"producto": "1003",
+		"cantidad": 1
+	  },
+	  {
+		"canal": 3,
+		"producto": "1002",
+		"cantidad": 3
+	  }
+	]
+  }
+
+  -- "MAS DE UN USO"
+  {
+	"nombre": "campanha otra",
+	"codigo": "cyber2025",
+	"activoCompraMin": 1,
+	"marca": "1002",
+	"monto": 12.2,
+	"tipoCupon": 1,
+	"descripcion": "test",
+	"user": "gianka",
+	"fecInicio": "2022-07-04 08:22:02",
+	"fecFin": "2022-07-09 08:23:02",
+	"nroUso": 3,
+	"canaldetalle": [
+	  {
+		"canal": 1,
+		"producto": "1002",
+		"cantidad": 3
+	  },
+	  {
+		"canal": 2,
+		"producto": "1003",
+		"cantidad": 1
+	  },
+	  {
+		"canal": 3,
+		"producto": "1002",
+		"cantidad": 3
+	  }
+	]
+  }
+
+--------------------------------------------------------------------------------------------------------
+
+
+--"Request de generacion cupon Descuento por porcentaje en un producto seleccionado"
+--"UN USO"
+{
+	"nombre": "campanha 5",
+	"activoCompraMin": 1,
+	"marca": "1002",
+	"monto": 12.2,
+	"tipoCupon": 2,
+	"descripcion": "test",
+	"user": "gianka",
+	"fecInicio": "2022-07-04 08:22:02",
+	"fecFin": "2022-07-09 08:23:02",
+	"nroUso": 1,
+	"nroCuponAGenerar": 3,
+	"montoMax": 30,
+	"canaldetalle": [
+	  {
+		"canal": 1,
+		"producto": "1002",
+		"cantidad": 3
+	  },
+	  {
+		"canal": 2,
+		"producto": "1003",
+		"cantidad": 1
+	  },
+	  {
+		"canal": 3,
+		"producto": "1002",
+		"cantidad": 3
+	  }
+	]
+  }
+
+-- "MAS DE UN USO"
+{
+	"nombre": "campanha 7",
+	"codigo": "MASUSOPOR",
+	"activoCompraMin": 1,
+	"marca": "1002",
+	"monto": 12.2,
+	"tipoCupon": 2,
+	"descripcion": "test",
+	"user": "gianka",
+	"fecInicio": "2022-07-04 08:22:02",
+	"fecFin": "2022-07-09 08:23:02",
+	"nroUso": 3,
+	"montoMax": 30,
+	"canaldetalle": [
+	  {
+		"canal": 1,
+		"producto": "1002",
+		"cantidad": 3
+	  },
+	  {
+		"canal": 2,
+		"producto": "1003",
+		"cantidad": 1
+	  },
+	  {
+		"canal": 3,
+		"producto": "1002",
+		"cantidad": 3
+	  }
+	]
+  }
+------------------------------------------------------------------------------------------------------------
+
+--"Request de generacion cupon Descuento por porcentaje en cualquier producto"
+--"UN USO"
+{
+	"nombre": "campanha cyber",
+	"activoCompraMin": 1,
+	"marca": "1002",
+	"monto": 12.2,
+	"tipoCupon": 3,
+	"descripcion": "Tipo 3",
+	"user": "gianka",
+	"fecInicio": "2022-07-04 08:22:02",
+	"fecFin": "2022-07-09 08:23:02",
+	"nroUso": 1,
+	"nroCuponAGenerar": 3,
+	"montoMax": 30,
+	"canaldetalle": [
+	  {
+		"canal": 1,
+		"producto": "1002",
+		"cantidad": 3
+	  },
+	  {
+		"canal": 1,
+		"producto": "1005",
+		"cantidad": 2
+	  },
+	  {
+		"canal": 2,
+		"producto": "1003",
+		"cantidad": 1
+	  },
+	  {
+		"canal": 3,
+		"producto": "1002",
+		"cantidad": 3
+	  }
+	]
+  }
+
+  --"MAS DE UN USO"
+  {
+	"nombre": "campanha cyber",
+	"codigo": "TEST3CU",
+	"activoCompraMin": 1,
+	"marca": "1002",
+	"monto": 10,
+	"tipoCupon": 3,
+	"descripcion": "test",
+	"user": "gianka",
+	"fecInicio": "2022-07-04 08:22:02",
+	"fecFin": "2022-07-09 08:23:02",
+	"nroUso": 3,
+	"montoMax": 30,
+	"canaldetalle": [
+	  {
+		"canal": 1,
+		"producto": "1002",
+		"cantidad": 3
+	  },
+	  {
+		"canal": 1,
+		"producto": "1004",
+		"cantidad": 3
+	  },
+	  {
+		"canal": 2,
+		"producto": "1003",
+		"cantidad": 1
+	  },
+	  {
+		"canal": 3,
+		"producto": "1002",
+		"cantidad": 3
+	  }
+	]
+  }
+  ------------------------------------------------------------------------------------------------------------
+  --"Request de generacion cupon Descuento por monto fijo en total del pedido"
+  --"UN USO"
+  {
+	"nombre": "campanha transaccion",
+	"activoCompraMin": 1,
+	"marca": "1002",
+	"monto": 12.2,
+	"tipoCupon": 5,
+	"descripcion": "test",
+	"user": "gianka",
+	"fecInicio": "2022-07-04 08:22:02",
+	"fecFin": "2022-07-09 08:23:02",
+	"nroUso": 1,
+	"nroCuponAGenerar": 3,
+	"compraMin": 40.23
+  }
+
+  -- "MAS DE UN USO"
+  {
+	"nombre": "campanha cyber",
+	"codigo": "cupon5",
+	"activoCompraMin": 1,
+	"marca": "1002",
+	"monto": 12.2,
+	"tipoCupon": 5,
+	"descripcion": "test",
+	"user": "gianka",
+	"fecInicio": "2022-07-04 08:22:02",
+	"fecFin": "2022-07-09 08:23:02",
+	"nroUso": 3,
+	"compraMin": 40.23
+  }
+
+  ------------------------------------------------------------------------------------------------------------
+  --"Request de generacion cupon Descuento por porcentaje en total del pedido"
+  --"UN USO"
+
+  {
+	"nombre": "campanha cyber",
+	"activoCompraMin": 1,
+	"marca": "1002",
+	"monto": 12.2,
+	"tipoCupon": 6,
+	"descripcion": "test",
+	"user": "gianka",
+	"fecInicio": "2022-07-04 08:22:02",
+	"fecFin": "2022-07-09 08:23:02",
+	"nroUso": 1,
+	"nroCuponAGenerar": 3,
+	"montoMax": 12.5,
+	"compraMin": 40.23
+  }
+  --"MAS DE UN USO"
+  {
+	"nombre": "campanha cyber",
+	"codigo": "cupon6",
+	"activoCompraMin": 1,
+	"marca": "1002",
+	"monto": 12.2,
+	"tipoCupon": 6,
+	"descripcion": "test",
+	"user": "gianka",
+	"fecInicio": "2022-07-04 08:22:02",
+	"fecFin": "2022-07-09 08:23:02",
+	"nroUso": 3,
+	"montoMax": 12.5,
+	"compraMin": 40.23
+  }
+
+
+  ------------------------------------------------------------------------------------------------------------
+
+"Response válido"
+[
+    {
+        "statusCode": 200,
+        "body": "Mensaje",
+    }
+]
+
+"Response error"
+[
+    {
+        "statusCode": 500,
+        "body": "Mensaje",
+    }
+]

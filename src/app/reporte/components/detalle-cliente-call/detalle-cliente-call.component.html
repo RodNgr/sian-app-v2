@@ -1,0 +1,46 @@
+<p-accordion>
+    <p-accordionTab header="{{cliente.nombre + ' ' + cliente.apellidos}}">
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-4">
+                <label for="documento">Documento</label>
+                <input id="documento" type="text" pInputText readonly value="{{cliente.dni}}"> 
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="telefono">Telefono</label>
+                <input id="telefono" type="text" pInputText readonly value="{{cliente.telefono}}"> 
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="mail">E-Mail</label>
+                <input id="mail" type="text" pInputText readonly value="{{cliente.email}}"> 
+            </div>
+            <div class="p-field p-col-12 p-md-6">
+                <label for="direccion1">Dirección 1</label>
+                <input id="direccion1" type="text" pInputText readonly value="{{cliente.direccion1}}"> 
+            </div>
+            <div class="p-field p-col-12 p-md-6">
+                <label for="direccion1">Dirección 2</label>
+                <input type="text" pInputText readonly value="{{cliente.direccion2}}"> 
+            </div>
+            <div class="p-field p-col-12 p-md-6">
+                <label for="ciudad">Ciudad</label>
+                <input id="ciudad" type="text" pInputText readonly value="{{cliente.ciudad}}"> 
+            </div>
+            <div class="p-field p-col-12 p-md-6">
+                <label for="provincia">Provincia</label>
+                <input id="provincia" type="text" pInputText readonly value="{{cliente.provincia}}"> 
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="origen">Origen</label>
+                <input id="origen" type="text" pInputText readonly value="{{cliente.tipoCentro | tipoCentro}}"> 
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="marca">Marca</label>
+                <input id="marca" type="text" pInputText readonly value="{{cliente.marca | marca}}"> 
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="autorizacion">F. Autorización</label>
+                <input id="autorizacion" type="text" pInputText readonly value="{{cliente.feAutorizacion | date: 'dd/MM/yyyy'}}"> 
+            </div>
+        </div>
+    </p-accordionTab>
+</p-accordion>

@@ -1,0 +1,99 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+     <p-toolbar styleClass="p-mb-4">
+          <ng-template pTemplate="left">
+               <button pButton pRipple pTooltip="Reprocesar" tooltipPosition="bottom" label="Reprocesar" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="reprocesar()"></button>
+               <button pButton pRipple pTooltip="Ver Detalle" tooltipPosition="bottom" label="Ver Detalle" icon="pi pi-align-justify" class="p-button-help p-mr-2" (click)="verDetalle()"></button>
+          </ng-template>
+
+          <ng-template pTemplate="right">
+               <button pButton pRipple pTooltip="Exportar" tooltipPosition="bottom" label="Exportar" icon="pi pi-upload" (click)="exportXLS()" styleClass="p-button-info"></button>
+          </ng-template>
+     </p-toolbar>
+
+     <p-table #dt [value]="procesoList" [responsive]="true" [rows]="25" [paginator]="true" [rowHover]="true" dataKey="idProceso"
+               [scrollable]="true" scrollHeight="40vh" [rowsPerPageOptions]="[15,25,50,100]" selectionMode="single" [(selection)]="procesoSelected" 
+               currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+               styleClass="p-datatable-sm p-datatable-striped">
+          <ng-template pTemplate="caption">
+               <div class="p-d-flex p-jc-between">
+                    <div class="p-grid p-ai-center vertical-container">
+                         <h1 class="p-col p-m-0">Mall</h1>
+                    </div>
+
+                    <div class="p-fluid p-form-grid p-grid p-jc-end">
+                         <div class="p-field p-col">
+                              <label for="inicio">F. Inicio Proceso:</label>
+                              <p-calendar id="inicio" [(ngModel)]="rangeDates[0]" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" [touchUI]="isMobile"></p-calendar>
+                         </div>
+                         <div class="p-field p-col">
+                              <label for="fin">F. Fin Proceso:</label>
+                              <p-calendar id="fin" [(ngModel)]="rangeDates[1]" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" [touchUI]="isMobile"></p-calendar>
+                         </div>
+
+                         <div class="p-field p-mr-2 p-ml-2">
+                              <button pButton pRipple pTooltip="Buscar" tooltipPosition="bottom" type="button" label="Buscar" style="margin-top: 2.3rem" icon="pi pi-search" (click)="buscar()"></button>
+                         </div>
+                    </div>
+               </div>
+          </ng-template>
+          <ng-template pTemplate="colgroup">
+               <colgroup *ngIf="!isMobile">
+                    <col style="width:7%;">
+                    <col style="width:30%;">
+                    <col style="width:10%;">
+                    <col style="width:10%;">
+                    <col style="width:13%;">
+                    <col style="width:10%;">
+               </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header">
+               <tr>
+                    <th>ID </th>
+                    <th>Descripción </th>
+                    <th [ngClass]="{'p-text-center': !isMobile}">Periodo Inicio </th>
+                    <th [ngClass]="{'p-text-center': !isMobile}">Periodo Fin </th>
+                    <th [ngClass]="{'p-text-center': !isMobile}">Fecha Proceso </th>
+                    <th>Resultado </th>
+                    <th>Estado </th>
+               </tr>
+               <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th><p-columnFilter type="boolean" field="inResultado" class="p-ml-auto"></p-columnFilter></th>
+                    <th>
+                         <p-dropdown appendTo="body" [options]="estados" optionLabel="descripcion" (onChange)="filterEstado($event.value, dt)" placeholder="Todos" styleClass="p-column-filter" [showClear]="true" class="p-ml-auto">
+                              <ng-template let-option pTemplate="item">
+                                   <span>{{option.descripcion}}</span>
+                              </ng-template>
+                         </p-dropdown>
+                    </th>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-proceso>
+               <tr [pSelectableRow]="proceso">
+                    <td><span class="p-column-title">ID</span>{{proceso.idProceso}}</td>
+                    <td><span class="p-column-title">Descripción</span>{{proceso.deProceso | uppercase}}</td>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Periodo Inicio</span>{{proceso.feInicioPeriodo | date: 'dd/MM/yyyy'}}</td>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Periodo Fin</span>{{proceso.feFinPeriodo | date: 'dd/MM/yyyy'}}</td>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Fecha Proceso</span>{{proceso.feCreacion | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+                    <td>
+                         <span class="p-column-title">Resultado</span>
+                         <i class="pi" [ngClass]="{'': proceso.inResultado === null, 'valid pi-check-circle': proceso.inResultado === true, 'invalid pi-times-circle': proceso.inResultado === false}"></i>
+                    </td>
+                    <td><span class="p-column-title">Estado</span>{{proceso.esProceso | estadoProceso}}</td>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="summary">
+               <div class="p-d-flex p-ai-center p-jc-between">
+                    {{(procesoList ? procesoList.length : 0) | i18nPlural: cantidadMap}}
+               </div>
+          </ng-template>
+     </p-table>
+</div>

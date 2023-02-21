@@ -1,0 +1,130 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+     <p-toolbar styleClass="p-mb-4">
+          <ng-template pTemplate="left">
+               <button pButton pRipple label="Sel. Cat. SAP" icon="pi pi-check" class="p-button-help p-mr-2"  pTooltip="Seleccionar Categoría SAP" tooltipPosition="bottom" (click)="seleccionarCategoriaSap()"></button>
+               <button pButton pRipple label="Limpiar Cat. SAP" icon="pi pi-times" class="p-button-danger p-mr-4"  pTooltip="Limpiar Categoría SAP" tooltipPosition="bottom" (click)="limpiarCategoriaSap()"></button>
+               <button pButton pRipple label="Asignar Familia" icon="pi pi-sitemap" class="p-button-primary p-mr-4"  pTooltip="Asignar Familia" tooltipPosition="bottom" (click)="asignarFamilia()"></button>
+               <button pButton pRipple label="Exp. Prod. No Transferidos" icon="pi pi-download" class="p-button-info"  pTooltip="Exportar Prod. No Transferidos" tooltipPosition="bottom" (click)="exportar()"></button>
+          </ng-template>
+
+          <ng-template pTemplate="right">
+               <button pButton pRipple label="Transferir" icon="pi pi-upload" class="p-button-success" pTooltip="Transferir" tooltipPosition="bottom" (click)="transferir()"></button>
+          </ng-template>
+     </p-toolbar>
+
+     <div *ngIf="empresaService.getEmpresaSeleccionada().idEmpresa === 8">
+          <p-table [value]="productoPixelList" [responsive]="true" [rowHover]="true" dataKey="prodNum" [scrollable]="true" scrollHeight="40vh" 
+                   [(selection)]="productosPixelSeleccionados" styleClass="p-datatable-sm p-datatable-striped">
+               <ng-template pTemplate="caption">
+                    <label for="inicio">Fecha de Registro:</label>
+                    <p-calendar id="inicio" [(ngModel)]="fechaSeleccionada" name="fecha" #fecha="ngModel" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" [touchUI]="isMobile"></p-calendar>
+                    <button pButton pRipple type="button" pTooltip="Buscar" tooltipPosition="bottom" label="Buscar" style="margin-top: 1.75rem" icon="pi pi-search" (click)="buscar()"></button>
+               </ng-template>
+               <ng-template pTemplate="colgroup">
+                    <colgroup *ngIf="!isMobile">
+                         <col style="width: 32px;">
+                         <col style="width: 100px;">
+                         <col style="width: 250px;">
+                         <col style="width: 100px;">
+                         <col style="width: 150px;">
+                         <col style="width: 250px;">
+                         <col style="width: 50px;">
+                         <col style="width: 75px;">
+                         <col style="width: 75px;">
+                         <col style="width: 85px;">
+                         <col style="width: 100px;">
+                         <col style="width: 75px;">
+                    </colgroup>
+               </ng-template>
+               <ng-template pTemplate="header">
+                    <tr>
+                         <th><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
+                         <th pSortableColumn="prodNum" [ngClass]="{'p-text-center': !isMobile}">Cód.Pixel <p-sortIcon field="prodNum"></p-sortIcon></th>
+                         <th pSortableColumn="descript">Nombre Pixel <p-sortIcon field="descript"></p-sortIcon></th>
+                         <th>Categoria </th>
+                         <th pSortableColumn="tipoConsumo.descripcion">Tipo Consumo <p-sortIcon field="tipoConsumo.descripcion"></p-sortIcon></th>
+                         <th pSortableColumn="jerarquia">Familia <p-sortIcon field="jerarquia"></p-sortIcon></th>
+                         <th [ngClass]="{'p-text-center': !isMobile}">S.F</th>
+                         <th pSortableColumn="priceA" [ngClass]="{'p-text-right': !isMobile}">Precio <p-sortIcon field="priceA"></p-sortIcon></th>
+                         <th pSortableColumn="clasica" [ngClass]="{'p-text-right': !isMobile}">C.Clásica <p-sortIcon field="clasica"></p-sortIcon></th>
+                         <th pSortableColumn="premium" [ngClass]="{'p-text-right': !isMobile}">C.Premium <p-sortIcon field="premium"></p-sortIcon></th>
+                         <th pSortableColumn="rangeStart" [ngClass]="{'p-text-center': !isMobile}">F.Vigencia <p-sortIcon field="rangeStart"></p-sortIcon></th>
+                         <th [ngClass]="{'p-text-center': !isMobile}">Status </th>
+                    </tr>
+               </ng-template>
+               <ng-template pTemplate="body" let-producto>
+                    <tr>
+                         <td><p-tableCheckbox [value]="producto"></p-tableCheckbox></td>
+                         <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Cód.Pixel</span>{{producto.prodNum}}</td>
+                         <td><span class="p-column-title">Nombre Pixel</span>{{producto.descript}}</td>
+                         <td><span class="p-column-title">Categoria</span>{{producto.categoria}}</td>
+                         <td><span class="p-column-title">Tipo Consumo</span>{{producto.tipoConsumo?.descripcion}}</td>
+                         <td><span class="p-column-title">Familia</span>{{producto.jerarquia}}</td>
+                         <td ><span class="p-column-title"></span><button pButton pRipple icon="pi pi-sitemap" style="justify-content: center;margin-right: 0rem;" (click)="seleccionarFamilia(producto)" pTooltip="Seleccionar Familia" tooltipPosition="bottom" ></button></td>
+                         <td [ngClass]="{'p-text-right': !isMobile}"><span class="p-column-title">Precio</span>{{producto.priceA | number: '0.2-2'}}</td>
+                         <td [ngClass]="{'p-text-right': !isMobile}"><span class="p-column-title">C.Clásica</span>{{producto.clasica}}</td>
+                         <td [ngClass]="{'p-text-right': !isMobile}"><span class="p-column-title">C.Premium</span>{{producto.premium}}</td>
+                         <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">F.Vigencia</span>{{producto.rangeStart}}</td>
+                         <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Status</span>P</td>
+                    </tr>
+               </ng-template>
+          </p-table>
+     </div>
+
+     <div *ngIf="empresaService.getEmpresaSeleccionada().idEmpresa !== 8">
+          <p-table [value]="productoPixelList" [responsive]="true" [rowHover]="true" dataKey="prodNum" [scrollable]="true" scrollHeight="40vh" 
+                    [(selection)]="productosPixelSeleccionados" styleClass="p-datatable-sm p-datatable-striped">
+               <ng-template pTemplate="caption">
+                    <label for="inicio">Fecha de Registro:</label>
+                    <p-calendar id="inicio" [(ngModel)]="fechaSeleccionada" name="fecha" #fecha="ngModel" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" [touchUI]="isMobile"></p-calendar>
+                    <button pButton pRipple type="button" pTooltip="Buscar" tooltipPosition="bottom" label="Buscar" style="margin-top: 1.75rem" icon="pi pi-search" (click)="buscar()"></button>
+               </ng-template>
+               <ng-template pTemplate="colgroup">
+                    <colgroup *ngIf="!isMobile">
+                         <col style="width: 32px;">
+                         <col style="width: 100px;">
+                         <col style="width: 250px;">
+                         <col style="width: 100px;">
+                         <col style="width: 150px;">
+                         <col style="width: 250px;">
+                         <col style="width: 50px;">
+                         <col style="width: 85px;">
+                         <col style="width: 100px;">
+                         <col style="width: 75px;">
+                    </colgroup>
+               </ng-template>
+               <ng-template pTemplate="header">
+                    <tr>
+                         <th><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
+                         <th pSortableColumn="prodNum" [ngClass]="{'p-text-center': !isMobile}">Cód.Pixel <p-sortIcon field="prodNum"></p-sortIcon></th>
+                         <th pSortableColumn="descript">Nombre Pixel <p-sortIcon field="descript"></p-sortIcon></th>
+                         <th>Categoria </th>
+                         <th pSortableColumn="tipoConsumo.descripcion">Tipo Consumo <p-sortIcon field="tipoConsumo.descripcion"></p-sortIcon></th>
+                         <th pSortableColumn="jerarquia">Familia <p-sortIcon field="jerarquia"></p-sortIcon></th>
+                         <th [ngClass]="{'p-text-center': !isMobile}">S.F</th>
+                         <th pSortableColumn="priceA" [ngClass]="{'p-text-right': !isMobile}">Precio <p-sortIcon field="priceA"></p-sortIcon></th>
+                         <th pSortableColumn="rangeStart" [ngClass]="{'p-text-center': !isMobile}">F.Vigencia <p-sortIcon field="rangeStart"></p-sortIcon></th>
+                         <th [ngClass]="{'p-text-center': !isMobile}">Status </th>
+                    </tr>
+               </ng-template>
+               <ng-template pTemplate="body" let-producto>
+                    <tr>
+                         <td><p-tableCheckbox [value]="producto"></p-tableCheckbox></td>
+                         <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Cód.Pixel</span>{{producto.prodNum}}</td>
+                         <td><span class="p-column-title">Nombre Pixel</span>{{producto.descript}}</td>
+                         <td><span class="p-column-title">Categoria</span>{{producto.categoria}}</td>
+                         <td><span class="p-column-title">Tipo Consumo</span>{{producto.tipoConsumo?.descripcion}}</td>
+                         <td><span class="p-column-title">Familia</span>{{producto.jerarquia}}</td>
+                         <td ><span class="p-column-title"></span><button pButton pRipple icon="pi pi-sitemap" style="justify-content: center;margin-right: 0rem;" (click)="seleccionarFamilia(producto)" pTooltip="Seleccionar Familia" tooltipPosition="bottom" ></button></td>
+                         <td [ngClass]="{'p-text-right': !isMobile}"><span class="p-column-title">Precio</span>{{producto.priceA | number: '0.2-2'}}</td>
+                         <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">F.Vigencia</span>{{producto.rangeStart}}</td>
+                         <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Status</span>P</td>
+                    </tr>
+               </ng-template>
+          </p-table>
+     </div>
+</div>

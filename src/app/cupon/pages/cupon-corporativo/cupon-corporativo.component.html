@@ -1,0 +1,169 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+ </ngx-spinner>
+
+<div class="card col">
+     <h1>{{title}}</h1>
+     <hr>
+
+     <form #formulario="ngForm" class="p-grid" autocomplete="off">
+          <div class="p-d-flex p-flex-column">
+               <div class="p-mb-2 p-mt-2">
+                    <p-fieldset legend="Configuracion">
+                         <div class="p-fluid p-formgrid p-grid">
+                              <div class="p-field p-col-12 p-lg-2 p-md-6 p-sm-6">
+                                   <label for="estado">Estado:</label>
+                                   <input id="estado" type="text" pInputText disabled [ngModel]="vale | estadoVale" name="estado" #estado="ngModel">
+                              </div>
+                              <div class="p-field p-col-12 p-lg-2 p-md-6 p-sm-6">
+                                   <label for="inicio" [ngClass] = "{' p-error ': vdesde.invalid && (vdesde.dirty || vdesde.touched)}">Fecha inicio: (*)</label>
+                                   <p-calendar id="inicio" [disabled]="type === 'V'" inputStyleClass="p-text-center" [touchUI]="isMobile"
+                                        [(ngModel)]="feInicio" [required]="true" name="vdesde" #vdesde="ngModel" dateFormat="dd/mm/yy"
+                                        [ngClass] = "{' ng-invalid ng-dirty ': vdesde.invalid && (vdesde.dirty || vdesde.touched)}"
+                                        (onSelect)="changeFechaInicio()" >
+                                   </p-calendar>
+                                   <small *ngIf="vdesde.invalid && (vdesde.dirty || vdesde.touched)" id="password-help" class="p-error">
+                                        La <strong>fecha de inicio</strong> es requerida.
+                                   </small>
+                              </div>
+                              <div class="p-field p-col-12 p-lg-2 p-md-6 p-sm-6">
+                                   <label for="fin" [ngClass] = "{' p-error ': vhasta.invalid && (vhasta.dirty || vhasta.touched)}">Fecha fin:</label>
+                                   <p-calendar id="fin" [disabled]="true" inputStyleClass="p-text-center" [touchUI]="isMobile"
+                                        [(ngModel)]="feFin" [required]="true" name="vhasta" #vhasta="ngModel" dateFormat="dd/mm/yy"
+                                        [ngClass] = "{' ng-invalid ng-dirty ': vhasta.invalid && (vhasta.dirty || vhasta.touched)}">
+                                   </p-calendar>
+                                   <small *ngIf="vhasta.invalid && (vhasta.dirty || vhasta.touched)" id="password-help" class="p-error">
+                                        La <strong>fecha de fin</strong> es requerida.
+                                   </small>
+                              </div>
+                              <div class="p-field p-col-12 p-lg-2 p-md-6 p-sm-6" [ngClass]="{'p-mt-5': !isMobile}">
+                                   <p-checkbox [binary]="true" inputId="binary" label="Documento digital" [(ngModel)]="esDigital" [disabled]="type === 'V'" 
+                                        name="subTipoDoc" #subTipoDoc="ngModel"></p-checkbox> 
+                              </div>
+                         </div>
+
+                         <div class="p-fluid p-formgrid p-grid">
+                              <div class="p-field p-col-12 p-lg-4 p-md-6 p-sm-6">
+                                   <label for="estado" [ngClass] = "{' p-error ': nrofactura.invalid && (nrofactura.dirty || nrofactura.touched)}">Nro. Documento Cobranza: (*)</label>
+                                   <div class="p-inputgroup">
+                                        <input type="text" pInputText class="p-mr-1" disabled [(ngModel)]="vale.serie" name="serie" #serie="ngModel"> 
+                                        <input type="text" pInputText disabled [(ngModel)]="vale.correlativo" required name="nrofactura" #nrofactura="ngModel"> 
+                                        <button type="button" pButton pRipple icon="pi pi-search" (click)="seleccionarDocumentoSAP()" [disabled]="type === 'V'"></button>    
+                                    </div>
+                                    <small *ngIf="nrofactura.invalid && (nrofactura.dirty || nrofactura.touched)" id="password-help" class="p-error">
+                                        El <strong>Documento de Cobranza</strong> es requerido.
+                                   </small>
+                              </div>
+                              <div class="p-field p-col-12 p-lg-2 p-md-6 p-sm-6">
+                                   <label for="tipoDocumento">Tipo documento:</label>
+                                   <input id="tipoDocumento" type="text" pInputText disabled [(ngModel)]="vale.tipoDocumento" name="tipoDocumento" #tipoDocumento="ngModel">
+                              </div>
+                              <div class="p-field p-col-12 p-lg-2 p-md-6 p-sm-6">
+                                   <label for="emision">Fecha emisión:</label>
+                                   <input id="emision" pInputText disabled [ngModel]="vale.fechaEmision | date: 'dd/MM/yyyy'" name="feEmision" #feEmision="ngModel" class="p-text-center"> 
+                              </div>
+                              <div class="p-field p-col-12 p-lg-1 p-md-6 p-sm-6">
+                                   <label for="moneda">Moneda:</label>
+                                   <input id="moneda" type="text" pInputText disabled [(ngModel)]="vale.moneda" name="moneda" #moneda="ngModel">
+                              </div>
+                              <div class="p-field p-col-12 p-lg-2 p-md-6 p-sm-6">
+                                   <label for="monto">Monto Total:</label>
+                                   <input id="monto" type="text" pInputText disabled [ngModel]="vale.montoTotal | number: '0.2-2'" name="montoTotal" #montoTotal="ngModel" class="p-text-right">
+                              </div>
+                         </div>
+
+                         <div class="p-fluid p-formgrid p-grid">
+                              <div class="p-field p-col-12 p-lg-2 p-md-6 p-sm-6">
+                                   <label for="ruc">R.U.C.:</label>
+                                   <input id="ruc" type="text" pInputText disabled [(ngModel)]="vale.ruc" name="ruc" #ruc="ngModel">
+                              </div>
+                              <div class="p-field p-col-12 p-lg-5 p-md-6 p-sm-6">
+                                   <label for="razonSocial">Razón social:</label>
+                                   <input id="razonSocial" type="text" pInputText disabled class="p-text-uppercase" [(ngModel)]="vale.razonSocial" name="razonSocial" #razonSocial="ngModel">
+                              </div>
+                              <div class="p-field p-col-12 p-lg-5 p-md-6 p-sm-6">
+                                   <label for="nombreContacto">Nombre contacto:</label>
+                                   <input id="nombreContacto" type="text" pInputText class="p-text-uppercase" [(ngModel)]="vale.nombreContacto" name="nombreContacto" #nombreContacto="ngModel" [disabled]="type === 'V'">
+                              </div>
+                         </div>
+
+                         <div class="p-fluid p-formgrid p-grid">
+                              <div class="p-field p-col-12 p-lg-2 p-md-6 p-sm-6">
+                                   <label for="telcontacto">Teléfono contacto:</label>
+                                   <input id="telcontacto" type="text" pInputText class="p-text-uppercase" [(ngModel)]="vale.telefonoContacto" name="telefonoContacto" #telefonoContacto="ngModel" [disabled]="type === 'V'">
+                              </div>
+                              <div class="p-field p-col-12 p-lg-5 p-md-6 p-sm-6">
+                                   <label for="cargocontacto">Cargo contacto:</label>
+                                   <input id="cargocontacto" type="text" pInputText class="p-text-uppercase" [(ngModel)]="vale.cargoContacto" name="cargoContacto" #cargoContacto="ngModel" [disabled]="type === 'V'">
+                              </div>
+                              <div class="p-field p-col-12 p-lg-5 p-md-6 p-sm-6">
+                                   <label for="mailcontacto">E-mail contacto:</label>
+                                   <input id="mailcontacto" type="text" pInputText class="p-text-uppercase" [(ngModel)]="vale.emailContacto" name="emailContacto" #emailContacto="ngModel" autocomplete="false" [disabled]="type === 'V'">
+                              </div>
+                         </div>
+
+                         <div class="p-fluid p-formgrid p-grid">
+                              <div class="p-field p-col">
+                                   <label for="desrcipcion" [ngClass] = "{' p-error ': observacion.invalid && (observacion.dirty || observacion.touched)}">Descripción: (*)</label>
+                                   <input id="desrcipcion" type="text" pInputText required [(ngModel)]="vale.observacion" name="observacion" #observacion="ngModel"
+                                          class="p-text-uppercase"
+                                          [ngClass] = "{' ng-invalid ng-dirty ': observacion.invalid && (observacion.dirty || observacion.touched)}" [disabled]="type === 'V'">
+                                   <small *ngIf="observacion.invalid && (observacion.dirty || observacion.touched)" id="password-help" class="p-error">
+                                        La <strong>descripción</strong> es requerida.
+                                   </small>
+                              </div>
+                         </div>
+
+                         <div class="p-fluid p-formgrid p-grid">
+                              <div class="p-field p-col-12 p-lg-4 p-md-6 p-sm-6">
+                                   <label for="docanterior">Nro. Documento Cobranza Anterior:</label>
+                                   <input id="docanterior" type="text" pInputText class="p-text-uppercase" [(ngModel)]="vale.nrofacturaAnterior" name="docanterior" #docanterior="ngModel" disabled>
+                              </div>
+                              <div class="p-field p-col-12 p-lg-4 p-md-6 p-sm-6">
+                                   <label for="fecanterior">Fecha de Emisión Anterior:</label>
+                                   <input id="fecanterior" type="text" pInputText class="p-text-uppercase" [(ngModel)]="vale.fechaEmisionAnterior" name="fecanterior" #fecanterior="ngModel" disabled>
+                              </div>
+                              <div class="p-field p-col-12 p-lg-4 p-md-6 p-sm-6">
+                                   <label for="montanterior">Monto Total Anterior:</label>
+                                   <input id="montanterior" type="text" pInputText class="p-text-uppercase" [(ngModel)]="vale.montoTotalAnterior" name="montanterior" #montanterior="ngModel" disabled>
+                              </div>
+                         </div>
+                    </p-fieldset>
+               </div>
+
+               <div class="p-mb-4 p-mt-2">
+                    <p-table [value]="detalles" [responsive]="true" [rowHover]="true" dataKey="codigo" styleClass="p-datatable-sm p-datatable-striped ">
+                         <ng-template pTemplate="header">
+                              <tr>
+                                   <th>Código </th>
+                                   <th>Nombre </th>
+                                   <th [ngClass]="{'p-text-right': !isMobile}">Precio </th>
+                                   <th [ngClass]="{'p-text-right': !isMobile}">Cantidad </th>
+                                   <th [ngClass]="{'p-text-right': !isMobile}">Total </th>
+                              </tr>
+                         </ng-template>
+                         <ng-template pTemplate="body" let-detalle>
+                              <tr >
+                                   <td><span class="p-column-title">Código</span>{{detalle.codigo}}</td>
+                                   <td><span class="p-column-title">Nombre</span>{{detalle.descripcion | uppercase}}</td>
+                                   <td [ngClass]="{'p-text-right': !isMobile}"><span class="p-column-title">Precio</span>{{detalle.precio | number: '0.2-2'}}</td>
+                                   <td [ngClass]="{'p-text-right': !isMobile}"><span class="p-column-title">Cantidad</span>{{(type === 'V' ? vale.cantidad : detalle.cantidad) | number: '0.0-0'}}</td>
+                                   <td [ngClass]="{'p-text-right': !isMobile}"><span class="p-column-title">Total</span>{{detalle.total | number: '0.2-2'}}</td>
+                              </tr>
+                         </ng-template>
+                    </p-table>
+               </div>
+
+               <div class="p-mb-2">
+                    <div class="p-d-flex p-jc-end">
+                         <div class="p-mr-2" *ngIf="type !== 'V'">
+                              <button pButton pRipple pTooltip="Guardar" tooltipPosition="bottom" label="Guardar"  icon="pi pi-save" (click)="guardar()" class="p-button-success" [disabled]="!formulario.form.valid"></button>
+                         </div>
+                         <div>
+                              <button pButton pRipple pTooltip="Cancelar" tooltipPosition="bottom" label="Cancelar" icon="pi pi-times" (click)="cancelar()" class="p-button-secondary"></button>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </form>
+</div>     

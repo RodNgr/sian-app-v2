@@ -1,0 +1,36 @@
+<div id="container" class="p-d-flex p-flex-column">
+     <div class="p-mb-2">
+          <div class="p-fluid p-formgrid p-grid">
+               <div class="p-field p-col-12">
+                    <label for="descripcion">Descripción:</label>
+                    <input id="descripcion" type="text" pInputText disabled value="AL PORTADOR">
+               </div>
+          </div>
+
+          <div class="p-fluid p-formgrid p-grid">
+               <div class="p-field p-col-12 p-lg-2 p-md-6 p-sm-6 ">
+                    <label for="cantidad">Cantidad:</label>
+                    <input id="cantidad" type="text" pInputText disabled [ngModel]="valeCorporativo.vale.cantidad | number: '0.0-0'" class="p-text-right" name="cantidad" #cantidad="ngModel">
+               </div>
+
+               <div class="p-field p-col-12 p-lg-3 p-md-6 p-sm-6">
+                    <label for="total">Total:</label>
+                    <input id="total" type="text" pInputText disabled [ngModel]="valeCorporativo.vale.montoTotal | number: '0.2-2'" class="p-text-right" name="total" #total="ngModel">
+               </div>
+          </div>
+
+          <div class="p-fluid p-formgrid p-grid">
+               <div class="p-field p-col-12">
+                    <label for="motivo">Motivo:</label>
+                    <textarea id="motivo" pInputTextarea [(ngModel)]="valeCorporativo.motivo" name="motivo" #motivo="ngModel" [rows]="3"> </textarea>
+               </div>
+          </div>
+     </div>
+
+     <div class="p-mb-2">
+          <div class="p-d-flex p-jc-end">
+               <button pButton pRipple pTooltip="Reimprimir" tooltipPosition="bottom" label="Reimprimir"  (click)="imprimir()" icon="pi pi-print" class="p-button-success p-mr-2"></button>
+               <button pButton pRipple pTooltip="Cancelar" tooltipPosition="bottom" label="Cancelar" (click)="cancelar()" icon="pi pi-times" class="p-button-secondary"></button>
+          </div>
+     </div>
+</div>

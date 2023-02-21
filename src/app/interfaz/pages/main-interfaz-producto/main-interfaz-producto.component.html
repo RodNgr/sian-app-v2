@@ -1,0 +1,29 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+     <p-tabView styleClass="tabview-custom">
+          <p-tabPanel>
+              <ng-template pTemplate="header" *ngIf="authService.hasRole('ROL_SIAN_ITZ_ARTICULO')">
+                  <i class="pi pi-share-alt"></i>
+                  <span>Interfaz Artículo</span>
+              </ng-template>
+              <app-interfaz-producto></app-interfaz-producto>
+          </p-tabPanel>
+          <p-tabPanel header="Header Modificar" *ngIf="authService.hasRole('ROL_SIAN_ITZ_MOD_ARTICULO')">
+              <ng-template pTemplate = "header">
+                  <i class="pi pi-pencil"></i>
+                  <span>Modificar Información de Artículo</span>
+              </ng-template>
+              <app-edit-info-producto></app-edit-info-producto>
+          </p-tabPanel>
+          <p-tabPanel header="Header Masiva" *ngIf="authService.hasRole('ROL_SIAN_ITZ_MASIVA_ARTICULO')">
+            <ng-template pTemplate = "header">
+                <i class="pi pi-download"></i>
+                <span>Carga Masiva Información de Artículo</span>
+            </ng-template>
+            <app-carga-masiva-producto></app-carga-masiva-producto>
+        </p-tabPanel>
+      </p-tabView>
+ </div>

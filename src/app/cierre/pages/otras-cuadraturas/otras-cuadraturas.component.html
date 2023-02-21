@@ -1,0 +1,55 @@
+<div class="card col"> 
+    <div class="p-fluid p-grid" > 
+         <div class="p-field p-col-12 p-lg-3 p-md-3 p-sm-3">
+             <label for="idMotivo">Motivo: </label>
+             <p-dropdown [options]="motivos" [autofocus]="true" [(ngModel)]="motivoSeleccionado" optionLabel="nombre" 
+                 [filter]="true" filterBy="nombre" placeholder="Ninguno" name="idMotivo" #tienda="ngModel"
+                 (onChange)="changeMotivo()"></p-dropdown>
+         </div>
+         
+               
+     </div>
+     <div class="p-fluid p-grid" > 
+        <div class="p-field p-col-12 p-lg-3 p-md-3 p-sm-3">
+            <label for="idMoneda">Moneda: </label>
+            <p-dropdown [options]="monedas" [autofocus]="true" [(ngModel)]="monedaSeleccionada" optionLabel="nombre" 
+                [filter]="true" filterBy="nombre" placeholder="Seleccione una moneda" name="idMoneda" #tienda="ngModel"
+            ></p-dropdown>
+        </div>
+     </div>
+
+     <div class="p-fluid p-grid" > 
+        <div class="p-field p-col-12 p-lg-3 p-md-3 p-sm-3">
+            <label for="txtMonto">Monto:</label>
+            <p-inputNumber #monto id="txtMonto" locale="es-PE" [min]="0" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2"
+            [(ngModel)]="montoIngresado"></p-inputNumber>
+        </div>
+     </div>
+
+     <div class="p-fluid p-grid" > 
+        <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <label for="idResponsable">Responsable: </label>
+            <p-dropdown [options]="responsables" [autofocus]="true" [(ngModel)]="responsableSeleccionado" optionLabel="posname" 
+                [filter]="true" filterBy="posname" placeholder="Seleccione un responsable" name="idResponsable" #tienda="ngModel"
+                [readonly]="this.motivoBFResponsable"
+                (onChange)="llenarDatosResponsable()"></p-dropdown>
+        </div>
+     </div>
+     <div class="p-fluid p-grid" > 
+        <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-6">
+            <label for="">Código :</label>
+            <input pInputText type="text" id="codigo" disabled [(ngModel)]="codigoSeleccionado">
+        </div>
+        <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-6">
+            <label for="">Doc.identidad :</label>
+            <input pInputText type="text" id="documento" disabled [(ngModel)]="numDocSeleccionado">
+        </div>
+     </div>
+ 
+   
+ </div>
+ 
+  <div class="p-d-flex p-jc-end p-mt-3">
+      <button pButton pRipple label="Aceptar" (click)="aceptar()" icon="pi pi-check-circle" class="p-button-success p-mr-2"></button>
+      <button pButton pRipple label="Cancelar" (click)="cancelar()"    icon="pi pi-times" class="p-button-secondary"></button>
+  </div>

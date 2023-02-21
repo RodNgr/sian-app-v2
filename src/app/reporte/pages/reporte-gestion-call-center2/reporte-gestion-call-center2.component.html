@@ -1,0 +1,128 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+    <div class="p-grid">
+        <div class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-2 p-lg-2 p-md-2 p-sm-12">
+                    <label for="estado">Fecha Inicio:</label>
+                    <p-calendar [(ngModel)]="feInicio" dateFormat="dd/mm/yy" inputStyleClass="p-text-center"></p-calendar>
+                </div>
+                <div class="p-field p-col-2 p-lg-2 p-md-2 p-sm-12">
+                    <label for="estado">Fecha Fin:</label>
+                    <p-calendar [(ngModel)]="feFin" dateFormat="dd/mm/yy" inputStyleClass="p-text-center"></p-calendar>
+                </div>
+                <div class="p-field p-col-4 p-lg-4 p-md-4 p-sm-12">
+                    <label for="estado">Tipo:</label>
+                    <p-dropdown  [options]="tipoList" [(ngModel)]="tipoSeleccionado" optionLabel="descripcion" (onChange)="onChangeTipo()"></p-dropdown>
+                </div>
+                <div class="p-field p-col-2 p-lg-2 p-md-2 p-sm-12 p-mt-4">
+                    <button pRipple pButton label="Ejecutar" icon="pi pi-forward" (click)="buscar()"> </button>
+                </div>
+            </div>
+        </div>
+
+        <p-tabView class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <p-tabPanel header="Resultados" leftIcon="pi pi-chart-bar">
+                <p-table *ngIf="tipoSeleccionado?.codigo === '0'" [value]="dataList" [responsive]="true" [rowHover]="true" [scrollable]="true" 
+                        scrollHeight="40vh" dataKey="tienda" styleClass="p-datatable-sm p-datatable-striped">
+                    <ng-template pTemplate="colgroup">
+                        <col style="width:200px;">
+                        <col style="width:280px;">
+                        <col style="width:100px;">
+                        <col style="width:90px;">
+                        <col style="width:150px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Cliente </th>
+                            <th>Dirección </th>
+                            <th>Distrito </th>
+                            <th>Transacción </th>
+                            <th>Tienda </th>
+                            <th>Fecha </th>
+                            <th>Teléfono </th>
+                            <th>Tipo Teléfono </th>
+                            <th>Nivel Tienda </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-resultado >
+                        <tr>
+                            <td class="wrap">{{resultado.cliente}}</td>
+                            <td class="wrap">{{resultado.direccion}}</td>
+                            <td class="wrap">{{resultado.ciudad}}</td>
+                            <td >{{resultado.transaccion}}</td>
+                            <td class="wrap">{{resultado.tienda}}</td>
+                            <td >{{resultado.fechaVenta}}</td>
+                            <td >{{resultado.telefono}}</td>
+                            <td >{{resultado.tipoTelefono}}</td>
+                            <td >{{resultado.nivel}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <p-table *ngIf="tipoSeleccionado?.codigo !== '0'" [value]="dataList" [responsive]="true" [rowHover]="true" [scrollable]="true" 
+                        scrollHeight="40vh" dataKey="tienda" styleClass="p-datatable-sm p-datatable-striped">
+                    <ng-template pTemplate="colgroup">
+                        <col style="width:170px;">
+                        <col style="width:80px;">
+                        <col style="width:80px;">
+                        <col style="width:80px;">
+                        <col style="width:80px;">
+                        <col style="width:80px;">
+                        <col style="width:80px;">
+                        <col style="width:80px;">
+                        <col style="width:80px;">
+                        <col style="width:80px;">
+                        <col style="width:80px;">
+                        <col style="width:80px;">
+                        <col style="width:80px;">
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Descripción </th>
+                            <th style="text-align: right;">Enero </th>
+                            <th style="text-align: right;">Febrero </th>
+                            <th style="text-align: right;">Marzo </th>
+                            <th style="text-align: right;">Abril </th>
+                            <th style="text-align: right;">Mayo </th>
+                            <th style="text-align: right;">Junio </th>
+                            <th style="text-align: right;">Julio </th>
+                            <th style="text-align: right;">Agosto </th>
+                            <th style="text-align: right;">Setiembre </th>
+                            <th style="text-align: right;">Octubre </th>
+                            <th style="text-align: right;">Noviembre </th>
+                            <th style="text-align: right;">Diciembre </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-resultado >
+                        <tr>
+                            <td >{{resultado.descripcion}}</td>
+                            <td style="text-align: right;">{{resultado.mesesMap[1] | number: '.0-0'}}</td>
+                            <td style="text-align: right;">{{resultado.mesesMap[2] | number: '.0-0'}}</td>
+                            <td style="text-align: right;">{{resultado.mesesMap[3] | number: '.0-0'}}</td>
+                            <td style="text-align: right;">{{resultado.mesesMap[4] | number: '.0-0'}}</td>
+                            <td style="text-align: right;">{{resultado.mesesMap[5] | number: '.0-0'}}</td>
+                            <td style="text-align: right;">{{resultado.mesesMap[6] | number: '.0-0'}}</td>
+                            <td style="text-align: right;">{{resultado.mesesMap[7] | number: '.0-0'}}</td>
+                            <td style="text-align: right;">{{resultado.mesesMap[8] | number: '.0-0'}}</td>
+                            <td style="text-align: right;">{{resultado.mesesMap[9] | number: '.0-0'}}</td>
+                            <td style="text-align: right;">{{resultado.mesesMap[10] | number: '.0-0'}}</td>
+                            <td style="text-align: right;">{{resultado.mesesMap[11] | number: '.0-0'}}</td>
+                            <td style="text-align: right;">{{resultado.mesesMap[12] | number: '.0-0'}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-tabPanel>
+        </p-tabView>
+
+        <div class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <button pRipple pButton label="Exportar" icon="pi pi-file-excel" class="p-mr-2" (click)="exportar()"> </button>
+        </div>
+    </div>
+</div>

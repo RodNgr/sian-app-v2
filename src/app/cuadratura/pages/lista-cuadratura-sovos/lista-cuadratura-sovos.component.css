@@ -1,0 +1,151 @@
+.item-list-name {
+     font-size: 1.5rem;
+     font-weight: 800;
+}
+
+.item-list-description {
+     margin: 0 0 1rem 0;
+}
+
+.item-list-title {
+     font-size: 1rem;
+     font-weight: 700;
+     text-align: center;
+     margin: 0 0 1rem 0;
+}
+
+.item-list-total {
+     font-weight: 700;
+     text-align: center;
+     color: darkblue;
+     margin: 0 0 1rem 0;
+}
+
+.item-list-cuadrado {
+     font-weight: 700;
+     text-align: center;
+     color: blue;
+     margin: 0 0 1rem 0;
+}
+
+.item-list-sobrante {
+     font-weight: 700;
+     text-align: center;
+     color: brown;
+     margin: 0 0 1rem 0;
+}
+
+.item-list-rechazado {
+     font-weight: 700;
+     text-align: center;
+     color: brown;
+     margin: 0 0 1rem 0;
+}
+
+.item-list-item {
+     display: flex;
+     align-items: center;
+     padding: 1rem;
+     width: 100%;
+}
+ 
+.item-list-item .item-list-detail {
+     flex: .5 .5 0;
+}
+
+.item-list-item .item-list-data {
+     flex: .25 .25 0;
+     margin-left: .5rem;
+     margin-right: .5rem;
+}
+ 
+.item-list-item .item-list-action {
+     display: flex;
+     flex-direction: column;
+}
+ 
+.item-list-item .p-button {
+     margin-bottom: .5rem;
+}
+
+.list-card {
+     background: var(--surface-e);
+     padding: 1rem;
+     box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+     border-radius: 4px;
+ }
+
+
+.item-grid {
+     margin: .3em;
+     border: 1px solid #dee2e6;
+}
+
+.grid-section-card {
+     display: flex;
+}
+
+.border-title-card {
+     border-bottom: 1px solid orange;
+     width: 100%;
+}
+
+.grid-card-header {
+     display: grid;
+     grid-template-rows: 1fr .5fr;
+     align-items: center;
+}
+   
+.grid-item-name {
+     font-size: 1.5rem;
+     font-weight: 800;
+}
+
+.grid-item-description {
+     font-size: 1rem;
+     font-weight: 600;
+}
+
+.border-bot-card {
+     border-bottom: 1px solid #E5E5E5;
+}
+
+.align-center-card {
+     display: flex;
+     align-items: center;
+     width: 80%;
+}
+
+.item-grid-total {
+     font-weight: 700;
+     text-align: center;
+     color: darkblue;
+}
+
+.item-grid-cuadrado {
+     font-weight: 700;
+     text-align: center;
+     color: blue;
+}
+
+.item-grid-sobrante {
+     font-weight: 700;
+     text-align: center;
+     color: brown;
+}
+
+.item-grid-rechazado {
+     font-weight: 700;
+     text-align: center;
+     color: brown;
+}
+
+.w-items {
+     width: 70%;
+}
+
+.card-grid {
+     padding: 1rem;
+     box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+     border-radius: 4px;
+ }

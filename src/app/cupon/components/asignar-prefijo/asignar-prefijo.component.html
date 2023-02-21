@@ -1,0 +1,15 @@
+<div id="container" class="p-d-flex p-flex-column">
+     <div class="p-grid p-form-grid p-mb-2">
+          <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12 ">
+               <label for="pdien">Prefijo:</label>
+               <input type="text" pInputText [(ngModel)]="prefijo" name="pdien" #pdien="ngModel" id="pdien" class="p-text-uppercase">
+          </div>
+     </div>
+
+     <div class="p-mb-2">
+          <div class="p-d-flex p-jc-end">
+               <button pButton pRipple pTooltip="Aceptar" tooltipPosition="bottom" label="Aceptar"  (click)="registrar()" icon="pi pi-check-circle" class="p-button-success p-mr-2"></button>
+               <button pButton pRipple pTooltip="Cancelar" tooltipPosition="bottom" label="Cancelar" (click)="cancelar()" icon="pi pi-times" class="p-button-secondary"></button>
+          </div>
+     </div>
+</div>

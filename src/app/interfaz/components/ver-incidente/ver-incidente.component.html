@@ -1,0 +1,53 @@
+<div class="p-fluid p-formgrid p-grid">
+     <div class="p-field p-col-4 p-md-4 p-sm-12">
+          <label for="tienda">Tienda: </label>
+          <input pInputText required id="tienda" name="tienda" [(ngModel)]="incidente.nombreTienda" >
+      </div>
+      <div class="p-field p-col-4 p-md-4 p-sm-12">
+          <label for="fecha">Fecha Venta: </label>
+          <input pInputText required id="fecha" name="fecha" [(ngModel)]="incidente.fechaVenta" >
+      </div>
+      <div class="p-field p-col-4 p-md-4 p-sm-12">
+          <label for="tipo">Tipo: </label>
+          <input pInputText required id="tipo" name="tipo" [(ngModel)]="incidente.tipo" >
+      </div>
+
+     <p-carousel [value]="logList" [numVisible]="1" [numScroll]="1" [circular]="true" class="p-field p-col-12 p-md-12 p-sm-12">
+          <ng-template let-log pTemplate="item">
+               <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-4 p-md-4 p-sm-6">
+                        <label for="ip" >IP: </label>
+                        <input pInputText id="ip" name="ip" [(ngModel)]="log.ip" disabled>
+                    </div>
+                    <div class="p-field p-col-4 p-md-4 p-sm-6">
+                         <label for="inicio" >Inicio Proceso: </label>
+                         <input pInputText id="inicio" name="inicio" [ngModel]="log.feInicioProceso | date:'dd/MM/yyyy HH:mm:ss'" disabled>
+                    </div>
+                    <div class="p-field p-col-4 p-md-4 p-sm-6">
+                         <label for="fin" >Fin Proceso: </label>
+                         <input pInputText id="fin" name="fin" [ngModel]="log.feFinProceso | date:'dd/MM/yyyy HH:mm:ss'" disabled>
+                    </div>
+                    <div class="p-field p-col-4 p-md-4 p-sm-6">
+                         <label for="idUsuario" >Usuario: </label>
+                         <input pInputText id="idUsuario" name="idUsuario" [(ngModel)]="log.idUsuario" disabled>
+                    </div>
+                    <div class="p-field p-col-4 p-md-4 p-sm-6">
+                         <label for="estado" >Estado: </label>
+                         <input pInputText id="estado" name="estado" [ngModel]="log.estado | estadoInterface" disabled>
+                    </div>
+                    <div class="p-field p-col-4 p-md-4 p-sm-6">
+                         <label for="tipo" >Tipo: </label>
+                         <input pInputText id="tipo" name="tipo" [ngModel]="log.tipo | tipoIncidenteLog" disabled>
+                    </div>
+                    <div class="p-field p-col-12 p-md-12 p-sm-12">
+                         <label for="mensaje" >Mensaje: </label>
+                         <input pInputText id="mensaje" name="mensaje" [(ngModel)]="log.mensaje" disabled>
+                    </div>
+                    <div class="p-field p-col-12 p-md-12 p-sm-12">
+                         <label for="observacion" >Observacion: </label>
+                         <textarea pInputTextarea id="observacion" name="observacion" [(ngModel)]="log.observacion" rows="4" disabled></textarea>
+                    </div>
+                </div>
+          </ng-template>
+     </p-carousel>
+</div>

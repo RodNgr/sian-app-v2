@@ -1,0 +1,89 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> {{spinnerMessage}} </p>
+</ngx-spinner>
+
+<div class="card col">
+     <p-toolbar styleClass="p-mb-4">
+          <ng-template pTemplate="left">
+               <h1 class="p-m-0">Reprocesar Interfaces</h1>
+          </ng-template>
+     </p-toolbar>
+
+     <div class="p-fluid p-grid">
+          <div class="p-fluid p-grid p-col-12 p-lg-6 p-md-6 p-sm-12">
+               <div class="p-formgrid p-grid p-col-12">
+                    <div class="p-field p-col-6 p-md-4 p-sm-6">
+                         <label for="id">Inicio: </label>
+                         <p-calendar [(ngModel)]="rangeDates[0]" dateFormat="dd/mm/yy" inputStyleClass="p-text-center"
+                         (ngModelChange)="changeFecIni()">                              
+                         </p-calendar>
+                    </div>
+                    <div class="p-field p-col-6 p-md-4 p-sm-6" *ngIf=!esTienda >
+                         <label for="id">Fin: </label>
+                         <p-calendar [(ngModel)]="rangeDates[1]" dateFormat="dd/mm/yy" inputStyleClass="p-text-center"
+                         (ngModelChange)="changeFecFin()">                              
+                         </p-calendar>
+                    </div>
+               </div>
+
+               <div class="p-field p-col-6" *ngIf=!esTienda>
+                    <p-checkbox [binary]="true" inputId="binary" label="Mix ventas" [(ngModel)]="mixVentas" ></p-checkbox> 
+               </div>
+
+               <div class="p-field p-col-6" *ngIf=!esTienda>
+                    <p-checkbox [binary]="true" inputId="binary" label="Forzar ejecución" [(ngModel)]="forzarEjecucion" ></p-checkbox> 
+               </div>               
+
+               <div class="p-col-12" >
+                    <p-listbox [options]="tiendaList" [(ngModel)]="tiendasSeleccionadas" [metaKeySelection]="false"
+                         [checkbox]="true" [filter]="true" [multiple]="true" optionLabel="nombreTienda"
+                         [listStyle]="{'max-height':'250px'}"></p-listbox>
+               </div>              
+               
+               <div class="p-grid p-col-12">
+                    <div class="p-mr-4">
+                         <!-- El método procesarInterface() recibe parámetros V y C, ( para V =  se procesará Mix, Venta, Consumo y para C = Cobranza)-->
+                         <p-button label="Procesar" icon="pi pi-play" pTooltip="Ventas y consumos"
+                              tooltipPosition="bottom" (click)="procesarInterface('V')"></p-button>
+                    </div>
+                    <div *ngIf=!esTienda>
+                         <p-button label="Cobranzas" pTooltip="Cobranzas" tooltipPosition="bottom"
+                              (click)="procesarInterface('C')"></p-button>
+                    </div>
+               </div>
+          </div>
+          <div class="p-fluid p-formgrid p-col-12 p-lg-6 p-md-6 p-sm-12">
+               <div class="p-col-12">
+                    <p-table [value]="mensajeList" [scrollable]="true" scrollHeight="60vh"
+                    styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand">
+                         <ng-template pTemplate="caption">
+                              <h3 class="p-m-0 p-col-12">Resultado</h3>
+                         </ng-template>
+
+                         <ng-template pTemplate="header">
+                              <tr class="p-col-12">
+                                   <th pSortableColumn="fecha">Fecha<p-sortIcon field="fecha"></p-sortIcon> </th>
+                                   <th pSortableColumn="idTienda">Tienda<p-sortIcon field="idTienda"></p-sortIcon> </th>
+                                   <th pSortableColumn="tipo">Tipo<p-sortIcon field="tipo"></p-sortIcon> </th>
+                                   <th pSortableColumn="mensaje">Descripción<p-sortIcon field="mensaje"></p-sortIcon> </th>
+                              </tr>
+                         </ng-template>
+                         <ng-template pTemplate="body" let-mensaje>
+                              <tr>                                   
+                                   <td>{{mensaje.fecDate  | date: 'dd/MM/yyyy'}}</td>
+                                   <td>{{mensaje.idTienda}}</td>
+                                   <td>{{mensaje.tipo}}</td>
+                                   <td>{{mensaje.mensaje}}</td>
+                              </tr>
+                         </ng-template>
+                    </p-table>
+               </div>
+
+               <!-- <div class="p-col-12 p-d-flex p-jc-center">
+                    <p-button label="Exportar Resultados" icon="pi pi-download" pTooltip="Exportar Resultados"
+                         tooltipPosition="bottom" (click)="exportList()"></p-button>
+               </div> -->
+          </div>
+
+     </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="card col">
+    <p-tabView>
+        <p-tabPanel header="Información General">
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-4 p-lg-4 p-md-4 p-sm-12">
+                    <label for="locales">Tipo: </label>
+                    <input pInputText type="text" [disabled]="true" [ngModel]="reporte.tiReporte | tipoReporte">
+                </div>
+                <div class="p-field p-col-4 p-lg-4 p-md-4 p-sm-12">
+                    <label for="locales">Base Datos: </label>
+                    <input pInputText type="text" [disabled]="true" [ngModel]="reporte.inBaseDatos | tipoBaseDatos"/>
+                </div>
+                <div class="p-field p-col-4 p-lg-4 p-md-4 p-sm-12">
+                    <label for="locales">Usuario Personalizado: </label>
+                    <input pInputText type="text" [disabled]="true" [ngModel]="reporte.usuario"/>
+                </div>
+                <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+                    <pre>
+                        <code [highlight]="reporte.query" [languages]="lan"></code>
+                    </pre>
+                </div>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Tiendas">
+            <p-table [value]="reporte.reporteTiendaList" [responsive]="true" [rowHover]="true" [scrollable]="true" scrollHeight="40vh"
+                     styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand">
+                <ng-template pTemplate="colgroup">
+                    <colgroup >
+                        <col style="width:35%;">
+                        <col style="width:20%;">
+                    </colgroup>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Tienda </th>
+                        <th>Estado </th>
+                        <th>Observación </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-tienda>
+                    <tr >
+                        <td>{{tienda.nombreTienda}}</td>
+                        <td>{{tienda.estado | estadoReporte}}</td>
+                        <td>{{tienda.observacion}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </p-tabPanel>
+    </p-tabView>
+
+    <div class="p-mb-2">
+        <div class="p-d-flex p-jc-end">
+            <button pButton pRipple pTooltip="Cerrar" tooltipPosition="bottom" label="Cerrar" icon="pi pi-times" (click)="cerrar()" class="p-button-secondary"></button>
+        </div>
+    </div>
+</div>

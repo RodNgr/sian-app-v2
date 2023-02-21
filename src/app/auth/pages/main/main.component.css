@@ -1,0 +1,43 @@
+body {
+    font-family: "Roboto", "Helvetica Neue", sans-serif;
+    font-size: 13px;
+    color: #757575;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 0;
+    margin: 0;
+    min-height: 100%;
+    background-color: #F2F8FA;
+}
+
+.image-container {
+    width:75%;
+    text-align:center;
+    padding-top: 40px;   
+}
+
+img {
+    max-width:100%;
+    height:100%;
+    object-fit: contain;
+}
+
+.contain-form{
+    width: 25%;
+}
+
+.container-login{
+    height: 100vh;
+    align-items: center;
+}
+
+.hide-mobile{
+    display: none;
+    
+}
+
+@media screen and (min-width:768px) {
+    .hide-mobile{
+        display: block;
+    }
+}

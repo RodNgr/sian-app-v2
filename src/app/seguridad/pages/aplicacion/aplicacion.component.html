@@ -1,0 +1,52 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+ </ngx-spinner>
+ 
+ <div class="card col">
+     <h1>{{title}}</h1>
+     <hr>
+ 
+     <form #formulario="ngForm" class="p-fluid p-formgrid p-grid" autocomplete="off">
+          <div class="p-field p-col-12 p-lg-1 p-md-1 p-sm-12">
+               <label for="id">Id: </label>
+               <input id="id" type="text" pInputText [(ngModel)]="aplicacion.id"  name="id" #id="ngModel" disabled="true">
+          </div>
+                  
+          <div class="p-field p-col-12 p-lg-11 p-md-11 p-sm-12">
+               <label for="descripcion" [ngClass] = "{' p-error ': descripcion.invalid && (descripcion.dirty || descripcion.touched)}">Nombre: (*)</label>
+               <input id="descripcion" type="text" pInputText required maxlength="100"
+                     [ngClass] = "{' ng-invalid ng-dirty ': descripcion.invalid && (descripcion.dirty || descripcion.touched)}"  
+                     [(ngModel)]="aplicacion.name" name="descripcion" #descripcion="ngModel"
+                     [disabled]="type === 'V'" tabindex="1" autofocus>
+               <small *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" id="password-help" class="p-error">
+                    El <strong>nombre</strong> es requerido.
+               </small>
+          </div>
+
+          <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+               <label for="url" [ngClass] = "{' p-error ': url.invalid && (url.dirty || url.touched)}">URL de la Aplicación: (*)</label>
+               <input id="url" type="text" pInputText required maxlength="100"
+                     [ngClass] = "{' ng-invalid ng-dirty ': url.invalid && (url.dirty || url.touched)}"  
+                     [(ngModel)]="aplicacion.urlApplication" name="url" #url="ngModel"
+                     [disabled]="type === 'V'" tabindex="2">
+               <small *ngIf="url.invalid && (url.dirty || url.touched)" id="password-help" class="p-error">
+                    La <strong>URL de la Aplicación</strong> es requerida.
+               </small>
+          </div>
+     
+          <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12" >
+               <p-checkbox [binary]="true" inputId="binaryInactivo" label="Incluir Inactivos" [(ngModel)]="incluirInactivos" [disabled]="type === 'V'" 
+                    name="inactivo" #inactivo="ngModel" ></p-checkbox> 
+          </div>
+
+          <div class="p-field p-col-12 p-lg-6 p-md-6 p-sm-12" >
+               <p-checkbox [binary]="true" inputId="binaryUbicacion" label="Enviar Notificación para Ubicación Desconocida" [(ngModel)]="informarUbicacion" [disabled]="type === 'V'" 
+                    name="ubicaion" #ubicaion="ngModel" ></p-checkbox> 
+          </div>
+     </form>
+ 
+     <div class="p-d-flex p-jc-end p-mt-3">
+         <button pButton pRipple pTooltip="Guardar"  tooltipPosition="bottom" label="Guardar"  icon="pi pi-save"  class="p-button-success p-mr-2" (click)="save()" [disabled]="!formulario.form.valid" *ngIf="type !== 'V'"></button>
+         <button pButton pRipple pTooltip="Cancelar" tooltipPosition="bottom" label="Cancelar" icon="pi pi-times" class="p-button-secondary" (click)="cancelar()"></button>
+     </div>
+ </div>

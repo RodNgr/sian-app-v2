@@ -1,0 +1,130 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+    <div class="p-grid">
+        <div class="p-col-5 p-lg-5 p-md-5 p-sm-12">
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+                    <label for="estado">Reportes:</label>
+                    <p-listbox [options]="reporteList" [(ngModel)]="reporteSeleccionado" optionLabel="descripcion" [listStyle]="{'max-height':'100px', 'height':'100px'}" (onChange)="onChangeReporte()"></p-listbox>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-col-7 p-lg-7 p-md-7 p-sm-12">
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+                    <label for="estado">Tiendas:</label>
+                    <p-multiSelect [options]="tiendaList" [(ngModel)]="tiendasSeleccionadas" optionLabel="nombre" defaultLabel="Seleccione las tiendas" selectedItemsLabel="{0} tiendas seleccionadas"></p-multiSelect>
+                </div>
+                <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+                    <label for="estado">Fecha Inicio:</label>
+                    <p-calendar [(ngModel)]="feInicio" dateFormat="dd/mm/yy" inputStyleClass="p-text-center"></p-calendar>
+                </div>
+                <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+                    <label for="estado">Fecha Fin:</label>
+                    <p-calendar [(ngModel)]="feFin" dateFormat="dd/mm/yy" inputStyleClass="p-text-center"></p-calendar>
+                </div>
+                <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12 p-mt-4">
+                    <button pRipple pButton label="Buscar" icon="pi pi-search" (click)="buscar()"> </button>
+                </div>
+            </div>
+        </div>
+
+        <p-tabView class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <p-tabPanel header="Resultados" leftIcon="pi pi-chart-bar">
+                <p-table *ngIf="reporteSeleccionado?.codigo === 1" [value]="remitoList" [responsive]="true" [rowHover]="true" [scrollable]="true" 
+                        scrollHeight="40vh" dataKey="tienda" styleClass="p-datatable-sm p-datatable-striped">
+                    <ng-template pTemplate="colgroup">
+                        <col style="width:60px;">
+                        <col style="width:100px;">
+                        <col style="width:150px;">
+                        <col style="width:200px;">
+                        <col style="width:150px;">
+                        <col style="width:125px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                        <col style="width:150px;">
+                        <col style="width:200px;">
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>C.Costo </th>
+                            <th>Fecha </th>
+                            <th>Hora Depósito </th>
+                            <th>Cajero </th>
+                            <th>Tipo Movimiento </th>
+                            <th>Monto Dólares </th>
+                            <th>Monto Soles </th>
+                            <th>Tipo Cambio </th>
+                            <th>Comentario </th>
+                            <th>Autorizado </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-remito let-rowIndex="rowIndex" let-expanded="expanded">
+                        <tr *ngIf="rowGroupMetadata[remito.tienda].index === rowIndex">
+                            <td colspan="5">
+                                <button type="button" pButton pRipple [pRowToggler]="remito" [label]="'Tienda: ' + remito.tienda + ' (' + rowGroupMetadata[remito.tienda].size + ')'" class="p-button-text p-button-rounded p-button-plain p-mr-2 p-text-bold" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                            </td>
+                            <td style="text-align: right;">
+                                <span class="p-text-bold ">{{rowGroupMetadata[remito.tienda].dolares | number: '.2-2'}} </span>
+                            </td>
+                            <td style="text-align: right;">
+                                <span class="p-text-bold ">{{rowGroupMetadata[remito.tienda].soles | number: '.2-2'}} </span>
+                            </td>
+                            <td colspan="3">
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="rowexpansion" let-remito>
+                        <tr>
+                            <td>{{remito.ceco}}</td>
+                            <td>{{remito.fecha}}</td>
+                            <td>{{remito.horaDeposito}}</td>
+                            <td class="wrap">{{remito.cajero}}</td>
+                            <td>{{remito.movimiento}}</td>
+                            <td style="text-align: right;">{{remito.dolares | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{remito.soles | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{remito.tipoCambio | number: '.2-2'}}</td>
+                            <td class="wrap">{{remito.comentario}}</td>
+                            <td class="wrap">{{remito.autorizado}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <p-table *ngIf="reporteSeleccionado?.codigo === 2" [value]="diferenciaList" [responsive]="true" [rowHover]="true" [scrollable]="true" 
+                        scrollHeight="40vh" dataKey="tienda" styleClass="p-datatable-sm p-datatable-striped">
+                    <ng-template pTemplate="colgroup">
+                        <col style="width:30%;">
+                        <col style="width:10%;">
+                        <col style="width:10%;">
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Tienda </th>
+                            <th>Fecha </th>
+                            <th>PunchIndex </th>
+                            <th>Cajero </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-diferencia >
+                        <tr>
+                            <td>{{diferencia.tiendaNombre}}</td>
+                            <td>{{diferencia.fecha}}</td>
+                            <td>{{diferencia.punchIndex}}</td>
+                            <td>{{diferencia.cajero}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-tabPanel>
+            <p-tabPanel header="Tiendas no Conectadas" leftIcon="pi pi-home">
+                <app-tienda-error [tiendaErrorList]="tiendaErrorList"></app-tienda-error>
+            </p-tabPanel>
+        </p-tabView>
+
+        <div class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <button pRipple pButton label="Exportar" icon="pi pi-file-excel" (click)="export()"> </button>      
+        </div>
+    </div>
+</div>

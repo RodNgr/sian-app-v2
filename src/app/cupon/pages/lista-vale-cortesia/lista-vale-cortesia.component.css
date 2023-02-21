@@ -1,0 +1,3 @@
+::ng-deep .ui-calendar .ui-datepicker {
+     min-width: 250px;
+ }

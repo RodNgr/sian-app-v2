@@ -1,0 +1,246 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+    <div class="p-grid">
+        <div class="p-col-5 p-lg-5 p-md-5 p-sm-12">
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+                    <label for="estado">Reportes:</label>
+                    <p-listbox [options]="reporteList" [(ngModel)]="reporteSeleccionado" optionLabel="descripcion" [listStyle]="{'max-height':'100px', 'height':'100px'}" (onChange)="onChangeReporte()"></p-listbox>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-col-7 p-lg-7 p-md-7 p-sm-12">
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+                    <label for="estado">Tiendas:</label>
+                    <p-multiSelect [options]="tiendaList" [(ngModel)]="tiendasSeleccionadas" optionLabel="nombre" defaultLabel="Seleccione las tiendas" selectedItemsLabel="{0} tiendas seleccionadas" [disabled]="!showTiendas"></p-multiSelect>
+                </div>
+                <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+                    <label for="estado">Fecha Inicio:</label>
+                    <p-calendar [(ngModel)]="feInicio" dateFormat="dd/mm/yy" inputStyleClass="p-text-center"></p-calendar>
+                </div>
+                <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+                    <label for="estado">Fecha Fin:</label>
+                    <p-calendar [(ngModel)]="feFin" dateFormat="dd/mm/yy" inputStyleClass="p-text-center"></p-calendar>
+                </div>
+                <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+                    <label *ngIf="showEstado" for="estado">Estado:</label>
+                    <p-dropdown *ngIf="showEstado" [options]="estadoList" [(ngModel)]="estadoSeleccionado" optionLabel="descripcion" ></p-dropdown>
+                </div>
+                <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12 p-mt-4">
+                    <button pRipple pButton label="Buscar" icon="pi pi-search" (click)="buscar()"> </button>
+                </div>
+            </div>
+        </div>
+
+        <p-tabView class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <p-tabPanel header="Resultados" leftIcon="pi pi-chart-bar">
+                <p-table *ngIf="reporteSeleccionado?.codigo === 1" [value]="ticketAnuladoList" [responsive]="true" [rowHover]="true" [scrollable]="true" 
+                        scrollHeight="40vh" dataKey="tienda" styleClass="p-datatable-sm">
+                    <ng-template pTemplate="colgroup">
+                        <col style="width:200px;">
+                        <col style="width:90px;">
+                        <col style="width:70px;">
+                        <col style="width:80px;">
+                        <col style="width:180px;">
+                        <col style="width:180px;">
+                        <col style="width:180px;">
+                        <col style="width:140px;">
+                        <col style="width:120px;">
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Tienda </th>
+                            <th>Fecha </th>
+                            <th>#TICKET </th>
+                            <th style="text-align: right;">Monto </th>
+                            <th>Cajero </th>
+                            <th>Administrador </th>
+                            <th>Motivo </th>
+                            <th>Inicio </th>
+                            <th>Canal Venta </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-reporte >
+                        <tr *ngIf="reporte.tipo === 'C'">
+                            <td class="wrap">{{reporte.tiendaNombre}}</td>
+                            <td>{{reporte.openDate}}</td>
+                            <td>{{reporte.transact}}</td>
+                            <td style="text-align: right;">{{reporte.importe | number: '.2-2'}}</td>
+                            <td class="wrap">{{reporte.empleado}}</td>
+                            <td class="wrap">{{reporte.administrador}}</td>
+                            <td class="wrap">{{reporte.motivo}}</td>
+                            <td>{{reporte.inicio}}</td>
+                            <td>{{reporte.canalVenta}}</td>
+                        </tr>
+                        <tr *ngIf="reporte.tipo === 'ST1' || reporte.tipo === 'ST2'" style="background-color: #5DADE2">
+                            <td style="text-align: left; font-weight: bold" colspan="4"><div [innerHtml]="reporte.tiendaNombre | safe: 'html'"></div></td>
+                            <td style="text-align: left; font-weight: bold" colspan="3"><div [innerHtml]="reporte.empleado | safe: 'html'"></div></td>
+                            <td style="text-align: left; font-weight: bold" colspan="2"><div [innerHtml]="reporte.openDate | safe: 'html'"></div></td>
+                        </tr>
+                        <tr *ngIf="reporte.tipo === 'TT'" style="background-color: #154360;">
+                            <td style="text-align: left; font-weight: bold; color: white" colspan="4"><div [innerHtml]="reporte.tiendaNombre | safe: 'html'"></div></td>
+                            <td style="text-align: left; font-weight: bold; color: white" colspan="3"><div [innerHtml]="reporte.empleado | safe: 'html'"></div></td>
+                            <td style="text-align: left; font-weight: bold; color: white" colspan="2"><div [innerHtml]="reporte.openDate | safe: 'html'"></div></td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <p-table *ngIf="reporteSeleccionado?.codigo === 2" [value]="ventaAnuladaList" [responsive]="true" [rowHover]="true" [scrollable]="true" 
+                        scrollHeight="40vh" dataKey="tienda" styleClass="p-datatable-sm p-datatable-striped">
+                    <ng-template pTemplate="colgroup">
+                        <col style="width:180px;">
+                        <col style="width:90px;">
+                        <col style="width:150px;">
+                        <col style="width:150px;">
+                        <col style="width:100px;">
+                        <col style="width:90px;">
+                        <col style="width:150px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Tienda </th>
+                            <th>#TICKET </th>
+                            <th>Autoriza </th>
+                            <th>Vendedor/Mozo </th>
+                            <th>Fecha </th>
+                            <th>Hora </th>
+                            <th>Producto </th>
+                            <th style="text-align: right;">Importe Anulado </th>
+                            <th style="text-align: right;">Total Cobrado </th>
+                            <th>Estado </th>
+                            <th>Canal </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-reporte >
+                        <tr>
+                            <td class="wrap">{{reporte.tiendaNombre}}</td>
+                            <td>{{reporte.transaccion}}</td>
+                            <td class="wrap">{{reporte.autoriza}}</td>
+                            <td class="wrap">{{reporte.vendedor}}</td>
+                            <td>{{reporte.fechaVenta}}</td>
+                            <td>{{reporte.hora | date: 'HH:mm:ss'}}</td>
+                            <td class="wrap">{{reporte.producto}}</td>
+                            <td style="text-align: right;">{{reporte.importe | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{reporte.totalTransaccion | number: '.2-2'}}</td>
+                            <td>{{reporte.estado}}</td>
+                            <td>{{reporte.canalVenta}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <p-table *ngIf="reporteSeleccionado?.codigo === 3" [value]="clienteDeliveryList" [responsive]="true" [rowHover]="true" [scrollable]="true" 
+                        scrollHeight="40vh" dataKey="tienda" styleClass="p-datatable-sm p-datatable-striped">
+                    <ng-template pTemplate="colgroup">
+                        <col style="width:90px;">
+                        <col style="width:200px;">
+                        <col style="width:100px;">
+                        <col style="width:120px;">
+                        <col style="width:100px;">
+                        <col style="width:200px;">
+                        <col style="width:200px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                        <col style="width:180px;">
+                        <col style="width:100px;">
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Código </th>
+                            <th>Apellidos y Nombres </th>
+                            <th>DNI </th>
+                            <th>Email </th>
+                            <th>Distrito </th>
+                            <th>Dirección 1 </th>
+                            <th>Dirección 2 </th>
+                            <th>Teléfono 1 </th>
+                            <th>Teléfono 2 </th>
+                            <th>Fecha </th>
+                            <th style="text-align: right;">Importe </th>
+                            <th>Tienda </th>
+                            <th>Tipo </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-reporte >
+                        <tr>
+                            <td>{{reporte.codigo}}</td>
+                            <td class="wrap">{{reporte.apellidos + ' ' + reporte.nombres}}</td>
+                            <td>{{reporte.dni}}</td>
+                            <td>{{reporte.email}}</td>
+                            <td class="wrap">{{reporte.distrito}}</td>
+                            <td class="wrap">{{reporte.direccion1}}</td>
+                            <td class="wrap">{{reporte.direccion2}}</td>
+                            <td>{{reporte.telefono1}}</td>
+                            <td>{{reporte.telefono2}}</td>
+                            <td>{{reporte.fechaVenta}}</td>
+                            <td style="text-align: right;">{{reporte.importe | number: '.2-2'}}</td>
+                            <td class="wrap">{{reporte.tienda}}</td>
+                            <td>{{reporte.tipo}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <p-table *ngIf="reporteSeleccionado?.codigo === 4" [value]="reportePjiList" [responsive]="true" [rowHover]="true" [scrollable]="true" 
+                        scrollHeight="40vh" dataKey="tienda" styleClass="p-datatable-sm p-datatable-striped">
+                    <ng-template pTemplate="colgroup">
+                        <col style="width:80px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                        <col style="width:180px;">
+                        <col style="width:90px;">
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Fecha </th>
+                            <th style="text-align: right;">NetSales </th>
+                            <th style="text-align: right;">DeliverySales </th>
+                            <th style="text-align: right;">CarryOutSales </th>
+                            <th style="text-align: right;">DineInOutSales </th>
+                            <th style="text-align: right;">TransacOrder </th>
+                            <th style="text-align: right;">DeliveryOrders </th>
+                            <th style="text-align: right;">CarryOutOrder </th>
+                            <th style="text-align: right;">DineInOrders </th>
+                            <th>TiendaPixel </th>
+                            <th>Tienda </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-reporte >
+                        <tr>
+                            <td>{{reporte.fecha | date: 'dd/MM/yyyy'}}</td>
+                            <td style="text-align: right;">{{reporte.netSales | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{reporte.deliverySales | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{reporte.carryOutSales | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{reporte.dineInOutSales | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{reporte.transaccOrders | number: '.0-0'}}</td>
+                            <td style="text-align: right;">{{reporte.deliveryOrders1 | number: '.0-0'}}</td>
+                            <td style="text-align: right;">{{reporte.deliveryOrders2 | number: '.0-0'}}</td>
+                            <td style="text-align: right;">{{reporte.dineInOrders | number: '.0-0'}}</td>
+                            <td class="wrap">{{reporte.tiendaNombre}}</td>
+                            <td>{{reporte.tienda}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-tabPanel>
+            <p-tabPanel header="Tiendas no Conectadas" leftIcon="pi pi-home">
+                <app-tienda-error [tiendaErrorList]="tiendaErrorList"></app-tienda-error>
+            </p-tabPanel>
+        </p-tabView>
+
+        <div class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <button pRipple pButton label="Exportar" icon="pi pi-file-excel" (click)="exportar()"> </button>      
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="layout-topbar">
+    <div class="p-d-flex p-jc-between p-pt-4">
+        <div id="sidebarCollapse">
+            <i class="pi pi-bars" style="cursor: pointer; font-size: 2rem;" ></i>
+        </div>
+        <div>
+            <img [src]="'assets/images/logo-' + empresaIcon + '.svg'" *ngIf="empresaIcon" class="p-pr-3">
+            <i class="pi pi-briefcase p-pr-2" style="cursor: pointer;" (click)="seleccionarEmpresa()" pTooltip="Cambiar Marca" tooltipPosition="bottom"></i>
+        </div>
+        <div>
+            <p-avatar icon="pi pi-user" styleClass="p-mr-2" size="large" [style]="{'background-color':'#2196F3', 'color': '#ffffff'}" shape="circle"></p-avatar>
+            <a class="hide">Usuario: {{ authService.usuario.user.shortName }}</a>
+        </div>
+    </div>
+</div>

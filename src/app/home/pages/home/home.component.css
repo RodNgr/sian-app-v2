@@ -1,0 +1,30 @@
+@media screen and (max-width: 40rem) {
+     .hide-column {
+          display: none !important;
+     }
+ 
+     :host ::ng-deep .p-button-label  {
+          display: none !important;
+     }
+ 
+     :host ::ng-deep .p-button-icon-left  {
+          margin-right: 0rem;
+     }
+
+     :host ::ng-deep .p-paginator-current {
+          display: none !important;
+     }
+
+     :host ::ng-deep .p-datatable.p-datatable-responsive-demo .p-datatable-tbody > tr > td:first-child {
+          width: 100%;
+    }
+}
+
+:host ::ng-deep .tabview-custom i, span { vertical-align: middle; } 
+:host ::ng-deep .tabview-custom span { margin: 0 .5rem; }
+
+:host ::ng-deep .p-datatable-header .p-datepicker {
+     min-width: 270px;
+     width: 270px;
+     max-width: 270px;
+}

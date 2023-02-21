@@ -1,0 +1,45 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+    <div class="p-grid">
+        <div class="p-col-7 p-lg-7 p-md-7 p-sm-12">
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+                    <label for="estado">Tiendas:</label>
+                    <p-multiSelect></p-multiSelect>
+                </div>
+                <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+                    <label for="estado">Fecha Inicial:</label>
+                    <p-calendar></p-calendar>
+                </div>
+                <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+                    <label for="horizontal">Hora Corte:</label>
+                        <p-inputNumber [showButtons]="true" buttonLayout="horizontal" inputId="horizontal" spinnerMode="horizontal" [step]="1" [min]="0" [max]="23"
+                                    decrementButtonClass="p-button-danger" incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
+                        </p-inputNumber>
+                </div>
+                <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12 p-mt-4">
+                    <button pRipple pButton label="Procesar" icon="pi pi-forward"> </button>
+                </div>
+            </div>
+        </div>
+
+        <p-tabView class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <p-tabPanel header="Reporte de Hora" leftIcon="pi pi-chart-bar">
+                <p-table></p-table>
+            </p-tabPanel>
+            <p-tabPanel header="Proyectado" leftIcon="pi pi-chart-line">
+                <p-table></p-table>
+            </p-tabPanel>
+            <p-tabPanel header="Tiendas no Conectadas" leftIcon="pi pi-home">
+                <p-table></p-table>
+            </p-tabPanel>
+        </p-tabView>
+
+        <div class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <button pRipple pButton label="Exportar" icon="pi pi-file-excel"> </button>      
+        </div>
+    </div>
+</div>

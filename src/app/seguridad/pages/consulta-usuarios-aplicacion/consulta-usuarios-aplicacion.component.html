@@ -1,0 +1,58 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+     <p-toolbar styleClass="p-mb-4">
+          <ng-template pTemplate="left">
+          </ng-template>
+          <ng-template pTemplate="right">
+               <button pButton pRipple label="Exportar" icon="pi pi-upload" styleClass="p-button-info" (click)="exportList()" pTooltip="Exportar" tooltipPosition="bottom"></button>
+          </ng-template>
+     </p-toolbar>
+
+     <p-table #dt [value]="usuarioList" [responsive]="true" [rows]="25" [paginator]="true" [rowHover]="true" dataKey="codigo" 
+               [scrollable]="true" scrollHeight="40vh" styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
+               currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+               [rowsPerPageOptions]="[15,25,50,100]">
+          <ng-template pTemplate="caption">
+               <div class="p-d-flex p-jc-between">
+                    <div class="p-grid p-ai-center vertical-container">
+                         <h1 class="p-m-0">Consulta de Usuario por Aplicación</h1>
+                    </div>
+                    
+                    <div>
+                         <p-dropdown [options]="aplicacionList" optionLabel="name" placeholder="Seleccionar Aplicación" [(ngModel)]="aplicacionSelected" [filter]="true" 
+                              filterBy="name" name="app" #app="ngModel" [showClear]="true" class="p-mr-2" (onChange)="changeValue()" ></p-dropdown>
+                         <button pButton pRipple label="Buscar" icon="pi pi-search" (click)="buscar()" pTooltip="Buscar" tooltipPosition="bottom" ></button>
+                    </div>
+               </div>
+          </ng-template>
+          <ng-template pTemplate="colgroup">
+               <colgroup *ngIf="!isMobile">
+                    <col style="width:15%;">
+               </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header">
+               <tr>
+                    <th pSortableColumn="id">Código <p-sortIcon field="id"></p-sortIcon></th>
+                    <th pSortableColumn="fullName">Nombre <p-sortIcon field="fullName"></p-sortIcon></th>
+                    <th pSortableColumn="razsoc">Empresa <p-sortIcon field="razsoc"></p-sortIcon></th>
+                    <th pSortableColumn="despue">Cargo <p-sortIcon field="despue"></p-sortIcon></th>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-usuario>
+               <tr [pSelectableRow]="usuario">
+                    <td><span class="p-column-title">Código</span>{{usuario.codigo}}</td>
+                    <td ><span class="p-column-title">Nombre </span>{{usuario.fullName}}</td>
+                    <td ><span class="p-column-title">Empresa </span>{{usuario.razsoc}}</td>
+                    <td ><span class="p-column-title">Cargo </span>{{usuario.despue}}</td>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="summary">
+               <div class="p-d-flex p-ai-center p-jc-between">
+                    {{(usuarioList ? usuarioList.length : 0) | i18nPlural: cantidadMap}}
+               </div>
+          </ng-template>
+     </p-table>
+</div>

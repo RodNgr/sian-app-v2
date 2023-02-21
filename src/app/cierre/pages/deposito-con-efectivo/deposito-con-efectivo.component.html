@@ -1,0 +1,65 @@
+<div class="card col"> 
+   <div class="p-fluid p-grid" > 
+        <div class="p-field p-col-12 p-lg-3 p-md-3 p-sm-3">
+            <label for="idFamilia">Moneda: </label>
+            <p-dropdown [options]="monedas" [autofocus]="true" [(ngModel)]="monedaSeleccionada" optionLabel="name" 
+                [filter]="true" filterBy="name" placeholder="Seleccione una moneda" name="idMoneda" #tienda="ngModel"
+            ></p-dropdown>
+        </div>
+        <div class="p-field p-col-12 p-lg-3 p-md-3 p-sm-3">
+            <label for="">Monto del voucher:</label>
+            <input pInputText type="text" >
+        </div>       
+        <div class="p-field p-col-12 p-lg-3 p-md-3 p-sm-3">
+            <label for="">Fec. del voucher:</label>
+            <p-calendar [(ngModel)]="fechaSeleccionada" dateFormat="dd/mm/yy" inputStyleClass="p-text-center"
+            (ngModelChange)="changeDate()"></p-calendar>
+       </div>
+       <div class="p-field p-col-12 p-lg-3 p-md-3 p-sm-3">
+            <label for="">No. de Ope/Trab. :</label>
+            <input pInputText type="text" >
+       </div> 
+              
+    </div>
+    <div class="p-fluid p-grid" >
+        <div class="p-field p-col-4 p-lg-4 p-md-4 p-sm-4">
+            <button pButton pRipple label="Agregar a la lista el depósito" (click)="seleccionar()" icon="pi pi-plus" class="p-button-primary p-mr-2"></button>
+        </div>
+    </div>
+
+    <div class="p-fluid p-grid" >
+        <!--<p-table id="table" [value]="empresas" [responsive]="true" styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped"
+            selectionMode="single" [(selection)]="empresaSeleccionada" dataKey="idEmpresa">-->
+            <p-table id="table"  [responsive]="true" styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped"
+            selectionMode="single">
+            <ng-template pTemplate="header">
+                <tr>
+                    
+                    <th pSortableColumn="nombre">Moneda <p-sortIcon field="nombre"></p-sortIcon></th>
+                    
+                    <th pSortableColumn="codSap">Monto del vo<p-sortIcon field="codSap"></p-sortIcon></th>
+                    <th pSortableColumn="codSap">Fec. voucher<p-sortIcon field="codSap"></p-sortIcon></th>
+                    <th pSortableColumn="codSap">No. operacion<p-sortIcon field="codSap"></p-sortIcon></th>
+                    
+                    <th>Accion</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body">
+                <tr>
+                    
+                    <td>SOLES</td>
+                    <td>2062.32</td>
+                    <td>30/05/2022</td>
+                    <td>0500102304</td>
+                    <td><button pButton pRipple label="Seleccionar" (click)="seleccionar()" icon="pi pi-check-circle" class="p-button-danger p-mr-2"></button></td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+  
+</div>
+
+ <div class="p-d-flex p-jc-end p-mt-3">
+     <button pButton pRipple label="Seleccionar" (click)="seleccionar()" icon="pi pi-check-circle" class="p-button-success p-mr-2"></button>
+     <button pButton pRipple label="Cancelar"    (click)="cancelar()"    icon="pi pi-times" class="p-button-secondary"></button>
+ </div>

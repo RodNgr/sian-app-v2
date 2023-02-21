@@ -1,0 +1,184 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+    <div class="p-grid">
+        <div class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-2 p-lg-2 p-md-2 p-sm-12">
+                    <label for="estado">Fecha Inicio:</label>
+                    <p-calendar [(ngModel)]="feInicio" dateFormat="dd/mm/yy" inputStyleClass="p-text-center"></p-calendar>
+                </div>
+                <div class="p-field p-col-2 p-lg-2 p-md-2 p-sm-12">
+                    <label for="estado">Fecha Fin:</label>
+                    <p-calendar [(ngModel)]="feFin" dateFormat="dd/mm/yy" inputStyleClass="p-text-center"></p-calendar>
+                </div>
+                <div class="p-field p-col-4 p-lg-4 p-md-4 p-sm-12">
+                    <label for="estado">Tipo:</label>
+                    <p-dropdown  [options]="tipoList" [(ngModel)]="tipoSeleccionado" optionLabel="descripcion" (onChange)="onChangeTipo()"></p-dropdown>
+                </div>
+                <div class="p-field p-col-2 p-lg-2 p-md-2 p-sm-12 p-mt-4">
+                    <button pRipple pButton label="Ejecutar" icon="pi pi-forward" (click)="buscar()"> </button>
+                </div>
+            </div>
+        </div>
+
+        <p-tabView class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <p-tabPanel header="Resultados" leftIcon="pi pi-chart-bar">
+                <p-table *ngIf="tipoSeleccionado?.codigo === '0'" [value]="dataList" [responsive]="true" [rowHover]="true" [scrollable]="true" 
+                        scrollHeight="40vh" dataKey="tienda" styleClass="p-datatable-sm p-datatable-striped">
+                    <ng-template pTemplate="colgroup">
+                        <col style="width:150px;">
+                        <col style="width:250px;">
+                        <col style="width:90px;">
+                        <col style="width:90px;">
+                        <col style="width:90px;">
+                        <col style="width:300px;">
+                        <col style="width:300px;">
+                        <col style="width:150px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                        <col style="width:150px;">
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Canal </th>
+                            <th>Cliente </th>
+                            <th>Registro Membresía </th>
+                            <th>Fecha </th>
+                            <th>Transacción </th>
+                            <th>Dirección </th>
+                            <th>Referencia </th>
+                            <th>Correo </th>
+                            <th>Teléfono </th>
+                            <th style="text-align: right;">Monto (S/) </th>
+                            <th>Medio de Pago </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-resultado >
+                        <tr>
+                            <td >{{resultado.canal}}</td>
+                            <td >{{resultado.cliente}}</td>
+                            <td >{{resultado.fechaRegistro}}</td>
+                            <td >{{resultado.fechaVenta}}</td>
+                            <td >{{resultado.transaccion}}</td>
+                            <td class="wrap">{{resultado.direccion}}</td>
+                            <td class="wrap">{{resultado.referencia}}</td>
+                            <td class="wrap">{{resultado.correo}}</td>
+                            <td >{{resultado.telefono}}</td>
+                            <td style="text-align: right;">{{resultado.monto | number: '.2-2'}}</td>
+                            <td class="wrap">{{resultado.formaPago}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <p-table *ngIf="tipoSeleccionado?.codigo === '1'" [value]="dataList" [responsive]="true" [rowHover]="true" [scrollable]="true" 
+                        scrollHeight="40vh" dataKey="tienda" styleClass="p-datatable-sm p-datatable-striped">
+                    <ng-template pTemplate="colgroup">
+                        <col style="width:250px;">
+                        <col style="width:120px;">
+                        <col style="width:120px;">
+                        <col style="width:120px;">
+                        <col style="width:120px;">
+                        <col style="width:120px;">
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Cliente </th>
+                            <th style="text-align: right;">Cantidad de Transacciones </th>
+                            <th style="text-align: right;">Total Neto (S/) </th>
+                            <th style="text-align: right;">Total Venta (S/) </th>
+                            <th style="text-align: right;">Ticket Promedio Neto (S/) </th>
+                            <th style="text-align: right;">Ticket Promedio Venta (S/) </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-resultado >
+                        <tr>
+                            <td >{{resultado.cliente}}</td>
+                            <td style="text-align: right;">{{resultado.qtyTransacciones | number: '.0-0'}}</td>
+                            <td style="text-align: right;">{{resultado.totalNeto | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{resultado.totalVenta | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{resultado.tckPromNeto | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{resultado.tckPromVenta | number: '.2-2'}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <p-table *ngIf="tipoSeleccionado?.codigo === '2'" [value]="dataList" [responsive]="true" [rowHover]="true" [scrollable]="true" 
+                        scrollHeight="40vh" dataKey="tienda" styleClass="p-datatable-sm p-datatable-striped">
+                    <ng-template pTemplate="colgroup">
+                        <col style="width:150px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Nombre </th>
+                            <th style="text-align: right;">Ene. a Jun. </th>
+                            <th style="text-align: right;">Feb. a Jul. </th>
+                            <th style="text-align: right;">Mar. a Ago. </th>
+                            <th style="text-align: right;">Abr. a Set. </th>
+                            <th style="text-align: right;">May. a Oct. </th>
+                            <th style="text-align: right;">Jun. a Nov. </th>
+                            <th style="text-align: right;">Jul. a Dic. </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-resultado >
+                        <tr>
+                            <td >{{resultado.descripcion}}</td>
+                            <td style="text-align: right;">{{resultado.frecuencia1 | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{resultado.frecuencia2 | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{resultado.frecuencia3 | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{resultado.frecuencia4 | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{resultado.frecuencia5 | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{resultado.frecuencia6 | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{resultado.frecuencia7 | number: '.2-2'}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <p-table *ngIf="tipoSeleccionado?.codigo === '3'" [value]="dataList" [responsive]="true" [rowHover]="true" [scrollable]="true" 
+                        scrollHeight="40vh" dataKey="tienda" styleClass="p-datatable-sm p-datatable-striped">
+                    <ng-template pTemplate="colgroup">
+                        <col style="width:150px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                        <col style="width:100px;">
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th># Veces de Compras Realizadas </th>
+                            <th style="text-align: right;">Cantidad Clientes </th>
+                            <th style="text-align: right;">%Clientes </th>
+                            <th style="text-align: right;">Cantidad Transacciones </th>
+                            <th style="text-align: right;">Total Venta (S/) </th>
+                            <th style="text-align: right;">%Venta </th>
+                            <th style="text-align: right;">Ticket Promedio </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-resultado >
+                        <tr>
+                            <td >{{resultado.comprasRealizadas | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{resultado.qtyClientes | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{resultado.porcClientes | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{resultado.qtyTransacciones | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{resultado.totalVenta | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{resultado.porcVentas | number: '.2-2'}}</td>
+                            <td style="text-align: right;">{{resultado.tckPromVenta | number: '.2-2'}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-tabPanel>
+        </p-tabView>
+
+        <div class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <button pRipple pButton label="Exportar" icon="pi pi-file-excel" class="p-mr-2" (click)="exportar()"></button>
+        </div>
+    </div>
+</div>

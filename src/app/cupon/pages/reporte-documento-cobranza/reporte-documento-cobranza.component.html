@@ -1,0 +1,135 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+     <p-table [value]="cabeceraList" [responsive]="true"  [rows]="25" [paginator]="true" [rowHover]="true" dataKey="id"
+               [scrollable]="true" scrollHeight="40vh" [rowsPerPageOptions]="[15,25,50,100]" selectionMode="single" [(selection)]="selectedDocumento"
+               currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true" 
+               styleClass="p-datatable-sm p-datatable-striped" (onRowSelect)="onRowSelect()" (onRowUnselect)="onRowUnselect()">
+          <ng-template pTemplate="caption">
+               <div class="p-d-flex p-jc-between">
+                    <div class="p-grid p-ai-center vertical-container">
+                         <h1 class="p-col p-m-0">Documentos de Cobranza</h1>
+                    </div>
+
+                    <div class="p-fluid p-formgrid p-grid p-jc-end">
+                         <div class="p-field p-col">
+                              <label for="tipo">Búsqueda por:</label>
+                              <p-dropdown id="tipo" [options]="tipos" [(ngModel)]="selectedTipo" optionLabel="name" optionValue="id"></p-dropdown>
+                         </div>
+                         <div class="p-field p-col">
+                              <label for="inicio">Inicio:</label>
+                              <p-calendar id="inicio" [(ngModel)]="rangeDates[0]" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" [touchUI]="isMobile"></p-calendar>
+                         </div>
+                         <div class="p-field p-col">
+                              <label for="fin">Fin:</label>
+                              <p-calendar id="fin" [(ngModel)]="rangeDates[1]" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" [touchUI]="isMobile"></p-calendar>
+                         </div>
+
+                         <div class="p-field p-mr-2 p-ml-2">
+                              <button pButton pRipple type="button" pTooltip="Procesar" tooltipPosition="bottom" label="Procesar" style="margin-top: 1.75rem" icon="pi pi-search" (click)="buscar()"></button>
+                         </div>
+                    </div>
+               </div>
+          </ng-template>
+          <ng-template pTemplate="colgroup">
+               <colgroup *ngIf="!isMobile">
+                    <col style="width: 50px;">
+                    <col style="width: 100px;">
+                    <col style="width: 100px;">
+                    <col style="width: 250px;">
+                    <col style="width: 130px;">
+                    <col style="width: 100px;">
+                    <col style="width: 100px;">
+                    <col style="width: 110px;">
+                    <col style="width: 100px;">
+                    <col style="width: 110px;">
+                    <col style="width: 130px;">
+                    <col style="width: 100px;">
+               </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header">
+               <tr>
+                    <th>UNI </th>
+                    <th pSortableColumn="feEmision" [ngClass]="{'p-text-center': !isMobile}">Emisión <p-sortIcon field="feEmision"></p-sortIcon></th>
+                    <th pSortableColumn="ruc" [ngClass]="{'p-text-center': !isMobile}">R.U.C <p-sortIcon field="ruc"></p-sortIcon></th>
+                    <th pSortableColumn="razonSocial">Nombre <p-sortIcon field="razonSocial"></p-sortIcon></th>
+                    <th pSortableColumn="correlativo">Doc. Cobranza <p-sortIcon field="correlativo"></p-sortIcon></th>
+                    <th pSortableColumn="feInicio" [ngClass]="{'p-text-center': !isMobile}">Inicio <p-sortIcon field="feInicio"></p-sortIcon></th>
+                    <th pSortableColumn="feFin" [ngClass]="{'p-text-center': !isMobile}">Fin <p-sortIcon field="feFin"></p-sortIcon></th>
+                    <th pSortableColumn="cantidad" [ngClass]="{'p-text-right': !isMobile}">C. Vendido <p-sortIcon field="cantidad"></p-sortIcon></th>
+                    <th pSortableColumn="caUsado" [ngClass]="{'p-text-right': !isMobile}">C. Usado <p-sortIcon field="caUsado"></p-sortIcon></th>
+                    <th pSortableColumn="vaMontoTotal" [ngClass]="{'p-text-right': !isMobile}">Monto D.C. <p-sortIcon field="vaMontoTotal"></p-sortIcon></th>
+                    <th pSortableColumn="vaUsado" [ngClass]="{'p-text-right': !isMobile}">Monto Usado <p-sortIcon field="vaUsado"></p-sortIcon></th>
+                    <th pSortableColumn="feRegistro" [ngClass]="{'p-text-center': !isMobile}">Registro <p-sortIcon field="feRegistro"></p-sortIcon></th>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-documento>
+               <tr [pSelectableRow]="documento">
+                    <td><span class="p-column-title">UNI</span>{{idEmpresa}}</td>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Emisión</span>{{documento.feEmision}}</td>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">R.U.C.</span>{{documento.ruc}}</td>
+                    <td><span class="p-column-title">Nombre</span>{{documento.razonSocial}}</td>
+                    <td><span class="p-column-title">Doc. Cobranza</span>{{documento.serie + '-' + documento.correlativo}}</td>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Inicio</span>{{documento.feInicio}}</td>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Fin</span>{{documento.feFin}}</td>
+                    <td [ngClass]="{'p-text-right': !isMobile}"><span class="p-column-title">C. Vendido</span>{{documento.cantidad}}</td>
+                    <td [ngClass]="{'p-text-right': !isMobile}"><span class="p-column-title">C. Usado</span>{{documento.caUsado}}</td>
+                    <td [ngClass]="{'p-text-right': !isMobile}"><span class="p-column-title">Monto D.C.</span>{{documento.vaMontoTotal | number: '.2-2'}}</td>
+                    <td [ngClass]="{'p-text-right': !isMobile}"><span class="p-column-title">Monto Usado</span>{{documento.vaUsado | number: '.2-2'}}</td>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Registro</span>{{documento.feRegistro}}</td>
+               </tr>
+          </ng-template>
+     </p-table>
+</div>
+
+<div class="card col">
+     <p-table [value]="detalleList" [responsive]="true" [rows]="25" [paginator]="true" [rowHover]="true" dataKey="id" [scrollable]="true" scrollHeight="40vh" 
+               [rowsPerPageOptions]="[15,25,50,100]" currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true" 
+               styleClass="p-datatable-sm p-datatable-striped">
+          <ng-template pTemplate="colgroup">
+               <colgroup *ngIf="!isMobile">
+                    <col style="width: 100px;">
+                    <col style="width: 100px;">
+                    <col style="width: 150px;">
+                    <col style="width: 100px;">
+                    <col style="width: 120px;">
+                    <col style="width: 200px;">
+                    <col style="width: 100px;">
+                    <col style="width: 150px;">
+               </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header">
+               <tr>
+                    <th pSortableColumn="feInicio" [ngClass]="{'p-text-center': !isMobile}">Inicio <p-sortIcon field="feInicio"></p-sortIcon></th>
+                    <th pSortableColumn="feFin" [ngClass]="{'p-text-center': !isMobile}">Fin <p-sortIcon field="feFin"></p-sortIcon></th>
+                    <th pSortableColumn="codBarra">Vale <p-sortIcon field="codBarra"></p-sortIcon></th>
+                    <th pSortableColumn="vaUnitarioVale" [ngClass]="{'p-text-right': !isMobile}">P.Unitario <p-sortIcon field="vaUnitarioVale"></p-sortIcon></th>
+                    <th pSortableColumn="tiendaSap" [ngClass]="{'p-text-center': !isMobile}">Tienda SAP <p-sortIcon field="tiendaSap"></p-sortIcon></th>
+                    <th pSortableColumn="nombreTienda">Nombre Tienda <p-sortIcon field="nombreTienda"></p-sortIcon></th>
+                    <th pSortableColumn="feUso" [ngClass]="{'p-text-center': !isMobile}">Usado <p-sortIcon field="feUso"></p-sortIcon></th>
+                    <th pSortableColumn="cajero">Cajero <p-sortIcon field="cajero"></p-sortIcon></th>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-detalle>
+               <tr [pSelectableRow]="detalle">
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Inicio </span>{{detalle.feInicio}}</td>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Fin </span>{{detalle.feFin}}</td>
+                    <td><span class="p-column-title">Vale </span>{{detalle.codBarra}}</td>
+                    <td [ngClass]="{'p-text-right': !isMobile}"><span class="p-column-title">P.Unitario </span>{{detalle.vaUnitarioVale | number: '.2-2'}}</td>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Tienda SAP</span>{{detalle.tiendaSap}}</td>
+                    <td><span class="p-column-title">Nombre Tienda</span>{{detalle.nombreTienda}}</td>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Usado</span>{{detalle.feUso}}</td>
+                    <td><span class="p-column-title">Cajero</span>{{detalle.cajero}}</td>
+               </tr>
+          </ng-template>
+     </p-table>
+     <p-toolbar styleClass="p-mb-4">
+          <ng-template pTemplate="left">
+               <button pButton pRipple pTooltip="Resumen" tooltipPosition="bottom" label="Resumen" icon="pi pi-upload" class="p-button-help p-mr-2" (click)="exportarResumen()"></button>
+               <button pButton pRipple pTooltip="Detalle" tooltipPosition="bottom" label="Detalle" icon="pi pi-upload" class="p-button-info" (click)="exportarDetalle()" >
+               </button>
+          </ng-template>
+     </p-toolbar>
+</div>

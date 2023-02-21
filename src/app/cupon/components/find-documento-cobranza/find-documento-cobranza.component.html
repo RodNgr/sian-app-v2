@@ -1,0 +1,86 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="p-grid">
+     <div class="p-col-12">
+          <div class="p-fluid p-formgrid p-grid">
+               <div class="p-field p-col-12 p-lg-2 p-md-6 p-sm-6">
+                    <label for="inicio">Fecha inicio:</label>
+                    <p-calendar appendTo="body" id="inicio" [(ngModel)]="feInicio" name="vdesde" #vdesde="ngModel" dateFormat="dd/mm/yy" inputStyleClass="p-text-center">
+                    </p-calendar>
+               </div>
+               <div class="p-field p-col-12 p-lg-2 p-md-6 p-sm-6">
+                    <label for="fin">Fecha fin:</label>
+                    <p-calendar appendTo="body" id="fin" [(ngModel)]="feFin" name="vhasta" #vhasta="ngModel" dateFormat="dd/mm/yy" inputStyleClass="p-text-center">
+                    </p-calendar>
+               </div>
+               <div class="p-field p-col-10 p-lg-5 p-md-6 p-sm-6">
+                    <label for="fact">Factura:</label>
+                    <input id="fact" type="text" pInputText [(ngModel)]="descripcion" name="factura" #factura="ngModel"/>
+               </div>
+               <div class="p-field p-col-2 p-lg-2 p-md-3 p-sm-2">
+                    <button pButton pRipple pTooltip="Buscar" tooltipPosition="bottom" label="Buscar" style="margin-top: 1.75rem" (click)="buscar()" icon="pi pi-search" class="p-button-primary p-mt-4"></button>
+               </div>
+          </div>
+     </div>
+
+     <div class="p-col-12">
+          
+     </div>
+
+     <div class="p-col-12">
+          <p-table #dt id="table" [value]="documentoList" [responsive]="true" [rowHover]="true" dataKey="id" 
+               selectionMode="single" [(selection)]="documentoSelected" styleClass="p-datatable-sm p-datatable-striped" 
+               [scrollable]="true" scrollHeight="40vh">
+               <ng-template pTemplate="colgroup">
+                    <colgroup *ngIf="!isMobile">
+                         <col style="width:10%;">
+                         <col style="width:40%;">
+                         <col style="width:10%;">
+                         <col style="width:10%;">
+                         <col style="width:10%;">
+                         <col style="width:10%;">
+                         <col style="width:10%;">
+                    </colgroup>
+               </ng-template>
+               <ng-template pTemplate="header">
+                    <tr>
+                         <th>RUC </th>
+                         <th>Cliente </th>
+                         <th>Tipo </th>
+                         <th>Serie </th>
+                         <th>#Documento </th>
+                         <th>Fecha Emisión </th>
+                         <th>Categoria </th>
+                    </tr>
+               </ng-template>
+               <ng-template pTemplate="body" let-documento>
+                    <tr [pSelectableRow]="documento">
+                         <td><span class="p-column-title">RUC</span>{{documento.ruc}}</td>
+                         <td><span class="p-column-title">Cliente</span>{{documento.razonSocial}}</td>
+                         <td><span class="p-column-title">Tipo</span>{{documento.tipoDocumento}}</td>
+                         <td><span class="p-column-title">Serie</span>{{documento.serie}}</td>
+                         <td><span class="p-column-title">#Documento</span>{{documento.correlativo}}</td>
+                         <td><span class="p-column-title">Fec. Emisión</span>{{documento.fechaEmision | date: 'dd/MM/yyyy'}}</td>
+                         <td class="hide-column">{{documento.categoria}}</td>
+                    </tr>
+               </ng-template>
+               <ng-template pTemplate="summary">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                         {{(documentoList ? documentoList.length : 0) | i18nPlural: cantidadMap}}
+                    </div>
+               </ng-template>
+          </p-table>
+     </div>
+     <div class="p-col-12 p-mt-4">
+          <div class="p-d-flex p-jc-center">
+               <div>
+                    <button pButton pRipple pTooltip="Aceptar" tooltipPosition="bottom" label="Aceptar" (click)="aceptar()" icon="pi pi-check-circle" class="p-button-success p-mr-2"></button>
+               </div>
+               <div>
+                    <button pButton pRipple pTooltip="Aceptar" tooltipPosition="bottom" label="Cancelar" (click)="cancelar()" icon="pi pi-times" class="p-button-secondary"></button>
+               </div>
+          </div>
+     </div>
+</div>

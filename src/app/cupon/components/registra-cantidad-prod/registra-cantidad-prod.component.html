@@ -1,0 +1,21 @@
+<div id="container" class="p-d-flex p-flex-column">
+    <p class="text-center">Producto Seleccionado : </p>
+    <p  class="text-center">{{nameProduct}}</p>
+  
+    <p>Cantidad de Producto</p>
+    <div class="p-mb-2">
+  
+      <input type="text"  pInputText />
+  
+    </div>
+  
+    <div class="p-mb-2 mt-2">
+      <div class="p-d-flex p-jc-center">
+        <button pButton pRipple  (click)="addProductTablePreview()" label="Agregar" icon="pi pi-plus"
+          class="p-button-success p-mr-2"></button>
+        <button pButton pRipple pTooltip="Cancelar" (click)="cancelar" tooltipPosition="bottom" label="Cancelar" icon="pi pi-times"
+          class="p-button-secondary"></button>
+      </div>
+    </div>
+  </div>
+  

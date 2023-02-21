@@ -1,0 +1,120 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+    <div class="p-grid">
+        <div class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-4 p-lg-4 p-md-4 p-sm-12">
+                    <label for="estado">Tiendas:</label>
+                    <p-multiSelect [options]="tiendaList" [(ngModel)]="tiendasSeleccionadas" optionLabel="nombre" defaultLabel="Seleccione las tiendas" selectedItemsLabel="{0} tiendas seleccionadas"></p-multiSelect>
+                </div>
+                <div class="p-field p-col-2 p-lg-2 p-md-2 p-sm-12">
+                    <label for="estado">Fecha Inicio:</label>
+                    <p-calendar [(ngModel)]="feInicio" dateFormat="dd/mm/yy" inputStyleClass="p-text-center"></p-calendar>
+                </div>
+                <div class="p-field p-col-2 p-lg-2 p-md-2 p-sm-12">
+                    <label for="estado">Fecha Fin:</label>
+                    <p-calendar [(ngModel)]="feFin" dateFormat="dd/mm/yy" inputStyleClass="p-text-center"></p-calendar>
+                </div>
+                <!-- <div class="p-field p-col-2 p-lg-2 p-md-2 p-sm-12">
+                    <label for="estado">Tipo:</label>
+                    <p-dropdown [options]="tipoVentaList" [(ngModel)]="tipoVentaSeleccionado" optionLabel="descripcion" (onChange)="onChangeTipo()"></p-dropdown>
+                </div> -->
+                <div class="p-field p-col-2 p-lg-2 p-md-3 p-sm-12 p-mt-4">
+                    <button pRipple pButton label="Buscar" icon="pi pi-search" (click)="buscar()"> </button>
+                </div>
+            </div>
+        </div>
+
+        <p-tabView class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <p-tabPanel header="Resultados" leftIcon="pi pi-chart-bar">
+                <p-table *ngIf="tipoVentaSeleccionado.codigo === '1'" [value]="detalladoList" [responsive]="true" [rowHover]="true" [scrollable]="true" 
+                        scrollHeight="40vh" dataKey="npedido" styleClass="p-datatable-sm p-datatable-striped">
+                    <ng-template pTemplate="colgroup">
+                        <col style="width:150px;">
+                        <col style="width:80px;">
+                        <col style="width:80px;">
+                        <col style="width:140px;">
+                        <col style="width:80px;">
+                        <col style="width:140px;">
+                        <col style="width:80px;">
+                        <col style="width:120px;">
+                        <col style="width:80px;">
+                        <col style="width:80px;">
+                        <col style="width:80px;">
+                        <col style="width:80px;">
+                        <col style="width:90px;">
+                        <col style="width:90px;">
+                        <col style="width:90px;">
+                        <col style="width:90px;">
+                        <col style="width:90px;">
+                        <col style="width:90px;">
+                        <col style="width:90px;">
+                        <col style="width:90px;">
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Tienda Nombre</th>
+                            <th>Tienda Pixel</th>
+                            <th>Día de venta</th>
+                            <th>Fecha de emisión</th>
+                            <th>N° de Pedido</th>
+                            <th>Cód. Vale</th>
+                            <th>Tipo de CPE</th>
+                            <th>Doc. cobranza</th>
+                            <th>Serie doc. cobranza</th> <!-- style="text-align: right;" -->
+                            <th>Número doc. cobranza</th>
+                            <th>Serie CPE</th>
+                            <th>Número CPE</th>
+                            <th>documento</th>
+                            <th>Cliente</th>
+                            <th>ruc</th>
+                            <th>razonsocial</th>
+                            <th>Base Imponible</th>
+                            <th>IGV</th>
+                            <th>RC</th>
+                            <th>Total</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-resultado >
+                        <tr>
+                            <td >{{resultado.tiendaNombre}}</td>
+                            <td >{{resultado.tiendapixel}}</td>
+                            <td >{{resultado.diaventa | date: 'dd/MM/yyy'}}</td>
+                            <td >{{resultado.fechaemision | date: 'dd/MM/yyy HH:mm:ss'}}</td>
+                            <td class="wrap">{{resultado.npedido}}</td>
+                            <td class="wrap">{{resultado.codvale}}</td>
+                            <td >{{resultado.tipocpe}}</td>
+                            <td >{{resultado.doccobranza}}</td>
+                            <td class="wrap">{{resultado.seriedoccobranza}}</td>
+                            <td class="wrap">{{resultado.numerodoccobranza}}</td>
+                            <td class="wrap">{{resultado.seriecpe}}</td>
+                            <td class="wrap">{{resultado.numerocpe}}</td>
+                            <td class="wrap">{{resultado.documento}}</td>
+                            <td class="wrap">{{resultado.cliente}}</td>
+                            <td class="wrap">{{resultado.ruc}}</td>
+                            <td class="wrap">{{resultado.razonsocial}}</td>
+                            <td class="wrap">{{resultado.baseimponible}}</td>
+                            <td class="wrap">{{resultado.igv}}</td>
+                            <td class="wrap">{{resultado.rc}}</td>
+                           <!--  <td style="text-align: right;" >{{resultado.neto | number: '.2-2'}}</td>
+                            <td style="text-align: right;" >{{resultado.igv | number: '.2-2'}}</td>
+                            <td style="text-align: right;" >{{resultado.rc | number: '.2-2'}}</td>
+                            <td style="text-align: right;" >{{resultado.total | number: '.2-2'}}</td> -->
+                            <td >{{resultado.total}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-tabPanel>
+           <!--  <p-tabPanel header="Tiendas no Conectadas" leftIcon="pi pi-home">
+                <app-tienda-error [tiendaErrorList]="tiendaErrorList"></app-tienda-error>
+            </p-tabPanel> -->
+        </p-tabView>
+
+        <div class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <button pRipple pButton label="Exportar" icon="pi pi-file-excel" (click)="exportar()"> </button>      
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+export class CartaOmnicanal{
+
+    public menu!: string;
+    public collection!: string;
+    public seccion!: string;
+    public orderPos!: number;
+    public prodPos!: number;
+    public codigoPadre!: string;
+    public productoPadre!: string;
+    public productoPixel!: string;
+    public precioPadre!: number;
+    public boton!: string;
+    public descripcionImpresa!: string;
+    public categoria!: string;
+    public vigenciaFechaInicio!: Date;
+    public vigenciaFechaFin!: Date;
+    public descripcionProductoPadreGlovo!: string;
+    public descripcionProductoPadreRappi!: string;
+    public ordenPregunta!: number;
+    public codigoPregunta!: string;
+    public pregunta!: string;
+    public minimo!: number;
+    public maximo!: number;
+    public ordenRespuesta!: number;
+    public codigoRespuesta!: string;
+    public respuesta!: string;
+    public precioRespuesta!: number;
+    public imagenGlovo!: string;
+    public imagenRappi!: string;
+    public codigo!: string;
+    public producto!: string;
+}

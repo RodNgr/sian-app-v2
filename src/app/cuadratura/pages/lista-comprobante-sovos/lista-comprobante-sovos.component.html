@@ -1,0 +1,100 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+     <p-toolbar styleClass="p-mb-4">
+          <ng-template pTemplate="left">
+          </ng-template>
+
+          <ng-template pTemplate="right">
+               <button pButton pRipple pTooltip="Exportar" tooltipPosition="bottom" label="Exportar" icon="pi pi-upload" (click)="exportXLS()" styleClass="p-button-info"></button>
+          </ng-template>
+     </p-toolbar>
+
+     <p-table #dt [value]="comprobanteList" [responsive]="true" [rows]="100" [paginator]="true" [rowHover]="true"
+               [scrollable]="true" scrollHeight="40vh" [rowsPerPageOptions]="[100,150,200,250]" 
+               currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+               styleClass="p-datatable-sm p-datatable-striped">
+          <ng-template pTemplate="caption">
+               <div class="p-d-flex p-grid">
+                    <div class="p-col-12 p-ai-center vertical-container">
+                         <h1 class="p-m-0">Listado de Comprobantes: {{empresaSeleccionada.nombre}}</h1>
+                    </div>
+                    
+                    <div class="p-col-12">
+                         <div class="p-fluid p-formgrid p-grid">
+                              <div class="p-field p-lg-2 p-md-2 p-sm-12">
+                                   <label for="cantidad">Inicio:</label>
+                                   <p-calendar [(ngModel)]="rangeDates[0]" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" [touchUI]="isMobile"></p-calendar>
+                              </div>
+
+                              <div class="p-field p-lg-2 p-md-2 p-sm-12">
+                                   <label for="cantidad">Fin:</label>
+                                   <p-calendar [(ngModel)]="rangeDates[1]" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" [touchUI]="isMobile"></p-calendar>
+                              </div>
+
+                              <div class="p-field p-lg-2 p-md-2 p-sm-6">
+                                   <label for="cantidad">Tipo:</label>
+                                   <p-dropdown [options]="tipoComprobanteList" [(ngModel)]="tipoComprobanteSeleccionado" optionLabel="descripcion" [showClear]="true" placeholder="Todos"></p-dropdown>
+                              </div>
+
+                              <div class="p-field p-lg-2 p-md-2 p-sm-6">
+                                   <label for="cantidad">Estado:</label>
+                                   <p-dropdown [options]="estadoList" [(ngModel)]="estadoSeleccionado" optionLabel="descripcion" [showClear]="true" placeholder="Todos"></p-dropdown>
+                              </div>
+
+                              <div class="p-field p-lg-2 p-md-2 p-sm-6">
+                                   <label for="cantidad">Sunat:</label>
+                                   <p-dropdown [options]="sunatList" [(ngModel)]="sunatSeleccionado" optionLabel="descripcion" [showClear]="true" placeholder="Todos"></p-dropdown>
+                              </div>
+
+                              <div class="p-field p-lg-1 p-md-2 p-sm-2">
+                                   <button pButton pRipple pTooltip="Buscar" tooltipPosition="bottom" type="button" label="Buscar" style="margin-top: 1.75rem" icon="pi pi-search" (click)="buscar()"></button>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </ng-template>
+          <ng-template pTemplate="colgroup">
+               <colgroup *ngIf="!isMobile">
+                    <col style="width:8%;">
+                    <col style="width:10%;">
+                    <col style="width:12%;">
+                    <col style="width:8%;">
+                    <col style="width:8%;">
+                    <col style="width:8%;">
+                    <col style="width:8%;">
+               </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header">
+               <tr>
+                    <th pSortableColumn="id.fecha" [ngClass]="{'p-text-center': !isMobile}">Fecha <p-sortIcon field="id.fecha"></p-sortIcon></th>
+                    <th pSortableColumn="id.tipo">Tipo <p-sortIcon field="id.tipo"></p-sortIcon></th>
+                    <th pSortableColumn="sovos">Comprobante <p-sortIcon field="sovos"></p-sortIcon></th>
+                    <th pSortableColumn="cliente" >Cliente <p-sortIcon field="cliente"></p-sortIcon></th>
+                    <th pSortableColumn="total" [ngClass]="{'p-text-right': !isMobile}">Total <p-sortIcon field="total"></p-sortIcon></th>
+                    <th pSortableColumn="estado" >Estado <p-sortIcon field="estado"></p-sortIcon></th>
+                    <th pSortableColumn="sunat" >Sunat <p-sortIcon field="sunat"></p-sortIcon></th>
+                    <th pSortableColumn="mensaje">Mensaje <p-sortIcon field="mensaje"></p-sortIcon></th>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-comprobante>
+               <tr [pSelectableRow]="comprobante">
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Fecha</span>{{comprobante.id.fecha | date: 'dd/MM/yyyy'}}</td>
+                    <td><span class="p-column-title">Tipo</span>{{comprobante.id.tipo | tipoComprobante}}</td>
+                    <td><span class="p-column-title">Comprobante</span>{{comprobante.sovos}}</td>
+                    <td><span class="p-column-title">Cliente</span>{{comprobante.cliente}}</td>
+                    <td [ngClass]="{'p-text-right': !isMobile}"><span class="p-column-title">Total</span>{{comprobante.total | number: '0.2'}}</td>
+                    <td><span class="p-column-title">Estado</span>{{comprobante.estado | estadoCuadratura}}</td>
+                    <td><span class="p-column-title">Sunat</span>{{comprobante.sunat | estadoSunat}}</td>
+                    <td><span class="p-column-title">Mensaje</span>{{comprobante.mensaje}}</td>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="summary">
+               <div class="p-d-flex p-ai-center p-jc-between">
+                    {{(comprobanteList ? comprobanteList.length : 0) | i18nPlural: cantidadMap}}
+               </div>
+          </ng-template>
+     </p-table>
+</div>

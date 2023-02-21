@@ -1,0 +1,468 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+  <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+  <div class="p-d-flex p-jc-between">
+    <div>
+      <h1>Nuevo Cupón Omnicanal </h1>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <form #formulario="ngForm" class="p-grid" autocomplete="off">
+    <div class="p-d-flex p-flex-column w-100">
+      <!-- Datos principales -->
+      <div class="p-mb-2 p-mt-2 p-margen">
+          <div class="p-fluid p-formgrid p-grid w-100">
+            
+            <div class="p-field p-col-3 p-md-3 p-sm-3">
+              <label for="nombreCampanha" [ngClass] = "{' p-error ': nombreCampanha.invalid && (nombreCampanha.dirty || nombreCampanha.touched)}">Campaña (*):</label>
+              <input required  maxlength="100"
+                [ngClass] = "{' ng-invalid ng-dirty ': nombreCampanha.invalid && (nombreCampanha.dirty || nombreCampanha.touched)}" 
+                id="nombreCampanha" type="text" pInputText #nombreCampanha="ngModel" [(ngModel)]="cuponOmni.nombreCampanha" name="nombreCampanha"
+                [disabled]="type === 'V'">
+              <small class="p-error" *ngIf="nombreCampanha.invalid && (nombreCampanha.dirty || nombreCampanha.touched)">Campo Obligatorio</small>
+            </div>
+
+            <div class="p-field p-col-3 p-md-3 p-sm-3">
+              <label for="tipo" [ngClass] = "{' p-error ': selectionTypeCupon == '0'}">Tipo (*):</label>
+              <p-dropdown [options]="tipos" [(ngModel)]="selectionTypeCupon" optionLabel="nombre" [showClear]="true" [ngModelOptions]="{standalone: true}"
+              optionDisabled="inactive" optionValue="codigo" (onChange)="showADetailsUnique($event)" [disabled]="type === 'V'">
+              </p-dropdown>
+              <small class="p-error" *ngIf="selectionTypeCupon == '0'">Seleccionar Campo</small>
+            </div>
+            
+            <div class="p-field p-col-3 p-md-3 p-sm-3">
+              <label for="fecInicio" [ngClass] = "{' p-error ': !fecInicio.dirty || !fecInicio.touched }">Inicio (*):</label>
+              <p-calendar [(ngModel)]="cuponOmni.fecInicio" [minDate]="minDate" [showTime]="true" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" name="fecInicio" #fecInicio="ngModel" id="fecInicio"></p-calendar>
+              <small class="p-error" *ngIf="!fecInicio.dirty || !fecInicio.touched">Fecha Obligatoria</small>
+            </div>
+            <div class="p-field p-col-3 p-md-3 p-sm-3">
+              <label for="fecFin" [ngClass] = "{' p-error ': !fecFin.dirty || !fecFin.touched }">Fin (*):</label>
+              <p-calendar [(ngModel)]="cuponOmni.fecFin" [minDate]="minDate" [showTime]="true" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" name="fecFin" #fecFin="ngModel" id="fecFin"></p-calendar>
+              <small class="p-error" *ngIf="!fecFin.dirty || !fecFin.touched">Fecha Obligatoria</small>
+            </div>
+
+          </div>
+
+          <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-3 p-md-3 p-sm-3">
+            <label for="alianza" [ngClass] = "{' p-error ': alianza.invalid && (alianza.dirty || alianza.touched)}">Alianzas (*):</label>
+            <input required 
+              [ngClass] = "{' ng-invalid ng-dirty ': alianza.invalid && (alianza.dirty || alianza.touched)}" 
+              id="alianza" type="text" pInputText #alianza="ngModel" [(ngModel)]="cuponOmni.alianza" name="alianza"
+              [disabled]="type === 'V'">
+            <small class="p-error" *ngIf="alianza.invalid && (alianza.dirty || alianza.touched)">Campo Obligatorio</small>
+          </div>
+        </div>
+      </div>
+      <!-- Acordeon General -->
+      <div class="p-mb-2 p-mt-2 accordion-container">
+        <p-fieldset legend="General (*)">
+          <label for="">Tipo :</label>
+          <div class="p-fluid p-formgrid p-grid w-100">
+            <br/>
+            <div class="p-field p-col-3 p-md-3 p-sm-3" style="padding: 25px; display: flex;">
+              <div class="p-field-radiobutton mr-1">
+                <p-radioButton name="count-times" value="1" inputId="only" (click)="showADetailsUnique($event)"
+                  [(ngModel)]="selectCountTimes"></p-radioButton>
+                <label for="only">Autogenerado</label>
+              </div>
+            </div>
+            <!-- Unico -->
+            <div class="p-field p-col-3 p-md-3 p-sm-3" *ngIf="showCuponesGenerar">
+              <label for="nroCuponAGenerar" >Cantidad de cupones a generar(*):</label>
+              <!-- [disabled]="selectCountTimes == 2" -->
+              <input #nroCuponAGenerar="ngModel" id="nroCuponAGenerar" type="number" pInputText [(ngModel)]="cuponOmni.nroCuponAGenerar" name="nroCuponAGenerar" min="1" [disabled]="selectCountTimes == '2'">
+              <small class="p-error" *ngIf="nroCuponAGenerar.value == 0 ">Cantidad de cupones a generar diferente a cero.</small>
+            </div>
+
+            <div class="p-field p-col-3 p-md-3 p-sm-3" *ngIf="showCantidadMaximaUso">
+              <label for="nroUso">Cantidad máxima de uso:</label>
+              <input #nroUso="ngModel" id="nroUso" type="number" pInputText [(ngModel)]="cuponOmni.nroUso" name="nroUso" min="1">
+              <small class="p-error" *ngIf="nroUso.value == 0 ">Cantidad máxima de uso diferente a cero.</small>
+            </div>
+
+            <div class="p-field p-col-3 p-md-3 p-sm-3" *ngIf="showCodigo">
+              <label for="codigo" [ngClass] = "{' p-error ': !formatoCodigo }">Código:</label>
+
+                <input id="codigo" pTooltip="Al crear el código tener en cuenta :
+                *mínimo 4 carácteres
+                *máximo 10 carácteres
+                *sin espacios
+                *sin letra Ñ y O
+                " type="text" aria-describedby="username2-help" tooltipEvent="focus" maxlength="10" pInputText 
+                  [(ngModel)]="cuponOmni.codigo" name="codigo" (change) = "codigoChange()" 
+                  [ngClass] = "{' ng-invalid ng-dirty ': !formatoCodigo }"
+                >
+                <small class="p-error" *ngIf="!formatoCodigo">Formato inválido</small>
+                
+            </div>
+
+          </div>
+
+          <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-3 p-md-3 p-sm-3" style="padding: 25px; display: flex;">
+            <div class="p-field-radiobutton ">
+              <p-radioButton name="count-times" value="2" inputId="more" (click)="showADetailsUnique($event)"
+                [(ngModel)]="selectCountTimes">
+              </p-radioButton>
+              <label for="more">Unico</label>
+            </div>
+          </div>
+
+          <!-- Unico -->
+          <div class="p-field p-col-3 p-md-3 p-sm-3" *ngIf="showMontoPagar">
+              <label for="monto" [ngClass] = "{' p-error ': monto.value == 0 }">Nuevo precio del producto(*):</label>
+              <input  id="monto" #monto="ngModel" [(ngModel)]="cuponOmni.monto" name="monto" ng type="number" pInputText [ngClass] = "{' ng-invalid ng-dirty ': monto.value == 0 }" (blur)="parseTwoDecimal(monto.value, 'monto')">
+              <small class="p-error" *ngIf="monto.value == 0">Monto mínimo diferente a cero.</small>
+              <!--<small class="p-error" *ngIf="monto.value > 0 && !validateTwoDecimals(monto.value)">El monto debe contener 2 decimales.</small>-->
+          </div>
+
+          <div class="p-field p-col-3 p-md-3 p-sm-3" *ngIf="showNecesitaMontoMinimo" style="padding-top: 31px; padding-left: 25px;">
+            <p-checkbox name="compraminima" value="1" inputId="ny" (onChange)="valueMinimo($event)"></p-checkbox>
+            <label  for="ny"> Necesita monto mínimo de compra</label>
+          </div>
+
+          <div class="p-field p-col-3 p-md-3 p-sm-3" [hidden]="!showMontoMinimo">
+            <label for="compraMin" [ngClass] = "{' p-error ': compraMin.value == 0 }">Monto mínimo de compra(*):</label>
+              <input  id="compraMin" #compraMin="ngModel" [(ngModel)]="cuponOmni.compraMin" name="compraMin" ng type="number" pInputText [ngClass] = "{' ng-invalid ng-dirty ': compraMin.value == 0 }"  (blur)="parseTwoDecimal(compraMin.value, 'compraMin')">
+              <small class="p-error" *ngIf="compraMin.value == 0 ">Monto mínimo de compra diferente a cero.</small>
+          </div>
+
+          <div class="p-field p-col-3 p-md-3 p-sm-3" *ngIf="showVacio">
+            
+          </div>
+
+          <div class="p-field p-col-3 p-md-3 p-sm-3" *ngIf="showVacio2">
+            
+          </div>
+          <div class="p-field p-col-3 p-md-3 p-sm-3" *ngIf="showVacio3">
+            
+          </div>
+          
+          <div class="p-field p-col-3 p-md-3 p-sm-3" *ngIf="showMaximoDescuento">
+            <label for="montoMax" [ngClass] = "{' p-error ': montoMax.value == 0 }">Monto máximo de descuento(*):</label>
+              <input  id="montoMax" #montoMax="ngModel" [(ngModel)]="cuponOmni.montoMax" name="montoMax" ng type="number" pInputText [ngClass] = "{' ng-invalid ng-dirty ': montoMax.value == 0 }"  (blur)="parseTwoDecimal(montoMax.value, 'montoMax')">
+              <small class="p-field" *ngIf="montoMax.value == 0 ">Monto máximo de descuento debe ser menor a Monto Mínimo de descuento.</small>
+          </div>
+
+          <div class="p-field p-col-3 p-md-3 p-sm-3" *ngIf="shoPorcentajeDescuento">
+            <label for="percentdsct" [ngClass] = "{' p-error ': percentdsct.value == 0 }">Porcentaje de descuento(*):</label>
+              <input  id="percentdsct" #percentdsct="ngModel" [(ngModel)]="cuponOmni.percentdsct" name="percentdsct" ng type="number" pInputText [ngClass] = "{' ng-invalid ng-dirty ': percentdsct.value == 0 }"  (blur)="parseTwoDecimal(percentdsct.value, 'percentdsct')">
+              <small class="p-error" *ngIf="percentdsct.value == 0 ">Porcentaje de descuento diferente a cero.</small>
+          </div>
+
+          <div class="p-field p-col-3 p-md-3 p-sm-3" *ngIf="showDelivery">
+            <label for="percentdsct" >Descuento al delivery(%):</label>
+            <input id="percentdsct" #percentdsct="ngModel" [(ngModel)]="cuponOmni.percentdsct" name="percentdsct" ng type="text" pInputText disabled>            
+          </div>
+
+          <div class="p-field p-col-3 p-md-3 p-sm-3" *ngIf="showMontoDescuento">
+            <label for="percentdsct" >Monto de descuento :</label>
+              <input id="percentdsct" #percentdsct="ngModel" [(ngModel)]="cuponOmni.percentdsct" name="percentdsct" ng type="number" pInputText [ngClass] = "{' ng-invalid ng-dirty ': percentdsct.value == 0 }"   (blur)="parseTwoDecimal(percentdsct.value, 'percentdsct')" >            
+          </div>
+        </div>
+        </p-fieldset>
+      </div>
+
+      <!-- Acordeon Canales -->
+      <div class="p-mb-2 p-mt-2 accordion-container" [hidden]="!showCanales">
+        <p-fieldset legend="Canales (*)">
+          <div class="p-fluid ">
+
+            <div class="p-d-flex ">
+
+              <div class="p-field-checkbox mr-1">
+                <p-checkbox name="channel" value="carta-web" inputId="web" (onChange)="showTableWeb($event)" #checkBox>
+                </p-checkbox>
+                <label for="web">Web</label>
+              </div>
+              <div class="p-field-checkbox mr-1">
+                <p-checkbox name="channel" value="carta-call" inputId="call" (onChange)="showTableCall($event)" #checkBox1>
+                </p-checkbox>
+                <label for="call">Call Center</label>
+              </div>
+
+              <div class="p-field-checkbox">
+                <p-checkbox name="channel" value="carta-salon" inputId="salon" (onChange)="showTableSalon($event)" #checkBox2>
+                </p-checkbox>
+                <label for="salon">Salón</label>
+              </div>
+            </div>
+            <small class="p-error" *ngIf="!checkBox.checked && !checkBox1.checked && !checkBox2.checked">Seleccionar al menos un canal.</small>
+          </div>
+        </p-fieldset>
+      </div>
+
+      <div class="mt-1" *ngIf="showTableProducts">
+        <p-fieldset legend="Productos">
+
+          <!-- Start Dialog -->
+          <p-dialog header="Agregar cantidad" [(visible)]="displayModal" [modal]="true"
+          [style]="{width: '25vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+          <div id="container" class="p-d-flex p-flex-column">
+            <p class="text-center">Producto Seleccionado : </p>
+            <p class="text-center">{{selectionProduct.nombre}}</p>
+            <p class="text-center">Cantidad de Producto</p>
+            <div class="p-mb-2" style="margin: auto;">
+              <input type="number" #cantidad pInputText min="1"/>
+            </div>
+
+            <div class="p-mb-2 mt-2">
+              <div class="p-d-flex p-jc-center">
+                <!-- (click)="addProductwithAcount(cantidad)" -->
+                <button pButton pRipple 
+                  label="Agregar" icon="pi pi-plus" class="p-button-success p-mr-2"></button>
+                <button pButton pRipple (click)="cancelarModal()" label="Cancelar" icon="pi pi-times"
+                  class="p-button-secondary"></button>
+              </div>
+            </div>
+          </div>
+
+        </p-dialog>
+        <!-- End dialog -->
+
+          <!-- Tabla carta web -->
+          <div *ngIf="showProductsWeb">
+            <div class="p-fluid ">
+              <div class="p-d-flex p-jc-between">
+                <div>
+                  <p class="title-carta">Carta Web</p>
+                </div>
+                <div>
+                  <div class="p-col-12 ">
+                    <div class="p-inputgroup">
+                      <!-- <button type="button" pButton pRipple label="Buscar"></button> -->
+                      <input (keyup)="filtroWeb()" name="searchweb"  #searchweb="ngModel" [(ngModel)]="searchWeb" type="text" pInputText placeholder="Buscar...">
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="p-col-12 ">
+
+                    <div class="p-inputgroup">
+                      <!-- " -->
+                      <button pButton pRipple label="Agregar Producto"  (click)="showModalDialogCartaWeb()"
+                      icon="pi pi-plus" class="p-button-success p-mr-2"></button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div>
+                <p-table #dt [value]="productosCartaWeb" [responsive]="true" [rows]="15" [paginator]="true" [rowHover]="true" dataKey="codigo"  
+                [globalFilterFields]="['codigo', 'producto']" [scrollable]="true" scrollHeight="40vh"
+                selectionMode="single" [(selection)]="CartaWebSelectedSelected" styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
+                currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+                [rowsPerPageOptions]="[15,25,50,100]">
+
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th pSortableColumn="producto">Nombre Producto <p-sortIcon field="producto"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="producto">Código Producto <p-sortIcon field="producto"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="carta">Carta <p-sortIcon field="carta"></p-sortIcon>
+                    </th>
+                  </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-ProductoCarta>
+                  <tr [pSelectableRow]="ProductoCarta">
+                    <td>{{ProductoCarta.producto}}</td>
+                    <td>{{ProductoCarta.codigo}}</td>
+                    <td>{{ProductoCarta.menu}}</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+          <!-- Tabla carta call center -->
+          <div class="mt-1" *ngIf="showProductsCall">
+            <div>
+              <div class="p-fluid ">
+                <div class="p-d-flex p-jc-between">
+                  <div>
+                    <p class="title-carta">Carta Call Center</p>
+                  </div>
+                  <div>
+                    <div class="p-col-12 ">
+                      <div class="p-inputgroup">
+                        <!-- <button type="button" pButton pRipple label="Buscar"></button> -->
+                        <input (keyup)="filtroCall()" name="searchcall"  #searchcall="ngModel" [(ngModel)]="searchCall" type="text" pInputText placeholder="Buscar...">
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="p-col-12 ">
+                      <div class="p-inputgroup">
+                        <!--  -->
+                        <button pButton pRipple label="Agregar Producto" (click)="showModalDialogCartaCall()"
+                        icon="pi pi-plus" class="p-button-success p-mr-2"></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div>
+                <p-table #dt [value]="productosCartaCallCenter" [responsive]="true" [rows]="15" [paginator]="true" [rowHover]="true" dataKey="codigo"  
+                [globalFilterFields]="['codigo', 'producto']" [scrollable]="true" scrollHeight="40vh"
+                selectionMode="single" [(selection)]="CartaCallSelectedSelected" styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
+                currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+                [rowsPerPageOptions]="[15,25,50,100]">
+
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th pSortableColumn="producto">Nombre Producto <p-sortIcon field="producto"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="producto">Código Producto <p-sortIcon field="producto"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="carta">Carta <p-sortIcon field="carta"></p-sortIcon>
+                    </th>
+                  </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-ProductoCarta>
+                  <tr [pSelectableRow]="ProductoCarta">
+                    <td>{{ProductoCarta.producto}}</td>
+                    <td>{{ProductoCarta.codigo}}</td>
+                    <td>{{ProductoCarta.menu}}</td>
+                  </tr>
+                </ng-template>
+
+              </p-table>
+            </div>
+            </div>
+          </div>
+
+          <!-- Tabla carta salón -->
+          <div class="mt-1" *ngIf="showProductsSalon">
+            <div>
+              <div class="p-fluid ">
+                <div class="p-d-flex p-jc-between">
+                  <div>
+                    <p class="title-carta">Carta Salón</p>
+                  </div>
+                  <div>
+                    <div class="p-col-12 ">
+                      <div class="p-inputgroup">
+                       <!--  <button type="button" pButton pRipple label="Buscar"></button> -->
+                        <input (keyup)="filtroSalon()" name="searchsalon"  #searchsalon="ngModel" [(ngModel)]="searchSalon" type="text" pInputText placeholder="Buscar...">
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="p-col-12 ">
+                      <div class="p-inputgroup">
+                        <!--  -->
+                        <button pButton pRipple label="Agregar Producto" (click)="showModalDialogCartaSalon()"
+                        icon="pi pi-plus" class="p-button-success p-mr-2"></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div>
+                <p-table #dt [value]="productosCartaSalon" [responsive]="true" [rows]="15" [paginator]="true" [rowHover]="true" dataKey="codigo"  
+                [globalFilterFields]="['codigo', 'producto']" [scrollable]="true" scrollHeight="40vh"
+                selectionMode="single" [(selection)]="CartaSalonSelectedSelected" styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
+                currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+                [rowsPerPageOptions]="[15,25,50,100]">
+
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th pSortableColumn="producto">Nombre Producto <p-sortIcon field="producto"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="producto">Código Producto <p-sortIcon field="producto"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="carta">Carta <p-sortIcon field="carta"></p-sortIcon>
+                    </th>
+                  </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-ProductoCarta>
+                  <tr [pSelectableRow]="ProductoCarta">
+                    <td>{{ProductoCarta.producto}}</td>
+                    <td>{{ProductoCarta.codigo}}</td>
+                    <td>{{ProductoCarta.menu}}</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+            </div>
+          </div>
+
+          <hr>
+          <!-- Tabla resumen -->
+          <div class="mt-1">
+            <div class="summary-product">
+              <div class="p-fluid ">
+                <div class="p-d-flex p-jc-between">
+                  <div>
+                    <p class="title-carta">Productos Seleccionados</p>
+
+                  </div>
+
+                  <div>
+                    <div class="p-col-12 ">
+                      <div class="p-inputgroup">
+                        <button pButton pRipple label="Quitar Producto" icon="pi pi-times" (click)="QuitarProducto()"
+                          class="p-button-danger p-mr-2"></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div>
+                <p-table #dt [value]="productosCartaConsolidado" [responsive]="true" [rows]="15" [paginator]="true" [rowHover]="true" dataKey="codigo"  
+                [globalFilterFields]="['codigo', 'producto']" [scrollable]="true" scrollHeight="40vh"
+                selectionMode="single" [(selection)]="CartaConsolidadoSelectedSelected" styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
+                currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+                [rowsPerPageOptions]="[15,25,50,100]">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th pSortableColumn="producto">Nombre Producto <p-sortIcon field="producto"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="producto">Código Producto <p-sortIcon field="producto"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="carta">Carta <p-sortIcon field="carta"></p-sortIcon>
+                    </th>
+                  </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-ProductoCarta>
+                  <tr [pSelectableRow]="ProductoCarta">
+                    <td>{{ProductoCarta.producto}}</td>
+                    <td>{{ProductoCarta.codigo}}</td>
+                    <td>{{ProductoCarta.menu}}</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+            </div>
+          </div>
+
+        </p-fieldset>
+      </div>
+    </div>
+    <div class="p-d-flex mt-2 mb-2 w-100">
+      <div class="p-inputgroup p-d-flex p-jc-end ">
+        <button pButton pRipple label="Guardar" icon="pi pi-save" class="p-button-lg p-button-success p-mr-2" (click)="guardarCupon()"></button>
+      </div>
+      <div class="p-inputgroup">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-lg p-button-secondary p-mr-2"
+          (click)="cancelar()"></button>
+      </div>
+    </div>
+  </form>
+
+</div>

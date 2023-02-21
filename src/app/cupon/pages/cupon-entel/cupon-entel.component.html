@@ -1,0 +1,111 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+ </ngx-spinner>
+
+<div class="card col">
+     <h1>{{title}}</h1>
+     <hr>
+
+     <form #formulario="ngForm" class="p-grid" autocomplete="off">
+          <div class="p-md-6 p-lg-6">
+               <div class="p-grid">
+                    <div class="p-col-12">
+                         <p-fieldset legend="Detalles">
+                              <div class="p-fluid p-formgrid p-grid">
+                                   <div class="p-field p-col">
+                                        <label for="observacion" [ngClass] = "{' p-error ': observacion.invalid && (observacion.dirty || observacion.touched)}">Observaciones: (*)</label>
+                                        <textarea id="observacion" type="text" pInputTextarea rows="2" [disabled]="type === 'V'" class="p-text-uppercase"
+                                             [(ngModel)]="vale.observacion" required name="observacion" #observacion="ngModel"
+                                             [ngClass] = "{' ng-invalid ng-dirty ': observacion.invalid && (observacion.dirty || observacion.touched)}"></textarea>
+                                        <small *ngIf="observacion.invalid && (observacion.dirty || observacion.touched)" id="password-help" class="p-error">
+                                             La <strong>observación</strong> es requerida.
+                                        </small>
+                                   </div>
+                              </div>
+
+                              <div class="p-fluid p-formgrid p-grid">
+                                   <div class="p-field p-col-6">
+                                        <label for="cantidad" [ngClass] = "{' p-error ': cantidad.invalid && (cantidad.dirty || cantidad.touched)}">Cantidad: (*)</label>
+                                        <p-inputNumber id="cantidad" [disabled]="type === 'V'" [min]="1" [max]="100000" locale="es-PE"
+                                             [(ngModel)]="vale.cantidad" [required]="true" name="cantidad" #cantidad="ngModel"
+                                             [ngClass] = "{' ng-invalid ng-dirty ': cantidad.invalid && (cantidad.dirty || cantidad.touched)}">
+                                        </p-inputNumber>
+                                        <small *ngIf="cantidad.invalid && (cantidad.dirty || cantidad.touched)" id="password-help" class="p-error">
+                                             La <strong>cantidad</strong> es requerida.
+                                        </small>
+                                   </div>
+                                   <div class="p-field p-col-6">
+                                        <label for="monto" [ngClass] = "{' p-error ': monto.invalid && (monto.dirty || monto.touched)}">Monto: (*)</label>
+                                        <p-inputNumber id="monto" [disabled]="type === 'V'" locale="es-PE" [min]="0" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2"
+                                             [(ngModel)]="vale.monto" [required]="true" name="monto" #monto="ngModel"
+                                             [ngClass] = "{' ng-invalid ng-dirty ': monto.invalid && (monto.dirty || monto.touched)}"> 
+                                        </p-inputNumber>
+                                        <small *ngIf="monto.invalid && (monto.dirty || monto.touched)" id="password-help" class="p-error">
+                                             El <strong>monto</strong> es requerido.
+                                        </small>
+                                   </div>
+                              </div>
+                              <div class="p-fluid p-formgrid p-grid">
+                                   <div class="p-field p-col-6">
+                                        <label for="longitud" [ngClass] = "{' p-error ': longitud.invalid && (longitud.dirty || longitud.touched)}">Longitud: (*)</label>
+                                        <p-inputNumber id="longitud" [disabled]="type === 'V'" [min]="1" [max]="16"
+                                             [(ngModel)]="vale.longitud" [required]="true" name="longitud" #longitud="ngModel"
+                                             [ngClass] = "{' ng-invalid ng-dirty ': longitud.invalid && (longitud.dirty || longitud.touched)}">
+                                        </p-inputNumber>
+                                        <small *ngIf="longitud.invalid && (longitud.dirty || longitud.touched)" id="password-help" class="p-error">
+                                             La <strong>longitud</strong> no es válida.
+                                        </small>
+                                   </div>
+                                   <div class="p-field p-col-6">
+                                        <label for="excluir">Excluir lo siguiente:</label>
+                                        <input id="excluir" type="text" pInputText [disabled]="type === 'V'" class="p-text-uppercase"
+                                             [(ngModel)]="vale.excluir" name="excluir" #excluir="ngModel"> 
+                                   </div>
+                              </div>
+                         </p-fieldset>
+                    </div>
+               </div>
+          </div>
+
+          <div class="p-md-6 p-lg-6">
+               <div class="p-grid">
+                    <div class="p-col-12">
+                         <p-fieldset legend="Validez">
+                              <div class="p-fluid p-formgrid p-grid">
+                                   <div class="p-field p-col">
+                                        <label for="desde" [ngClass] = "{' p-error ': vdesde.invalid && (vdesde.dirty || vdesde.touched)}">Fecha inicio: (*)</label>
+                                        <p-calendar inputId="desde" [disabled]="type === 'V'" inputStyleClass="p-text-center" [touchUI]="isMobile"
+                                             [(ngModel)]="vale.fecInicio" [required]="true" name="vdesde" #vdesde="ngModel" dateFormat="dd/mm/yy"
+                                             [ngClass] = "{' ng-invalid ng-dirty ': vdesde.invalid && (vdesde.dirty || vdesde.touched)}">
+                                        </p-calendar>
+                                        <small *ngIf="vdesde.invalid && (vdesde.dirty || vdesde.touched)" id="password-help" class="p-error">
+                                             La <strong>fecha de inicio</strong> es requerida.
+                                        </small>
+                                   </div>
+                                   <div class="p-field p-col">
+                                        <label for="hasta" [ngClass] = "{' p-error ': vhasta.invalid && (vhasta.dirty || vhasta.touched)}">Fecha fin: (*)</label>
+                                        <p-calendar inputId="hasta" [disabled]="type === 'V'" inputStyleClass="p-text-center" [touchUI]="isMobile"
+                                             [(ngModel)]="vale.fecFin" [required]="true" name="vhasta" #vhasta="ngModel" dateFormat="dd/mm/yy" 
+                                             [ngClass] = "{' ng-invalid ng-dirty ': vhasta.invalid && (vhasta.dirty || vhasta.touched)}">
+                                        </p-calendar>
+                                        <small *ngIf="vhasta.invalid && (vhasta.dirty || vhasta.touched)" id="password-help" class="p-error">
+                                             La <strong>fecha de fin</strong> es requerida.
+                                        </small>
+                                   </div>
+                              </div>
+                         </p-fieldset>
+                    </div>
+                    <div class="p-col-12">
+                         <div class="p-d-flex p-jc-end">
+                              <div *ngIf="type !== 'V'" class="p-mr-2">
+                                   <button  pButton pRipple pTooltip="Guardar" tooltipPosition="bottom" label="Guardar" icon="pi pi-save"  class="p-button-success" (click)="generar()" [disabled]="!formulario.form.valid"></button>
+                              </div>
+                              <div>
+                                   <button pButton pRipple pTooltip="Cancelar" tooltipPosition="bottom" label="Cancelar" icon="pi pi-times" class="p-button-secondary" (click)="cancelar()"></button>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </form>
+</div>

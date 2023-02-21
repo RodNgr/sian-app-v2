@@ -1,0 +1,14 @@
+<div class="p-fluid p-formgrid p-grid" autocomplete="off">
+     <div class="p-field p-col-12 p-md-12 p-sm-12" >
+         <label for="msg" [ngClass] = "{' p-error ': msg.invalid && (msg.dirty || msg.touched)}">Motivo: (*)</label>
+         <input pInputText required id="msg" name="msg" #msg="ngModel" [(ngModel)]="incidente.mensaje" tabindex="1">
+         <small *ngIf="msg.invalid && (msg.dirty || msg.touched)" id="password-help" class="p-error">
+             El <strong>motivo</strong> es requerido.
+         </small>
+     </div>
+</div>
+ 
+<div class="p-d-flex p-jc-end p-mt-3">
+     <button pButton pRipple pTooltip="Aceptar"  tooltipPosition="bottom" label="Guardar"  icon="pi pi-save"  class="p-button-success p-mr-2" (click)="aceptar()"></button>
+     <button pButton pRipple pTooltip="Cancelar" tooltipPosition="bottom" label="Cancelar" icon="pi pi-times" class="p-button-secondary" (click)="cancelar()"></button>
+</div>

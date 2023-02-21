@@ -1,0 +1,68 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+     <p-toolbar styleClass="p-mb-4">
+          <ng-template pTemplate="left">
+          </ng-template>
+
+          <ng-template pTemplate="right">
+               <button pButton pRipple pTooltip="Exportar" tooltipPosition="bottom" label="Exportar" icon="pi pi-upload" (click)="exportXLS()" styleClass="p-button-info"></button>
+          </ng-template>
+     </p-toolbar>
+
+     <p-table #dt [responsive]="true" [rowHover]="true" [scrollable]="true" scrollHeight="40vh" [columns]="resultadoDto.childColumnNames"
+               [value]="resultadoDto.valores" styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines" >
+          <ng-template pTemplate="caption">
+               <div class="p-d-flex p-grid">
+                    <div class="p-col-12 p-ai-center vertical-container">
+                         <h1 class="p-m-0">Tablero de Control</h1>
+                    </div>
+                    
+                    <div class="p-col-12">
+                         <div class="p-fluid p-formgrid p-grid">
+                              <div class="p-field p-col-3">
+                                   <label for="cmbTienda">Tienda:</label>
+                                   <p-multiSelect  id="cmbTienda" [options]="tiendaList" [(ngModel)]="tiendasSeleccionadas" optionLabel="nombreTienda" [filter]="true" ></p-multiSelect>
+                              </div>
+                              <div class="p-field p-col-2">
+                                   <label for="dtpInicial">Fecha Inicial:</label>
+                                   <p-calendar id="dtpInicial" [(ngModel)]="fechaIniSeleccionada" dateFormat="dd/mm/yy" ></p-calendar>
+                              </div>
+                              <div class="p-field p-col-2">
+                                   <label for="dtpFinal">Fecha Final:</label>
+                                   <p-calendar id="dtpFinal" [(ngModel)]="fechaFinSeleccionada" dateFormat="dd/mm/yy" ></p-calendar>
+                              </div>
+                              <div class="p-field p-col-2">
+                                   <button pButton pRipple label="Listar" class="p-mt-4" icon="pi pi-list" (click)="listar()"></button>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+               <tr style="font-size: 0.8rem;">
+                    <th style="width: 230px;">Tienda </th>
+                    <th style="width: 70px;" class="p-text-center">Últ. Cierre </th>
+                    <th [style]="'width: ' + child.ancho + 'px'" class="p-text-center" *ngFor="let child of resultadoDto.childColumnNames">{{child.name}}</th>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+               <tr style="font-size: 0.8rem;"> 
+                    <td style="width: 230px">{{ rowData.data['tienda'] }}</td>
+                    <td style="width: 70px" class="p-text-center p-text-bold">{{ rowData.data['fechaCierre'] }}</td>
+                    <td *ngFor="let col of columns" [style]="'width: ' + col.ancho + 'px'" class="p-text-right" 
+                         [style.background]="rowData.data[col.busqueda].estado === 'C' ? '#8BEB6C' : '#F7BBAD'">
+                         <span *ngIf="rowData.data[col.busqueda].icono === 'N'">
+                              {{ rowData.data[col.busqueda].value }}      
+                         </span>
+                         <span *ngIf="rowData.data[col.busqueda].icono === 'S'">
+                              <span style="color: green;" [ngClass]="{'pi pi-check-circle': rowData.data[col.busqueda].estado === 'C'}"></span>
+                              <span style="color: red;" [ngClass]="{'pi pi-times-circle': rowData.data[col.busqueda].estado !== 'C'}"></span>
+                         </span>
+                    </td>
+               </tr>
+          </ng-template>
+     </p-table>
+</div>

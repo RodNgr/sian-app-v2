@@ -1,0 +1,61 @@
+<div class="card col ">
+    <div class="p-grid">
+        <div class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+                    <label for="locales" [ngClass] = "{' p-error ': locales.invalid && (locales.dirty || locales.touched)}">Tiendas: (*)</label>
+                    <p-multiSelect appendTo="body" [required]="true" [options]="tiendaList" optionLabel="nombre" [selectedItemsLabel]="'{0} tiendas seleccionadas'" 
+                                   placeholder="Seleccione un Local" [ngClass] = "{' p-error ': locales.invalid && (locales.dirty || locales.touched)}" name="locales" 
+                                   #locales="ngModel" [tabindex]="1" [(ngModel)]="tiendaSeleccionadaList"></p-multiSelect>
+                    <small *ngIf="locales.invalid && (locales.dirty || locales.touched)" id="password-help" class="p-error">
+                        Debe seleccionar por lo menos <strong>una tienda</strong>.
+                    </small>
+                </div>
+                
+                <div class="p-field p-col-6 p-lg-6 p-md-6 p-sm-12">
+                    <label for="tipos">Tipo: (*)</label>
+                    <p-dropdown appendTo="body" [required]="true" [options]="tipoList" optionLabel="descripcion" #tipos="ngModel" [tabindex]="2" [(ngModel)]="tipoSeleccionado"></p-dropdown>
+                </div>
+
+                <div class="p-field p-col-6 p-lg-6 p-md-6 p-sm-12">
+                    <label for="bases" >Base de Datos: (*)</label>
+                    <p-dropdown appendTo="body" [required]="true" [options]="baseList" optionLabel="descripcion" #bases="ngModel" [tabindex]="3" [(ngModel)]="baseSeleccionado"></p-dropdown>
+                </div>
+
+                <div class="p-field-checkbox p-col-4 p-lg-4 p-md-4 p-sm-12">
+                    <p-checkbox inputId="binary" [binary]="true" [(ngModel)]="checked"></p-checkbox>
+                    <label for="binary">Ejecutar como: </label>
+                </div>
+
+                <div class="p-field p-col-4 p-lg-4 p-md-4 p-sm-12">
+                    <label for="txtUsuario">Usuario: </label>
+                    <input pInputText type="text" [(ngModel)]="usuario" name="txtUsuario" [disabled]="!checked">
+                </div>
+
+                <div class="p-field p-col-4 p-lg-4 p-md-4 p-sm-12">
+                    <label for="txtPassword">Clave: </label>
+                    <input pInputText type="text" [(ngModel)]="password" name="txtPassword" [disabled]="!checked">
+                </div>
+
+                <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12">
+                    <label for="archivo" >Archivo: (*)</label>
+                    <p-fileUpload name="archivo" [auto]="false" accept=".sql" (onSelect)="onUpload($event)"
+                                [maxFileSize]="6000000" [showCancelButton]="false" [showUploadButton]="false">
+                        <ng-template let-file pTemplate="file">
+                            <pre>
+                                <code [highlight]="content" [languages]="lan"></code>
+                            </pre>
+                        </ng-template> 
+                    </p-fileUpload>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="p-mb-2">
+         <div class="p-d-flex p-jc-end">
+              <button pButton pRipple pTooltip="Aceptar" tooltipPosition="bottom" label="Aceptar"  icon="pi pi-check-circle" (click)="aceptar()" class="p-button-success p-mr-2"></button>
+              <button pButton pRipple pTooltip="Cancelar" tooltipPosition="bottom" label="Cancelar" icon="pi pi-times" (click)="cancelar()" class="p-button-secondary"></button>
+         </div>
+    </div>
+</div>

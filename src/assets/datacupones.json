@@ -1,0 +1,59 @@
+[{
+	"nombre": "campanha cyber",
+	"activoCompraMin": 1,
+	"marca": "1002",
+	"monto": 12.2,
+	"tipoCupon": 1,
+	"descripcion": "test",
+	"user": "gianka",
+	"fecInicio": "2022-07-04 08:22:02",
+	"fecFin": "2022-07-09 08:23:02",
+	"nroUso": 1,
+	"nroCuponAGenerar": 3,
+	"canaldetalle": [
+	  {
+		"canal": 1,
+		"producto": "1002",
+		"cantidad": 3
+	  },
+	  {
+		"canal": 2,
+		"producto": "1003",
+		"cantidad": 1
+	  },
+	  {
+		"canal": 3,
+		"producto": "1002",
+		"cantidad": 3
+	  }
+	]
+  },   {
+    "nombre": "campanha otra",
+    "codigo": "cyber2025",
+    "activoCompraMin": 1,
+    "marca": "1002",
+    "monto": 12.2,
+    "tipoCupon": 1,
+    "descripcion": "test",
+    "user": "gianka",
+    "fecInicio": "2022-07-04 08:22:02",
+    "fecFin": "2022-07-09 08:23:02",
+    "nroUso": 3,
+    "canaldetalle": [
+      {
+      "canal": 1,
+      "producto": "1002",
+      "cantidad": 3
+      },
+      {
+      "canal": 2,
+      "producto": "1003",
+      "cantidad": 1
+      },
+      {
+      "canal": 3,
+      "producto": "1002",
+      "cantidad": 3
+      }
+    ]
+    }]

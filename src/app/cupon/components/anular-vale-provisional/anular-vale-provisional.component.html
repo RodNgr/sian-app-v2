@@ -1,0 +1,76 @@
+<div id="container" class="p-d-flex p-flex-column">
+     <div class="p-mb-2">
+          <div class="p-fluid p-formgrid p-grid">
+               <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12 ">
+                    <label for="descripcion">Nro. Documento de Cobranza:</label>
+                    <p-dropdown [options]="documentosCobranza" [(ngModel)]="documentoSeleccionado" optionLabel="descripcion" [showClear]="true" [required]="true" [filter]="true" 
+                         filterBy="descripcion" [showClear]="false" placeholder="Seleccione un Documento de Cobranza"  name="descripcion" #descripcion="ngModel"></p-dropdown>
+               </div>
+          </div>
+
+          <div class="p-fluid p-formgrid p-grid">
+               <div class="p-field p-col-3 p-lg-3 p-md-6 p-sm-12 ">
+                    <label for="inicio">Tipo Documento:</label>
+                    <input id="tipoDocumento" type="text" pInputText disabled [(ngModel)]="documentoSeleccionado.tipoDocumento" name="tipoDocumento" #tipoDocumento="ngModel">
+               </div>
+
+               <div class="p-field p-col-3 p-lg-3 p-md-6 p-sm-12 ">
+                    <label for="inicio">Fecha Emisión:</label>
+                    <input id="emision" pInputText disabled [ngModel]="documentoSeleccionado.fechaEmision| date: 'dd/MM/yyyy'" name="feEmision" #feEmision="ngModel" class="p-text-center"> 
+               </div>
+
+               <div class="p-field p-col-3 p-lg-3 p-md-6 p-sm-12 ">
+                    <label for="inicio">Moneda:</label>
+                    <input id="moneda" type="text" pInputText disabled [(ngModel)]="documentoSeleccionado.moneda" name="moneda" #moneda="ngModel">
+               </div>
+
+               <div class="p-field p-col-3 p-lg-3 p-md-6 p-sm-12 ">
+                    <label for="inicio">Monto Total:</label>
+                    <input id="monto" type="text" pInputText disabled [ngModel]="documentoSeleccionado.vaMontoTotal| number: '0.2-2'" name="montoTotal" #montoTotal="ngModel" class="p-text-right">
+               </div>
+          </div>
+
+          <div class="p-fluid p-formgrid p-grid">
+               <div class="p-field p-col-3 p-lg-3 p-md-6 p-sm-12 ">
+                    <label for="inicio">R.U.C.:</label>
+                    <input id="ruc" type="text" pInputText disabled [(ngModel)]="documentoSeleccionado.ruc" name="ruc" #ruc="ngModel">
+               </div>
+
+               <div class="p-field p-col-9 p-lg-9 p-md-6 p-sm-12 ">
+                    <label for="inicio">Razón Social:</label>
+                    <input id="razonSocial" type="text" pInputText disabled class="p-text-uppercase" [(ngModel)]="documentoSeleccionado.razonSocial" name="razonSocial" #razonSocial="ngModel">
+               </div>
+          </div>
+
+          <div class="p-fluid p-formgrid p-grid">
+               <div class="p-field p-col-6 p-lg-6 p-md-6 p-sm-12 ">
+                    <p-fileUpload #fu name="archivo" accept=".txt" [customUpload]="true" [auto]="true" (uploadHandler)="uploadFile($event, fu)" [multiple]="false" chooseLabel="Cargar Archivo de Vales Vendidos" chooseIcon="pi pi-file" mode="basic" ></p-fileUpload>
+               </div>
+
+               <div class="p-field p-col-6 p-lg-6 p-md-6 p-sm-12 ">
+                    Total de Vales: {{vales.length}}
+               </div>
+          </div>
+
+          <!--
+          <div class="p-fluid p-formgrid p-grid">
+               <div class="p-field p-col-12 p-lg-12 p-md-12 p-sm-12 ">
+                    <p-dataView [value]="vales" emptyMessage="">
+                         <ng-template let-vale pTemplate="listItem">
+                              <div class="p-mb-3 p-mr-3" style="border: 1px solid #dee2e6; padding: 1rem;">
+                                   <b>{{vale}}</b>
+                              </div>
+                          </ng-template>
+                     </p-dataView>                     
+               </div>
+          </div>
+          -->
+     </div>
+
+     <div class="p-mb-2">
+          <div class="p-d-flex p-jc-end">
+               <button pButton pRipple pTooltip="Anular" tooltipPosition="bottom" label="Anular"  (click)="aceptar()" icon="pi pi-check-circle" class="p-button-success p-mr-2"></button>
+               <button pButton pRipple pTooltip="Cancelar" tooltipPosition="bottom" label="Cancelar" (click)="cancelar()" icon="pi pi-times" class="p-button-secondary"></button>
+          </div>
+     </div>
+</div>

@@ -1,0 +1,64 @@
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+     <p-table #dt [value]="configuracionList" [responsive]="true" [rows]="100" [paginator]="true" [rowHover]="true" dataKey="codigo"
+               editMode="row" responsiveLayout="scroll" [scrollable]="true" scrollHeight="50vh" [rowsPerPageOptions]="[100,150,200]" 
+               currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+               styleClass="p-datatable-sm p-datatable-striped">
+          <ng-template pTemplate="caption">
+               <div class="p-d-flex p-ai-center p-jc-between">
+                    <h1 class="p-m-0">Configuraciones SOVOS</h1>
+
+                    <span class="p-input-icon-left">
+                         <i class="pi pi-search"></i>
+                         <input pInputText #txtFind type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Buscar..."  autocomplete="off"/>
+                    </span>
+               </div>
+          </ng-template>
+          <ng-template pTemplate="colgroup">
+               <colgroup *ngIf="!isMobile">
+                    <col style="width:10%;">
+                    <col style="width:35%;">
+                    <col style="width:45%;">
+               </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header">
+               <tr>
+                    <th>Código </th>
+                    <th>Descripción </th>
+                    <th>E-Mail </th>
+                    <th> </th>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-configuracion let-editing="editing" let-ri="rowIndex">
+               <tr [pEditableRow]="configuracion">
+                    <td><span class="p-column-title">Código</span>{{configuracion.codigo}}</td>
+                    <td><span class="p-column-title">Descripción</span>{{configuracion.descripcion}}</td>
+                    <td>
+                         <span class="p-column-title">E-Mail</span>
+                         <p-cellEditor>
+                              <ng-template pTemplate="input">
+                                   <input pInputText type="text" [(ngModel)]="configuracion.email" style="width:100%">
+                              </ng-template>
+                              <ng-template pTemplate="output">
+                                   {{configuracion.email}}
+                              </ng-template>
+                         </p-cellEditor>
+                    </td>
+                    <td style="text-align:center">
+                         <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(configuracion)" class="p-button-rounded p-button-text"></button>
+                         <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(configuracion)" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
+                         <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(configuracion, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+                     </td>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="summary">
+               <div class="p-d-flex p-ai-center p-jc-between">
+                    {{(configuracionList ? configuracionList.length : 0) | i18nPlural: cantidadMap}}
+               </div>
+          </ng-template>
+     </p-table>
+</div>

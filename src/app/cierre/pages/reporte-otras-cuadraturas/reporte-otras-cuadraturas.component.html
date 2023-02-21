@@ -1,0 +1,99 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+     <p-toolbar styleClass="p-mb-4">
+          <ng-template pTemplate="left">
+          </ng-template>
+
+          <ng-template pTemplate="right">
+               <button pButton pRipple pTooltip="Exportar" tooltipPosition="bottom" label="Exportar" icon="pi pi-upload" (click)="exportXLS()" styleClass="p-button-info"></button>
+          </ng-template>
+     </p-toolbar>
+
+     <div class="p-mb-2">
+          <div class="p-fluid p-formgrid p-grid">
+               <div class="p-field p-col-2">
+                   <label for="cmbEmpresa">Empresa:</label>
+                   <p-dropdown id="cmbEmpresa" [options]="empresaList" [(ngModel)]="empresaSeleccionada" optionLabel="nombreComercial" (onChange)="onChangeEmpresa()"></p-dropdown>
+               </div>
+               <div class="p-field p-col-3">
+                    <label for="cmbTienda">Tienda:</label>
+                    <p-multiSelect  id="cmbTienda" [options]="tiendaList" [(ngModel)]="tiendasSeleccionadas" optionLabel="nombreTienda" [filter]="true" (onChange)="limpiarOtrasCuadraturas()" [disabled]="!enableDropDownTienda"></p-multiSelect>
+               </div>
+               <div class="p-field p-col-2">
+                    <label for="cmbMotivo">Motivos:</label>
+                    <p-dropdown  id="cmbMotivo" [options]="cierreMotivosList" [(ngModel)]="cierreMotivoSeleccionado" optionLabel="nombre" (onChange)="limpiarOtrasCuadraturas()" ></p-dropdown>
+               </div>
+               <div class="p-field p-col-2">
+                    <label for="cmbEstado">Estado:</label>
+                    <p-dropdown  id="cmbEstado" [options]="estadoList" [(ngModel)]="estadoSeleccionado" optionLabel="descripcion" (onChange)="limpiarOtrasCuadraturas()" ></p-dropdown>
+               </div>
+           </div>
+           <div class="p-fluid p-formgrid p-grid">
+               <div class="p-field p-col-2">
+                    <label for="dtpInicial">Fecha Inicial:</label>
+                    <p-calendar id="dtpInicial" [(ngModel)]="fechaIniSeleccionada" dateFormat="dd/mm/yy" (onSelect)="limpiarOtrasCuadraturas()" (onInput)="limpiarOtrasCuadraturas()"></p-calendar>
+               </div>
+               <div class="p-field p-col-2">
+                    <label for="dtpFinal">Fecha Final:</label>
+                    <p-calendar id="dtpFinal" [(ngModel)]="fechaFinSeleccionada" dateFormat="dd/mm/yy" (onSelect)="limpiarOtrasCuadraturas()" (onInput)="limpiarOtrasCuadraturas()"></p-calendar>
+               </div>
+               <div class="p-field p-col-1">
+                    <button pButton pRipple label="Listar" class="p-mt-4" icon="pi pi-list" (click)="listarOtrasCuadraturas()"></button>
+                </div>
+           </div>
+     </div>
+     <p-table #dt [value]="cierreOtrasCuadraturasList" [responsive]="true" [rowHover]="true" [scrollable]="true" scrollHeight="40vh"
+               styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand">
+          <ng-template pTemplate="colgroup">
+               <colgroup *ngIf="!isMobile">
+                    <col style="width:120px;">
+                    <col style="width:240px;">
+                    <col style="width:120px;">
+                    <col style="width:100px;">
+                    <col style="width:70px;">
+                    <col style="width:100px;">
+                    <col style="width:120px;">
+                    <col style="width:200px;">
+                    <col style="width:100px;">
+                    <col style="width:100px;">
+                    <col style="width:100px;">
+                    <col style="width:70px;">
+               </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header">
+               <tr>
+                    <th>Empresa </th>
+                    <th>Tienda </th>
+                    <th>Motivo </th>
+                    <th [ngClass]="{'p-text-center': !isMobile}">Día Venta </th>
+                    <th>Moneda </th>
+                    <th [ngClass]="{'p-text-right': !isMobile}">Monto </th>
+                    <th>Cod.Autorización </th>
+                    <th>Registrado Por </th>
+                    <th [ngClass]="{'p-text-center': !isMobile}">Fecha Cierre </th>
+                    <th [ngClass]="{'p-text-center': !isMobile}">Fecha Registro </th>
+                    <th [ngClass]="{'p-text-center': !isMobile}">Hora Registro </th>
+                    <th>Estado </th>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-otro>
+               <tr >
+                    <td><span class="p-column-title">Empresa</span>{{otro.empresa.nombreComercial}}</td>
+                    <td><span class="p-column-title">Tienda</span>{{otro.tienda.nombreTienda}}</td>
+                    <td><span class="p-column-title">Motivo</span>{{otro.motivo.nombre}}</td>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Día Venta</span>{{otro.cierreFecha | date: 'dd/MM/yyyy'}}</td>
+                    <td ><span class="p-column-title">Moneda</span>{{otro.moneda.nombreCorto}}</td>
+                    <td [ngClass]="{'p-text-right': !isMobile}"><span class="p-column-title">Monto</span>{{otro.monto | number: '.2-2'}}</td>
+                    <td ><span class="p-column-title">Cod.Autorización</span>{{otro.codigoAutorizacion}}</td>
+                    <td ><span class="p-column-title">Registrado Por</span>{{otro.empleadoCajaChica}}</td>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Fecha Cierre</span>{{otro.cierreFechaCierre}}</td>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Fecha Registro</span>{{otro.fechaRegistroS}}</td>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Hora Registro</span>{{otro.horaRegistroS}}</td>
+                    <td ><span class="p-column-title">Estadp</span>{{otro.descEstado}}</td>
+               </tr>
+          </ng-template>
+     </p-table>
+</div>

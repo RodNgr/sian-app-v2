@@ -1,0 +1,37 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <div class="p-col-12 p-ai-center vertical-container">
+                <h1 class="p-m-0">Consulta de Clientes</h1>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <div class="p-col-12">
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-lg-4 p-md-3 p-sm-6">
+                        <label for="busqueda">Buscar por:</label>
+                        <p-dropdown id="busqueda" [options]="tipoList" [(ngModel)]="tipoSelected" optionLabel="descripcion"></p-dropdown>
+                    </div>
+
+                    <div class="p-field p-lg-4 p-md-3 p-sm-6" >
+                        <label for="cantidad">Criterio:</label>
+                        <input type="text" [(ngModel)]="documento" pInputText>
+                    </div>
+
+                    <div class="p-field p-lg-3 p-md-2 p-sm-2">
+                        <button pButton pRipple type="button" label="Buscar" pTooltip="Buscar" tooltipPosition="bottom" style="margin-top: 2rem" icon="pi pi-search" (click)="buscar()"></button>
+                    </div>
+                </div>
+            </div>
+         </ng-template>
+    </p-toolbar>
+
+    <div *ngFor="let cliente of clienteList">
+        <app-detalle-cliente-call [cliente]="cliente"></app-detalle-cliente-call>
+    </div>
+</div>

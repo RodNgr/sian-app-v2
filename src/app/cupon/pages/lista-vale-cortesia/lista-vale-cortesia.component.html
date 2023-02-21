@@ -1,0 +1,87 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+     <p-toolbar styleClass="p-mb-4">
+          <ng-template pTemplate="left">
+               <button pButton pRipple pTooltip="Nuevo" tooltipPosition="bottom" label="Nuevo" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="newVale()"></button>
+               <button pButton pRipple pTooltip="Consultar" tooltipPosition="bottom" label="Consultar" icon="pi pi-eye" class="p-button-help p-mr-5" (click)="viewVale()"></button>
+               <button pButton pRipple pTooltip="Anular" tooltipPosition="bottom" label="Anular" icon="pi pi-times" class="p-button-danger p-mr-5" (click)="anularVale()" *ngIf="authService.hasRole('ROL_SIAN_MKT_ANULAR')"></button>
+               <button pButton pRipple pTooltip="Imprimir" tooltipPosition="bottom" label="Imprimir" icon="pi pi-print" class="p-button-help" (click)="imprimir()" ></button>
+          </ng-template>
+
+          <ng-template pTemplate="right">
+               <button pButton pRipple pTooltip="Exportar" tooltipPosition="bottom" label="Exportar" icon="pi pi-upload" (click)="exportXLS()" styleClass="p-button-info"></button>
+          </ng-template>
+     </p-toolbar>
+
+     <p-table #dt [value]="cabValeVerdeList" [responsive]="true" [rows]="25" [paginator]="true" [rowHover]="true" dataKey="id"
+               [scrollable]="true" scrollHeight="40vh" [rowsPerPageOptions]="[15,25,50,100]" selectionMode="single" [(selection)]="valeSelected"  [responsive]="true"
+               currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+               styleClass="p-datatable-sm p-datatable-striped">
+          <ng-template pTemplate="caption">
+               <div class="p-d-flex p-jc-between">
+                    <div class="p-grid p-ai-center vertical-container">
+                         <h1 class="p-col p-m-0">Vales Cortesía</h1>
+                    </div>
+
+                    <div class="p-fluid p-formgrid p-grid p-jc-end">
+                         <div class="p-field p-col">
+                              <label for="inicio">Inicio:</label>
+                              <p-calendar id="inicio" [(ngModel)]="rangeDates[0]" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" [touchUI]="isMobile"></p-calendar>
+                         </div>
+
+                         <div class="p-field p-col">
+                              <label for="fin">Fin:</label>
+                              <p-calendar id="fin" [(ngModel)]="rangeDates[1]" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" [touchUI]="isMobile"></p-calendar>
+                         </div>
+
+                         <div class="p-field p-mr-2 p-ml-2">
+                              <button pButton pRipple pTooltip="Buscar" tooltipPosition="bottom" type="button" label="Buscar" style="margin-top: 1.9rem" icon="pi pi-search" (click)="buscar()"></button>
+                         </div>
+                    </div>
+               </div>
+          </ng-template>
+          <ng-template pTemplate="colgroup">
+               <colgroup *ngIf="!isMobile">
+                    <col style="width:10%;">
+                    <col style="width:10%;">
+                    <col style="width:20%;">
+                    <col style="width:10%;">
+                    <col style="width:10%;">
+                    <col style="width:15%;">
+                    <col style="width:15%;">
+               </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header">
+               <tr>
+                    <th pSortableColumn="vdesde" [ngClass]="{'p-text-center': !isMobile}">Desde <p-sortIcon field="vdesde"></p-sortIcon></th>
+                    <th pSortableColumn="vhasta" [ngClass]="{'p-text-center': !isMobile}">Hasta <p-sortIcon field="vhasta"></p-sortIcon></th>
+                    <th pSortableColumn="observacion">Descripción <p-sortIcon field="observacion"></p-sortIcon></th>
+                    <th pSortableColumn="prefijo">Prefijo <p-sortIcon field="prefijo"></p-sortIcon></th>
+                    <th pSortableColumn="cantidad" [ngClass]="{'p-text-right': !isMobile}">Cantidad <p-sortIcon field="cantidad"></p-sortIcon></th>
+                    <th pSortableColumn="areaNombre">Área <p-sortIcon field="areaNombre"></p-sortIcon></th>
+                    <th pSortableColumn="empleadoNombre">Empleado <p-sortIcon field="empleadoNombre"></p-sortIcon></th>
+                    <th pSortableColumn="estado">Estado <p-sortIcon field="estado"></p-sortIcon></th>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-vale>
+               <tr [pSelectableRow]="vale">
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Desde</span>{{vale.vdesde | date: 'dd/MM/yyyy'}}</td>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Hasta</span>{{vale.vhasta | date: 'dd/MM/yyyy'}}</td>
+                    <td><span class="p-column-title">Observación</span>{{vale.observacion | uppercase}}</td>
+                    <td><span class="p-column-title">Prefijo</span>{{vale.prefijo}}</td>
+                    <td [ngClass]="{'p-text-right': !isMobile}"><span class="p-column-title">Cantidad</span>{{vale.cantidad}}</td>
+                    <td class="hide-column">{{vale.areaNombre | uppercase}}</td>
+                    <td class="hide-column">{{vale.empleadoNombre | uppercase}}</td>
+                    <td><span class="p-column-title">Estado</span>{{vale | estadoVale}}</td>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="summary">
+               <div class="p-d-flex p-ai-center p-jc-between">
+                    {{(cabValeVerdeList ? cabValeVerdeList.length : 0) | i18nPlural: cantidadMap}}
+               </div>
+          </ng-template>
+     </p-table>
+</div>

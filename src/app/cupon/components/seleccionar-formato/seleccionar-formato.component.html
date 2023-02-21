@@ -1,0 +1,40 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card">
+    <p-dataView #dv [value]="formatos" [paginator]="true" [rows]="9" filterBy="name" layout="grid" id="container">
+        <ng-template pTemplate="header">
+            <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
+                <p-fileUpload #upload name="archivo" [customUpload]="true" (uploadHandler)="onCustomUpload($event, upload)" accept="image/*" [auto]="true" mode="basic" chooseLabel="Agregar Formato"></p-fileUpload>
+                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+            </div>
+        </ng-template>
+        <ng-template let-formato pTemplate="listItem">
+            <div class="p-col-12">
+                <div class="product-list-item">
+                    <img [src]="url + '/api/formato-vale/upload/' + formato.nombreAlmacenado | safe"[alt]="formato.descripcion"/>
+                    <div class="product-list-detail">
+                        <div class="product-name">{{formato.descripcion}}</div>
+                    </div>
+                    <div class="product-list-action">
+                        <button pButton pRipple icon="pi pi-check-circle" label="Seleccionar" class="p-button-success" (click)="seleccionarImagen(formato)"></button>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template let-formato pTemplate="gridItem">
+            <div class="p-col-12 p-md-4">
+                <div class="product-grid-item card">
+                    <div class="product-grid-item-content">
+                        <img [src]="url + '/api/formato-vale/upload/' + formato.nombreAlmacenado | safe" [alt]="formato.descripcion"/>
+                        <div class="product-description">{{formato.descripcion}}</div>
+                    </div>
+                    <div class="product-grid-item-bottom">
+                        <button pButton pRipple icon="pi pi-check-circle" class="p-button-success" (click)="seleccionarImagen(formato)"></button>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataView>
+ </div>

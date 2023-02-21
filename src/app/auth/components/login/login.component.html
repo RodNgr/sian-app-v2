@@ -1,0 +1,49 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<form #loginForm="ngForm">
+    <div class="p-fluid p-pr-5">
+        <div class="p-text-center">
+            <img src="./assets/images/logo-ngr-2.svg" width="125px">
+            <h2>Bienvenidos</h2>
+        </div>
+
+        <div class="p-field">
+            <label for="username">Usuario</label>
+            <div class="p-inputgroup">
+                <input type="text" autofocus autocomplete="off" pInputText
+                    [ngClass] = "{' ng-invalid ng-dirty ': username.invalid && (username.dirty || username.touched)}"  
+                    aria-describedby="username-help"
+                    [(ngModel)]="login.username" required name="username" #username="ngModel" tabindex="1">
+                <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+            </div>
+            <small *ngIf="username.invalid && (username.dirty || username.touched)" id="username-help"
+                class="p-error">El <strong>Usuario</strong> es requerido.
+            </small>
+        </div>
+
+        <div class="p-field">
+            <label for="password">Contraseña</label>
+            <div class="p-inputgroup">
+                <input type="password" autocomplete="off" pInputText class="p-inputtext"
+                    [ngClass] = "{' ng-invalid ng-dirty ': password.invalid && (password.dirty || password.touched)}"  
+                    aria-describedby="password-help" [(ngModel)]="login.password" required name="password"
+                    #password="ngModel" tabindex="2">
+                <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
+            </div>
+            <small *ngIf="password.invalid && (password.dirty || password.touched)" id="password-help"
+                class="p-error">La <strong>Contraseña</strong> es requerida.</small>
+        </div>
+
+        <div class="p-field p-text-center">
+            <a class="login--enlace" (click)="resetPassword()" >¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <div>
+            <button pButton pRipple type="button" id="btnLogin" label="Ingresar" tabindex="3"
+                (click)="logIn()" [disabled]="!loginForm.form.valid">
+            </button>
+        </div>
+    </div>
+</form>

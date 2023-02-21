@@ -1,0 +1,14 @@
+@media screen and (max-width: 40rem) {
+     .hide-column {
+          display: none !important;
+     }
+ 
+     :host ::ng-deep .p-button-label  {
+          display: none !important;
+     }
+ 
+     :host ::ng-deep .p-button-icon-left  {
+          margin-right: 0rem;
+     }
+
+}

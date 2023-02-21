@@ -1,0 +1,27 @@
+<p-table id="table" [value]="interfaces" [responsive]="true" styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped">
+    <ng-template pTemplate="header">
+         <tr  style="font-size: 0.8rem;" [style.width]="100+'%'">
+             <th [style.width]="4+'%'">Id</th>
+             <th>Mesanje</th>
+             <th>Fecha Inicio</th>
+             <th>Fecha Fin</th>
+             <th [style.width]="7+'%'">Estado</th>
+             <th>Observación</th>
+         </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-interfaces>
+        <tr  style="font-size: 0.8rem;">
+            <td>{{interfaces.idEjecucion}}</td>
+            <td>{{interfaces.mensaje}}</td>
+            <td>{{interfaces.feInicioProceso}}</td>
+            <td>{{interfaces.feFinProceso}}</td>
+            <td>{{interfaces.estado}}</td>
+            <td *ngIf="interfaces.observacion?.length >= 36">{{ interfaces.observacion.substr(0,35) }}... <span style="color: #007bff; cursor: pointer;" (click)="observacion(interfaces.observacion)">[ver más]</span></td>
+            <td *ngIf="interfaces.observacion?.length < 35">{{ interfaces.observacion }}</td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<div class="p-d-flex p-jc-end p-mt-3">
+    <button pButton pRipple label="Cancelar"  (click)="cancelar()"  icon="pi pi-times" class="p-button-secondary"></button>
+</div>

@@ -1,0 +1,146 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+ </ngx-spinner>
+
+<div class="card col">
+
+     <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-3 p-sm-3">
+               <label for="id">Código: </label>
+               <input id="id" type="text" pInputText [ngModel]="usuario.codigo"  name="id" disabled >
+          </div>
+     </div>
+
+     <div class="p-mb-2">
+          <p-fieldset legend="Información Personal">
+               <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4 p-sm-4">
+                         <label for="docIdentidad">Documento de Identidad:</label>
+                         <input id="docIdentidad" type="text" pInputText name="docIdentidad" [ngModel]="usuario.desdoc + ' - ' + usuario.nrodoc" disabled>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4 p-sm-4">
+                         <label for="nacimiento">Fec. Nacimiento:</label>
+                         <input id="nacimiento" type="text" pInputText name="nacimiento" [ngModel]="usuario.fecnac | date: 'dd/MM/yyyy'" disabled>
+                    </div>
+               </div>
+     
+               <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4 p-sm-4">
+                         <label for="paterno">Paterno:</label>
+                         <input id="paterno" type="text" pInputText class="p-text-uppercase" [ngModel]="usuario.apepat" name="paterno"  disabled>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4 p-sm-4">
+                         <label for="materno">Materno:</label>
+                         <input id="materno" type="text" pInputText class="p-text-uppercase" [ngModel]="usuario.apemat" name="materno" disabled>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4 p-sm-4">
+                         <label for="nombre">Nombre:</label>
+                         <input id="nombre" type="text" pInputText class="p-text-uppercase" [ngModel]="usuario.nombre" name="nombre" disabled>
+                    </div>
+               </div>
+          </p-fieldset>
+     </div>
+
+     <div class="p-mb-2">
+          <p-fieldset legend="Información Laboral" >
+               <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-12 p-sm-12">
+                         <label for="empresa">Empresa:</label>
+                         <input id="empresa" type="text" pInputText name="empresa" [ngModel]="usuario.razsoc" disabled>
+                    </div>
+               </div>
+     
+               <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4 p-sm-4">
+                         <label for="desloc">Tipo:</label>
+                         <input id="desloc" type="text" pInputText name="desloc" [ngModel]="usuario.desloc" disabled>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4 p-sm-4">
+                         <label for="descen">Centro de Costo:</label>
+                         <input id="descen" type="text" pInputText name="descen" [ngModel]="usuario.descen" disabled>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4 p-sm-4">
+                         <label for="destipcco">Tipo Centro de Costo:</label>
+                         <input id="destipcco" type="text" pInputText name="destipcco" [ngModel]="usuario.destipcco" disabled>
+                    </div>
+               </div>
+     
+               <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4 p-sm-4">
+                         <label for="desbenef">Beneficio:</label>
+                         <input id="desbenef" type="text" pInputText class="p-text-uppercase" [ngModel]="usuario.desbenef" name="desbenef" disabled>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4 p-sm-4">
+                         <label for="despue">Puesto:</label>
+                         <input id="despue" type="text" pInputText name="despue" [ngModel]="usuario.despue" disabled>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4 p-sm-4">
+                         <label for="desjef">Jefe Directo:</label>
+                         <input id="desjef" type="text" pInputText class="p-text-uppercase" [ngModel]="usuario.desjef" name="desjef" disabled>
+                    </div>
+               </div>
+               
+               <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4 p-sm-4">
+                         <label for="fecing">Fecha Ingreso:</label>
+                         <input id="fecing" type="text" pInputText [ngModel]="usuario.fecing | date: 'dd/MM/yyyy'" name="fecing"  disabled>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4 p-sm-4">
+                         <label for="fecini">Fecha Inicio:</label>
+                         <input id="fecini" type="text" pInputText [ngModel]="usuario.fecini | date: 'dd/MM/yyyy'" name="fecini" disabled>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4 p-sm-4">
+                         <label for="fecret">Fecha Retiro:</label>
+                         <input id="fecret" type="text" pInputText [ngModel]="usuario.fecret | date: 'dd/MM/yyyy'" name="fecret" disabled>
+                    </div>
+               </div>
+          </p-fieldset>
+     </div>
+
+     <div class="p-mb-2">
+          <p-fieldset legend="Información de Seguridad">
+               <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4 p-sm-4">
+                         <label for="fecUltimoLogueo">Fecha Último Logueo:</label>
+                         <input id="fecUltimoLogueo" type="text" pInputText [ngModel]="usuario.fecUltimoLogueo | date: 'dd/MM/yyyy HH:mm:ss'" name="fecUltimoLogueo"  disabled>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4 p-sm-4">
+                         <label for="fecUltCambioClave">Fecha Último Cambio Clave:</label>
+                         <input id="fecUltCambioClave" type="text" pInputText [ngModel]="usuario.fecUltCambioClave | date: 'dd/MM/yyyy HH:mm:ss'" name="fecUltCambioClave" disabled>
+                    </div>
+               </div>
+          </p-fieldset>
+     </div>
+
+     <div class="p-mb-2">
+          <p-fieldset legend="Grupo de Tiendas">
+               <p-table [value]="usuario.groupList" [responsive]="true" [rowHover]="true" [scrollable]="true" scrollHeight="20vh"
+                         styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand">
+                    <ng-template pTemplate="header">
+                         <tr>
+                              <th pSortableColumn="id">Descripción <p-sortIcon field="id"></p-sortIcon></th>
+                         </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-grupo>
+                         <tr [pSelectableRow]="grupo">
+                              <td><span class="p-column-title">Descripción</span>{{grupo.descripcion}}</td>
+                         </tr>
+                    </ng-template>
+               </p-table>
+          </p-fieldset>
+     </div>
+
+     <div class="p-mb-4">
+          <p-fieldset legend="Detalle de Accesos">
+               <p-tree [value]="accesosNodes">
+                    <ng-template pTemplate="default" let-node >
+                         <b>{{node.label}}</b>
+                    </ng-template>
+                </p-tree>
+          </p-fieldset>
+     </div>
+
+     <div class="p-d-flex p-jc-center">
+         <button pButton pRipple label="Cancelar" icon="pi pi-times" pTooltip="Cancelar" class="p-button-secondary" routerLink="/home/seguridad/lista-usuario"></button> 
+     </div>
+</div>

@@ -1,0 +1,79 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+     <p-toolbar styleClass="p-mb-4">
+          <ng-template pTemplate="left">
+               <button pButton pRipple pTooltip="Nuevo" tooltipPosition="bottom" label="Nuevo" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="newVale()" *ngIf="authService.hasRole('ROL_SIAN_MKT_EDITOR_ENTEL')"></button>
+               <button pButton pRipple pTooltip="Anular No Redimidos" tooltipPosition="bottom" label="Anular No Redimidos" icon="pi pi-minus-circle" class="p-button-danger p-mr-2" (click)="anularValesNoUsados()" *ngIf="authService.hasRole('ROL_SIAN_MKT_ANULAR')"></button>
+          </ng-template>
+
+          <ng-template pTemplate="right">
+               <button pButton pRipple pTooltip="Exportar" tooltipPosition="bottom" label="Exportar" icon="pi pi-upload" (click)="exportXLS()" styleClass="p-button-info"></button>
+          </ng-template>
+     </p-toolbar>
+
+     <p-table #dt [value]="cabValeVerdeList" [responsive]="true" [rows]="25" [paginator]="true" [rowHover]="true" dataKey="id"
+               [scrollable]="true" scrollHeight="40vh" [rowsPerPageOptions]="[15,25,50,100]" selectionMode="single" [(selection)]="valeSelected" 
+               currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+               styleClass="p-datatable-sm p-datatable-striped">
+          <ng-template pTemplate="caption">
+               <div class="p-d-flex p-jc-between">
+                    <div class="p-grid p-ai-center vertical-container">
+                         <h1 class="p-col p-m-0">Vales Entel</h1>
+                    </div>
+
+                    <div class="p-fluid p-form-grid p-grid p-jc-end">
+                         <div class="p-field p-col">
+                              <label for="inicio">Inicio:</label>
+                              <p-calendar id="inicio" [(ngModel)]="rangeDates[0]" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" [touchUI]="isMobile"></p-calendar>
+                         </div>
+                         <div class="p-field p-col">
+                              <label for="fin">Fin:</label>
+                              <p-calendar id="fin" [(ngModel)]="rangeDates[1]" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" [touchUI]="isMobile"></p-calendar>
+                         </div>
+
+                         <div class="p-field p-mr-2 p-ml-2">
+                              <button pButton pRipple pTooltip="Buscar" tooltipPosition="bottom" type="button" label="Buscar" style="margin-top: 2.3rem" icon="pi pi-search" (click)="buscar()"></button>
+                         </div>
+                    </div>
+               </div>
+          </ng-template>
+          <ng-template pTemplate="colgroup">
+               <colgroup *ngIf="!isMobile">
+                    <col style="width:10%;">
+                    <col style="width:10%;">
+                    <col style="width:40%;">
+                    <col style="width:15%;">
+                    <col style="width:15%;">
+                    <col style="width:15%;">
+               </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header">
+               <tr>
+                    <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
+                    <th >Tipo Vale </th>
+                    <th pSortableColumn="observacion">Observación <p-sortIcon field="observacion"></p-sortIcon></th>
+                    <th pSortableColumn="cantidad" [ngClass]="{'p-text-right': !isMobile}">Cantidad <p-sortIcon field="cantidad"></p-sortIcon></th>
+                    <th pSortableColumn="caUsados" [ngClass]="{'p-text-right': !isMobile}">Usados <p-sortIcon field="caUsados"></p-sortIcon></th>
+                    <th pSortableColumn="fecInicio" [ngClass]="{'p-text-center': !isMobile}">Fecha <p-sortIcon field="fecInicio"></p-sortIcon></th>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-vale>
+               <tr [pSelectableRow]="vale">
+                    <td class="hide-column">{{vale.id}}</td>
+                    <td class="hide-column">{{vale.tipoVale | tipoValeEntel}}</td>
+                    <td><span class="p-column-title">Observación</span>{{vale.observacion | uppercase}}</td>
+                    <td [ngClass]="{'p-text-right': !isMobile}"><span class="p-column-title">Cantidad</span>{{vale.cantidad | number: '.0-0'}}</td>
+                    <td [ngClass]="{'p-text-right': !isMobile}"><span class="p-column-title">Usados</span>{{vale.caUsados | number: '.0-0'}}</td>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Fecha</span>{{vale.fecInicio | date: 'dd/MM/yyyy'}}</td>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="summary">
+               <div class="p-d-flex p-ai-center p-jc-between">
+                    {{(cabValeVerdeList ? cabValeVerdeList.length : 0) | i18nPlural: cantidadMap}}
+               </div>
+          </ng-template>
+     </p-table>
+</div>

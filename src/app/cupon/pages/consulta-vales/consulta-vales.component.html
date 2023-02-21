@@ -1,0 +1,148 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+     <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+     <p-toolbar styleClass="p-mb-4">
+          <ng-template pTemplate="left">
+               <button pButton pRipple pTooltip="Ingresar ID Bolsa" tooltipPosition="bottom" label="Anular no redimidos" icon="pi pi-times" class="p-button-danger p-mr-4" (click)="anularNoRedimidos()" *ngIf="authService.hasRole('ROL_SIAN_MKT_ANULAR')"></button>               
+               <button pButton pRipple pTooltip="Ingresar Código de Barra" tooltipPosition="bottom" label="No redimido" icon="pi pi-check-circle" class="p-button-info p-mr-4" (click)="marcarNoRedimido()" *ngIf="authService.hasRole('ROL_SIAN_MKT_NO_REDIMIDO')"></button>
+               <div class="p-d-flex p-p-1" style="border-radius: 5px; border: thin solid rgba(120, 117, 117, 0.3)" *ngIf="authService.hasRole('ROL_SIAN_MKT_AMPLIAR_FECHA')">
+                    <button pButton pRipple pTooltip="Ingresar ID Bolsa o Código de Barra" tooltipPosition="bottom" label="Ampliar Fecha" icon="pi pi-calendar-plus" class="p-button-primary p-mr-2" (click)="ampliarFecha()"></button>
+                    <div class="p-col">
+                         <label class="p-mr-1" for="inicio" >Nueva Fecha:</label>
+                         <p-calendar appendTo="body" id="inicio" [(ngModel)]="vhasta" name="vdesde" #vdesde="ngModel" dateFormat="dd/mm/yy" inputStyleClass="p-text-center">
+                         </p-calendar>
+                    </div>
+               </div>     
+          </ng-template>
+
+          <ng-template pTemplate="right">
+               <button pButton pRipple pTooltip="Exportar" tooltipPosition="bottom" label="Exportar" icon="pi pi-upload" (click)="exportXLS()" styleClass="p-button-info"></button>
+          </ng-template>
+     </p-toolbar>
+
+     <p-table #dt [value]="valeList" [responsive]="true" [rows]="25" [paginator]="true" [rowHover]="true" 
+               [scrollable]="true" scrollHeight="40vh" [rowsPerPageOptions]="[15,25,50,100]" 
+               currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+               styleClass="p-datatable-sm p-datatable-striped">
+          <ng-template pTemplate="caption">
+               <div class="p-d-flex p-grid">
+                    <div class="p-col-12 p-ai-center vertical-container">
+                         <h1 class="p-m-0">Consulta de Vales</h1>
+                    </div>
+                    
+                    <div class="p-col-12">
+                         <div class="p-fluid p-formgrid p-grid">
+                              <div class="p-field p-lg-2 p-md-2 p-sm-6">
+                                   <label for="busqueda">Buscar por:</label>
+                                   <p-dropdown id="busqueda" [options]="tipoList" [(ngModel)]="tipoSelected" optionLabel="descripcion"></p-dropdown>
+                              </div>
+
+                              <div class="p-field p-lg-8 p-md-8 p-sm-6" *ngIf="tipoSelected.codigo === 'V'">
+                                   <label for="cantidad">Cód. Barra:</label>
+                                   <p-chips [(ngModel)]="codigos" separator=","></p-chips>
+                              </div>
+
+                              <div class="p-field p-lg-3 p-md-3 p-sm-6" *ngIf="tipoSelected.codigo === 'D'">
+                                   <label for="cantidad">Doc. Cobranza:</label>
+                                   <input type="text" [(ngModel)]="documento" pInputText>
+                              </div>
+
+                              <div class="p-field p-lg-2 p-md-2 p-sm-6" *ngIf="tipoSelected.codigo === 'B'">
+                                   <label for="cantidad">Id Bolsa:</label>
+                                   <input type="text" [(ngModel)]="bolsa" pInputText>
+                              </div>
+
+                              <div class="p-field p-lg-2 p-md-2 p-sm-6" *ngIf="tipoSelected.codigo === 'F'">
+                                   <label for="tipoVale">Tipo Vale:</label>
+                                   <p-dropdown id="tipoVale" [options]="tipoValeList" [(ngModel)]="tipoValeSelected" optionLabel="descripcion"></p-dropdown>
+                              </div>
+
+                              <div class="p-field p-lg-2 p-md-2 p-sm-6" *ngIf="tipoSelected.codigo === 'F'">
+                                   <label for="cantidad">Fecha Inicio:</label>
+                                   <p-calendar [(ngModel)]="rangeDates[0]" dateFormat="dd/mm/yy" inputStyleClass="p-text-center"></p-calendar>
+                              </div>
+
+                              <div class="p-field p-lg-2 p-md-2 p-sm-6" *ngIf="tipoSelected.codigo === 'F'">
+                                   <label for="cantidad">Fecha Fin:</label>
+                                   <p-calendar [(ngModel)]="rangeDates[1]" dateFormat="dd/mm/yy" inputStyleClass="p-text-center"></p-calendar>
+                              </div>
+
+                              <div class="p-field p-lg-2 p-md-2 p-sm-2">
+                                   <button pButton pRipple type="button" label="Buscar" pTooltip="Buscar" tooltipPosition="bottom" style="margin-top: 2rem" icon="pi pi-search" (click)="buscar()"></button>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </ng-template>
+          <ng-template pTemplate="colgroup">
+               <colgroup *ngIf="!isMobile">
+                    <col style="width:70px;">
+                    <col style="width:120px;">
+                    <col style="width:100px;">
+                    <col style="width:130px;">
+                    <col style="width:130px;">
+                    <col style="width:200px;">
+                    <col style="width:130px;">
+                    <col style="width:130px;">
+                    <col style="width:120px;">
+                    <col style="width:100px;">
+                    <col style="width:100px;">
+                    <col style="width:150px;">
+                    <col style="width:100px;">
+                    <col style="width:100px;">
+                    <col style="width:100px;">
+                    <col style="width:300px;">
+                    <col style="width:100px;">
+               </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header">
+               <tr>
+                    <th pSortableColumn="anno" [ngClass]="{'p-text-center': !isMobile}">Año <p-sortIcon field="anno"></p-sortIcon></th>
+                    <th pSortableColumn="setNombreComercial" >Marca <p-sortIcon field="setNombreComercial"></p-sortIcon></th>
+                    <th pSortableColumn="id">Id Bolsa <p-sortIcon field="id"></p-sortIcon></th>
+                    <th pSortableColumn="documento" >Doc. Cobranza <p-sortIcon field="documento"></p-sortIcon></th>
+                    <th pSortableColumn="tipo" >Tipo Vale <p-sortIcon field="tipo"></p-sortIcon></th>
+                    <th pSortableColumn="bolsa" >Bolsa <p-sortIcon field="bolsa"></p-sortIcon></th>
+                    <th pSortableColumn="inicio" [ngClass]="{'p-text-center': !isMobile}">Inicio Vigencia <p-sortIcon field="inicio"></p-sortIcon></th>
+                    <th pSortableColumn="fin" [ngClass]="{'p-text-center': !isMobile}">Fin Vigencia <p-sortIcon field="fin"></p-sortIcon></th>
+                    <th pSortableColumn="barra">Cod. Barra <p-sortIcon field="barra"></p-sortIcon></th>
+                    <th pSortableColumn="total" [ngClass]="{'p-text-right': !isMobile}">Total <p-sortIcon field="total"></p-sortIcon></th>
+                    <th pSortableColumn="tiendaUso">Id Tienda <p-sortIcon field="tiendaUso"></p-sortIcon></th>
+                    <th pSortableColumn="nombreTienda">Tienda <p-sortIcon field="nombreTienda"></p-sortIcon></th>
+                    <th pSortableColumn="fechaUso" [ngClass]="{'p-text-center': !isMobile}">Fecha Uso <p-sortIcon field="fechaUso"></p-sortIcon></th>
+                    <th pSortableColumn="redimido" [ngClass]="{'p-text-center': !isMobile}">Redimido <p-sortIcon field="redimido"></p-sortIcon></th>
+                    <th pSortableColumn="anulado" [ngClass]="{'p-text-center': !isMobile}">Anulado <p-sortIcon field="anulado"></p-sortIcon></th>
+                    <th pSortableColumn="razonSocial" >Empresa <p-sortIcon field="razonSocial"></p-sortIcon></th>
+                    <th pSortableColumn="canal" >Canal <p-sortIcon field="canal"></p-sortIcon></th>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-vale>
+               <tr>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Año</span>{{vale.anno}}</td>
+                    <td><span class="p-column-title">Marca</span>{{vale.nombreComercial}}</td>
+                    <td><span class="p-column-title">Id Bolsa</span>{{vale.id}}</td>
+                    <td><span class="p-column-title">Doc. Cobranza</span>{{vale.documento}}</td>
+                    <td><span class="p-column-title">Tipo</span>{{vale.tipo}}</td>
+                    <td><span class="p-column-title">Bolsa</span>{{vale.bolsa}}</td>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Inicio Vigencia</span>{{vale.inicio | date: 'dd/MM/yyyy'}}</td>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Fin Vigencia</span>{{vale.fin | date: 'dd/MM/yyyy'}}</td>
+                    <td><span class="p-column-title">Cod. Barra</span>{{vale.barra}}</td>
+                    <td [ngClass]="{'p-text-right': !isMobile}"><span class="p-column-title">Total</span>{{vale.total | number: '.2-2'}}</td>
+                    <td><span class="p-column-title">Id Tienda</span>{{vale.tiendaUso}}</td>
+                    <td><span class="p-column-title">Tienda</span>{{vale.nombreTienda}}</td>
+                    <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">Fecha Uso</span>{{vale.fechaUso | date: 'dd/MM/yyyy'}}</td>
+                    <td><span class="p-column-title">Redimido</span>{{vale.redimido}}</td>
+                    <td><span class="p-column-title">Anulado</span>{{vale.anulado}}</td>
+                    <td><span class="p-column-title">Empresa</span>{{vale.razonSocial}}</td>
+                    <td><span class="p-column-title">Canal</span>{{vale.canal}}</td>
+               </tr>
+          </ng-template>
+          <ng-template pTemplate="summary">
+               <div class="p-d-flex p-ai-center p-jc-between">
+                    {{(valeList ? valeList.length : 0) | i18nPlural: cantidadMap}}
+               </div>
+          </ng-template>
+     </p-table>
+</div>

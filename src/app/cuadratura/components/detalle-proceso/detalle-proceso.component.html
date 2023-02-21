@@ -1,0 +1,114 @@
+<div class="card col">
+     <div class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+          <div class="p-grid">
+               <div class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+                    <p-fieldset legend="Información">
+                         <div class="p-fluid p-formgrid p-grid">
+                              <div class="p-field p-lg-4 p-md-4 p-sm-12">
+                                   <label >Marca:</label>
+                                   <input type="text" pInputText [ngModel]="proceso.marca" disabled>
+                              </div>
+                              <div class="p-field p-lg-2 p-md-2 p-sm-12">
+                                   <label >Inicio:</label>
+                                   <input type="text" pInputText [ngModel]="proceso.feInicioPeriodo | date: 'dd/MM/yyyy'" disabled>
+                              </div>
+                              <div class="p-field p-lg-2 p-md-2 p-sm-12">
+                                   <label >Fin:</label>
+                                   <input type="text" pInputText [ngModel]="proceso.feFinPeriodo | date: 'dd/MM/yyyy'" disabled>
+                              </div>
+                              <div class="p-field p-lg-2 p-md-2 p-sm-12">
+                                   <label >Valor Bolsa:</label>
+                                   <input type="text" pInputText [ngModel]="proceso.vaBolsa | number: '.2-2'" disabled>
+                              </div>
+                              <div class="p-field p-lg-2 p-md-2 p-sm-12">
+                                   <label >%Comisión:</label>
+                                   <input type="text" pInputText [ngModel]="proceso.pcComision | number: '.2-2'" disabled>
+                              </div>
+                         </div>
+                         <div class="p-fluid p-formgrid p-grid">
+                              <div class="p-field p-lg-8 p-md-8 p-sm-12">
+                                   <label >Descripción:</label>
+                                   <input type="text" pInputText [ngModel]="proceso.deProceso" disabled>
+                              </div>
+                              <div class="p-field p-lg-4 p-md-4 p-sm-12">
+                                   <label >Formato:</label>
+                                   <p-dropdown name="formato" [options]="formatos" [(ngModel)]="formatoSelected" optionLabel="nombre"
+                                              [disabled]="true">
+                                   </p-dropdown>
+                              </div>
+                         </div>
+                    </p-fieldset>
+               </div>
+          </div>
+     </div>
+
+     <div class="p-lg-12 p-md-12 p-sm-12">
+          <div class="p-grid">
+               <div class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+                    <p-fieldset legend="Archivos">
+                         <p-table #dtArchivos [value]="proceso.archivos" [responsive]="true" [rowHover]="true" selectionMode="single"
+                                   styleClass="p-datatable-sm p-datatable-striped">
+                              <ng-template pTemplate="colgroup">
+                                   <colgroup *ngIf="!isMobile">
+                                        <col style="width:65%;">
+                                        <col style="width:15%;">
+                                   </colgroup>
+                              </ng-template>
+                              <ng-template pTemplate="header">
+                                   <tr>
+                                        <th>Nombre </th>
+                                        <th>Tipo </th>
+                                        <th> </th>
+                                   </tr>
+                              </ng-template>
+                              <ng-template pTemplate="body" let-archivo>
+                                   <tr>
+                                        <td class="wrap"><span class="p-column-title">Nombre</span>{{archivo.noRealArchivo}}</td>
+                                        <td><span class="p-column-title">Tipo</span>{{archivo.tiArchivo | uppercase}}</td>
+                                        <td><span class="p-column-title">Descargar</span>
+                                             <button pButton pRipple pTooltip="Descargar" tooltipPosition="bottom" label="Descargar" icon="pi pi-download" (click)="downloadFile(archivo)" ></button>
+                                        </td>
+                                   </tr>
+                              </ng-template>
+                         </p-table>
+                    </p-fieldset>
+               </div>
+          </div>
+     </div>
+
+     <div class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+          <div class="p-grid">
+               <div class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+                    <p-fieldset legend="Detalle de la Ejecución del Proceso">
+                         <p-table #dtDetalle [value]="proceso.detalles" [responsive]="true" [rowHover]="true" selectionMode="single"
+                                   styleClass="p-datatable-sm p-datatable-striped">
+                              <ng-template pTemplate="colgroup">
+                                   <colgroup *ngIf="!isMobile">
+                                        <col style="width:30%;">
+                                        <col style="width:15%;">
+                                        <col style="width:15%;">
+                                   </colgroup>
+                              </ng-template>
+                              <ng-template pTemplate="header">
+                                   <tr>
+                                        <th>Descripción </th>
+                                        <th>Inicio </th>
+                                        <th>Fin </th>
+                                        <th>Observación </th>
+                                   </tr>
+                              </ng-template>
+                              <ng-template pTemplate="body" let-detalle>
+                                   <tr>
+                                        <td><span class="p-column-title">Descripción</span>{{detalle.deDetalle}}</td>
+                                        <td><span class="p-column-title">Inicio</span>{{detalle.feInicio | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+                                        <td><span class="p-column-title">Fin</span>{{detalle.feFin | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+                                        <td><span class="p-column-title">Observación</span>{{detalle.deError}}</td>
+                                   </tr>
+                              </ng-template>
+                         </p-table>
+                    </p-fieldset>
+               </div>
+          </div>
+     </div>
+</div>
+
