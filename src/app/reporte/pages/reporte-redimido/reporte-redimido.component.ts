@@ -149,7 +149,7 @@ export class ReporteRedimidoComponent implements OnInit {
     }
 
     let workbook = new Workbook();
-    let worksheet = workbook.addWorksheet('CRM');
+    let worksheet = workbook.addWorksheet('Redimido');
 
     worksheet.addRow(['']);
     worksheet.addRow(['Reporte Redimidos']);
@@ -191,7 +191,30 @@ export class ReporteRedimidoComponent implements OnInit {
       worksheet.getRow(contador).getCell(11).numFmt = '#,##0.00'; */
       contador++;
     })
-    
+
+   /*  let worksheetNo = workbook.addWorksheet('TiendasNoConectadas');
+    worksheetNo.addRow(['Tienda','Motivo']);
+    worksheetNo.columns = [{ width: 30 }, { width: 100 }];
+
+    worksheetNo.getRow(1).eachCell(function(cell: Cell, _colNumber: number) {
+      cell.border = {top: {style:'thin', color: {argb:'000000'}}, left: {style:'thin', color: {argb:'000000'}}, bottom: {style:'thin', color: {argb:'000000'}}, right: {style:'thin', color: {argb:'000000'}}};
+      cell.font = { size: 8, bold: true,  name: 'Arial' };
+      cell.alignment = { vertical: 'middle', horizontal: 'center' };
+      cell.fill = {type: 'pattern', pattern:'solid', fgColor:{argb:'CCCCCC'}};
+    });
+
+    let contadorNo: number = 1;
+    this.tiendaErrorList.forEach(info => {
+      worksheetNo.addRow([info.noTienda,info.motivo]);
+
+      worksheetNo.getRow(contadorNo).eachCell(function(cell: Cell, colNumber: number) {
+        cell.border = {top: {style:'thin', color: {argb:'000000'}}, left: {style:'thin', color: {argb:'000000'}}, bottom: {style:'thin', color: {argb:'000000'}}, right: {style:'thin', color: {argb:'000000'}}};
+        cell.font = { size: 8,  name: 'Arial' };
+      });
+
+      contadorNo++;
+    });
+     */
     workbook.xlsx.writeBuffer().then((data) => {
       let timestamp = this.pipe.transform(new Date(), 'yyyyMMddHHmmss');
       let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
