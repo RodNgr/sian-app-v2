@@ -75,7 +75,8 @@ export class ListaCuponOmnicanalComponent implements OnInit {
 
   public viewValeOmnicanal(): void {
     sessionStorage.setItem('tipoOperacion', 'V');
-    this.router.navigateByUrl('/home/cupon/cupon-omnicanal')
+    sessionStorage.setItem('cupon-omnicanal', this.CampanhasSelected.cdCodigoCuponCabecera.toString());
+    this.router.navigateByUrl('/home/cupon/cupon-omnicanal');
   }
 
   public actualizarFecha(): void {

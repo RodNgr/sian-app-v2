@@ -37,12 +37,12 @@
             
             <div class="p-field p-col-3 p-md-3 p-sm-3">
               <label for="fecInicio" [ngClass] = "{' p-error ': !fecInicio.dirty || !fecInicio.touched }">Inicio (*):</label>
-              <p-calendar [(ngModel)]="cuponOmni.fecInicio" [minDate]="minDate" [showTime]="true" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" name="fecInicio" #fecInicio="ngModel" id="fecInicio"></p-calendar>
+              <p-calendar [(ngModel)]="cuponOmni.fecInicio" [minDate]="minDate" [showTime]="true" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" name="fecInicio" #fecInicio="ngModel" id="fecInicio" [disabled]="type === 'V'"></p-calendar>
               <small class="p-error" *ngIf="!fecInicio.dirty || !fecInicio.touched">Fecha Obligatoria</small>
             </div>
             <div class="p-field p-col-3 p-md-3 p-sm-3">
               <label for="fecFin" [ngClass] = "{' p-error ': !fecFin.dirty || !fecFin.touched }">Fin (*):</label>
-              <p-calendar [(ngModel)]="cuponOmni.fecFin" [minDate]="minDate" [showTime]="true" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" name="fecFin" #fecFin="ngModel" id="fecFin"></p-calendar>
+              <p-calendar [(ngModel)]="cuponOmni.fecFin" [disabled]="type === 'V'" [minDate]="minDate" [showTime]="true" dateFormat="dd/mm/yy" inputStyleClass="p-text-center" name="fecFin" #fecFin="ngModel" id="fecFin"></p-calendar>
               <small class="p-error" *ngIf="!fecFin.dirty || !fecFin.touched">Fecha Obligatoria</small>
             </div>
 
@@ -56,6 +56,12 @@
               id="alianza" type="text" pInputText #alianza="ngModel" [(ngModel)]="cuponOmni.alianza" name="alianza"
               [disabled]="type === 'V'">
             <small class="p-error" *ngIf="alianza.invalid && (alianza.dirty || alianza.touched)">Campo Obligatorio</small>
+          </div>
+
+          <div class="p-field p-col-3 p-md-3 p-sm-3" style="padding-top: 25px;" *ngIf="!showExento">
+            <p-checkbox name="Exento"  [(ngModel)]="Exento" value="Exento" id="Exento" #checkBox3>
+            </p-checkbox>
+            <label for="call">Exento de la compra minima (Solo canales con delivery)</label>
           </div>
         </div>
       </div>
@@ -170,35 +176,39 @@
       </div>
 
       <!-- Acordeon Canales -->
-      <div class="p-mb-2 p-mt-2 accordion-container" [hidden]="!showCanales">
+      <div class="p-mb-2 p-mt-2 accordion-container">
         <p-fieldset legend="Canales (*)">
           <div class="p-fluid ">
 
             <div class="p-d-flex ">
 
               <div class="p-field-checkbox mr-1">
-                <p-checkbox name="channel" value="carta-web" inputId="web" (onChange)="showTableWeb($event)" #checkBox>
+                <p-checkbox name="channel" value="carta-web" [(ngModel)]="webVal" inputId="web" (onChange)="showTableWeb($event)" #checkBox>
                 </p-checkbox>
                 <label for="web">Web</label>
               </div>
               <div class="p-field-checkbox mr-1">
-                <p-checkbox name="channel" value="carta-call" inputId="call" (onChange)="showTableCall($event)" #checkBox1>
+                <p-checkbox name="channel" value="carta-call" [(ngModel)]="callVal" inputId="call" (onChange)="showTableCall($event)" #checkBox1>
                 </p-checkbox>
                 <label for="call">Call Center</label>
               </div>
 
               <div class="p-field-checkbox">
-                <p-checkbox name="channel" value="carta-salon" inputId="salon" (onChange)="showTableSalon($event)" #checkBox2>
+                <p-checkbox name="channel" value="carta-salon" [(ngModel)]="salonVal" inputId="salon" (onChange)="showTableSalon($event)" #checkBox2>
                 </p-checkbox>
                 <label for="salon">Salón</label>
               </div>
+
+
+            
+
             </div>
             <small class="p-error" *ngIf="!checkBox.checked && !checkBox1.checked && !checkBox2.checked">Seleccionar al menos un canal.</small>
           </div>
         </p-fieldset>
       </div>
 
-      <div class="mt-1" *ngIf="showTableProducts">
+      <div class="mt-1" *ngIf="showTableProducts" [hidden]="!showCanales">
         <p-fieldset legend="Productos">
 
           <!-- Start Dialog -->
@@ -456,7 +466,7 @@
     </div>
     <div class="p-d-flex mt-2 mb-2 w-100">
       <div class="p-inputgroup p-d-flex p-jc-end ">
-        <button pButton pRipple label="Guardar" icon="pi pi-save" class="p-button-lg p-button-success p-mr-2" (click)="guardarCupon()"></button>
+        <button pButton pRipple label="Guardar" icon="pi pi-save" class="p-button-lg p-button-success p-mr-2" (click)="guardarCupon()" [disabled]="type === 'V'"></button>
       </div>
       <div class="p-inputgroup">
         <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-lg p-button-secondary p-mr-2"

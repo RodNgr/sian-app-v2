@@ -6,6 +6,7 @@ import { OmnicanalDto } from '../dto/omnicalanal-dto';
 import { CartaOmnicanal } from '../entity/cartaOmnicanal';
 import { environment } from 'src/environments/environment';
 import { ProductoCarta } from '../entity/producto-carta';
+import { CuponOmnicanal, CuponOmnicanalC, detalle } from '../entity/cuponOmnicanal';
 interface ProductSelect {
 
 
@@ -39,6 +40,15 @@ export class ProductoCartaService {
   getDataCartaxTipo(dto: OmnicanalDto): Observable<ProductoCarta[]> {
     return this.http.post<ProductoCarta[]>(`${this.urlEndPoint}/getDataCartaxTipo`, dto);
   }
+
+  getCampana(id: number): Observable<CuponOmnicanalC[]> {
+    return this.http.get<CuponOmnicanalC[]>(`${this.urlEndPoint}/getCampanha/${id}`);
+  }
+
+  getDetalleVales(id: number): Observable<detalle[]> {
+    return this.http.get<detalle[]>(`${this.urlEndPoint}/getCampanhaProductos/${id}`);
+  }
+  
   /*
   getDataCartaWeb() {
     //this.webservice(marca,canal)
