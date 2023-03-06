@@ -1,8 +1,12 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+  <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
 <div class="card col">
     <p-toolbar styleClass="p-mb-4">
       <ng-template pTemplate="left"></ng-template>
       <ng-template pTemplate="right">
-        <p-button label="Exportar" icon="pi pi-upload" pTooltip="Exportar" tooltipPosition="bottom"
+        <p-button label="Exportar" icon="pi pi-upload" (click)="exportar()" pTooltip="Exportar" tooltipPosition="bottom"
           styleClass="p-button-info">
         </p-button>
       </ng-template>
@@ -19,41 +23,60 @@
           </div>
   
           <div class="p-fluid p-form-grid p-grid p-jc-end">
-            <div class="p-field p-col">
-              <label for="inicio">Inicio:</label>
-              <p-calendar id="inicio" dateFormat="dd/mm/yy" inputStyleClass="p-text-center"></p-calendar>
-            </div>
-            <div class="p-field p-col">
-              <label for="fin">Fin:</label>
-              <p-calendar id="fin" dateFormat="dd/mm/yy" inputStyleClass="p-text-center"></p-calendar>
-            </div>
-  
+            <div class="p-field p-lg-8 p-md-8 p-sm-6">
+              <label for="cantidad">Cód. Cupon:</label>
+              <input type="text" #codcupon [(ngModel)]="codigocupon" pInputText>
+         </div>
+
             <div class="p-field p-mr-2 p-ml-2">
               <button pButton pRipple type="button" label="Buscar" pTooltip="Buscar" tooltipPosition="bottom"
-                style="margin-top: 2.30rem" icon="pi pi-search"></button>
+              (click)="buscar()" style="margin-top: 2.30rem" icon="pi pi-search"></button>
             </div>
           </div>
         </div>
       </ng-template>
-  
+      <ng-template pTemplate="colgroup">
+        <col style="width:80px;">
+        <col style="width:80px;">
+        <col style="width:80px;">
+        <col style="width:80px;">
+        <col style="width:80px;">
+        <col style="width:100px;">
+        <col style="width:320px;">
+        <col style="width:140px;">
+        <col style="width:140px;">
+        <col style="width:120px;">
+        <col style="width:320px;">
+        <col style="width:320px;">
+    </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th>Código</th>
-          <th>Tipo de cupon</th>
-          <th>Campaña</th>
-          <th>Desde</th>
-          <th>Hasta</th>
-          <th>Estado</th>
+          <th>N° Pedido</th>
+          <th>Marca</th>
+          <th>Canal</th>
+          <th>Cod Tienda</th>
+          <th>Cupon</th>
+          <th>Cod Cajero</th>
+          <th>Nombre Campaña</th>
+          <th>Fecha Registro</th>
+          <th>Fecha Actualización</th>
+          <th>Nombre Cajero</th>
+          <th>Nombre Tienda</th>
       </tr>
       </ng-template>
       <ng-template pTemplate="body" let-cupong>
         <tr>
-          <td>{{cupong.id}}</td>
-          <td>{{cupong.tipocupon}}</td>
-          <td>{{cupong.campana}}</td>
-          <td>{{cupong.fechainicio}}</td>
-          <td>{{cupong.fechafin}}</td>
-          <td>{{cupong.estado}}</td>
+          <td>{{cupong.nroPedido}}</td>
+          <td>{{cupong.marca}}</td>
+          <td>{{cupong.canal}}</td>
+          <td>{{cupong.codtienda}}</td>
+          <td>{{cupong.codCupon}}</td>
+          <td>{{cupong.codCajero}}</td>
+          <td>{{cupong.nombreCampanha}}</td>
+          <td>{{cupong.fecRegistro}}</td>
+          <td>{{cupong.fecActualizacion}}</td>
+          <td>{{cupong.nombreCajero}}</td>
+          <td>{{cupong.nombreTienda}}</td>
         </tr>
       </ng-template>
   
