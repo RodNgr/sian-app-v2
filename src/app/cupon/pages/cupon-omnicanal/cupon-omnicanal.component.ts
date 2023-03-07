@@ -33,7 +33,7 @@ export class CuponOmnicanalComponent implements OnInit {
 
   public selectCountTimes: string = '1';
   public activeOptions: boolean = false;
-  public selectionTypeCupon = '0';
+  public selectionTypeCupon: string = '0';
 
 
 /* Validaciones Campos */
@@ -76,6 +76,7 @@ export class CuponOmnicanalComponent implements OnInit {
   public CartaCallSelectedSelected!: ProductoCarta;
   public CartaSalonSelectedSelected!: ProductoCarta;
   public CartaConsolidadoSelectedSelected!: ProductoCarta;  
+  public DetalleSelected!: detalle;
   public maxCantidadProductos: number = 0;
   
   public canalDetalle: CanalDetalle[] = [];
@@ -797,16 +798,16 @@ export class CuponOmnicanalComponent implements OnInit {
       cuponOmni => {
         this.cuponOmniD = cuponOmni;
         
-        
         this.cuponOmni.fecInicio = new Date(this.cuponOmniD[0].fecInicio);
         this.cuponOmni.fecFin = new Date(this.cuponOmniD[0].fecFin);
         this.cuponOmni.nombreCampanha = this.cuponOmniD[0].nombreCampanha;
         this.cuponOmni.alianza = this.cuponOmniD[0].alianza;
         // this.selectionTypeCupon = this.cuponOmniD[0].tipoCupon.toString();
+        
 
 
         this.tipos = this.tipos.filter(r => {          
-          return r.codigo !== this.cuponOmniD[0].tipoCupon;
+          return r.codigo == this.cuponOmniD[0].tipoCupon;
         });
 
         if (this.cuponOmniD[0].tipoCupon) {
@@ -814,6 +815,8 @@ export class CuponOmnicanalComponent implements OnInit {
             if (r.codigo.toString() === this.cuponOmniD[0].tipoCupon.toString()) {
               this.selectionTypeCupon = r.codigo.toString();              
               console.log(this.selectionTypeCupon);
+              $("#TiposC").val(r.nombre);
+
             }
           })
         }
@@ -1136,6 +1139,9 @@ export class CuponOmnicanalComponent implements OnInit {
           detalles => {
             this.spinner.hide();
             this.detalles = detalles;
+
+            
+            
           }, 
           err => {
             this.spinner.hide();

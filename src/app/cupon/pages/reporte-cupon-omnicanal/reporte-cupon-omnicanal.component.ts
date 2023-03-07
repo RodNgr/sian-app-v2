@@ -63,7 +63,7 @@ export class ReporteCuponOmnicanalComponent implements OnInit {
   }
 
 
-  private exportar(): void {
+  public exportar(): void {
     if (!this.cuponesGenerados) {
       swal.fire('Advertencia!', 'No hay información para exportar', 'warning');
       return;
