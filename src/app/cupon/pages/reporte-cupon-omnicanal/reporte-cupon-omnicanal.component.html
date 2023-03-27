@@ -12,14 +12,14 @@
       </ng-template>
     </p-toolbar>
   
-    <p-table [value]="cuponesGenerados"#dt [responsive]="true" [rows]="25" [paginator]="true" [rowHover]="true" dataKey="id" [scrollable]="true"
+    <p-table [value]="cuponesGenerados"#dt [responsive]="true" [rows]="25" [paginator]="false" [rowHover]="true" dataKey="id" [scrollable]="true"
       scrollHeight="40vh" [rowsPerPageOptions]="[15,25,50,100]"
       currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
       styleClass="p-datatable-sm p-datatable-striped">
       <ng-template pTemplate="caption">
         <div class="p-d-flex p-jc-between">
           <div class="p-grid p-ai-center vertical-container">
-            <h1 class="p-col p-m-0">Cupones</h1>
+            <h1 class="p-col p-m-0">Cupon</h1>
           </div>
   
           <div class="p-fluid p-form-grid p-grid p-jc-end">
@@ -36,13 +36,90 @@
         </div>
       </ng-template>
       <ng-template pTemplate="colgroup">
+        <col style="width:320px;">
+        <col style="width:100px;">
+        <col style="width:250px;">
+        <col style="width:100px;">
+        <col style="width:140px;">
+        <col style="width:100px;">
+       <!--  <col style="width:100px;"> -->
+        <col style="width:160px;">
+        <col style="width:100px;">
+        <col style="width:100px;">
+        <col style="width:100px;">
+        <col style="width:140px;">
+        <col style="width:140px;">
+        <col style="width:140px;">
+        <col style="width:100px;">
+        <col style="width:100px;">
+        <col style="width:100px;">
+        <col style="width:140px;">
+    </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Nombre Campaña</th>
+          <th>Cod. Cupon</th>
+          <th>Tipo Cupon</th>
+          <th>N° de Usos</th>
+          <th>Cant. Redimido</th>
+          <th>Alianza</th>
+         <!--  <th>Cod. Cajero</th> -->
+          <th>Cant. produc. usado</th>
+          <th>Monto</th>
+          <th>Monto Max.</th>
+          <th>Compra Min.</th>
+          <th>Fecha Actualización</th>
+          <th>Fecha Ini.</th>
+          <th>Fecha Fin</th>
+          <th>Anulado</th>
+          <th>Estado</th>
+          <th>Usu Registro</th>
+          <th>Fecha Reg.</th>
+      </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-cupong>
+        <tr>
+          <td>{{cupong.nombreCampanha}}</td>
+          <td>{{cupong.codCupon}}</td>
+          <td>{{cupong.stTipoCupon}}</td>
+          <td>{{cupong.nroUso}}</td>
+          <td>{{cupong.cantidadRedimido}}</td>
+          <td>{{cupong.alianza}}</td>
+          <!-- <td>{{cupong.codCajero}}</td> -->
+          <td>{{cupong.cantidadProductUso}}</td>
+          <td>{{cupong.monto}}</td>
+          <td>{{cupong.montoMax}}</td>
+          <td>{{cupong.compraMin}}</td>
+          <td>{{cupong.fecActualizacion}}</td>
+          <td>{{cupong.fecInicio}}</td>
+          <td>{{cupong.fecFin}}</td>
+          <td>{{cupong.stanulado}}</td>
+          <td>{{cupong.stestado}}</td>
+          <td>{{cupong.usuarioReg}}</td>
+          <td>{{cupong.fecReg}}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+    <div class="p-d-flex p-jc-between" style="margin-top: 25px;">
+      <div class="p-grid p-ai-center vertical-container">
+        <h1 class="p-col p-m-0">Detalle cupon </h1>
+         <label class="cantidadmax"> [ Ultimos {{cantTrans}} registro(s) ] </label>
+      </div>
+    </div>
+
+    <p-table [value]="TransaccionesGenerados"#dt [responsive]="true" [rows]="25" [paginator]="true" [rowHover]="true" dataKey="id" [scrollable]="true"
+      scrollHeight="40vh" [rowsPerPageOptions]="[15,25,50,100]"
+      currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+      styleClass="p-datatable-sm p-datatable-striped">
+      <ng-template pTemplate="colgroup">
         <col style="width:80px;">
-        <col style="width:80px;">
+        <col style="width:160px;">
         <col style="width:80px;">
         <col style="width:80px;">
         <col style="width:80px;">
         <col style="width:100px;">
-        <col style="width:320px;">
+        <col style="width:200px;">
         <col style="width:140px;">
         <col style="width:140px;">
         <col style="width:120px;">
@@ -57,7 +134,7 @@
           <th>Cod Tienda</th>
           <th>Cupon</th>
           <th>Cod Cajero</th>
-          <th>Nombre Campaña</th>
+          <th>Pedido anulado</th>
           <th>Fecha Registro</th>
           <th>Fecha Actualización</th>
           <th>Nombre Cajero</th>
@@ -67,12 +144,12 @@
       <ng-template pTemplate="body" let-cupong>
         <tr>
           <td>{{cupong.nroPedido}}</td>
-          <td>{{cupong.marca}}</td>
-          <td>{{cupong.canal}}</td>
-          <td>{{cupong.codtienda}}</td>
+          <td>{{cupong.Marca}}</td>
+          <td>{{cupong.Canal}}</td>
+          <td>{{cupong.codTienda}}</td>
           <td>{{cupong.codCupon}}</td>
           <td>{{cupong.codCajero}}</td>
-          <td>{{cupong.nombreCampanha}}</td>
+          <td>{{cupong.stpedidoAnulado}}</td>
           <td>{{cupong.fecRegistro}}</td>
           <td>{{cupong.fecActualizacion}}</td>
           <td>{{cupong.nombreCajero}}</td>
