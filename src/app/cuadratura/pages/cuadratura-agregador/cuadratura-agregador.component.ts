@@ -42,7 +42,7 @@ export class CuadraturaAgregadorComponent implements OnInit {
 
   public fileResumen: File[] = [];
 
-  public fileComprobante: File[] = [];
+  // public fileComprobante: File[] = [];
 
   public isMobile: boolean = window.innerWidth < 641
 
@@ -71,10 +71,10 @@ export class CuadraturaAgregadorComponent implements OnInit {
       return;
     }  
     
-    if (this.fileComprobante.length == 0) {
-      swal.fire('Advertencia!', 'Debe seleccionar por lo menos un Archivo de Comprobante', 'warning');
-      return;
-    }
+    // if (this.fileComprobante.length == 0) {
+    //   swal.fire('Advertencia!', 'Debe seleccionar por lo menos un Archivo de Comprobante', 'warning');
+    //   return;
+    // }
 
     if (this.proceso.pcComision === undefined) {
       swal.fire('Advertencia!', 'Debe ingresar el % de Comisión', 'warning');
@@ -93,7 +93,7 @@ export class CuadraturaAgregadorComponent implements OnInit {
     const promiseList:Observable<any>[] = [];
 
     filesToSend.push(...this.fileResumen);
-    filesToSend.push(...this.fileComprobante);
+    // filesToSend.push(...this.fileComprobante);
 
     filesToSend.forEach(file => {
       promiseList.push(this.procesoService.uploadFile(file));
@@ -141,12 +141,12 @@ export class CuadraturaAgregadorComponent implements OnInit {
     };
   }
 
-  public onSelectComprobante(event: any): void {
-    this.fileComprobante = [];
-    for(let file of event.currentFiles) {
-      this.fileComprobante.push(file);
-    };
-  }
+  // public onSelectComprobante(event: any): void {
+  //   this.fileComprobante = [];
+  //   for(let file of event.currentFiles) {
+  //     this.fileComprobante.push(file);
+  //   };
+  // }
 
   public onError(event:any) {
     swal.fire('Error', 'Problemas al subir el archivo!', 'error');
@@ -156,9 +156,9 @@ export class CuadraturaAgregadorComponent implements OnInit {
     this.fileResumen = [];
   }
 
-  public onCancelComprobante() {
-    this.fileComprobante = [];
-  }
+  // public onCancelComprobante() {
+  //   this.fileComprobante = [];
+  // }
 
   @HostListener('window:resize', ['$event'])
   getScreenSize(event?: any) {
