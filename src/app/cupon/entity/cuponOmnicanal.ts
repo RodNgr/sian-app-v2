@@ -21,23 +21,34 @@ export class CuponOmnicanal {
 }
 
 export class CuponOmnicanalC {
+	
+	// activoCompraMin!: number;
+	// marca!: string;
+	// monto!: number;
+	// descripcion!: string;
+	// nroUso!: number;
+	// nroCuponAGenerar!: number;
+	// montoMax!: number;
+	// compraMin!: number;
+	// percentdsct: number;
+	// user!: string;
+	
     nombreCampanha!: string;
-	codigo!: string;
-	activoCompraMin!: number;
-	marca!: string;
-	monto!: number;
 	tipoCupon!: number;
-	tipo!: number;
-	descripcion!: string;
-	user!: string;
 	fecInicio!: Date;
 	fecFin!: Date;
-	nroUso!: number;
-	nroCuponAGenerar!: number;
-	montoMax!: number;
-	compraMin!: number;
 	alianza!: string;
-	percentdsct: number;
+	tipo!: number;
+	nroCuponAGenerar!: number; 
+	maximouso!: number; 
+	codigo!: string; 
+	monto!: number; 
+	activoCompraMin!: number; 
+	compraMin!: number; 
+	montoMax!: number; 
+	percentdsct!: number; 
+	delivery!: number; 
+	montodescuento!: number; 
 }
 
 export class detalle{

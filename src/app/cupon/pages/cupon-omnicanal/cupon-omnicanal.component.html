@@ -462,7 +462,7 @@
           </div>
 
 
-          <div>
+          <div *ngIf="type == 'V'">
             <p-table #dt [value]="detalles" [responsive]="true" [rows]="15" [paginator]="true" [rowHover]="true" dataKey="codProducto"  
             [globalFilterFields]="['codProducto', 'producto']" [scrollable]="true" scrollHeight="40vh"
             selectionMode="single" [(selection)]="DetalleSelected" styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"

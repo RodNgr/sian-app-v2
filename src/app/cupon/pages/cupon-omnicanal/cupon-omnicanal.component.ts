@@ -34,6 +34,7 @@ export class CuponOmnicanalComponent implements OnInit {
   public selectCountTimes: string = '1';
   public activeOptions: boolean = false;
   public selectionTypeCupon: string = '0';
+  public validacion: string = '';
 
 
 /* Validaciones Campos */
@@ -802,6 +803,7 @@ export class CuponOmnicanalComponent implements OnInit {
         this.cuponOmni.fecFin = new Date(this.cuponOmniD[0].fecFin);
         this.cuponOmni.nombreCampanha = this.cuponOmniD[0].nombreCampanha;
         this.cuponOmni.alianza = this.cuponOmniD[0].alianza;
+        this.selectCountTimes = this.cuponOmniD[0].tipo.toString();
         // this.selectionTypeCupon = this.cuponOmniD[0].tipoCupon.toString();
         
 
@@ -1048,91 +1050,120 @@ export class CuponOmnicanalComponent implements OnInit {
         }
 
 
-        if (this.cuponOmniD[0].tipoCupon == 1 && this.cuponOmniD[0].tipo == 1) {
+        // if (this.cuponOmniD[0].tipoCupon == 1 && this.cuponOmniD[0].tipo == 1) {
           
-            this.cuponOmni.monto = this.cuponOmniD[0].monto;
-            this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
-            this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
-            this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
+        //     this.cuponOmni.monto = this.cuponOmniD[0].monto;
+        //     this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
+        //     this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
+        //     this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
+        // }
+    
+        // else if (this.cuponOmniD[0].tipoCupon == 1 && this.cuponOmniD[0].tipo == 2) {
+        //   this.cuponOmni.codigo = this.cuponOmniD[0].codigo;
+        //   this.cuponOmni.monto = this.cuponOmniD[0].monto;
+        //   this.cuponOmni.nroUso = this.cuponOmniD[0].nroUso;
+        //   this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
+        //   this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
+        // }
+    
+        if (this.cuponOmniD[0].tipoCupon == 1 && this.cuponOmniD[0].tipo == 1) {
+          this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
+          this.cuponOmni.monto = this.cuponOmniD[0].monto;
+          this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
+          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;          
         }
     
         else if (this.cuponOmniD[0].tipoCupon == 1 && this.cuponOmniD[0].tipo == 2) {
-          this.cuponOmni.codigo = this.cuponOmniD[0].codigo;
+          this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
           this.cuponOmni.monto = this.cuponOmniD[0].monto;
-          this.cuponOmni.nroUso = this.cuponOmniD[0].nroUso;
-          this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
+          this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
           this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
+          this.cuponOmni.nroUso = this.cuponOmniD[0].maximouso;
+          this.cuponOmni.codigo = this.cuponOmniD[0].codigo;
         }
     
         else if (this.cuponOmniD[0].tipoCupon == 2 && this.cuponOmniD[0].tipo == 1) {
-          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
           this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
-          this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
+          this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
           this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
-        }
-    
-        else if (this.cuponOmniD[0].tipoCupon == 2 && this.cuponOmniD[0].tipo == 2) {           
-            this.cuponOmni.codigo = this.cuponOmniD[0].codigo;
-            this.cuponOmni.nroUso = this.cuponOmniD[0].nroUso;
-            this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
-            this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
-        }
-    
-        else if (this.cuponOmniD[0].tipoCupon == 3 && this.cuponOmniD[0].tipo == 1) {
-          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
-          this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
-          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
-        }
-    
-        else if (this.cuponOmniD[0].tipoCupon == 3 && this.cuponOmniD[0].tipo == 2) {
-          this.cuponOmni.codigo = this.cuponOmniD[0].codigo;
-          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
-          this.cuponOmni.nroUso = this.cuponOmniD[0].nroUso;
-          this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
-          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
-        }
-    
-        else if (this.cuponOmniD[0].tipoCupon == 4 && this.cuponOmniD[0].tipo == 1) {
-          this.cuponOmni.percentdsct = this.cuponOmniD[0].monto;
-          this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
-          this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
-          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
-        }
-    
-        else if (this.cuponOmniD[0].tipoCupon == 4 && this.cuponOmniD[0].tipo == 2) {
-          this.cuponOmni.codigo = this.cuponOmniD[0].codigo;
-          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
-          this.cuponOmni.nroUso = this.cuponOmniD[0].nroUso;
-          this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
-          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
-        }
-    
-        else if (this.cuponOmniD[0].tipoCupon == 5 && this.cuponOmniD[0].tipo == 1) {
-          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
-          this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
-          this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
-        }
-    
-        else if (this.cuponOmniD[0].tipoCupon == 5 && this.cuponOmniD[0].tipo == 2) {
-          this.cuponOmni.codigo = this.cuponOmniD[0].codigo;
-          this.cuponOmni.nroUso = this.cuponOmniD[0].nroUso;
           this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
           this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;          
         }
     
-        else if (this.cuponOmniD[0].tipoCupon == 6 && this.cuponOmniD[0].tipo == 1) {
-          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
+        else if (this.cuponOmniD[0].tipoCupon == 2 && this.cuponOmniD[0].tipo == 2) { 
           this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
-          this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
+          this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
           this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
+          this.cuponOmni.nroUso = this.cuponOmniD[0].maximouso;
+          this.cuponOmni.codigo = this.cuponOmniD[0].codigo;
+          this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
+          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;          
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 3 && this.cuponOmniD[0].tipo == 1) {
+          this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
+          this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
+          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
+          this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
+          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 3 && this.cuponOmniD[0].tipo == 2) {
+          this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
+          this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
+          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
+          this.cuponOmni.nroUso = this.cuponOmniD[0].maximouso;
+          this.cuponOmni.codigo = this.cuponOmniD[0].codigo;
+          this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
+          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;   
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 4 && this.cuponOmniD[0].tipo == 1) {
+          this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
+          this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
+          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
+          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 4 && this.cuponOmniD[0].tipo == 2) {  
+          this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
+          this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
+          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
+          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
+          this.cuponOmni.nroUso = this.cuponOmniD[0].maximouso;
+          this.cuponOmni.codigo = this.cuponOmniD[0].codigo;          
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 5 && this.cuponOmniD[0].tipo == 1) {
+          this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
+          this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
+          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
+          this.cuponOmni.percentdsct = this.cuponOmniD[0].montodescuento;
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 5 && this.cuponOmniD[0].tipo == 2) {
+          this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
+          this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
+          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
+          this.cuponOmni.percentdsct = this.cuponOmniD[0].montodescuento;
+          this.cuponOmni.nroUso = this.cuponOmniD[0].maximouso;
+          this.cuponOmni.codigo = this.cuponOmniD[0].codigo;  
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 6 && this.cuponOmniD[0].tipo == 1) {
+          this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
+          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
+          this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
+          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
         }
     
         else if (this.cuponOmniD[0].tipoCupon == 6 && this.cuponOmniD[0].tipo == 2) {
-          this.cuponOmni.codigo = this.cuponOmniD[0].codigo;
-          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
-          this.cuponOmni.nroUso = this.cuponOmniD[0].nroUso;
-          this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
+          this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
           this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
+          this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
+          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
+          this.cuponOmni.nroUso = this.cuponOmniD[0].maximouso;
+          this.cuponOmni.codigo = this.cuponOmniD[0].codigo;  
         }
         
         this.cartaService.getDetalleVales(id).subscribe(
@@ -1878,8 +1909,12 @@ export class CuponOmnicanalComponent implements OnInit {
       this.ajaxQueryPost(`${this.urlEndPointOmnicanal}/generarcupon`, this.dataCupones.token, this.cuponOmni2);     
       
       this.cuponOmni4 = this.cuponOmni2;
-      
-      this.ajaxQueryPostCSV(`${this.urlEndPointOmnicanal}/generatecsv`, this.dataCupones.token, this.cuponOmni3);
+      //
+      if (this.validacion == 'Cupon creado') {        
+        this.ajaxQueryPostCSV(`${this.urlEndPointOmnicanal}/generatecsv`, this.dataCupones.token, this.cuponOmni3);
+      } else{
+        Swal.fire('Validar Información.', 'Sesion caducada, vuelva a iniciar sesion' , 'error');
+      }
     }else{
       this.spinner.hide();
       if(this.Cantidad > 0){
@@ -1929,7 +1964,7 @@ export class CuponOmnicanalComponent implements OnInit {
   }
 
   private ajaxQueryPost(urlEndPoint: string, token: string, data: any): any {
-    console.log(data);
+    console.log("Entro aquiiiiiiiii");
     let t_result!: any;
     $.ajax({
       url: urlEndPoint,
@@ -1945,12 +1980,11 @@ export class CuponOmnicanalComponent implements OnInit {
       headers: {
          'Authorization': 'Bearer ' + token
       },
-      success: (result) => {         
-        console.log("aca esta el result: ",result);          
+      success: (result) => {        
+        this.validacion = result;
        },
       error: (error) => {
-       
-        console.log(error);
+        this.validacion = error.responseText;
         this.spinner.hide();
       }
     });
@@ -2015,352 +2049,164 @@ export class CuponOmnicanalComponent implements OnInit {
         fecfin = this.cuponOmni.fecFin.getFullYear() + "-" + (this.cuponOmni.fecFin.getMonth()+1).toString().padStart(2, '0') + "-" + (this.cuponOmni.fecFin.getDate()).toString().padStart(2, '0') + " " + this.cuponOmni.fecFin.getHours() + ":" + this.cuponOmni.fecFin.getMinutes() + ":" + this.cuponOmni.fecFin.getSeconds();
         var tipo = parseInt(this.selectCountTimes);
         // cdtipo, cdcuponesgenerar, cdmaximouso, cdcodigo, cdnuevoprecio, fgMinimoCompra, cdmontoMinimo, cdmontoMaximoDescuento, cdPorcentajeDescuento, cdDescuentoDelivery, cdMontoDescuento
-        var monto, montomax, compramin, cupongenerar, codigo, nroUso, percentdsct;
-        
-          if(this.cuponOmni.monto == undefined){
-            monto = '';
-          }
-          else{
-            monto = '=' +this.cuponOmni.monto;
-          }
-          
-          if(this.cuponOmni.montoMax == undefined){
-            montomax = '';
-          }
-          else{
-            montomax = '=' +this.cuponOmni.montoMax;
-          }
-          
-          if(this.cuponOmni.compraMin == undefined){
-            compramin = '';
-          }
-          else{
-            compramin = '=' + this.cuponOmni.compraMin;
-          }
-          
-          if(this.cuponOmni.nroCuponAGenerar == undefined){
-            cupongenerar = '';
-          }
-          else{
-            cupongenerar = '=' +this.cuponOmni.nroCuponAGenerar;
-          }          
+        var cuponesagenerar, maximouso, codigo, nuevoprecio, fgminimocompra, montominimo, montomaximodescuento, porcentajedescuento, descuentodelivery, montodescuento;
+        if (this.cuponOmni.tipoCupon == 1 && tipo == 1) {
+          cuponesagenerar = '=' + this.cuponOmni.nroCuponAGenerar;
+          nuevoprecio = '=' + this.cuponOmni.monto;
+          fgminimocompra = '=' + this.cuponOmni.activoCompraMin;
+          montominimo = '=' + this.cuponOmni.compraMin;
+          maximouso = '';
+          codigo = '';
+          montomaximodescuento = '';
+          porcentajedescuento = '';
+          descuentodelivery = '';
+          montodescuento = '';
+        }
+    
+        else if (this.cuponOmni.tipoCupon == 1 && tipo == 2) {
+          cuponesagenerar = '=' + this.cuponOmni.nroCuponAGenerar;
+          nuevoprecio = '=' + this.cuponOmni.monto;
+          fgminimocompra = '=' + this.cuponOmni.activoCompraMin;
+          montominimo = '=' + this.cuponOmni.compraMin;
+          maximouso = '=' + this.cuponOmni.nroUso
+          codigo = '=' + this.cuponOmni.codigo
+          montomaximodescuento = '';
+          porcentajedescuento = '';
+          descuentodelivery = '';
+          montodescuento = '';
+        }
+    
+        else if (this.cuponOmni.tipoCupon == 2 && tipo == 1) {
+          cuponesagenerar = '=' + this.cuponOmni.nroCuponAGenerar;
+          nuevoprecio = '';
+          fgminimocompra = '=' + this.cuponOmni.activoCompraMin;
+          montominimo = '=' + this.cuponOmni.compraMin;
+          maximouso = '';
+          codigo = '';
+          montomaximodescuento = '=' + this.cuponOmni.montoMax;
+          porcentajedescuento = '=' + this.cuponOmni.percentdsct;
+          descuentodelivery = '';
+          montodescuento = '';
+        }
+    
+        else if (this.cuponOmni.tipoCupon == 2 && tipo == 2) { 
+          cuponesagenerar = '=' + this.cuponOmni.nroCuponAGenerar;
+          nuevoprecio = '';
+          fgminimocompra = '=' + this.cuponOmni.activoCompraMin;
+          montominimo = '=' + this.cuponOmni.compraMin;
+          maximouso = '=' + this.cuponOmni.nroUso
+          codigo = '=' + this.cuponOmni.codigo
+          montomaximodescuento = '=' + this.cuponOmni.montoMax;
+          porcentajedescuento = '=' + this.cuponOmni.percentdsct;
+          descuentodelivery = '';
+          montodescuento = '';
+        }
+    
+        else if (this.cuponOmni.tipoCupon == 3 && tipo == 1) {
+          cuponesagenerar = '=' + this.cuponOmni.nroCuponAGenerar;
+          nuevoprecio = '';
+          fgminimocompra = '=' + this.cuponOmni.activoCompraMin;
+          montominimo = '=' + this.cuponOmni.compraMin;
+          maximouso = '';
+          codigo = '';
+          montomaximodescuento = '=' + this.cuponOmni.montoMax;
+          porcentajedescuento = '=' + this.cuponOmni.percentdsct;
+          descuentodelivery = '';
+          montodescuento = '';
+        }
+    
+        else if (this.cuponOmni.tipoCupon == 3 && tipo == 2) {
+          cuponesagenerar = '=' + this.cuponOmni.nroCuponAGenerar;
+          nuevoprecio = '';
+          fgminimocompra = '=' + this.cuponOmni.activoCompraMin;
+          montominimo = '=' + this.cuponOmni.compraMin;
+          maximouso = '=' + this.cuponOmni.nroUso
+          codigo = '=' + this.cuponOmni.codigo
+          montomaximodescuento = '=' + this.cuponOmni.montoMax;
+          porcentajedescuento = '=' + this.cuponOmni.percentdsct;
+          descuentodelivery = '';
+          montodescuento = '';
+        }
+    
+        else if (this.cuponOmni.tipoCupon == 4 && tipo == 1) {
+          cuponesagenerar = '=' + this.cuponOmni.nroCuponAGenerar;
+          nuevoprecio = '';
+          fgminimocompra = '=' + this.cuponOmni.activoCompraMin;
+          montominimo = '=' + this.cuponOmni.compraMin;
+          maximouso = '';
+          codigo = '';
+          montomaximodescuento = '';
+          porcentajedescuento = '';
+          descuentodelivery = '=' + this.cuponOmni.percentdsct;
+          montodescuento = '';
+        }
+    
+        else if (this.cuponOmni.tipoCupon == 4 && tipo == 2) {  
+          cuponesagenerar = '=' + this.cuponOmni.nroCuponAGenerar;
+          nuevoprecio = '';
+          fgminimocompra = '=' + this.cuponOmni.activoCompraMin;
+          montominimo = '=' + this.cuponOmni.compraMin;
+          maximouso = '=' + this.cuponOmni.nroUso;
+          codigo = '=' + this.cuponOmni.codigo;
+          montomaximodescuento = '';
+          porcentajedescuento = '';
+          descuentodelivery = '=' + this.cuponOmni.percentdsct;
+          montodescuento = '';  
+        }
+    
+        else if (this.cuponOmni.tipoCupon == 5 && tipo == 1) {
+          cuponesagenerar = '=' + this.cuponOmni.nroCuponAGenerar;
+          nuevoprecio = '';
+          fgminimocompra = '=' + this.cuponOmni.activoCompraMin;
+          montominimo = '=' + this.cuponOmni.compraMin;
+          maximouso = '';
+          codigo = '';
+          montomaximodescuento = '';
+          porcentajedescuento = '';
+          descuentodelivery = '';
+          montodescuento = '=' + this.cuponOmni.percentdsct;
+        }
+    
+        else if (this.cuponOmni.tipoCupon == 5 && tipo == 2) {
+          cuponesagenerar = '=' + this.cuponOmni.nroCuponAGenerar;
+          nuevoprecio = '';
+          fgminimocompra = '=' + this.cuponOmni.activoCompraMin;
+          montominimo = '=' + this.cuponOmni.compraMin;
+          maximouso = '=' + this.cuponOmni.nroUso;
+          codigo = '=' + this.cuponOmni.codigo;
+          montomaximodescuento = '';
+          porcentajedescuento = '';
+          descuentodelivery = '';
+          montodescuento = '=' + this.cuponOmni.percentdsct;
+        }
+    
+        else if (this.cuponOmni.tipoCupon == 6 && tipo == 1) {
+          cuponesagenerar = '=' + this.cuponOmni.nroCuponAGenerar;
+          nuevoprecio = '';
+          fgminimocompra = '';
+          montominimo = '=' + this.cuponOmni.compraMin;
+          maximouso = '';
+          codigo = '';
+          montomaximodescuento = '=' + this.cuponOmni.montoMax;
+          porcentajedescuento = '=' + this.cuponOmni.percentdsct;
+          descuentodelivery = '';
+          montodescuento = '';
+        }
+    
+        else if (this.cuponOmni.tipoCupon == 6 && tipo == 2) {
+          cuponesagenerar = '=' + this.cuponOmni.nroCuponAGenerar;
+          nuevoprecio = '';
+          fgminimocompra = '';
+          montominimo = '=' + this.cuponOmni.compraMin;
+          maximouso = '=' + this.cuponOmni.nroUso;
+          codigo = '=' + this.cuponOmni.codigo;
+          montomaximodescuento = '=' + this.cuponOmni.montoMax;
+          porcentajedescuento = '=' + this.cuponOmni.percentdsct;
+          descuentodelivery = '';
+          montodescuento = '';
+        }
 
-          if(this.cuponOmni.monto == undefined){
-            monto = '';
-          }
-          else{
-            monto = '=' +this.cuponOmni.monto;
-          }
-          
-          if(this.cuponOmni.montoMax == undefined){
-            montomax = '';
-          }
-          else{
-            montomax = '=' +this.cuponOmni.montoMax;
-          }
-          
-          if(this.cuponOmni.compraMin == undefined){
-            compramin = '';
-          }
-          else{
-            compramin = '=' + this.cuponOmni.compraMin;
-          }
-          
-          if(this.cuponOmni.nroCuponAGenerar == undefined){
-            cupongenerar = '';
-          }
-          else{
-            cupongenerar = '=' +this.cuponOmni.nroCuponAGenerar;
-          }
-          
-          if(this.cuponOmni.codigo == undefined){
-            codigo = '';
-          }
-          else{
-            codigo = '=' +this.cuponOmni.codigo;
-          }
-
-          if(this.cuponOmni.nroUso == undefined){
-            nroUso = '';
-          }
-          else{
-            nroUso = '=' +this.cuponOmni.nroUso;
-          }
-                 
-          if(this.cuponOmni.percentdsct == undefined){
-            percentdsct = '';
-          }
-          else{
-            percentdsct = '=' +this.cuponOmni.percentdsct;
-          }      
-
-          if(this.cuponOmni.nroCuponAGenerar == undefined){
-            cupongenerar = '';
-          }
-          else{
-            cupongenerar = '=' +this.cuponOmni.nroCuponAGenerar;
-          }      
-          if(this.cuponOmni.montoMax == undefined){
-            montomax = '';
-          }
-          else{
-            montomax = '=' +this.cuponOmni.montoMax;
-          }
-          
-          if(this.cuponOmni.compraMin == undefined){
-            compramin = '';
-          }
-          else{
-            compramin = '=' + this.cuponOmni.compraMin;
-          }        
-          if(this.cuponOmni.codigo == undefined){
-            codigo = '';
-          }
-          else{
-            codigo = '=' +this.cuponOmni.codigo;
-          }
-
-          if(this.cuponOmni.nroUso == undefined){
-            nroUso = '';
-          }
-          else{
-            nroUso = '=' +this.cuponOmni.nroUso;
-          }
-          if(this.cuponOmni.montoMax == undefined){
-            montomax = '';
-          }
-          else{
-            montomax = '=' +this.cuponOmni.montoMax;
-          }
-          
-          if(this.cuponOmni.compraMin == undefined){
-            compramin = '';
-          }
-          else{
-            compramin = '=' + this.cuponOmni.compraMin;
-          }
-
-          if(this.cuponOmni.percentdsct == undefined){
-            percentdsct = '';
-          }
-          else{
-            percentdsct = '=' +this.cuponOmni.percentdsct;
-          }        
-          if(this.cuponOmni.montoMax == undefined){
-            montomax = '';
-          }
-          else{
-            montomax = '=' +this.cuponOmni.montoMax;
-          }
-          
-          if(this.cuponOmni.compraMin == undefined){
-            compramin = '';
-          }
-          else{
-            compramin = '=' + this.cuponOmni.compraMin;
-          }
-
-          if(this.cuponOmni.percentdsct == undefined){
-            percentdsct = '';
-          }
-          else{
-            percentdsct = '=' +this.cuponOmni.percentdsct;
-          }        
-          if(this.cuponOmni.codigo == undefined){
-            codigo = '';
-          }
-          else{
-            codigo = '=' +this.cuponOmni.codigo;
-          }
-
-          if(this.cuponOmni.nroUso == undefined){
-            nroUso = '';
-          }
-          else{
-            nroUso = '=' +this.cuponOmni.nroUso;
-          }
-          if(this.cuponOmni.percentdsct == undefined){
-            percentdsct = '';
-          }
-          else{
-            percentdsct = '=' +this.cuponOmni.percentdsct;
-          }
-          if(this.cuponOmni.montoMax == undefined){
-            montomax = '';
-          }
-          else{
-            montomax = '=' +this.cuponOmni.montoMax;
-          }
-          
-          if(this.cuponOmni.compraMin == undefined){
-            compramin = '';
-          }
-          else{
-            compramin = '=' + this.cuponOmni.compraMin;
-          }        
-          if(this.cuponOmni.percentdsct == undefined){
-            percentdsct = '';
-          }
-          else{
-            percentdsct = '=' +this.cuponOmni.percentdsct;
-          }
-          if(this.cuponOmni.nroCuponAGenerar == undefined){
-            cupongenerar = '';
-          }
-          else{
-            cupongenerar = '=' +this.cuponOmni.nroCuponAGenerar;
-          }      
-          if(this.cuponOmni.montoMax == undefined){
-            montomax = '';
-          }
-          else{
-            montomax = '=' +this.cuponOmni.montoMax;
-          }
-          
-          if(this.cuponOmni.compraMin == undefined){
-            compramin = '';
-          }
-          else{
-            compramin = '=' + this.cuponOmni.compraMin;
-          }       
-          if(this.cuponOmni.codigo == undefined){
-            codigo = '';
-          }
-          else{
-            codigo = '=' +this.cuponOmni.codigo;
-          }
-
-          if(this.cuponOmni.nroUso == undefined){
-            nroUso = '';
-          }
-          else{
-            nroUso = '=' +this.cuponOmni.nroUso;
-          }
-          if(this.cuponOmni.percentdsct == undefined){
-            percentdsct = '';
-          }
-          else{
-            percentdsct = '=' +this.cuponOmni.percentdsct;
-          }
-          if(this.cuponOmni.montoMax == undefined){
-            montomax = '';
-          }
-          else{
-            montomax = '=' +this.cuponOmni.montoMax;
-          }
-          
-          if(this.cuponOmni.compraMin == undefined){
-            compramin = '';
-          }
-          else{
-            compramin = '=' + this.cuponOmni.compraMin;
-          }
-       
-          if(this.cuponOmni.percentdsct == undefined){
-            percentdsct = '';
-          }
-          else{
-            percentdsct = '=' +this.cuponOmni.percentdsct;
-          }
-          if(this.cuponOmni.nroCuponAGenerar == undefined){
-            cupongenerar = '';
-          }
-          else{
-            cupongenerar = '=' +this.cuponOmni.nroCuponAGenerar;
-          }      
-          if(this.cuponOmni.montoMax == undefined){
-            montomax = '';
-          }
-          else{
-            montomax = '=' +this.cuponOmni.montoMax;
-          }
-                
-          if(this.cuponOmni.codigo == undefined){
-            codigo = '';
-          }
-          else{
-            codigo = '=' +this.cuponOmni.codigo;
-          }
-
-          if(this.cuponOmni.nroUso == undefined){
-            nroUso = '';
-          }
-          else{
-            nroUso = '=' +this.cuponOmni.nroUso;
-          }
-          if(this.cuponOmni.percentdsct == undefined){
-            percentdsct = '';
-          }
-          else{
-            percentdsct = '=' +this.cuponOmni.percentdsct;
-          }
-          if(this.cuponOmni.montoMax == undefined){
-            montomax = '';
-          }
-          else{
-            montomax = '=' +this.cuponOmni.montoMax;
-          }           
-          if(this.cuponOmni.percentdsct == undefined){
-            percentdsct = '';
-          }
-          else{
-            percentdsct = '=' +this.cuponOmni.percentdsct;
-          }
-          if(this.cuponOmni.montoMax == undefined){
-            montomax = '';
-          }
-          else{
-            montomax = '=' +this.cuponOmni.montoMax;
-          }
-          
-          if(this.cuponOmni.compraMin == undefined){
-            compramin = '';
-          }
-          else{
-            compramin = '=' + this.cuponOmni.compraMin;
-          }
-          if(this.cuponOmni.nroCuponAGenerar == undefined){
-            cupongenerar = '';
-          }
-          else{
-            cupongenerar = '=' +this.cuponOmni.nroCuponAGenerar;
-          }         
-          if(this.cuponOmni.codigo == undefined){
-            codigo = '';
-          }
-          else{
-            codigo = '=' +this.cuponOmni.codigo;
-          }
-
-          if(this.cuponOmni.nroUso == undefined){
-            nroUso = '';
-          }
-          else{
-            nroUso = '=' +this.cuponOmni.nroUso;
-          }
-          if(this.cuponOmni.percentdsct == undefined){
-            percentdsct = '';
-          }
-          else{
-            percentdsct = '=' +this.cuponOmni.percentdsct;
-          }
-          if(this.cuponOmni.montoMax == undefined){
-            montomax = '';
-          }
-          else{
-            montomax = '=' +this.cuponOmni.montoMax;
-          }
-          
-          if(this.cuponOmni.compraMin == undefined){
-            compramin = '';
-          }
-          else{
-            compramin = '=' + this.cuponOmni.compraMin;
-          }
-        
-
-
-        var ruta = `${this.urlLista}/CrearCampanha?cdNombreCampanha=`+this.cuponOmni.nombreCampanha+`&idTipoCupon=`+this.cuponOmni.tipoCupon+`&dtFecInicio=`+fecinicio+`&dtFecFin=`+fecfin+`&cdAlianza=`+this.cuponOmni.alianza+`&cdCantidad=`+cantidad+`&idMarca=` + this.empresaService.getEmpresaSeleccionada().idEmpresa.toString()+`&Bucket=`+this.Bucket+`&Web=`+web+`&Salon=`+salon+`&Call=`+call+`&cdtipo=`+1 +`&cdcuponesgenerar`+cupongenerar +`&cdmaximouso`+ montomax +`&cdcodigo`+ codigo +`&cdnuevoprecio`+ monto +`&fgMinimoCompra=`+ 1 +`&cdmontoMinimo`+ compramin +`&cdmontoMaximoDescuento`+ percentdsct +`&cdPorcentajeDescuento`+ percentdsct +`&cdDescuentoDelivery`+ percentdsct +`&cdMontoDescuento`+compramin;
+        var ruta = `${this.urlLista}/CrearCampanha?cdNombreCampanha=`+this.cuponOmni.nombreCampanha+`&idTipoCupon=`+this.cuponOmni.tipoCupon+`&dtFecInicio=`+fecinicio+`&dtFecFin=`+fecfin+`&cdAlianza=`+this.cuponOmni.alianza+`&cdCantidad=`+cantidad+`&idMarca=` + this.empresaService.getEmpresaSeleccionada().idEmpresa.toString()+`&Bucket=`+this.Bucket+`&Web=`+web+`&Salon=`+salon+`&Call=`+call+`&cdtipo=`+tipo +`&cdcuponesgenerar`+cuponesagenerar +`&cdmaximouso`+ maximouso +`&cdcodigo`+ codigo +`&cdnuevoprecio`+ nuevoprecio +`&fgMinimoCompra`+ fgminimocompra +`&cdmontoMinimo`+ montominimo +`&cdmontoMaximoDescuento`+ montomaximodescuento +`&cdPorcentajeDescuento`+ porcentajedescuento +`&cdDescuentoDelivery`+ descuentodelivery +`&cdMontoDescuento`+montodescuento;
 
         this.ajaxQueryPostsql(ruta, this.dataCupones.token);
 
