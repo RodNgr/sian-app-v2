@@ -6,12 +6,14 @@
     <ng-template pTemplate="header">
         <tr>
             <th>Tienda </th>
+            <th>Nombre </th>
             <th>Motivo </th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-tienda>
         <tr>
             <td>{{tienda.noTienda}}</td>
+            <td>{{tienda.nombre}}</td>
             <td>{{tienda.motivo}}</td>
         </tr>
     </ng-template>
