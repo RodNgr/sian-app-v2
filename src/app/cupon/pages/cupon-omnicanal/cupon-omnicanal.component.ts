@@ -250,7 +250,7 @@ export class CuponOmnicanalComponent implements OnInit {
   codigoChange(): void {
     if(this.cuponOmni.codigo){
       if(
-        this.cuponOmni.codigo.length > 4 
+        this.cuponOmni.codigo.length > 3 
         && this.cuponOmni.codigo.length < 11 
         && this.cuponOmni.codigo.toUpperCase().search('Ñ') < 0
         && this.cuponOmni.codigo.toUpperCase().search('O') < 0
@@ -1517,7 +1517,9 @@ export class CuponOmnicanalComponent implements OnInit {
       if(!this.cuponOmni.nroCuponAGenerar && this.cuponOmni.nroCuponAGenerar > 1 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
       if(!this.cuponOmni.compraMin && this.cuponOmni.compraMin == 0 && this.cuponOmni.activoCompraMin == 1){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
       if(!this.cuponOmni.percentdsct && this.cuponOmni.percentdsct == 0 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
-      if(this.cuponOmni.compraMin<this.cuponOmni.percentdsct && this.cuponOmni.activoCompraMin == 1){ console.error('Compra Minima debe ser mayor a Monto de descuento'); validation = false;}
+      let minimo:number =  Number(this.cuponOmni.compraMin);
+      let monto:number= Number(this.cuponOmni.percentdsct);      
+      if(minimo<monto && this.cuponOmni.activoCompraMin == 1){ console.error('Compra Minima debe ser mayor a Monto de descuento'); validation = false;}
     }
 
     else if (this.cuponOmni.tipoCupon == 5 && this.selectCountTimes == '2') {
@@ -1526,7 +1528,9 @@ export class CuponOmnicanalComponent implements OnInit {
       if(!this.cuponOmni.codigo && this.cuponOmni.codigo == "" ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
       if(!this.cuponOmni.compraMin && this.cuponOmni.compraMin == 0 && this.cuponOmni.activoCompraMin == 1){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
       if(!this.cuponOmni.percentdsct && this.cuponOmni.percentdsct == 0 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
-      if(this.cuponOmni.compraMin<this.cuponOmni.percentdsct && this.cuponOmni.activoCompraMin == 1){ console.error('Compra Minima debe ser mayor a Monto de descuento'); validation = false;}
+      let minimo:number =  Number(this.cuponOmni.compraMin);
+      let monto:number= Number(this.cuponOmni.percentdsct);      
+      if(minimo<monto && this.cuponOmni.activoCompraMin == 1){ console.error('Compra Minima debe ser mayor a Monto de descuento'); validation = false;}
     }
 
     else if (this.cuponOmni.tipoCupon == 6 && this.selectCountTimes == '1') {
