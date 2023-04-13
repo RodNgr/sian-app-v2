@@ -1,8 +1,8 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { FormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CuponRoutingModule } from './cupon-routing.module';
 import { PrimengModule } from '../primeng/primeng.module';
 import { SharedModule } from '../shared/shared.module';
@@ -87,7 +87,8 @@ import { AnularCuponComponent } from './components/anular-cupon/anular-cupon.com
     CuponRoutingModule,
     PrimengModule,
     NgxSpinnerModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

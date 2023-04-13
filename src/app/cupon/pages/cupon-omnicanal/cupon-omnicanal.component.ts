@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef   } from '@angular/core';
 import { Router } from '@angular/router';
 import { TipoCuponOmnicanal } from '../../entity/tipo-cupon-omnicanal';
 import { CartaConsolidada, CartaDetalleVista, ProductoCarta } from '../../entity/producto-carta';
@@ -21,7 +21,7 @@ import * as $ from 'jquery';
 import { environment } from 'src/environments/environment';
 import { CuponesOmnicanalService } from '../../services/cupones-omnicanal.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-cupon-omnicanal',
@@ -129,7 +129,9 @@ export class CuponOmnicanalComponent implements OnInit {
               private empresaService: EmpresaService,
               private dataCupones: CuponesOmnicanalService,
               private authService: AuthService,
-              private spinner: NgxSpinnerService) {
+              private spinner: NgxSpinnerService,
+              private datePipe: DatePipe,
+              private elementRef: ElementRef) {
                 this.urlEndPointOmnicanal = environment.urlOmnicanalA;    
                 this.urlLista = environment.urlCarta;
 
@@ -144,7 +146,7 @@ export class CuponOmnicanalComponent implements OnInit {
     this.showMontoMinimo = false;
     this.getProductSelect = this.cartaService.getDataProductSelect();
 
-    this.productosCartaConsolidado.splice(0, 1);  
+    this.productosCartaConsolidado.splice(0, 1);
   }
 
   filtroWeb(){
@@ -799,8 +801,8 @@ export class CuponOmnicanalComponent implements OnInit {
       cuponOmni => {
         this.cuponOmniD = cuponOmni;
         
-        this.cuponOmni.fecInicio = new Date(this.cuponOmniD[0].fecInicio);
-        this.cuponOmni.fecFin = new Date(this.cuponOmniD[0].fecFin);
+        this.cuponOmni.fecInicio = new Date(this.cuponOmniD[0].fecInicio.toString());;
+        this.cuponOmni.fecFin = new Date(this.cuponOmniD[0].fecFin.toString());
         this.cuponOmni.nombreCampanha = this.cuponOmniD[0].nombreCampanha;
         this.cuponOmni.alianza = this.cuponOmniD[0].alianza;
         this.selectCountTimes = this.cuponOmniD[0].tipo.toString();
@@ -1070,7 +1072,8 @@ export class CuponOmnicanalComponent implements OnInit {
           this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
           this.cuponOmni.monto = this.cuponOmniD[0].monto;
           this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
-          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;          
+          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
+          this.activarBlur(this.cuponOmni.monto,'monto');         
         }
     
         else if (this.cuponOmniD[0].tipoCupon == 1 && this.cuponOmniD[0].tipo == 2) {
@@ -1080,6 +1083,7 @@ export class CuponOmnicanalComponent implements OnInit {
           this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
           this.cuponOmni.nroUso = this.cuponOmniD[0].maximouso;
           this.cuponOmni.codigo = this.cuponOmniD[0].codigo;
+          this.activarBlur(this.cuponOmni.monto,'monto');
         }
     
         else if (this.cuponOmniD[0].tipoCupon == 2 && this.cuponOmniD[0].tipo == 1) {
@@ -1087,7 +1091,9 @@ export class CuponOmnicanalComponent implements OnInit {
           this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
           this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
           this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
-          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;          
+          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
+          this.activarBlur(this.cuponOmni.montoMax,'montoMax');
+          this.activarBlur(this.cuponOmni.percentdsct,'percentdsct');        
         }
     
         else if (this.cuponOmniD[0].tipoCupon == 2 && this.cuponOmniD[0].tipo == 2) { 
@@ -1097,7 +1103,9 @@ export class CuponOmnicanalComponent implements OnInit {
           this.cuponOmni.nroUso = this.cuponOmniD[0].maximouso;
           this.cuponOmni.codigo = this.cuponOmniD[0].codigo;
           this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
-          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;          
+          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
+          this.activarBlur(this.cuponOmni.montoMax,'montoMax');
+          this.activarBlur(this.cuponOmni.percentdsct,'percentdsct');         
         }
     
         else if (this.cuponOmniD[0].tipoCupon == 3 && this.cuponOmniD[0].tipo == 1) {
@@ -1106,6 +1114,8 @@ export class CuponOmnicanalComponent implements OnInit {
           this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
           this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
           this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
+          this.activarBlur(this.cuponOmni.montoMax,'montoMax');
+          this.activarBlur(this.cuponOmni.percentdsct,'percentdsct'); 
         }
     
         else if (this.cuponOmniD[0].tipoCupon == 3 && this.cuponOmniD[0].tipo == 2) {
@@ -1115,7 +1125,9 @@ export class CuponOmnicanalComponent implements OnInit {
           this.cuponOmni.nroUso = this.cuponOmniD[0].maximouso;
           this.cuponOmni.codigo = this.cuponOmniD[0].codigo;
           this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
-          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;   
+          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
+          this.activarBlur(this.cuponOmni.montoMax,'montoMax');
+          this.activarBlur(this.cuponOmni.percentdsct,'percentdsct');
         }
     
         else if (this.cuponOmniD[0].tipoCupon == 4 && this.cuponOmniD[0].tipo == 1) {
@@ -1123,6 +1135,7 @@ export class CuponOmnicanalComponent implements OnInit {
           this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
           this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
           this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
+          this.activarBlur(this.cuponOmni.percentdsct,'percentdsct');
         }
     
         else if (this.cuponOmniD[0].tipoCupon == 4 && this.cuponOmniD[0].tipo == 2) {  
@@ -1139,6 +1152,7 @@ export class CuponOmnicanalComponent implements OnInit {
           this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
           this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
           this.cuponOmni.percentdsct = this.cuponOmniD[0].montodescuento;
+          this.activarBlur(this.cuponOmni.percentdsct,'percentdsct');
         }
     
         else if (this.cuponOmniD[0].tipoCupon == 5 && this.cuponOmniD[0].tipo == 2) {
@@ -1147,7 +1161,8 @@ export class CuponOmnicanalComponent implements OnInit {
           this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
           this.cuponOmni.percentdsct = this.cuponOmniD[0].montodescuento;
           this.cuponOmni.nroUso = this.cuponOmniD[0].maximouso;
-          this.cuponOmni.codigo = this.cuponOmniD[0].codigo;  
+          this.cuponOmni.codigo = this.cuponOmniD[0].codigo;
+          this.activarBlur(this.cuponOmni.percentdsct,'percentdsct'); 
         }
     
         else if (this.cuponOmniD[0].tipoCupon == 6 && this.cuponOmniD[0].tipo == 1) {
@@ -1155,6 +1170,8 @@ export class CuponOmnicanalComponent implements OnInit {
           this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
           this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
           this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
+          this.activarBlur(this.cuponOmni.montoMax,'montoMax');
+          this.activarBlur(this.cuponOmni.percentdsct,'percentdsct'); 
         }
     
         else if (this.cuponOmniD[0].tipoCupon == 6 && this.cuponOmniD[0].tipo == 2) {
@@ -1163,7 +1180,9 @@ export class CuponOmnicanalComponent implements OnInit {
           this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
           this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
           this.cuponOmni.nroUso = this.cuponOmniD[0].maximouso;
-          this.cuponOmni.codigo = this.cuponOmniD[0].codigo;  
+          this.cuponOmni.codigo = this.cuponOmniD[0].codigo; 
+          this.activarBlur(this.cuponOmni.montoMax,'montoMax');
+          this.activarBlur(this.cuponOmni.percentdsct,'percentdsct');  
         }
         
         this.cartaService.getDetalleVales(id).subscribe(
@@ -1421,6 +1440,10 @@ export class CuponOmnicanalComponent implements OnInit {
       
       console.error(e);
     })
+  }
+
+  private FormatoFecha(date= new Date()): string {
+    return this.datePipe.transform(date,'yyyy-MM-dd HH:mm:ss' ).toString();
   }
 
   private validarDataCupon(): void {
@@ -1954,8 +1977,8 @@ export class CuponOmnicanalComponent implements OnInit {
           web = 0;
         }
         
-        fecinicio = this.cuponOmni.fecInicio.getFullYear() + "-" + (this.cuponOmni.fecInicio.getMonth()+1).toString().padStart(2, '0') + "-" + (this.cuponOmni.fecInicio.getDate()).toString().padStart(2, '0') + " " + this.cuponOmni.fecInicio.getHours() + ":" + this.cuponOmni.fecInicio.getMinutes() + ":" + this.cuponOmni.fecInicio.getSeconds();
-        fecfin = this.cuponOmni.fecFin.getFullYear() + "-" + (this.cuponOmni.fecFin.getMonth()+1).toString().padStart(2, '0') + "-" + (this.cuponOmni.fecFin.getDate()).toString().padStart(2, '0') + " " + this.cuponOmni.fecFin.getHours() + ":" + this.cuponOmni.fecFin.getMinutes() + ":" + this.cuponOmni.fecFin.getSeconds();
+        fecinicio = this.FormatoFecha(this.cuponOmni.fecInicio);//.getFullYear() + "-" + (this.cuponOmni.fecInicio.getMonth()+1).toString().padStart(2, '0') + "-" + (this.cuponOmni.fecInicio.getDate()).toString().padStart(2, '0') + " " + this.cuponOmni.fecInicio.getHours() + ":" + this.cuponOmni.fecInicio.getMinutes() + ":" + this.cuponOmni.fecInicio.getSeconds();
+        fecfin = this.FormatoFecha(this.cuponOmni.fecFin);//.getFullYear() + "-" + (this.cuponOmni.fecFin.getMonth()+1).toString().padStart(2, '0') + "-" + (this.cuponOmni.fecFin.getDate()).toString().padStart(2, '0') + " " + this.cuponOmni.fecFin.getHours() + ":" + this.cuponOmni.fecFin.getMinutes() + ":" + this.cuponOmni.fecFin.getSeconds();
         var tipo = parseInt(this.selectCountTimes);
         // cdtipo, cdcuponesgenerar, cdmaximouso, cdcodigo, cdnuevoprecio, fgMinimoCompra, cdmontoMinimo, cdmontoMaximoDescuento, cdPorcentajeDescuento, cdDescuentoDelivery, cdMontoDescuento
         var cuponesagenerar, maximouso, codigo, nuevoprecio, fgminimocompra, montominimo, montomaximodescuento, porcentajedescuento, descuentodelivery, montodescuento;
@@ -2115,8 +2138,8 @@ export class CuponOmnicanalComponent implements OnInit {
           montodescuento = '';
         }
 
-        var ruta = `${this.urlLista}/CrearCampanha?cdNombreCampanha=`+this.cuponOmni.nombreCampanha.toUpperCase()+`&idTipoCupon=`+this.cuponOmni.tipoCupon+`&dtFecInicio=`+fecinicio+`&dtFecFin=`+fecfin+`&cdAlianza=`+this.cuponOmni.alianza.toUpperCase()+`&cdCantidad=`+cantidad+`&idMarca=` + this.empresaService.getEmpresaSeleccionada().idEmpresa.toString()+`&Bucket`+`&Web=`+web+`&Salon=`+salon+`&Call=`+call+`&cdtipo=`+tipo +`&cdcuponesgenerar`+cuponesagenerar +`&cdmaximouso`+ maximouso +`&cdcodigo`+ codigo +`&cdnuevoprecio`+ nuevoprecio +`&fgMinimoCompra`+ fgminimocompra +`&cdmontoMinimo`+ montominimo +`&cdmontoMaximoDescuento`+ montomaximodescuento +`&cdPorcentajeDescuento`+ porcentajedescuento +`&cdDescuentoDelivery`+ descuentodelivery +`&cdMontoDescuento`+montodescuento;
-
+        var ruta = `${this.urlLista}/CrearCampanha?cdNombreCampanha=`+this.cuponOmni.nombreCampanha.toUpperCase()+`&idTipoCupon=`+this.cuponOmni.tipoCupon+`&dtFecInicio=`+fecinicio+`&dtFecFin=`+fecfin+`&cdAlianza=`+this.cuponOmni.alianza.toUpperCase()+`&cdCantidad=`+cantidad+`&idMarca=` + this.empresaService.getEmpresaSeleccionada().idEmpresa.toString()+`&Bucket`+`&Web=`+web+`&Salon=`+salon+`&Call=`+call+`&cdtipo=`+tipo +`&cdcuponesgenerar`+cuponesagenerar +`&cdmaximouso`+ maximouso +`&cdcodigo`+ codigo +`&cdnuevoprecio`+ nuevoprecio +`&fgMinimoCompra`+ fgminimocompra +`&cdmontoMinimo`+ montominimo +`&cdmontoMaximoDescuento`+ montomaximodescuento +`&cdPorcentajeDescuento`+ porcentajedescuento +`&cdDescuentoDelivery`+ descuentodelivery +`&cdMontoDescuento`+montodescuento+`&nrodoc=`+this.authService.usuario.user.nrodoc;
+        
         this.ajaxQueryPostsql(ruta, this.dataCupones.token);
 
         console.log('Cantidad detalle vista: ' + this.CartaDetalleVista.length);
@@ -2186,7 +2209,7 @@ export class CuponOmnicanalComponent implements OnInit {
   }
 
   private ajaxQueryPost(urlEndPoint: string, token: string, data: any): any {
-    console.log("Entro aquiiiiiiiii");
+
     let t_result!: any;
     $.ajax({
       url: urlEndPoint,
@@ -2704,8 +2727,14 @@ export class CuponOmnicanalComponent implements OnInit {
     });
   }
 
-  public parseTwoDecimal(monto, nameAtribute){
-    let newMonto = monto.toFixed(2);
+  activarBlur(parametro1: any, parametro2: any) {
+    const event = new FocusEvent('blur');
+    this.parseTwoDecimal(parametro1, parametro2);
+  }
+
+  
+  parseTwoDecimal(monto, nameAtribute) {
+    let newMonto =  Number.parseFloat(monto).toFixed(2);//monto.toFixed(2);
     this.cuponOmni[nameAtribute] = newMonto;
   }
 }

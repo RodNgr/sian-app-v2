@@ -97,7 +97,7 @@ export class CuponesOmnicanalService {
   }
 
   TokenClient() {
-    return this.http.post(`${this.urlEndPointOmnicanal}/generatoken`, { "grant_type": "client_credentials", "client_id": "7tj4d2jf2kenqkra76ga751omni", "client_secret": "mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliiomni" }).pipe(
+    return this.http.post(`${this.urlEndPointOmnicanal}/generatoken`, { "grant_type": this._gtype, "client_id": this._clientid, "client_secret": this._clientsecret }).pipe(
       map( (resp: any) => {
         console.log("Se crea el token");
         this.handledToken(resp.access_token);
