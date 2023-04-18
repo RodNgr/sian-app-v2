@@ -90,7 +90,7 @@ export class CuponOmnicanalComponent implements OnInit {
   public searchWeb: string='';
   public searchCall: string='';
   public searchSalon: string='';
-  public searchrcolas1: string='';
+  public searchrColas: string='';
   public Cantidad: number;
 
   public productosCartaWebTemp: ProductoCarta[] = [];
@@ -174,21 +174,21 @@ export class CuponOmnicanalComponent implements OnInit {
  }
 
  filtrorCOLAS(){
-  if(this.searchrcolas1.length > 0){
-    this.productosCartaWeb =  this.productosRcolasTemp.filter((item) => {
-      if (item.producto.toLowerCase().indexOf(this.searchrcolas1.toLowerCase()) > 0) {
+  if(this.searchrColas.length > 0){
+    this.productosCartaRcolas =  this.productosRcolasTemp.filter((item) => {
+      if (item.producto.toLowerCase().indexOf(this.searchrColas.toLowerCase()) > 0) {
         return true;
       }
-      if (item.codigo.toString().toLowerCase().indexOf(this.searchrcolas1.toLowerCase( )) >= 0) {
+      if (item.codigo.toString().toLowerCase().indexOf(this.searchrColas.toLowerCase( )) >= 0) {
         return true;
       }
-      if (item.menu.toLowerCase().indexOf(this.searchrcolas1.toLowerCase( )) >= 0) {
+      if (item.menu.toLowerCase().indexOf(this.searchrColas.toLowerCase( )) >= 0) {
         return true;
       }
       return false;
     })
   } else{
-    this.productosCartaWeb =  this.productosRcolasTemp;
+    this.productosCartaRcolas =  this.productosRcolasTemp;
   }
 }
 
