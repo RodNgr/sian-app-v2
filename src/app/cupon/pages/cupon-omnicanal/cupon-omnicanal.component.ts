@@ -50,6 +50,7 @@ export class CuponOmnicanalComponent implements OnInit {
   public showProductsWeb: boolean = false;
   public showProductsCall: boolean = false;
   public showProductsSalon: boolean = false;
+  public showProductsRColas: boolean = false;
   public showProductsBot: boolean = false;
   public shoPorcentajeDescuento: boolean = false;
   public showMaximoDescuento: boolean = false;
@@ -68,6 +69,7 @@ export class CuponOmnicanalComponent implements OnInit {
   public productosCartaWeb: ProductoCarta[] = [];
   public productosCartaCallCenter: ProductoCarta[] = [];
   public productosCartaSalon: ProductoCarta[] = [];
+  public productosCartaRcolas: ProductoCarta[] = [];
   public productosCartaConsolidado: ProductoCarta[] = [];
   public CartaFinal: CartaConsolidada[] = [];
   public CartaFinaltipos: CartaConsolidada[] = [];
@@ -76,6 +78,7 @@ export class CuponOmnicanalComponent implements OnInit {
   public CartaWebSelectedSelected!: ProductoCarta;
   public CartaCallSelectedSelected!: ProductoCarta;
   public CartaSalonSelectedSelected!: ProductoCarta;
+  public CartaRcolasSelectedSelected!: ProductoCarta;
   public CartaConsolidadoSelectedSelected!: ProductoCarta;  
   public DetalleSelected!: detalle;
   public maxCantidadProductos: number = 0;
@@ -87,11 +90,13 @@ export class CuponOmnicanalComponent implements OnInit {
   public searchWeb: string='';
   public searchCall: string='';
   public searchSalon: string='';
+  public searchrcolas1: string='';
   public Cantidad: number;
 
   public productosCartaWebTemp: ProductoCarta[] = [];
   public productosCartaCallCenterTemp: ProductoCarta[] = [];
   public productosCartaSalonTemp: ProductoCarta[] = [];
+  public productosRcolasTemp: ProductoCarta[] = [];
 
   public selectionProduct: ProductoCarta = { carta: '', nombre: '', codigo: '', detalle: '', menu: '', producto: ''};
 
@@ -167,6 +172,25 @@ export class CuponOmnicanalComponent implements OnInit {
       this.productosCartaWeb =  this.productosCartaWebTemp;
     }
  }
+
+ filtrorCOLAS(){
+  if(this.searchrcolas1.length > 0){
+    this.productosCartaWeb =  this.productosRcolasTemp.filter((item) => {
+      if (item.producto.toLowerCase().indexOf(this.searchrcolas1.toLowerCase()) > 0) {
+        return true;
+      }
+      if (item.codigo.toString().toLowerCase().indexOf(this.searchrcolas1.toLowerCase( )) >= 0) {
+        return true;
+      }
+      if (item.menu.toLowerCase().indexOf(this.searchrcolas1.toLowerCase( )) >= 0) {
+        return true;
+      }
+      return false;
+    })
+  } else{
+    this.productosCartaWeb =  this.productosRcolasTemp;
+  }
+}
 
  filtroCall(){
   if(this.searchCall.length > 0){
@@ -315,6 +339,26 @@ export class CuponOmnicanalComponent implements OnInit {
     console.log(this.CartaDetalleVista);
   }
 
+  showModalDialogCartaRcolas(){    
+    let tipo = parseInt(this.selectionTypeCupon);
+
+    if(tipo == 1 && this.CartaFinal.filter(x=> x.canal == 2).length > 0){
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'No se puede añadir más de un producto',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      return;
+    }
+    this.productosCartaConsolidado.push(this.CartaWebSelectedSelected);
+    console.log("this.CartaWebSelectedSelected",this.CartaWebSelectedSelected);
+    this.CartaFinal.push({canal:2, producto : this.CartaWebSelectedSelected.codigo.toString(),cantidad: this.cuponOmni.nroCuponAGenerar});
+    this.CartaDetalleVista.push({canal:100, producto : this.CartaWebSelectedSelected.codigo.toString(),nombre: this.CartaWebSelectedSelected.producto.toString()});
+    console.log(this.CartaDetalleVista);
+  }
+
   showModalDialogCartaCall(){
     let tipo = parseInt(this.selectionTypeCupon);
     
@@ -372,6 +416,7 @@ export class CuponOmnicanalComponent implements OnInit {
   webVal: string = '';
   callVal: string = '';
   salonVal: string = '';
+  rcolasVal: string = '';
 
 // Mostrar opciones por tipo de cupon
   showADetailsUnique(event) {
@@ -769,6 +814,12 @@ export class CuponOmnicanalComponent implements OnInit {
   showTableSalon(event) {
     this.showProductsSalon = event.checked;
     this.getCartaxTipoSalon(this.obtenerCartaSalon(),this.nombreMarca()); //Modificar según especificación de POS
+    console.log(this.salonVal);
+  }
+
+  showTableRColas(event) {
+    this.showProductsRColas = event.checked;
+    this.getCartaxTipoSalon('22106','Bembos-RompeColaLima'); //Modificar según especificación de POS
     console.log(this.salonVal);
   }
 
@@ -1607,6 +1658,9 @@ export class CuponOmnicanalComponent implements OnInit {
       if (this.salonVal == 'carta-salon') {
         this.CartaFinaltipos.push({canal:0,producto:"",cantidad:1});
       }
+      if (this.salonVal == 'carta-rcolas') {
+        this.CartaFinaltipos.push({canal:100,producto:"",cantidad:1});
+      }
       
       if (this.selectionTypeCupon == '1' && tipo == 1) {
         this.cuponOmni2 = {
@@ -2342,7 +2396,7 @@ export class CuponOmnicanalComponent implements OnInit {
         this.spinner.hide();
         var canales = "";
         var minimo = "";
-        if(this.showProductsWeb) {
+        if(this.showProductsWeb || this.showProductsRColas) {
           canales += " Web "
         }
 

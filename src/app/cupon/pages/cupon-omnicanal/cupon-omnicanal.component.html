@@ -199,11 +199,14 @@
                 <label for="salon">Salón</label>
               </div>
 
-
+              <div class="p-field-checkbox">
+                <p-checkbox name="channel" value="carta-rcolas" [(ngModel)]="rcolasVal" inputId="rcolas" (onChange)="showTableRColas($event)" #checkBox3>
+                </p-checkbox>
+                <label for="salon">Rompe Colas</label>
+              </div>
             
-
             </div>
-            <small class="p-error" *ngIf="!checkBox.checked && !checkBox1.checked && !checkBox2.checked">Seleccionar al menos un canal.</small>
+            <small class="p-error" *ngIf="!checkBox.checked && !checkBox1.checked && !checkBox2.checked && !checkBox3.checked">Seleccionar al menos un canal.</small>
           </div>
         </p-fieldset>
       </div>
@@ -407,6 +410,64 @@
                 </ng-template>
               </p-table>
             </div>
+            </div>
+          </div>
+
+          <!-- Tabla carta Rompe Colas -->
+          <div class="mt-1">
+            <div class="p-fluid ">
+              <div class="p-d-flex p-jc-between">
+                <div>
+                  <p class="title-carta">Carta Rompecolas</p>
+                </div>
+                <div>
+                  <div class="p-col-12 ">
+                    <div class="p-inputgroup">
+                      <!-- <button type="button" pButton pRipple label="Buscar"></button> -->
+                      <input (keyup)="filtrorCOLAS()" name="searchrcolas1"  #searchrcolas1="ngModel" [(ngModel)]="searchrcolas1" type="text" pInputText placeholder="Buscar...">
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="p-col-12 ">
+
+                    <div class="p-inputgroup">
+                      <!-- " -->
+                      <button pButton pRipple label="Agregar Producto"  (click)="showModalDialogCartaRcolas()"
+                      icon="pi pi-plus" class="p-button-success p-mr-2"></button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div>
+                <p-table #dt [value]="productosCartaRcolas" [responsive]="true" [rows]="15" [paginator]="true" [rowHover]="true" dataKey="codigo"  
+                [globalFilterFields]="['codigo', 'producto']" [scrollable]="true" scrollHeight="40vh"
+                selectionMode="single" [(selection)]="CartaRcolasSelectedSelected" styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
+                currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+                [rowsPerPageOptions]="[15,25,50,100]">
+
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th pSortableColumn="producto">Nombre Producto <p-sortIcon field="producto"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="producto">Código Producto <p-sortIcon field="producto"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="carta">Carta <p-sortIcon field="carta"></p-sortIcon>
+                    </th>
+                  </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-ProductoCarta>
+                  <tr [pSelectableRow]="ProductoCarta">
+                    <td>{{ProductoCarta.producto}}</td>
+                    <td>{{ProductoCarta.codigo}}</td>
+                    <td>{{ProductoCarta.menu}}</td>
+                  </tr>
+                </ng-template>
+              </p-table>
             </div>
           </div>
 
