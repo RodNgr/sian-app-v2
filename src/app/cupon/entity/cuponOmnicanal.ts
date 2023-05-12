@@ -49,10 +49,14 @@ export class CuponOmnicanalC {
 	percentdsct!: number; 
 	delivery!: number; 
 	montodescuento!: number; 
+	cuponCabecera!: number;
+	codProceso!: number;
+	origen!: number;
+	aliados!: number;
 }
 
 export class detalle{
 	Canal!: string;
-	NomProducto!: string;
-	CodProducto!: string;
+	nomProducto!: string;
+	codProducto!: string;
 }

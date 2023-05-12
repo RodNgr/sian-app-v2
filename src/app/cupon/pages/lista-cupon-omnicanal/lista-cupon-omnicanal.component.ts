@@ -29,14 +29,10 @@ import { Console } from 'console';
 export class ListaCuponOmnicanalComponent implements OnInit {
 
   private ref!: DynamicDialogRef;
+  public SeleccionarCupon: string = '0';
 
-  public tipos: TipoCuponOmnicanal[] = [{ nombre: 'Seleccionar tipo', estado: true, codigo: 0 },
-  { nombre: 'Cupón Precio Fijo a un producto', estado: false, codigo: 1 },
-  { nombre: 'Cupón descuento % a un producto', estado: false, codigo: 2 },
-  { nombre: 'Cupón descuento % a varios producto', estado: false, codigo: 3 },
-  { nombre: 'Cupón descuento Recargo de Delivery', estado: false, codigo: 4 },
-  { nombre: 'Cupón descuento monto fijo al  total', estado: false, codigo: 5 },
-  { nombre: 'Cupón descuento % al monto total', estado: false, codigo: 6 }]
+  public tipos: TipoCuponOmnicanal[] = [{ nombre: 'Activo', estado: true, codigo: 1 },
+  { nombre: 'Inactivo', estado: false, codigo: 0 }]
 
   private urlEndPoint: string;
   private urlEndPointOmnicanal: string;
@@ -47,6 +43,7 @@ export class ListaCuponOmnicanalComponent implements OnInit {
   private Desde!: Date;
   public visualizaExportar: boolean; 
   private Campanha!: string;
+  private Validacion!: number;
 
   public Campanhas: CuponListaOmnicanal[] = [];
   public CampanhasSelected!: CuponListaOmnicanal;
@@ -64,13 +61,28 @@ export class ListaCuponOmnicanalComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.SeleccionarCupon = '1';
     this.isAuthenticated();
     
   }
 
   public newVale(): void {
-    sessionStorage.setItem('tipoOperacion', 'N');
-    this.router.navigateByUrl('/home/cupon/cupon-omnicanal')
+    var ruta = `${this.urlLista}/ValidarCreacion`;    
+  
+    this.ajaxQueryPostValida(ruta);
+
+    if(this.Validacion == 1){
+      sessionStorage.setItem('tipoOperacion', 'N');
+      this.router.navigateByUrl('/home/cupon/cupon-omnicanal')
+    } 
+    else{
+      swal.fire(
+        'Alto',
+        'Se debe crear una nueva campaña cada 30 minutos',
+        'error'
+      )
+    }
+    
   }
 
   public viewValeOmnicanal(): void {
@@ -163,7 +175,7 @@ export class ListaCuponOmnicanalComponent implements OnInit {
     else{
       hasta = '=' +$('#Hasta').val();
     }
-    var ruta = `${this.urlLista}/Cupones?Marca=` + this.empresaService.getEmpresaSeleccionada().idEmpresa.toString() + `&nombre` +  campana + `&fecini` + desde + `&fecfin` + hasta;
+    var ruta = `${this.urlLista}/Cupones?Marca=` + this.empresaService.getEmpresaSeleccionada().idEmpresa.toString() + `&nombre` +  campana + `&fecini` + desde + `&fecfin` + hasta+ `&estado=` + this.SeleccionarCupon;    
     console.log(ruta);
   
     this.ajaxQueryPost(ruta, data);
@@ -250,6 +262,25 @@ export class ListaCuponOmnicanalComponent implements OnInit {
       contentType: 'application/json',
       success: (result) => {
         this.Campanhas = result;
+        this.spinner.hide();
+      },
+      error: (error) => {
+        console.log(error);
+        this.spinner.hide();
+      }
+    });
+  }
+
+  private ajaxQueryPostValida(urlEndPoint: string): any {
+    let t_result!: any;
+    $.ajax({
+      url: urlEndPoint,
+      async: false,
+      type: 'GET',
+      crossDomain: true,
+      contentType: 'application/json',
+      success: (result) => {
+        this.Validacion = result;
         this.spinner.hide();
       },
       error: (error) => {

@@ -8,4 +8,6 @@ export class CuponListaOmnicanal {
 	cdCantidad:number;
 	idMarca:String;
 	validacionDescarga: String;
+	validacionproceso: String;
+	dtFecCreacion: Date;
 }

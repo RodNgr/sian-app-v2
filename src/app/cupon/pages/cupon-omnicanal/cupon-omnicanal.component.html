@@ -58,6 +58,22 @@
             <small class="p-error" *ngIf="alianza.invalid && (alianza.dirty || alianza.touched)">Campo Obligatorio</small>
           </div>
 
+          <div class="p-field p-col-3 p-md-3 p-sm-3">
+            <label for="tipo" [ngClass] = "{' p-error ': SeleccionOrigen == '0'}">Origen (*):</label>
+            <p-dropdown [options]="origenes" [(ngModel)]="SeleccionOrigen" optionLabel="nombre" [showClear]="true" [ngModelOptions]="{standalone: true}"
+            optionDisabled="inactive" optionValue="codigo" (onChange)="showADetailsUnique($event)" [disabled]="type === 'V'" id="Origen">
+            </p-dropdown>
+            <small class="p-error" *ngIf="SeleccionOrigen == '0'">Seleccionar Campo</small>
+          </div>
+
+          <div class="p-field p-col-3 p-md-3 p-sm-3">
+            <label for="Aliados" [ngClass] = "{' p-error ': SeleccionAliados == '0'}">Aliados (*):</label>
+            <p-dropdown [options]="Aliados" [(ngModel)]="SeleccionAliados" optionLabel="nombre" [showClear]="true" [ngModelOptions]="{standalone: true}"
+            optionDisabled="inactive" optionValue="codigo" (onChange)="showADetailsUnique($event)" [disabled]="type === 'V'" id="Aliados">
+            </p-dropdown>
+            <small class="p-error" *ngIf="SeleccionAliados == '0'">Seleccionar Campo</small>
+          </div>
+
           <div class="p-field p-col-3 p-md-3 p-sm-3" style="padding-top: 25px;" *ngIf="!showExento">
             <p-checkbox name="Exento"  [(ngModel)]="Exento" value="Exento" id="Exento" #checkBox3>
             </p-checkbox>
@@ -78,17 +94,19 @@
                 <label for="only">Autogenerado</label>
               </div>
             </div>
-            <!-- Unico -->
+            <!-- Unico -->             
             <div class="p-field p-col-3 p-md-3 p-sm-3" *ngIf="showCuponesGenerar">
-              <label for="nroCuponAGenerar" >Cantidad de cupones a generar(*):</label>
+              <label for="nroCuponAGenerar" *ngIf="type !== 'V'" >Cantidad de cupones a generar(*):</label>
+              <label for="nroCuponAGenerar" *ngIf="type === 'V'" style="font-weight: bolder;" >Cantidad de cupones actuales ({{CantidadInter}}):</label>
               <!-- [disabled]="selectCountTimes == 2" -->
-              <input #nroCuponAGenerar="ngModel" id="nroCuponAGenerar" type="number" pInputText [(ngModel)]="cuponOmni.nroCuponAGenerar" name="nroCuponAGenerar" min="1" [disabled]="selectCountTimes == '2'">
+              <input #nroCuponAGenerar="ngModel" id="nroCuponAGenerar" type="number" pInputText [(ngModel)]="cuponOmni.nroCuponAGenerar" name="nroCuponAGenerar" min="1">
               <small class="p-error" *ngIf="nroCuponAGenerar.value == 0 ">Cantidad de cupones a generar diferente a cero.</small>
+              <!-- <button pButton pRipple label="Agregar más cupones"></button> -->
             </div>
 
             <div class="p-field p-col-3 p-md-3 p-sm-3" *ngIf="showCantidadMaximaUso">
               <label for="nroUso">Cantidad máxima de uso:</label>
-              <input #nroUso="ngModel" id="nroUso" type="number" pInputText [(ngModel)]="cuponOmni.nroUso" name="nroUso" min="1">
+              <input #nroUso="ngModel" id="nroUso" type="number" pInputText [(ngModel)]="cuponOmni.nroUso" name="nroUso" min="1" [disabled]="type === 'V'">
               <small class="p-error" *ngIf="nroUso.value == 0 ">Cantidad máxima de uso diferente a cero.</small>
             </div>
 
@@ -97,12 +115,12 @@
 
                 <input id="codigo" pTooltip="Al crear el código tener en cuenta :
                 *mínimo 4 carácteres
-                *máximo 10 carácteres
+                *máximo 30 carácteres
                 *sin espacios
                 *sin letra Ñ y O
                 " type="text" aria-describedby="username2-help" tooltipEvent="focus" maxlength="10" pInputText 
                   [(ngModel)]="cuponOmni.codigo" name="codigo" (change) = "codigoChange()" 
-                  [ngClass] = "{' ng-invalid ng-dirty ': !formatoCodigo }"
+                  [ngClass] = "{' ng-invalid ng-dirty ': !formatoCodigo }" [disabled]="type === 'V'"
                 >
                 <small class="p-error" *ngIf="!formatoCodigo">Formato inválido</small>
                 
@@ -123,19 +141,19 @@
           <!-- Unico -->
           <div class="p-field p-col-3 p-md-3 p-sm-3" *ngIf="showMontoPagar">
               <label for="monto" [ngClass] = "{' p-error ': monto.value == 0 }">Nuevo precio del producto(*):</label>
-              <input  id="monto" #monto="ngModel" [(ngModel)]="cuponOmni.monto" name="monto" ng type="number" pInputText [ngClass] = "{' ng-invalid ng-dirty ': monto.value == 0 }" (blur)="parseTwoDecimal(monto.value, 'monto')">
+              <input  id="monto" #monto="ngModel" [(ngModel)]="cuponOmni.monto" name="monto" ng type="number" pInputText [ngClass] = "{' ng-invalid ng-dirty ': monto.value == 0 }" (blur)="parseTwoDecimal(monto.value, 'monto')" [disabled]="type === 'V'">
               <small class="p-error" *ngIf="monto.value == 0">Monto mínimo diferente a cero.</small>
               <!--<small class="p-error" *ngIf="monto.value > 0 && !validateTwoDecimals(monto.value)">El monto debe contener 2 decimales.</small>-->
           </div>
 
           <div class="p-field p-col-3 p-md-3 p-sm-3" *ngIf="showNecesitaMontoMinimo" style="padding-top: 31px; padding-left: 25px;">
-            <p-checkbox name="compraminima" value="1" inputId="ny" (onChange)="valueMinimo($event)"></p-checkbox>
+            <p-checkbox name="compraminima" value="1" inputId="ny" (onChange)="valueMinimo($event)" [disabled]="type === 'V'"></p-checkbox>
             <label  for="ny"> Necesita monto mínimo de compra</label>
           </div>
 
           <div class="p-field p-col-3 p-md-3 p-sm-3" [hidden]="!showMontoMinimo">
             <label for="compraMin" [ngClass] = "{' p-error ': compraMin.value == 0 }">Monto mínimo de compra(*):</label>
-              <input  id="compraMin" #compraMin="ngModel" [(ngModel)]="cuponOmni.compraMin" name="compraMin" ng type="number" pInputText [ngClass] = "{' ng-invalid ng-dirty ': compraMin.value == 0 }"  (blur)="parseTwoDecimal(compraMin.value, 'compraMin')">
+              <input  id="compraMin" #compraMin="ngModel" [(ngModel)]="cuponOmni.compraMin" name="compraMin" ng type="number" pInputText [ngClass] = "{' ng-invalid ng-dirty ': compraMin.value == 0 }"  (blur)="parseTwoDecimal(compraMin.value, 'compraMin')" [disabled]="type === 'V'">
               <small class="p-error" *ngIf="compraMin.value == 0 ">Monto mínimo de compra diferente a cero.</small>
           </div>
 
@@ -152,24 +170,24 @@
           
           <div class="p-field p-col-3 p-md-3 p-sm-3" *ngIf="showMaximoDescuento">
             <label for="montoMax" [ngClass] = "{' p-error ': montoMax.value == 0 }">Monto máximo de descuento(*):</label>
-              <input  id="montoMax" #montoMax="ngModel" [(ngModel)]="cuponOmni.montoMax" name="montoMax" ng type="number" pInputText [ngClass] = "{' ng-invalid ng-dirty ': montoMax.value == 0 }"  (blur)="parseTwoDecimal(montoMax.value, 'montoMax')">
+              <input  id="montoMax" #montoMax="ngModel" [(ngModel)]="cuponOmni.montoMax" [disabled]="type === 'V'" name="montoMax" ng type="number" pInputText [ngClass] = "{' ng-invalid ng-dirty ': montoMax.value == 0 }"  (blur)="parseTwoDecimal(montoMax.value, 'montoMax')">
               <small class="p-field" *ngIf="montoMax.value == 0 ">Monto máximo de descuento debe ser menor a Monto Mínimo de descuento.</small>
           </div>
 
           <div class="p-field p-col-3 p-md-3 p-sm-3" *ngIf="shoPorcentajeDescuento">
             <label for="percentdsct" [ngClass] = "{' p-error ': percentdsct.value == 0 }">Porcentaje de descuento(*):</label>
-              <input  id="percentdsct" #percentdsct="ngModel" [(ngModel)]="cuponOmni.percentdsct" name="percentdsct" ng type="number" pInputText [ngClass] = "{' ng-invalid ng-dirty ': percentdsct.value == 0 }"  (blur)="parseTwoDecimal(percentdsct.value, 'percentdsct')">
+              <input  id="percentdsct" #percentdsct="ngModel" [disabled]="type === 'V'" [(ngModel)]="cuponOmni.percentdsct" name="percentdsct" ng type="number" pInputText [ngClass] = "{' ng-invalid ng-dirty ': percentdsct.value == 0 }"  (blur)="parseTwoDecimal(percentdsct.value, 'percentdsct')">
               <small class="p-error" *ngIf="percentdsct.value == 0 ">Porcentaje de descuento diferente a cero.</small>
           </div>
 
           <div class="p-field p-col-3 p-md-3 p-sm-3" *ngIf="showDelivery">
             <label for="percentdsct" >Descuento al delivery(%):</label>
-            <input id="percentdsct" #percentdsct="ngModel" [(ngModel)]="cuponOmni.percentdsct" name="percentdsct" ng type="text" pInputText disabled>            
+            <input id="percentdsct" #percentdsct="ngModel" [disabled]="type === 'V'" [(ngModel)]="cuponOmni.percentdsct" name="percentdsct" ng type="text" pInputText disabled>            
           </div>
 
           <div class="p-field p-col-3 p-md-3 p-sm-3" *ngIf="showMontoDescuento">
             <label for="percentdsct" >Monto de descuento :</label>
-              <input id="percentdsct" #percentdsct="ngModel" [(ngModel)]="cuponOmni.percentdsct" name="percentdsct" ng type="number" pInputText [ngClass] = "{' ng-invalid ng-dirty ': percentdsct.value == 0 }"   (blur)="parseTwoDecimal(percentdsct.value, 'percentdsct')" >            
+              <input id="percentdsct" #percentdsct="ngModel" [disabled]="type === 'V'" [(ngModel)]="cuponOmni.percentdsct" name="percentdsct" ng type="number" pInputText [ngClass] = "{' ng-invalid ng-dirty ': percentdsct.value == 0 }"   (blur)="parseTwoDecimal(percentdsct.value, 'percentdsct')" >            
           </div>
         </div>
         </p-fieldset>
@@ -199,14 +217,14 @@
                 <label for="salon">Salón</label>
               </div>
 
-              <div class="p-field-checkbox">
+              <div class="p-field-checkbox" *ngIf="validaBembos">
                 <p-checkbox name="channel" value="carta-rcolas" [(ngModel)]="rcolasVal" inputId="rcolas" (onChange)="showTableRColas($event)" #checkBox3>
                 </p-checkbox>
                 <label for="salon">Rompe Colas</label>
               </div>
             
             </div>
-            <small class="p-error" *ngIf="!checkBox.checked && !checkBox1.checked && !checkBox2.checked && !checkBox3.checked">Seleccionar al menos un canal.</small>
+            <small class="p-error" *ngIf="!checkBox.checked && !checkBox1.checked && !checkBox2.checked">Seleccionar al menos un canal.</small>
           </div>
         </p-fieldset>
       </div>
@@ -414,7 +432,7 @@
           </div>
 
           <!-- Tabla carta Rompe Colas -->
-          <div class="mt-1">
+          <div class="mt-1" *ngIf="showProductsRColas && type != 'V'">
             <div class="p-fluid ">
               <div class="p-d-flex p-jc-between">
                 <div>
@@ -556,7 +574,10 @@
     </div>
     <div class="p-d-flex mt-2 mb-2 w-100">
       <div class="p-inputgroup p-d-flex p-jc-end ">
-        <button pButton pRipple label="Guardar" icon="pi pi-save" class="p-button-lg p-button-success p-mr-2" (click)="guardarCupon()" *ngIf="type != 'V'"></button>
+        <button pButton pRipple label="Guardar" icon="pi pi-save" class="p-button-lg p-button-success p-mr-2" (click)="bloquear(); guardarCupon()" *ngIf="type != 'V'" [disabled]="isClicked"></button>
+      </div>
+      <div class="p-inputgroup p-d-flex p-jc-end ">
+        <button pButton pRipple label="Generar Cupones" icon="pi pi-save" class="p-button-lg p-button-success p-mr-2" (click)="bloquear(); MasCupones()"  *ngIf="type == 'V'" [disabled]="isClicked"></button>
       </div>
       <div class="p-inputgroup">
         <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-lg p-button-secondary p-mr-2"

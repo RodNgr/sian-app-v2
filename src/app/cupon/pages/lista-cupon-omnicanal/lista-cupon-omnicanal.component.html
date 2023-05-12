@@ -39,7 +39,7 @@
             <div class="p-col-12">
               <div class="p-fluid p-formgrid p-grid">
   
-                <div class="p-field p-lg-3 p-md-3 p-sm-6">
+                <div class="p-field p-lg-2 p-md-2 p-sm-6">
                   <label for="cantidad">Campaña:</label>
                   <input type="text" pInputText id="Campanha"/>
                 </div>
@@ -51,6 +51,13 @@
                 <div class="p-field p-lg-2 p-md-2 p-sm-12">
                   <label for="cantidad">Fecha de Fin:</label>
                   <p-calendar dateFormat="dd/mm/yy" inputStyleClass="p-text-center" id="Hasta"></p-calendar>
+                </div>
+
+                <div class="p-field p-lg-2 p-md-2 p-sm-12">
+                  <label for="cantidad">Estado:</label>
+                  <p-dropdown [options]="tipos" [(ngModel)]="SeleccionarCupon" optionLabel="nombre" [showClear]="true" [ngModelOptions]="{standalone: true}"
+              optionDisabled="inactive" optionValue="codigo">
+              </p-dropdown>
                 </div>
   
                 <div class="p-field p-lg-2 p-md-2 p-sm-2  ">
@@ -76,7 +83,9 @@
             </th>
             <th pSortableColumn="desde">Alianza<p-sortIcon field="desde"></p-sortIcon>
             </th>            
-            <th pSortableColumn="desde">Estado Descarga<p-sortIcon field="desde"></p-sortIcon>
+            <th pSortableColumn="creacion">Creación<p-sortIcon field="desde"></p-sortIcon>
+            </th>            
+            <th pSortableColumn="desde">Estado<p-sortIcon field="desde"></p-sortIcon>
             </th>            
           </tr>
         </ng-template>
@@ -88,7 +97,8 @@
             <td>{{CuponListaOmnicanal.dtFecInicio | date : 'dd/MM/y'}}</td>
             <td>{{CuponListaOmnicanal.dtFecFin | date : 'dd/MM/y'}}</td>
             <td>{{CuponListaOmnicanal.cdAlianza}}</td>
-            <td>{{CuponListaOmnicanal.validacionDescarga}}</td>
+            <td>{{CuponListaOmnicanal.dtFecCreacion | date : 'dd/MM/y hh:mm:ss'}}</td>
+            <td>{{CuponListaOmnicanal.validacionproceso}}</td>
           </tr> 
 
         </ng-template>
