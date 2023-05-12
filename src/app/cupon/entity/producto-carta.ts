@@ -12,6 +12,7 @@ export class CartaConsolidada{
     canal!: number;
     producto!: string;
     cantidad!: number;
+    nombreProducto!: string;
 }
 
 export class CartaDetalleVista{
