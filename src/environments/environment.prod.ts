@@ -22,7 +22,7 @@ export const environment = {
   //clientsecret: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliiomni'
 
    //DESARROLLO
-   urlSecurity: 'http://VSRVDEVAPP07.ngr.com.pe:9999',
+   urlSecurity: 'http://vsrvprdweb01:9999',
    urlCupones: 'http://VSRVDEVAPP07.ngr.com.pe:9837',
    urlInterfazProducto: 'http://VSRVDEVAPP07.ngr.com.pe:9838',
    urlCuadratura: 'http://VSRVDEVAPP07.ngr.com.pe:9839',

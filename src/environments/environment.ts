@@ -6,8 +6,8 @@ export const environment = {
   production: false,
 
   //LOCAL
-  /* urlSecurity: 'http://localhost:9999',
-  urlCupones: 'http://localhost:9837',
+  urlSecurity: 'http://localhost:9999',
+  /* urlCupones: 'http://localhost:9837',
   urlInterfazProducto: 'http://localhost:9838',
   urlCuadratura: 'http://localhost:9839',
   urlEjecutor: 'http://localhost:9845',
@@ -20,7 +20,7 @@ export const environment = {
   urlSecurityShared: 'http://localhost:4201', */
 
   //DESARROLLO
-  urlSecurity: 'http://VSRVDEVAPP07.ngr.com.pe:9999',
+  //urlSecurity: 'http://vsrvdevapp07.ngr.com.pe:9999',
   urlCupones: 'http://VSRVDEVAPP07.ngr.com.pe:9837',
   urlInterfazProducto: 'http://VSRVDEVAPP07.ngr.com.pe:9838',
   urlCuadratura: 'http://VSRVDEVAPP07.ngr.com.pe:9839',
