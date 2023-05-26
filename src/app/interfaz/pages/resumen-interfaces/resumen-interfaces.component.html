@@ -63,8 +63,8 @@
                     <td *ngFor="let col of columns" style="width: 45px;" class="p-text-center" 
                          [style.background]="rowData.data[col.busqueda] == '' ? '#d3d3d3' : (rowData.data[col.busqueda] == 'P' ? '#d3d3d3' : '')">
                          <!--- Juan Ramos - funcion getDetallesInterface -->
-                         <span style="color: green; cursor: pointer;" (click)="getDetallesInterface(resultadoDto, col.busqueda)" [ngClass]="{'pi pi-check-circle': rowData.data[col.busqueda] === 'C'}"></span>
-                         <span style="color: red; cursor: pointer;" (click)="getDetallesInterface(resultadoDto, col.busqueda)" [ngClass]="{'pi pi-times-circle': rowData.data[col.busqueda] === 'E'}"></span>
+                         <span pTooltip ="ver Detalles" style="color: green; cursor: pointer; padding: 0 5px;" (click)="getDetallesInterface(resultadoDto, col.busqueda)" [ngClass]="{'pi pi-check-circle': rowData.data[col.busqueda] === 'C'}"></span>
+                         <span pTooltip ="ver Detalles" style="color: red; cursor: pointer; padding: 0 5px;" (click)="getDetallesInterface(resultadoDto, col.busqueda)" [ngClass]="{'pi pi-times-circle': rowData.data[col.busqueda] === 'E'}"></span>
                     </td>
                </tr>
           </ng-template>
