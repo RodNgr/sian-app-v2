@@ -6,8 +6,8 @@ export const environment = {
   production: false,
 
   //LOCAL
-  /*urlSecurity: 'http://localhost:9999',
-  urlCupones: 'http://localhost:9837',
+  //urlSecurity: 'http://localhost:9999',
+  /* urlCupones: 'http://localhost:9837',
   urlInterfazProducto: 'http://localhost:9838',
   urlCuadratura: 'http://localhost:9839',
   urlEjecutor: 'http://localhost:9845',
