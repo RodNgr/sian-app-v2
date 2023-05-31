@@ -6,8 +6,8 @@ export const environment = {
   production: false,
 
   //LOCAL
-  urlSecurity: 'http://localhost:9999',
-  /* urlCupones: 'http://localhost:9837',
+  /*urlSecurity: 'http://localhost:9999',
+  urlCupones: 'http://localhost:9837',
   urlInterfazProducto: 'http://localhost:9838',
   urlCuadratura: 'http://localhost:9839',
   urlEjecutor: 'http://localhost:9845',
@@ -17,8 +17,8 @@ export const environment = {
   urlCierre: 'http://localhost:9899',
   urlRrhh: 'http://localhost:9822',
   urlOmnicanal: 'http://localhost:9833',
-  urlSecurityShared: 'http://localhost:4201', */
-  urlInterfaz: 'http://localhost:9842',
+  urlSecurityShared: 'http://localhost:4201', 
+  urlInterfaz: 'http://localhost:9842',*/
   //DESARROLLO
   //urlSecurity: 'http://VSRVDEVAPP07.ngr.com.pe:9999',
   //urlCupones: 'http://VSRVDEVAPP07.ngr.com.pe:9837',
@@ -48,7 +48,7 @@ export const environment = {
   urlCuadratura: 'http://VSRVPRDAPP07.ngr.com.pe:9839',
   urlEjecutor: 'http://VSRVPRDAPP07.ngr.com.pe:9845',
   urlEjecutorSybase: 'http://VSRVPRDAPP07.ngr.com.pe:9753',
-  //urlInterfaz: 'http://VSRVPRDAPP07.ngr.com.pe:9842',
+  urlInterfaz: 'http://VSRVPRDAPP07.ngr.com.pe:9842',
   urlReporte: 'http://VSRVPRDAPP07.ngr.com.pe:9811',
   urlCierre: 'http://VSRVPRDAPP07.ngr.com.pe:9899',
   urlRrhh: 'http://VSRVPRDAPP07.ngr.com.pe:9822',

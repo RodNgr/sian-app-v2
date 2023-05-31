@@ -45,8 +45,8 @@ export class CuponOmnicanalComponent implements OnInit {
   public showCantidadMaximaUso: boolean = false;
   public showCodigo: boolean = false;
   public showMontoPagar: boolean = false;
-  public showtipo1: boolean = false;
-  public showtipo2: boolean = false;
+  public showtipo1: boolean = true;
+  public showtipo2: boolean = true;
   public showNecesitaMontoMinimo: boolean = false;
   public showMontoMinimo: boolean = false;
   public showCanales: boolean = true;
