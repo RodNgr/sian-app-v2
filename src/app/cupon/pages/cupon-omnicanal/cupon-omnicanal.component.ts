@@ -83,10 +83,10 @@ export class CuponOmnicanalComponent implements OnInit {
   public CartaFinaltipos: CartaConsolidada[] = [];
   public CartaDetalleVista: CartaDetalleVista[] = [];
 
-  public CartaWebSelectedSelected!: ProductoCarta;
-  public CartaCallSelectedSelected!: ProductoCarta;
-  public CartaSalonSelectedSelected!: ProductoCarta;
-  public CartaRcolasSelectedSelected!: ProductoCarta;
+  public CartaWebSelected!: ProductoCarta[];
+  public CartaCallSelected!: ProductoCarta[];
+  public CartaSalonSelected!: ProductoCarta[];
+  public CartaRcolasSelected!: ProductoCarta[];
   public CartaConsolidadoSelectedSelected!: ProductoCarta;  
   public DetalleSelected!: detalle;
   public maxCantidadProductos: number = 0;
@@ -358,84 +358,75 @@ export class CuponOmnicanalComponent implements OnInit {
 
   }
 
-  
-
   showModalDialogCartaWeb(){    
-    let tipo = parseInt(this.selectionTypeCupon);
-
-    if(tipo == 1 && this.CartaDetalleVista.filter(x=> x.canal == 2).length > 0){
+    const tipo = parseInt(this.selectionTypeCupon);
+    if(this.addProductCondition(this.CartaWebSelected, tipo)) {
       Swal.fire({
         position: 'center',
         icon: 'warning',
-        title: 'No se puede añadir más de un producto',
+        title: 'No se puede añadir más de un producto o repetidos.',
         showConfirmButton: false,
         timer: 1500
       })
       return;
     }
-    this.productosCartaConsolidado.push(this.CartaWebSelectedSelected);
-    console.log("this.CartaWebSelectedSelected",this.CartaWebSelectedSelected);
-    this.CartaFinal.push({canal:2, producto : this.CartaWebSelectedSelected.codigo.toString(),cantidad: this.cuponOmni.nroCuponAGenerar, nombreProducto : this.CartaWebSelectedSelected.producto});
-    this.CartaDetalleVista.push({canal:2, producto : this.CartaWebSelectedSelected.codigo.toString(),nombre: this.CartaWebSelectedSelected.producto.toString()});
-    console.log(this.CartaDetalleVista);
+    this.productosCartaConsolidado.push(...this.CartaWebSelected);
+    const productsToValidation = this.parseProductToValidate(2, this.CartaWebSelected);
+    this.CartaFinal.push(...productsToValidation);
+    this.CartaDetalleVista.push(...productsToValidation);
   }
 
   showModalDialogCartaRcolas(){    
-    let tipo = parseInt(this.selectionTypeCupon);
-
-    if(tipo == 1 && this.CartaDetalleVista.filter(x=> x.canal == 100).length > 0){
+    const tipo = parseInt(this.selectionTypeCupon);
+    if(this.addProductCondition(this.CartaRcolasSelected, tipo)) {
       Swal.fire({
         position: 'center',
         icon: 'warning',
-        title: 'No se puede añadir más de un producto',
+        title: 'No se puede añadir más de un producto o repetidos.',
         showConfirmButton: false,
         timer: 1500
       })
       return;
     }
-    this.productosCartaConsolidado.push(this.CartaRcolasSelectedSelected);
-    console.log("this.CartaRcolasSelectedSelected",this.CartaRcolasSelectedSelected);
-    this.CartaFinal.push({canal:2, producto : this.CartaRcolasSelectedSelected.codigo.toString(),cantidad: this.cuponOmni.nroCuponAGenerar, nombreProducto : this.CartaRcolasSelectedSelected.producto});
-    this.CartaDetalleVista.push({canal:100, producto : this.CartaRcolasSelectedSelected.codigo.toString(),nombre: this.CartaRcolasSelectedSelected.producto.toString()});
-    console.log(this.CartaDetalleVista);
+    this.productosCartaConsolidado.push(...this.CartaRcolasSelected);
+    this.CartaFinal.push(...this.parseProductToValidate(2, this.CartaRcolasSelected));
+    this.CartaDetalleVista.push(...this.parseProductToValidate(100, this.CartaRcolasSelected));
   }
 
   showModalDialogCartaCall(){
-    let tipo = parseInt(this.selectionTypeCupon);
-    
-    if(tipo == 1 && this.CartaFinal.filter(x=> x.canal == 1).length > 0){
+    const tipo = parseInt(this.selectionTypeCupon);
+    if(this.addProductCondition(this.CartaCallSelected, tipo, this.CartaFinal)) {
       Swal.fire({
         position: 'center',
         icon: 'warning',
-        title: 'No se puede añadir más de un producto',
+        title: 'No se puede añadir más de un producto o repetidos.',
         showConfirmButton: false,
         timer: 1500
       })
       return;
     }
-    this.productosCartaConsolidado.push(this.CartaCallSelectedSelected);
-    this.CartaFinal.push({canal:1, producto : this.CartaCallSelectedSelected.codigo.toString(),cantidad: this.cuponOmni.nroCuponAGenerar, nombreProducto : this.CartaCallSelectedSelected.producto});
-    this.CartaDetalleVista.push({canal:1, producto : this.CartaCallSelectedSelected.codigo.toString(),nombre: this.CartaCallSelectedSelected.producto.toString()});
-    console.log(this.CartaDetalleVista);
+    this.productosCartaConsolidado.push(...this.CartaCallSelected);
+    const productsToValidation = this.parseProductToValidate(1, this.CartaCallSelected);
+    this.CartaFinal.push(...productsToValidation);
+    this.CartaDetalleVista.push(...productsToValidation);
   }
 
   showModalDialogCartaSalon(){
-    let tipo = parseInt(this.selectionTypeCupon);
-    
-    if(tipo == 1 && this.CartaFinal.filter(x=> x.canal == 0).length > 0){
+    const tipo = parseInt(this.selectionTypeCupon);
+    if(this.addProductCondition(this.CartaSalonSelected, tipo, this.CartaFinal)) {
       Swal.fire({
         position: 'center',
         icon: 'warning',
-        title: 'No se puede añadir más de un producto',
+        title: 'No se puede añadir más de un producto o repetidos.',
         showConfirmButton: false,
         timer: 1500
       })
       return;
     }
-    this.productosCartaConsolidado.push(this.CartaSalonSelectedSelected);
-    this.CartaFinal.push({canal:0, producto : this.CartaSalonSelectedSelected.codigo.toString(),cantidad: this.cuponOmni.nroCuponAGenerar, nombreProducto : this.CartaSalonSelectedSelected.producto});
-    this.CartaDetalleVista.push({canal:0, producto : this.CartaSalonSelectedSelected.codigo.toString(),nombre: this.CartaSalonSelectedSelected.producto.toString()});
-    console.log(this.CartaDetalleVista);
+    this.productosCartaConsolidado.push(...this.CartaSalonSelected);
+    const productsToValidation = this.parseProductToValidate(0, this.CartaSalonSelected);
+    this.CartaFinal.push(...productsToValidation);
+    this.CartaDetalleVista.push(...productsToValidation);
   }
 
   QuitarProducto(){
@@ -474,7 +465,7 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showCantidadMaximaUso = false;
       this.showCodigo = false;
       this.showMontoPagar = true;
-      this.showNecesitaMontoMinimo = true;
+      this.showNecesitaMontoMinimo = false;
       this.showMontoMinimo = false;
       this.showCanales = true;
       this.showTableProducts = true;
@@ -494,7 +485,7 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showCodigo = true;
       this.cuponOmni.nroCuponAGenerar = 1;
       this.showMontoPagar = true;
-      this.showNecesitaMontoMinimo = true;
+      this.showNecesitaMontoMinimo = false;
       this.showMontoMinimo = false;
       this.showCanales = true;
       this.showTableProducts = true;
@@ -513,7 +504,7 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showCantidadMaximaUso = false;
       this.showCodigo = false;
       this.showMontoPagar = false;
-      this.showNecesitaMontoMinimo = true;
+      this.showNecesitaMontoMinimo = false;
       this.showMontoMinimo = false;
       this.showCanales = true;
       this.showTableProducts = true;
@@ -533,7 +524,7 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showCodigo = true;
       this.cuponOmni.nroCuponAGenerar = 1;
       this.showMontoPagar = false;
-      this.showNecesitaMontoMinimo = true;
+      this.showNecesitaMontoMinimo = false;
       this.showCanales = true;
       this.showMontoMinimo = false;
       this.showTableProducts = true;
@@ -550,7 +541,7 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showCantidadMaximaUso = false;
       this.showCodigo = false;
       this.showMontoPagar = false;
-      this.showNecesitaMontoMinimo = true;
+      this.showNecesitaMontoMinimo = false;
       this.showMontoMinimo = false;
       this.showCanales = true;
       this.showTableProducts = true;
@@ -570,7 +561,7 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showCantidadMaximaUso = true;
       this.showCodigo = true;
       this.showMontoPagar = false;
-      this.showNecesitaMontoMinimo = true;
+      this.showNecesitaMontoMinimo = false;
       this.showMontoMinimo = false;
       this.showCanales = true;
       this.showTableProducts = true;
@@ -3746,5 +3737,25 @@ export class CuponOmnicanalComponent implements OnInit {
   parseTwoDecimal(monto, nameAtribute) {
     let newMonto =  Number.parseFloat(monto).toFixed(2);//monto.toFixed(2);
     this.cuponOmni[nameAtribute] = newMonto;
+  }
+
+  private parseProductToValidate(canal: number, productArray: { codigo: string, producto: string }[]) {
+    return productArray.map(prd => ({
+      canal,
+      producto: prd.codigo.toString(),
+      cantidad: this.cuponOmni.nroCuponAGenerar,
+      nombreProducto: prd.producto,
+      nombre: prd.producto.toString(),
+    }));
+  }
+
+  private existsDuplicate(consolidado: ProductoCarta[], selectedArray: ProductoCarta[]): boolean {
+    return consolidado.some(con => selectedArray.some(sel => sel.codigo === con.codigo));
+  }
+
+  private addProductCondition(selectedArray: ProductoCarta[], type: number, arrayToCompare?): boolean {
+    return this.existsDuplicate(this.productosCartaConsolidado, selectedArray) || (
+      type === 1 && [...selectedArray, ...(arrayToCompare || this.CartaDetalleVista)].length > 1
+    );
   }
 }

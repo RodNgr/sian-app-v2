@@ -290,12 +290,15 @@
             <div>
                 <p-table #dt [value]="productosCartaWeb" [responsive]="true" [rows]="15" [paginator]="true" [rowHover]="true" dataKey="codigo"  
                 [globalFilterFields]="['codigo', 'producto']" [scrollable]="true" scrollHeight="40vh"
-                selectionMode="single" [(selection)]="CartaWebSelectedSelected" styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
+                selectionMode="multiple" [(selection)]="CartaWebSelected" styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
                 currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
                 [rowsPerPageOptions]="[15,25,50,100]">
 
                 <ng-template pTemplate="header">
                   <tr>
+                    <th style="width: 4rem">
+                      <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
                     <th pSortableColumn="producto">Nombre Producto <p-sortIcon field="producto"></p-sortIcon>
                     </th>
                     <th pSortableColumn="producto">Código Producto <p-sortIcon field="producto"></p-sortIcon>
@@ -307,6 +310,9 @@
 
                 <ng-template pTemplate="body" let-ProductoCarta>
                   <tr [pSelectableRow]="ProductoCarta">
+                    <td style="width: 4rem">
+                      <p-tableCheckbox [value]="ProductoCarta"></p-tableCheckbox>
+                    </td>
                     <td>{{ProductoCarta.producto}}</td>
                     <td>{{ProductoCarta.codigo}}</td>
                     <td>{{ProductoCarta.menu}}</td>
@@ -346,12 +352,15 @@
               <div>
                 <p-table #dt [value]="productosCartaCallCenter" [responsive]="true" [rows]="15" [paginator]="true" [rowHover]="true" dataKey="codigo"  
                 [globalFilterFields]="['codigo', 'producto']" [scrollable]="true" scrollHeight="40vh"
-                selectionMode="single" [(selection)]="CartaCallSelectedSelected" styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
+                selectionMode="multiple" [(selection)]="CartaCallSelected" styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
                 currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
                 [rowsPerPageOptions]="[15,25,50,100]">
 
                 <ng-template pTemplate="header">
                   <tr>
+                    <th style="width: 4rem">
+                      <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
                     <th pSortableColumn="producto">Nombre Producto <p-sortIcon field="producto"></p-sortIcon>
                     </th>
                     <th pSortableColumn="producto">Código Producto <p-sortIcon field="producto"></p-sortIcon>
@@ -363,6 +372,9 @@
 
                 <ng-template pTemplate="body" let-ProductoCarta>
                   <tr [pSelectableRow]="ProductoCarta">
+                    <td style="width: 4rem">
+                      <p-tableCheckbox [value]="ProductoCarta"></p-tableCheckbox>
+                    </td>
                     <td>{{ProductoCarta.producto}}</td>
                     <td>{{ProductoCarta.codigo}}</td>
                     <td>{{ProductoCarta.menu}}</td>
@@ -405,12 +417,15 @@
               <div>
                 <p-table #dt [value]="productosCartaSalon" [responsive]="true" [rows]="15" [paginator]="true" [rowHover]="true" dataKey="codigo"  
                 [globalFilterFields]="['codigo', 'producto']" [scrollable]="true" scrollHeight="40vh"
-                selectionMode="single" [(selection)]="CartaSalonSelectedSelected" styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
+                selectionMode="multiple" [(selection)]="CartaSalonSelected" styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
                 currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
                 [rowsPerPageOptions]="[15,25,50,100]">
 
                 <ng-template pTemplate="header">
                   <tr>
+                    <th style="width: 4rem">
+                      <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
                     <th pSortableColumn="producto">Nombre Producto <p-sortIcon field="producto"></p-sortIcon>
                     </th>
                     <th pSortableColumn="producto">Código Producto <p-sortIcon field="producto"></p-sortIcon>
@@ -422,6 +437,9 @@
 
                 <ng-template pTemplate="body" let-ProductoCarta>
                   <tr [pSelectableRow]="ProductoCarta">
+                    <td style="width: 4rem">
+                      <p-tableCheckbox [value]="ProductoCarta"></p-tableCheckbox>
+                    </td>
                     <td>{{ProductoCarta.producto}}</td>
                     <td>{{ProductoCarta.codigo}}</td>
                     <td>{{ProductoCarta.menu}}</td>
@@ -464,12 +482,15 @@
             <div>
                 <p-table #dt [value]="productosCartaRcolas" [responsive]="true" [rows]="15" [paginator]="true" [rowHover]="true" dataKey="codigo"  
                 [globalFilterFields]="['codigo', 'producto']" [scrollable]="true" scrollHeight="40vh"
-                selectionMode="single" [(selection)]="CartaRcolasSelectedSelected" styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
+                selectionMode="multiple" [(selection)]="CartaRcolasSelected" styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
                 currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
                 [rowsPerPageOptions]="[15,25,50,100]">
 
                 <ng-template pTemplate="header">
                   <tr>
+                    <th style="width: 4rem">
+                      <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
                     <th pSortableColumn="producto">Nombre Producto <p-sortIcon field="producto"></p-sortIcon>
                     </th>
                     <th pSortableColumn="producto">Código Producto <p-sortIcon field="producto"></p-sortIcon>
@@ -481,6 +502,9 @@
 
                 <ng-template pTemplate="body" let-ProductoCarta>
                   <tr [pSelectableRow]="ProductoCarta">
+                    <td style="width: 4rem">
+                      <p-tableCheckbox [value]="ProductoCarta"></p-tableCheckbox>
+                    </td>
                     <td>{{ProductoCarta.producto}}</td>
                     <td>{{ProductoCarta.codigo}}</td>
                     <td>{{ProductoCarta.menu}}</td>
