@@ -45,6 +45,8 @@ export class CuponOmnicanalComponent implements OnInit {
   public showCantidadMaximaUso: boolean = false;
   public showCodigo: boolean = false;
   public showMontoPagar: boolean = false;
+  public showtipo1: boolean = true;
+  public showtipo2: boolean = true;
   public showNecesitaMontoMinimo: boolean = false;
   public showMontoMinimo: boolean = false;
   public showCanales: boolean = true;
@@ -886,7 +888,10 @@ export class CuponOmnicanalComponent implements OnInit {
   public VisCodCupon!: number;
   public VisCodProceso!: number;
   public CantidadAntigua!: number;
+  public CantidadAntigu2!: number;
   public CantidadInter!: number;
+  public CantidadInte2!: number;
+  
   public getDetailsSelectCupon() {
     const id = Number(sessionStorage.getItem('cupon-omnicanal')!)
     
@@ -895,6 +900,7 @@ export class CuponOmnicanalComponent implements OnInit {
         this.cuponOmniD = cuponOmni;
 
         this.CantidadInter = this.cuponOmniD[0].nroCuponAGenerar;
+        this.CantidadInte2 = this.cuponOmniD[0].maximouso;
         
         this.cuponOmni.fecInicio = new Date(this.cuponOmniD[0].fecInicio.toString());;
         this.cuponOmni.fecFin = new Date(this.cuponOmniD[0].fecFin.toString());
@@ -908,6 +914,7 @@ export class CuponOmnicanalComponent implements OnInit {
         this.selectionTypeCupon = this.cuponOmniD[0].tipoCupon.toString();
         this.cuponOmni.tipoCupon = this.cuponOmniD[0].tipoCupon;
         this.CantidadAntigua = this.cuponOmniD[0].nroCuponAGenerar;
+        this.CantidadAntigu2 = this.cuponOmniD[0].maximouso;
         this.SeleccionOrigen = this.cuponOmniD[0].origen.toString();
         this.SeleccionAliados = this.cuponOmniD[0].aliados.toString();
 
@@ -957,6 +964,8 @@ export class CuponOmnicanalComponent implements OnInit {
         }
 
         if (this.cuponOmniD[0].tipoCupon == 1 && this.cuponOmniD[0].tipo == 1) {
+          this.showtipo1 = true;
+          this.showtipo2 = false;
           this.showCuponesGenerar = true;
           this.showCantidadMaximaUso = false;
           this.showCodigo = false;
@@ -976,6 +985,8 @@ export class CuponOmnicanalComponent implements OnInit {
         }
     
         else if (this.cuponOmniD[0].tipoCupon == 1 && this.cuponOmniD[0].tipo == 2) {
+          this.showtipo1 = false;
+          this.showtipo2 = true;
           this.showCuponesGenerar = true;
           this.showCantidadMaximaUso = true;
           this.showCodigo = true;
@@ -996,6 +1007,8 @@ export class CuponOmnicanalComponent implements OnInit {
         }
     
         else if (this.cuponOmniD[0].tipoCupon == 2 && this.cuponOmniD[0].tipo == 1) {
+          this.showtipo1 = true;
+          this.showtipo2 = false;
           this.showCuponesGenerar = true;
           this.showCantidadMaximaUso = false;
           this.showCodigo = false;
@@ -1015,6 +1028,8 @@ export class CuponOmnicanalComponent implements OnInit {
         }
     
         else if (this.cuponOmniD[0].tipoCupon == 2 && this.cuponOmniD[0].tipo == 2) { 
+          this.showtipo1 = false;
+          this.showtipo2 = true;
           this.showCuponesGenerar = true;
           this.showCantidadMaximaUso = true;
           this.showCodigo = true;
@@ -1033,6 +1048,8 @@ export class CuponOmnicanalComponent implements OnInit {
         }
     
         else if (this.cuponOmniD[0].tipoCupon == 3 && this.cuponOmniD[0].tipo == 1) {
+          this.showtipo1 = true;
+          this.showtipo2 = false;
           this.showCuponesGenerar = true;
           this.showCantidadMaximaUso = false;
           this.showCodigo = false;
@@ -1052,6 +1069,8 @@ export class CuponOmnicanalComponent implements OnInit {
         }
     
         else if (this.cuponOmniD[0].tipoCupon == 3 && this.cuponOmniD[0].tipo == 2) {
+          this.showtipo1 = false;
+          this.showtipo2 = true;
           this.showCuponesGenerar = true;
           this.cuponOmni.nroCuponAGenerar = 1;
           this.showCantidadMaximaUso = true;
@@ -1070,6 +1089,8 @@ export class CuponOmnicanalComponent implements OnInit {
         }
     
         else if (this.cuponOmniD[0].tipoCupon == 4 && this.cuponOmniD[0].tipo == 1) {
+          this.showtipo1 = true;
+          this.showtipo2 = false;
           this.showCuponesGenerar = true;
           this.showCantidadMaximaUso = false;
           this.showCodigo = false;
@@ -1090,6 +1111,8 @@ export class CuponOmnicanalComponent implements OnInit {
         }
     
         else if (this.cuponOmniD[0].tipoCupon == 4 && this.cuponOmniD[0].tipo == 2) {      
+          this.showtipo1 = false;
+          this.showtipo2 = true;
           this.showCuponesGenerar = true;
           this.cuponOmni.nroCuponAGenerar = 1;
           this.showCantidadMaximaUso = true;
@@ -1109,6 +1132,8 @@ export class CuponOmnicanalComponent implements OnInit {
         }
     
         else if (this.cuponOmniD[0].tipoCupon == 5 && this.cuponOmniD[0].tipo == 1) {
+          this.showtipo1 = true;
+          this.showtipo2 = false;
           this.showCuponesGenerar = true;
           this.showCantidadMaximaUso = false;
           this.showCodigo = false;
@@ -1128,6 +1153,8 @@ export class CuponOmnicanalComponent implements OnInit {
         }
     
         else if (this.cuponOmniD[0].tipoCupon == 5 && this.cuponOmniD[0].tipo == 2) {
+          this.showtipo1 = false;
+          this.showtipo2 = true;
           this.showCuponesGenerar = true;
           this.showCantidadMaximaUso = true;
           this.cuponOmni.nroCuponAGenerar = 1;
@@ -1146,6 +1173,8 @@ export class CuponOmnicanalComponent implements OnInit {
         }
     
         else if (this.cuponOmniD[0].tipoCupon == 6 && this.cuponOmniD[0].tipo == 1) {
+          this.showtipo1 = true;
+          this.showtipo2 = false;
           this.showCuponesGenerar = true;
           this.showCantidadMaximaUso = false;
           this.showCodigo = false;
@@ -1165,6 +1194,8 @@ export class CuponOmnicanalComponent implements OnInit {
         }
     
         else if (this.cuponOmniD[0].tipoCupon == 6 && this.cuponOmniD[0].tipo == 2) {
+          this.showtipo1 = false;
+          this.showtipo2 = true;
           this.showCuponesGenerar = true;
           this.showCantidadMaximaUso = true;
           this.showCodigo = true;
@@ -2072,11 +2103,23 @@ export class CuponOmnicanalComponent implements OnInit {
     if(this.cuponOmni.nroCuponAGenerar > 0){
       var sumaCant = this.cuponOmni.nroCuponAGenerar * this.CartaFinal.length;
       console.log(sumaCant);
-      if(sumaCant < 1000001){
-        console.log("entro");
-        this.ajaxQueryPost(`${this.urlEndPointOmnicanal}/generarcupon`, this.dataCupones.token, this.cuponOmni2);
-        var ruta = `${this.urlLista}/GeneraMasCupones?Codigo=`+this.VisCodCupon+`&proceso=`+this.VisCodProceso+`&usuario=`+this.getUsuario()+`&Cantidad=`+this.cuponOmni.nroCuponAGenerar+`&CantidadTotal=`+sumaCant+`&CantidadAntigua=`+this.CantidadAntigua;
-        this.ajaxQueryPostsqlMasCupones(ruta);
+      if(sumaCant < 1000001){        
+        if(parseInt(this.selectCountTimes) == 1){
+          this.ajaxQueryPost(`${this.urlEndPointOmnicanal}/generarcupon`, this.dataCupones.token, this.cuponOmni2);
+          var ruta = `${this.urlLista}/GeneraMasCupones?Codigo=`+this.VisCodCupon+`&proceso=`+this.VisCodProceso+`&usuario=`+this.getUsuario()+`&Cantidad=`+this.cuponOmni.nroCuponAGenerar+`&CantidadTotal=`+sumaCant+`&CantidadAntigua=`+this.CantidadAntigua+`&tipo=1`;
+          
+        } else if (parseInt(this.selectCountTimes) == 2){
+          this.cuponOmni3 = {            
+              adicional:this.cuponOmni.nroUso,
+              nombreCupon:this.cuponOmni.codigo.toUpperCase(),
+              codMarca:this.empresaService.getEmpresaSeleccionada().idEmpresa.toString(),
+              usuario:this.getUsuario()                    
+          };
+
+          this.ajaxQueryPost(`${this.urlEndPointOmnicanal}/adicionarcantidad`, this.dataCupones.token, this.cuponOmni3);
+          var ruta = `${this.urlLista}/GeneraMasCupones?Codigo=`+this.VisCodCupon+`&proceso=`+this.VisCodProceso+`&usuario=`+this.getUsuario()+`&Cantidad=`+this.cuponOmni.nroUso+`&CantidadTotal=`+this.cuponOmni.nroUso+`&CantidadAntigua=`+this.CantidadAntigu2+`&tipo=2`;
+        }
+        this.ajaxQueryPostsqlMasCupones(ruta);        
       } else {
         Swal.fire(
           'Advertencia',

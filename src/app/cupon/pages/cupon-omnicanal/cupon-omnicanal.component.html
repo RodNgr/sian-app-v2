@@ -96,18 +96,19 @@
             </div>
             <!-- Unico -->             
             <div class="p-field p-col-3 p-md-3 p-sm-3" *ngIf="showCuponesGenerar">
-              <label for="nroCuponAGenerar" *ngIf="type !== 'V'" >Cantidad de cupones a generar(*):</label>
-              <label for="nroCuponAGenerar" *ngIf="type === 'V'" style="font-weight: bolder;" >Cantidad de cupones actuales ({{CantidadInter}}):</label>
+              <label for="nroCuponAGenerar" *ngIf="showtipo2" >Cantidad de cupones a generar(*):</label>
+              <label for="nroCuponAGenerar" *ngIf="showtipo1 && this.type !== 'N'" style="font-weight: bolder;" >Cantidad de cupones actuales ({{CantidadInter}}):</label>
               <!-- [disabled]="selectCountTimes == 2" -->
-              <input #nroCuponAGenerar="ngModel" id="nroCuponAGenerar" type="number" pInputText [(ngModel)]="cuponOmni.nroCuponAGenerar" name="nroCuponAGenerar" min="1">
-              <small class="p-error" *ngIf="nroCuponAGenerar.value == 0 ">Cantidad de cupones a generar diferente a cero.</small>
+              <input #nroCuponAGenerar="ngModel" id="nroCuponAGenerar" type="number" pInputText [(ngModel)]="cuponOmni.nroCuponAGenerar" name="nroCuponAGenerar" min="1" [disabled]="this.selectCountTimes == '1'? false: true">
+              <small class="p-error" *ngIf="nroCuponAGenerar.value < 2 ">Cantidad de cupones a generar diferente a cero.</small>
               <!-- <button pButton pRipple label="Agregar más cupones"></button> -->
             </div>
 
-            <div class="p-field p-col-3 p-md-3 p-sm-3" *ngIf="showCantidadMaximaUso">
-              <label for="nroUso">Cantidad máxima de uso:</label>
-              <input #nroUso="ngModel" id="nroUso" type="number" pInputText [(ngModel)]="cuponOmni.nroUso" name="nroUso" min="1" [disabled]="type === 'V'">
-              <small class="p-error" *ngIf="nroUso.value == 0 ">Cantidad máxima de uso diferente a cero.</small>
+            <div class="p-field p-col-3 p-md-3 p-sm-3" *ngIf="showCantidadMaximaUso">              
+              <label for="nroUso" *ngIf="showtipo1" >Cantidad máxima de uso(*):</label>
+              <label for="nroUso" *ngIf="showtipo2 && this.type !== 'N'" style="font-weight: bolder;" >Cantidad de maximo uso actual ({{CantidadInte2}}):</label>
+              <input #nroUso="ngModel" id="nroUso" type="number" pInputText [(ngModel)]="cuponOmni.nroUso" name="nroUso" min="1" [disabled]="!showtipo2">
+              <small class="p-error" *ngIf="nroUso.value == 0 && this.selectCountTimes == '1'">Cantidad máxima de uso diferente a cero.</small>              
             </div>
 
             <div class="p-field p-col-3 p-md-3 p-sm-3" *ngIf="showCodigo">
