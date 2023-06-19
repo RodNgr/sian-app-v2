@@ -1,0 +1,170 @@
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-spin"
+  [fullScreen]="true"
+>
+  <p style="color: white">Cargando...</p>
+</ngx-spinner>
+
+<div class="card col">
+  <div class="p-grid">
+    <div class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+      <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-3 p-lg-3 p-md-6 p-sm-12">
+          <label for="tipoDoc">Tipo Documento:</label>
+          <p-dropdown
+            id="tipoDoc"
+            [options]="tipoDocumentosList"
+            [(ngModel)]="documentoSeleccionado"
+            optionLabel="nombre"
+            optionValue="id"
+            placeholder="Seleccione un tipo de documento"
+          >
+          </p-dropdown>
+        </div>
+        <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+          <label for="documento">Documento:</label>
+          <input
+            type="text"
+            autofocus
+            autocomplete="off"
+            pInputText
+            aria-describedby="tipoDoc-help"
+            [(ngModel)]="nroDocumento"
+            required
+            tabindex="1"
+            name="documento"
+          />
+        </div>
+        <div class="p-field p-col-2 p-lg-2 p-md-2 p-sm-12 p-mt-4">
+          <button
+            pRipple
+            pButton
+            label="Buscar"
+            icon="pi pi-search"
+            (click)="buscar()"
+          ></button>
+        </div>
+      </div>
+    </div>
+
+    <p-table
+      [value]="clientes"
+      dataKey="id"
+      editMode="row"
+      [tableStyle]="{ 'min-width': '50rem' }"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 20%">Nro documento</th>
+          <th style="width: 20%">Nombre</th>
+          <th style="width: 20%">Correo</th>
+          <th style="width: 20%">Tratamiento</th>
+          <th style="width: 20%"></th>
+        </tr>
+      </ng-template>
+      <ng-template
+        pTemplate="body"
+        let-cliente
+        let-editing="editing"
+        let-ri="rowIndex"
+      >
+        <tr [pEditableRow]="cliente">
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input
+                  pInputText
+                  type="text"
+                  [(ngModel)]="cliente.documento"
+                  disabled
+                />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ cliente.documento }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input
+                  pInputText
+                  type="text"
+                  [(ngModel)]="cliente.nombre"
+                  disabled
+                />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ cliente.nombre }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input
+                  pInputText
+                  type="text"
+                  [(ngModel)]="cliente.correo"
+                  disabled
+                />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ cliente.correo | lowercase }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <p-inputSwitch
+                  [(ngModel)]="cliente.tratamiento"
+                ></p-inputSwitch>
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ cliente.tratamiento }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <div class="flex align-items-center justify-content-center gap-2">
+              <button
+                *ngIf="!editing"
+                pButton
+                pRipple
+                type="button"
+                pInitEditableRow
+                icon="pi pi-pencil"
+                (click)="onRowEditInit(cliente)"
+                class="p-button-rounded p-button-text"
+              ></button>
+              <button
+                *ngIf="editing"
+                pButton
+                pRipple
+                type="button"
+                pSaveEditableRow
+                icon="pi pi-check"
+                (click)="onRowEditSave(cliente)"
+                class="p-button-rounded p-button-text p-button-success mr-2"
+              ></button>
+              <button
+                *ngIf="editing"
+                pButton
+                pRipple
+                type="button"
+                pCancelEditableRow
+                icon="pi pi-times"
+                (click)="onRowEditCancel(cliente, ri)"
+                class="p-button-rounded p-button-text p-button-danger"
+              ></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

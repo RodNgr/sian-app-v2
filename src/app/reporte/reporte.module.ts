@@ -34,6 +34,7 @@ import { TipoReportePipe } from './pipes/tipo-reporte.pipe';
 import { TipoBaseDatosPipe } from './pipes/tipo-base-datos.pipe';
 import { ReporteGestionVentaLocatarioComponent } from './pages/reporte-gestion-venta-locatario/reporte-gestion-venta-locatario.component';
 import { ReporteRedimidoComponent } from './pages/reporte-redimido/reporte-redimido.component';
+import { GestionClienteComponent } from './pages/gestion-cliente/gestion-cliente.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { ReporteRedimidoComponent } from './pages/reporte-redimido/reporte-redim
     TipoReportePipe,
     TipoBaseDatosPipe,
     ReporteGestionVentaLocatarioComponent,
-    ReporteRedimidoComponent
+    ReporteRedimidoComponent,
+    GestionClienteComponent,
   ],
   imports: [
     CommonModule,
