@@ -360,7 +360,8 @@ export class CuponOmnicanalComponent implements OnInit {
 
   showModalDialogCartaWeb(){    
     const tipo = parseInt(this.selectionTypeCupon);
-    if(this.addProductCondition(this.CartaWebSelected, tipo)) {
+    const CHANNEL = 2;
+    if(this.addProductCondition(this.CartaWebSelected, tipo, CHANNEL)) {
       Swal.fire({
         position: 'center',
         icon: 'warning',
@@ -371,14 +372,15 @@ export class CuponOmnicanalComponent implements OnInit {
       return;
     }
     this.productosCartaConsolidado.push(...this.CartaWebSelected);
-    const productsToValidation = this.parseProductToValidate(2, this.CartaWebSelected);
+    const productsToValidation = this.parseProductToValidate(CHANNEL, this.CartaWebSelected);
     this.CartaFinal.push(...productsToValidation);
     this.CartaDetalleVista.push(...productsToValidation);
   }
 
   showModalDialogCartaRcolas(){    
     const tipo = parseInt(this.selectionTypeCupon);
-    if(this.addProductCondition(this.CartaRcolasSelected, tipo)) {
+    const CHANNEL = 2;
+    if(this.addProductCondition(this.CartaRcolasSelected, tipo, CHANNEL)) {
       Swal.fire({
         position: 'center',
         icon: 'warning',
@@ -389,13 +391,14 @@ export class CuponOmnicanalComponent implements OnInit {
       return;
     }
     this.productosCartaConsolidado.push(...this.CartaRcolasSelected);
-    this.CartaFinal.push(...this.parseProductToValidate(2, this.CartaRcolasSelected));
+    this.CartaFinal.push(...this.parseProductToValidate(CHANNEL, this.CartaRcolasSelected));
     this.CartaDetalleVista.push(...this.parseProductToValidate(100, this.CartaRcolasSelected));
   }
 
   showModalDialogCartaCall(){
     const tipo = parseInt(this.selectionTypeCupon);
-    if(this.addProductCondition(this.CartaCallSelected, tipo, this.CartaFinal)) {
+    const CHANNEL = 1;
+    if(this.addProductCondition(this.CartaCallSelected, tipo, CHANNEL, this.CartaFinal)) {
       Swal.fire({
         position: 'center',
         icon: 'warning',
@@ -406,14 +409,15 @@ export class CuponOmnicanalComponent implements OnInit {
       return;
     }
     this.productosCartaConsolidado.push(...this.CartaCallSelected);
-    const productsToValidation = this.parseProductToValidate(1, this.CartaCallSelected);
+    const productsToValidation = this.parseProductToValidate(CHANNEL, this.CartaCallSelected);
     this.CartaFinal.push(...productsToValidation);
     this.CartaDetalleVista.push(...productsToValidation);
   }
 
   showModalDialogCartaSalon(){
     const tipo = parseInt(this.selectionTypeCupon);
-    if(this.addProductCondition(this.CartaSalonSelected, tipo, this.CartaFinal)) {
+    const CHANNEL = 0;
+    if(this.addProductCondition(this.CartaSalonSelected, tipo, CHANNEL, this.CartaFinal)) {
       Swal.fire({
         position: 'center',
         icon: 'warning',
@@ -424,7 +428,7 @@ export class CuponOmnicanalComponent implements OnInit {
       return;
     }
     this.productosCartaConsolidado.push(...this.CartaSalonSelected);
-    const productsToValidation = this.parseProductToValidate(0, this.CartaSalonSelected);
+    const productsToValidation = this.parseProductToValidate(CHANNEL, this.CartaSalonSelected);
     this.CartaFinal.push(...productsToValidation);
     this.CartaDetalleVista.push(...productsToValidation);
   }
@@ -3753,9 +3757,14 @@ export class CuponOmnicanalComponent implements OnInit {
     return consolidado.some(con => selectedArray.some(sel => sel.codigo === con.codigo));
   }
 
-  private addProductCondition(selectedArray: ProductoCarta[], type: number, arrayToCompare?): boolean {
+  private checkSameChannel(channel: number, selectedArray: ProductoCarta[]): boolean {
+    return selectedArray.length > 1 || this.CartaFinal.some(con => channel === con.canal);
+  }
+
+  private addProductCondition(selectedArray: ProductoCarta[], type: number, channel: number, arrayToCompare?): boolean {
     return this.existsDuplicate(this.productosCartaConsolidado, selectedArray) || (
-      type === 1 && [...selectedArray, ...(arrayToCompare || this.CartaDetalleVista)].length > 1
+      [1,2].includes(type) && this.checkSameChannel(channel, selectedArray) &&
+      [...selectedArray, ...(arrayToCompare || this.CartaDetalleVista)].length > 1
     );
   }
 }
