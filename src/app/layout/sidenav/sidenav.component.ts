@@ -270,7 +270,7 @@ export class SidenavComponent implements OnInit {
 
       if (this.authService.hasRole('ROL_SIAN_REP_GES_VTA_FORMA_PAGO')) {
         gestion.items?.push({ label: 'Ventas por Forma de Pago', icon: 'pi pi-fw pi-file', routerLink: '/home/reporte/reporte-gestion-pago', routerLinkActiveOptions: {exact: true} });
-        gestion.items?.push({ label: 'Gestion clientes', icon: 'pi pi-fw pi-file', routerLink: '/home/reporte/reporte-gestion-cliente', routerLinkActiveOptions: {exact: true} });
+        // gestion.items?.push({ label: 'Gestion clientes', icon: 'pi pi-fw pi-file', routerLink: '/home/reporte/reporte-gestion-cliente', routerLinkActiveOptions: {exact: true} });
       }
 
       if (this.authService.hasRole('ROL_SIAN_REP_GES_RENDIDO_TARJETA')) {
