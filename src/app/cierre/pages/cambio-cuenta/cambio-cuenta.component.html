@@ -1,0 +1,52 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+    <div class="p-mb-2">
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-4">
+                 <label for="lblNombreTienda">Nombre Tienda:</label>
+                 <input type="text" pInputText id="Campanha"/>                 
+             </div>
+            <div class="p-field p-col-1 p-mt-4">
+                <button pButton type="button" label="Buscar" icon="pi pi-search" class="p-button"></button>
+                <!-- (click)="Buscar()" -->
+            </div>            
+        </div>
+    </div>
+    <p-table #dt [value]="CuentasTiendas" [responsive]="true" [rows]="15" [paginator]="true" [rowHover]="true"
+          [globalFilterFields]="['CodTienda,CodBanco,CodMoneda,CodNumero']" [scrollable]="true" scrollHeight="40vh"
+          selectionMode="single" [(selection)]="CuentaSelected" styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
+          currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+          [rowsPerPageOptions]="[15,25,50,100]" (onRowSelect)="onRowSelect($event)">
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="campanha">Tienda<p-sortIcon field="Tienda"></p-sortIcon>
+            </th>
+            <th pSortableColumn="tipo">Banco<p-sortIcon field="tipo"></p-sortIcon>
+            </th>
+            <th pSortableColumn="nombreCupon">Moneda<p-sortIcon field="nombreCupon"></p-sortIcon>
+            </th>
+            <th pSortableColumn="desde">Numero Cuenta<p-sortIcon field="desde"></p-sortIcon>
+            </th>            
+            <th pSortableColumn="creacion">Cuenta Contable<p-sortIcon field="desde"></p-sortIcon>
+            </th>
+          </tr>
+        </ng-template>
+  
+        <ng-template pTemplate="body" let-CuentaBancaria>
+          
+          <tr [pSelectableRow]="CuentaBancaria">
+            <td>{{CuentaBancaria.Tienda}}</td>            
+            <td>{{CuentaBancaria.Banco}}</td>
+            <td>{{CuentaBancaria.Moneda}}</td>
+            <td>{{CuentaBancaria.Numero}}</td>
+            <td>{{CuentaBancaria.Cuenta}}</td>
+          </tr> 
+
+        </ng-template>
+      
+      </p-table> 
+</div>

@@ -14,6 +14,7 @@ import { DepositosPixelComponent } from './pages/depositos-pixel/depositos-pixel
 import { DepositoConEfectivoComponent } from './pages/deposito-con-efectivo/deposito-con-efectivo.component';
 import { DepositoSinEfectivoComponent } from './pages/deposito-sin-efectivo/deposito-sin-efectivo.component';
 import { OtrasCuadraturasComponent } from './pages/otras-cuadraturas/otras-cuadraturas.component';
+import { CambioCuentaComponent } from './pages/cambio-cuenta/cambio-cuenta.component';
 
 
 @NgModule({
@@ -24,7 +25,9 @@ import { OtrasCuadraturasComponent } from './pages/otras-cuadraturas/otras-cuadr
     TableroControlComponent, 
     ReporteOtrasCuadraturasComponent, DepositosPixelComponent, DepositoConEfectivoComponent,
     DepositoSinEfectivoComponent,
-    OtrasCuadraturasComponent
+    OtrasCuadraturasComponent,
+    CambioCuentaComponent,
+    CambioCuentaComponent
   ],
   imports: [
     CommonModule,
