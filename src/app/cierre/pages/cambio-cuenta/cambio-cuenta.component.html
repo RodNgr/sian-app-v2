@@ -7,12 +7,15 @@
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-4">
                  <label for="lblNombreTienda">Nombre Tienda:</label>
-                 <input type="text" pInputText id="Campanha"/>                 
+                 <input type="text" pInputText [(ngModel)]="Tienda"/>                 
              </div>
-            <div class="p-field p-col-1 p-mt-4">
-                <button pButton type="button" label="Buscar" icon="pi pi-search" class="p-button"></button>
-                <!-- (click)="Buscar()" -->
+            <div class="p-field p-col-2 p-mt-4">
+                <button pButton type="button" label="Buscar" icon="pi pi-search" class="p-button" (click)="Buscar()"></button>
             </div>            
+            <div class="p-field p-col-3 p-mt-4">
+                <button pButton pRipple pTooltip="Selecciona una cuenta" tooltipPosition="bottom" (click)="editarCuentaBancaria()" label="Editar cuenta bancaria" icon="pi pi-user-edit"
+                        class="p-button-primary p-mr-2" ></button>
+            </div>
         </div>
     </div>
     <p-table #dt [value]="CuentasTiendas" [responsive]="true" [rows]="15" [paginator]="true" [rowHover]="true"
@@ -39,11 +42,11 @@
         <ng-template pTemplate="body" let-CuentaBancaria>
           
           <tr [pSelectableRow]="CuentaBancaria">
-            <td>{{CuentaBancaria.Tienda}}</td>            
-            <td>{{CuentaBancaria.Banco}}</td>
-            <td>{{CuentaBancaria.Moneda}}</td>
-            <td>{{CuentaBancaria.Numero}}</td>
-            <td>{{CuentaBancaria.Cuenta}}</td>
+            <td>{{CuentaBancaria.tienda}}</td>            
+            <td>{{CuentaBancaria.banco}}</td>
+            <td>{{CuentaBancaria.moneda}}</td>
+            <td>{{CuentaBancaria.numero}}</td>
+            <td>{{CuentaBancaria.cuenta}}</td>
           </tr> 
 
         </ng-template>

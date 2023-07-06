@@ -15,6 +15,7 @@ import { DepositoConEfectivoComponent } from './pages/deposito-con-efectivo/depo
 import { DepositoSinEfectivoComponent } from './pages/deposito-sin-efectivo/deposito-sin-efectivo.component';
 import { OtrasCuadraturasComponent } from './pages/otras-cuadraturas/otras-cuadraturas.component';
 import { CambioCuentaComponent } from './pages/cambio-cuenta/cambio-cuenta.component';
+import { EditarCuentaBancariaComponent } from './components/editar-cuenta-bancaria/editar-cuenta-bancaria.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { CambioCuentaComponent } from './pages/cambio-cuenta/cambio-cuenta.compo
     DepositoSinEfectivoComponent,
     OtrasCuadraturasComponent,
     CambioCuentaComponent,
-    CambioCuentaComponent
+    CambioCuentaComponent,
+    EditarCuentaBancariaComponent
   ],
   imports: [
     CommonModule,

@@ -1,12 +1,17 @@
-export class CuentaBancaria {
-	Marca: number;
-    CodTienda: number;
-    Tienda:String;
-    CodBanco: number;
-    Banco:String;
-    CodMoneda: number;
-    Moneda:String;
-    CodNumero: number;
-    Numero:String;
-    Cuenta:String;
+export class CuentaBancarias {
+	marca: number;
+    codTienda: number;
+    tienda:String;
+    codBanco: number;
+    banco:String;
+    codMoneda: number;
+    moneda:String;
+    codNumero: number;
+    numero:string;
+    cuenta:string;
+}
+
+export class cbobancos{
+    codBanco: number;
+    banco: string;
 }
