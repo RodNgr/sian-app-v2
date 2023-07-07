@@ -262,6 +262,14 @@ export class CierreDiaComponent implements OnInit, OnDestroy {
       icon: 'question',
       showCancelButton: true
     }).then(respuesta => {
+      //aqui se agregara el registro de cierre de dia 
+      var fechaActual = new Date();
+      this.cierreDia.usuarioCierre = parseInt(this.authService.usuario.user.codigo);
+      // this.cierreDia.fechaCierre = '2023-06-20';
+      this.cierreDia.fechaCierre = fechaActual.getFullYear() + '-' + (fechaActual.getMonth()+1).toString().padStart(2, '0') + '-' + (fechaActual.getDate()).toString().padStart(2, '0') + " " + fechaActual.getHours().toString().padStart(2, '0') + ":" + fechaActual.getMinutes().toString().padStart(2, '0') + ":" + fechaActual.getSeconds().toString().padStart(2, '0');
+      
+      this.cierreDiaService.RegistrarIngreso(this.cierreDia).subscribe();
+
       if (respuesta.isConfirmed) {
         let montoSol = this.cierreDia.montoDepositoSoles + this.cierreDia.montoOtroSoles - this.cierreDia.montoRendidoSoles; 
         montoSol = toDecimal(montoSol, 2);

@@ -7,12 +7,14 @@ import { CierreDiaComponent } from './pages/cierre-dia/cierre-dia.component';
 import { ReporteDepositosComponent } from './pages/reporte-depositos/reporte-depositos.component';
 import { ReporteOtrasCuadraturasComponent } from './pages/reporte-otras-cuadraturas/reporte-otras-cuadraturas.component';
 import { TableroControlComponent } from './pages/tablero-control/tablero-control.component';
+import { CambioCuentaComponent } from './pages/cambio-cuenta/cambio-cuenta.component';
 
 const routes: Routes = [
   { path: '', children: 
     [
       { path: 'cierre-dia', component: CierreDiaComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_CIERRE_DIA']}},
       { path: 'caja-chica', component: CajaChicaComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_CIERRE_CAJA_CHICA']} },
+      { path: 'cambio-cuenta', component: CambioCuentaComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_CIERRE_CAMBIO_CUENTA']} },//ROL_SIAN_CIERRE_CAMBIO_CUENTA
 
       { path: 'reporte-depositos', component: ReporteDepositosComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_CIERRE_REP_DEPOSITO']} },
       { path: 'tablero-control', component: TableroControlComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_CIERRE_REP_TAB_CONTROL']} },

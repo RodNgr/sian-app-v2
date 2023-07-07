@@ -1,0 +1,22 @@
+    <div class="p-d-flex p-flex-column w-100">
+        <div class="p-field p-col-4 p-md-4 p-sm-4">
+            <label for="tipo">Banco:&nbsp;&nbsp;</label> 
+            <p-dropdown [options]="bancoss" [(ngModel)]="Banco" name="Banco" optionLabel="banco" [showClear]="true" [ngModelOptions]="{standalone: true}"
+            optionDisabled="inactive" optionValue="codBanco" (onChange)="MostrarDatos()" id="Banco2">
+            </p-dropdown>
+          </div>
+    
+        <div class="p-field p-col-6 p-md-6 p-sm-6">
+            <label for="tipo">Numero:&nbsp;&nbsp;</label>
+            <input type="text" pInputText [(ngModel)]="Numero"/>
+        </div>
+    
+        <div class="p-field p-col-6 p-md-6 p-sm-6">
+            <label for="tipo">Cuenta:&nbsp;&nbsp;</label>
+            <input type="text" pInputText [(ngModel)]="Cuenta"/>
+        </div>
+
+        <div class="p-field p-col-6 p-md-6 p-sm-6">
+            <button pButton type="button" label="Guardar" icon="pi pi-save" class="p-button" (click)="Guardar()"></button>
+        </div>
+    </div>

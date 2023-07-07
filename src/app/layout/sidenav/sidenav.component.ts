@@ -224,6 +224,10 @@ export class SidenavComponent implements OnInit {
         proceso.items?.push({ label: 'Cierre Día', icon: 'pi pi-fw pi-wallet', routerLink: '/home/cierre/cierre-dia', routerLinkActiveOptions: {exact: true} });
       }
 
+      if (this.authService.hasRole('ROL_SIAN_CIERRE_CAMBIO_CUENTA')) {
+        proceso.items?.push({ label: 'Cambio Cuenta', icon: 'pi pi-fw pi-money-bill', routerLink: '/home/cierre/cambio-cuenta', routerLinkActiveOptions: {exact: true} });
+      }
+
       if (this.authService.hasRole('ROL_SIAN_CIERRE_CAJA_CHICA')) {
         proceso.items?.push({ label: 'Caja Chica', icon: 'pi pi-fw pi-money-bill', routerLink: '/home/cierre/caja-chica', routerLinkActiveOptions: {exact: true} });
       }
@@ -270,7 +274,7 @@ export class SidenavComponent implements OnInit {
 
       if (this.authService.hasRole('ROL_SIAN_REP_GES_VTA_FORMA_PAGO')) {
         gestion.items?.push({ label: 'Ventas por Forma de Pago', icon: 'pi pi-fw pi-file', routerLink: '/home/reporte/reporte-gestion-pago', routerLinkActiveOptions: {exact: true} });
-        // gestion.items?.push({ label: 'Gestion clientes', icon: 'pi pi-fw pi-file', routerLink: '/home/reporte/reporte-gestion-cliente', routerLinkActiveOptions: {exact: true} });
+        gestion.items?.push({ label: 'Gestion clientes', icon: 'pi pi-fw pi-file', routerLink: '/home/reporte/reporte-gestion-cliente', routerLinkActiveOptions: {exact: true} });
       }
 
       if (this.authService.hasRole('ROL_SIAN_REP_GES_RENDIDO_TARJETA')) {

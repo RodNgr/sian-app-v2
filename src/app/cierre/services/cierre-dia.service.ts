@@ -39,6 +39,10 @@ export class CierreDiaService {
     return this.http.post<Cierre>(`${this.urlEndPoint}/api/cierredia/closeDia`, cierre);
   }
 
+  RegistrarIngreso(cierre: Cierre): Observable<Cierre> {
+    return this.http.post<Cierre>(`${this.urlEndPoint}/api/cierredia/RegistrarIngreso`, cierre);
+  }
+
   cleanDia(cierre: Cierre): Observable<Cierre> {
     return this.http.post<Cierre>(`${this.urlEndPoint}/api/cierredia/cleanDia`, cierre);
   }
