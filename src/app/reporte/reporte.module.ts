@@ -35,7 +35,8 @@ import { TipoBaseDatosPipe } from './pipes/tipo-base-datos.pipe';
 import { ReporteGestionVentaLocatarioComponent } from './pages/reporte-gestion-venta-locatario/reporte-gestion-venta-locatario.component';
 import { ReporteRedimidoComponent } from './pages/reporte-redimido/reporte-redimido.component';
 import { GestionClienteComponent } from './pages/gestion-cliente/gestion-cliente.component';
-
+import { ProcesoAutomaticoComponent } from './pages/proceso-automatico/proceso-automatico.component';
+import { DetalleProcesoAutomaticoComponent } from './components/detalle-procesoautomatico/detalle-procesoautomatico.component';
 @NgModule({
   declarations: [
     EjecutarConsultaComponent, 
@@ -67,6 +68,8 @@ import { GestionClienteComponent } from './pages/gestion-cliente/gestion-cliente
     ReporteGestionVentaLocatarioComponent,
     ReporteRedimidoComponent,
     GestionClienteComponent,
+    ProcesoAutomaticoComponent,
+    DetalleProcesoAutomaticoComponent
   ],
   imports: [
     CommonModule,

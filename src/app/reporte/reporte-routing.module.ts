@@ -21,6 +21,7 @@ import { ListaTransaccionComponent } from './pages/lista-transaccion/lista-trans
 import { ReporteGestionVentaLocatarioComponent } from './pages/reporte-gestion-venta-locatario/reporte-gestion-venta-locatario.component';
 import { ReporteRedimidoComponent } from './pages/reporte-redimido/reporte-redimido.component';
 import { GestionClienteComponent } from './pages/gestion-cliente/gestion-cliente.component';
+import { ProcesoAutomaticoComponent } from './pages/proceso-automatico/proceso-automatico.component';
 
 const routes: Routes = [
   { path: '',  children: 
@@ -45,6 +46,7 @@ const routes: Routes = [
       { path: 'reporte-control-comparativo-horas', component: ReporteControlComparativoHoraComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_REP_CON_COMPARATIVO']} },
       { path: 'lista-reporte', component: ListaTransaccionComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_REP_EJECUTAR_CONSULTA']} },
       { path: 'reporte-redimido', component: ReporteRedimidoComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_REP_CON_REDIMIDO']} },
+      { path: 'proceso-automatico', component: ProcesoAutomaticoComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_REP_PROCESO_AUTOMATICO']} },
       
     ]
   }

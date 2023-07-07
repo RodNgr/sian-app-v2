@@ -1,0 +1,59 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+    <p-toolbar styleClass="p-mb-4">
+         <ng-template pTemplate="left">
+              <button pButton pRipple label="Nuevo" icon="pi pi-book" class="p-button-success p-mr-2" pTooltip="Nuevo" tooltipPosition="bottom" (click)="detalleReporte(0)"></button>
+              <button pButton pRipple label="Editar" icon="pi pi-list" class="p-button-help p-mr-5" pTooltip="Ver Detalle" tooltipPosition="bottom" (click)="detalleReporte(1)" ></button>
+         </ng-template>
+         <ng-template pTemplate="right">
+          <p-dropdown [options]="tipoProcesosList" [(ngModel)]="tipoProceso" optionLabel="proceso" (onChange)="onChangeTipoProceso($event)"></p-dropdown>
+         </ng-template>
+        
+    </p-toolbar>
+
+    <p-table [value]="reporteTemp"[responsive]="true" [rows]="25" [paginator]="true" [rowHover]="true" [scrollable]="true" scrollHeight="40vh"
+              selectionMode="single" styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
+              [(selection)]="reporteSelected" [showCurrentPageReport]="true" [rowsPerPageOptions]="[25,50,100,150]"
+              currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" >
+         <ng-template pTemplate="caption">
+              <div class="p-d-flex p-ai-center p-jc-between">
+                   <h1 class="p-m-0">Procesos Automaticos</h1>
+              </div>
+         </ng-template>
+         <ng-template pTemplate="colgroup">
+              <colgroup>
+                   <col style="width:10%;">
+                   <col style="width:20%;">
+                   <col style="width:25%;">
+                   <col style="width:14%;">
+                   <col style="width:14%;">
+              </colgroup>
+         </ng-template>
+         <ng-template pTemplate="header">
+              <tr>
+                   <th>cliente_sap </th>
+                   <th>Empresa </th>
+                   <th>Nombre de tienda </th>
+                   <th>Proceso </th>
+                   <th>Estado </th>
+              </tr>
+         </ng-template>
+         <ng-template pTemplate="body" let-reporte>
+               <tr [pSelectableRow]="reporte">
+                    <td class="wrap">{{reporte.cliente_sap}}</td>
+                    <td class="wrap">{{reporte.empresa}}</td>
+                    <td class="wrap">{{reporte.nombretienda}}</td>
+                    <td class="wrap">{{reporte.proceso}}</td>
+                    <td class="wrap">{{reporte.estado}}</td>
+              </tr>
+         </ng-template>
+         <ng-template pTemplate="summary">
+              <div class="p-d-flex p-ai-center p-jc-between">
+                   {{(reporteTemp ? reporteTemp.length : 0) | i18nPlural: cantidadMap}}
+              </div>
+         </ng-template>
+    </p-table>
+</div>

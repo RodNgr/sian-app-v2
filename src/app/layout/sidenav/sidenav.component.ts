@@ -320,7 +320,11 @@ export class SidenavComponent implements OnInit {
       if (this.authService.hasRole('ROL_SIAN_REP_EJECUTAR_CONSULTA')) {
         configuracion.items?.push({ label: 'Ejecutar Transacción', icon: 'pi pi-fw pi-file', routerLink: '/home/reporte/lista-reporte', routerLinkActiveOptions: {exact: true} });
       }
-      
+
+      if (this.authService.hasRole('ROL_SIAN_REP_PROCESO_AUTOMATICO')) {
+        configuracion.items?.push({ label: 'Proceso Automatico', icon: 'pi pi-fw pi-file', routerLink: '/home/reporte/proceso-automatico', routerLinkActiveOptions: {exact: true} });
+      }
+
       menu.items?.push(gestion);
       menu.items?.push(control);
       menu.items?.push(configuracion);

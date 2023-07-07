@@ -1,0 +1,77 @@
+<div class="card col">
+    <p-tabView>
+        <p-tabPanel header="Información General">
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-4 p-lg-4 p-md-4 p-sm-12">
+                    <label for="cmbEmpresa">Empresa:</label>
+                    <p-dropdown id="cmbEmpresa" [options]="empresaList" [(ngModel)]="empresaSeleccionada" optionLabel="nombreComercial" (onChange)="onChangeEmpresa()"></p-dropdown>
+                </div>
+                <div class="p-field p-col-4 p-lg-4 p-md-4 p-sm-12">
+                     <label for="cmbTienda">Tienda:</label>
+                     <p-dropdown  id="cmbTienda" [options]="tiendaList" [(ngModel)]="tiendasSeleccionadas" optionLabel="nombreTienda" [filter]="true" [disabled]="!enableDropDownTienda"></p-dropdown>
+                 </div>
+                 <div class="p-field p-col-4 p-lg-4 p-md-4 p-sm-12">
+                     <label for="cmbBanco">Proceso:</label>
+                     <p-dropdown [options]="tipoProcesosList" [(ngModel)]="tipoProcesoSeleccionadas" optionLabel="proceso" (onChange)="onChangeTipoProceso()"></p-dropdown>
+                 </div>
+               <!--   [disabled]="true" -->
+                <div *ngIf="boSoloRealPlaza" class="p-field p-col-4 p-lg-4 p-md-4 p-sm-12">
+                    <label for="locales">Ip FTP: </label>
+                    <input pInputText type="text" [(ngModel)]="objProcAuto.ip_ftp">
+                </div>
+                <div *ngIf="boSoloRealPlaza" class="p-field p-col-4 p-lg-4 p-md-4 p-sm-12">
+                    <label for="locales">Nro Puerto: </label>
+                    <input (input)="sanitizeInput($event)" pInputText type="text" [(ngModel)]="objProcAuto.nu_puerto_ftp"/>
+                </div>
+                <div *ngIf="boSoloRealPlaza" class="p-field p-col-4 p-lg-4 p-md-4 p-sm-12">
+                    <label for="locales">Usuario FTP: </label>
+                    <input pInputText type="text" [(ngModel)]="objProcAuto.de_usuario_ftp"/>
+                </div>
+                <div *ngIf="boSoloRealPlaza" class="p-field p-col-4 p-lg-4 p-md-4 p-sm-12">
+                    <label for="locales">Clave FTP: </label>
+                    <input pInputText type="text" [(ngModel)]="objProcAuto.de_clave_ftp"/>
+                </div>
+                <div *ngIf="boSoloRealPlaza" class="p-field p-col-4 p-lg-4 p-md-4 p-sm-12">
+                    <label for="locales">Prefijo: </label>
+                    <input pInputText type="text" [(ngModel)]="objProcAuto.de_prefijo"/>
+                </div>
+                <div *ngIf="boSoloRealPlaza" class="p-field p-col-4 p-lg-4 p-md-4 p-sm-12">
+                    <label for="locales">Id stored: </label>
+                    <input pInputText type="text" [(ngModel)]="objProcAuto.id_store"/>
+                </div>
+                <div *ngIf="boSoloRealPlaza" class="p-field p-col-4 p-lg-4 p-md-4 p-sm-12">
+                    <label for="locales">Id mall: </label>
+                    <input pInputText type="text" [(ngModel)]="objProcAuto.id_mall"/>
+                </div>
+                <div *ngIf="boSoloRealPlaza" class="p-field p-col-4 p-lg-4 p-md-4 p-sm-12">
+                    <label for="locales">N° Stored: </label>
+                    <input pInputText type="text" [(ngModel)]="objProcAuto.nu_store"/>
+                </div>
+                <div *ngIf="boSoloRealPlaza" class="p-field p-col-4 p-lg-4 p-md-4 p-sm-12">
+                    <label for="locales">File Destino: </label>
+                    <input pInputText type="text" [(ngModel)]="objProcAuto.ftp_file_destino"/>
+                </div>
+                <div *ngIf="!boSoloRealPlaza" class="p-field p-col-4 p-lg-4 p-md-4 p-sm-12">
+                    <label for="locales">Codigo Inmueble: </label>
+                    <input pInputText type="text" [(ngModel)]="objProcAuto.codigoinmueblerp"/>
+                </div>
+                <div *ngIf="!boSoloRealPlaza" class="p-field p-col-4 p-lg-4 p-md-4 p-sm-12">
+                    <label for="locales">Codigo Local MP: </label>
+                    <input pInputText type="text" [(ngModel)]="objProcAuto.codigoLocalrp"/>
+                </div>
+                <div *ngIf="boSoloRealPlaza" class="p-field p-col-4 p-lg-4 p-md-4 p-sm-12">
+                    <label for="cmbBanco">Proceso:</label>
+                    <p-dropdown [options]="Estados" [(ngModel)]="EstadosSeleccionada" optionLabel="Desc" (onChange)="onChangeEstado()"></p-dropdown>
+                </div>
+            </div>
+        </p-tabPanel>
+        
+    </p-tabView>
+
+    <div class="p-mb-2">
+        <div class="p-d-flex p-jc-end">
+            <button pButton pRipple pTooltip="Aceptar" tooltipPosition="bottom" label="Aceptar"  icon="pi pi-check-circle" (click)="aceptar()" class="p-button-success p-mr-2"></button>
+            <button pButton pRipple pTooltip="Cerrar" tooltipPosition="bottom" label="Cerrar" icon="pi pi-times" (click)="cerrar()" class="p-button-secondary"></button>
+        </div>
+    </div>
+</div>

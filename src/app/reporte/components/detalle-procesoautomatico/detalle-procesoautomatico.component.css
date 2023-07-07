@@ -1,0 +1,12 @@
+pre {
+    display: flex;
+    margin-top: 0;
+    margin-bottom: 0;
+    word-wrap: break-word;
+}
+
+code {
+    flex: 1;
+    font-size: 14px;
+    min-height: 100%;
+}

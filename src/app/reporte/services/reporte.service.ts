@@ -11,6 +11,7 @@ import { MethodPay } from '../entity/method-pay';
 import { TreeNode } from 'primeng/api';
 import { map } from 'rxjs/operators';
 import { CallVentasBaseDto } from '../dto/call-ventas-base-dto';
+import { ProcesoAutomatico } from '../entity/procesoautomatico';
 
 @Injectable({
   providedIn: 'root'
@@ -213,5 +214,14 @@ export class ReporteService {
   getReporteRedimido(dto: ParamDto): Observable<any> {
     return this.http.post<any>(`${this.urlEndPoint}/api/reporte/control/redimido`, dto);
   }
+
+  getListaProcesoAutomatico(idempresa: number,tienda: number): Observable<ProcesoAutomatico[]> {
+    return this.http.get<ProcesoAutomatico[]>(`${this.urlEndPoint}/api/reporte/procesoautomatico/${idempresa}/${tienda}`);
+  }
+
+  addProcesoAutomatico(objProceso: ProcesoAutomatico): Observable<any> {
+    return this.http.post<any>(`${this.urlEndPoint}/api/reporte/procesoautomatico`, objProceso);
+  }
+
 
 }
