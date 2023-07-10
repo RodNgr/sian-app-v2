@@ -1,0 +1,190 @@
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-spin"
+  [fullScreen]="true"
+>
+  <p style="color: white">Cargando...</p>
+</ngx-spinner>
+
+<div class="card col">
+  <div class="p-grid">
+    <div class="p-col-12 p-lg-12 p-md-12 p-sm-12">
+      <form #aperturaForm="ngForm" class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-3 p-lg-3 p-md-6 p-sm-12">
+          <label for="tipoDoc">Empresa:</label>
+          <p-dropdown
+            id="tipoDoc"
+            [options]="marcasList"
+            [(ngModel)]="apertura.idEmpresa"
+            optionLabel="nombreComercial"
+            optionValue="idEmpresa"
+            placeholder="Seleccione una empresa"
+            (onChange)="handleEmpresaChange($event)"
+            #idempresa="ngModel"
+            name="idEmpresa"
+          >
+          </p-dropdown>
+        </div>
+        <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+          <label for="documento">MV Formato:</label>
+          <p-dropdown
+            id="mvFormato"
+            [options]="formatosList"
+            [(ngModel)]="apertura.MVFormato"
+            optionLabel="formato"
+            placeholder="Seleccione un formato"
+            #mvformato="ngModel"
+            name="mvFormato"
+          >
+          </p-dropdown>
+        </div>
+
+        <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+          <label for="documento">Tienda Padre:</label>
+          <p-dropdown name="tiendaPadre" [options]="tiendasByMarcaList" [(ngModel)]="tiendaPadreSeleccionada" optionLabel="nombreTienda" [filter]="true" filterBy="nombreTienda" [showClear]="true" placeholder="Selecciona tienda padre">
+            <ng-template pTemplate="selectedItem">
+              <div class="flex align-items-center gap-2" *ngIf="tiendaPadreSeleccionada">
+                <div>{{ tiendaPadreSeleccionada.nombreTienda }}</div>
+              </div>
+            </ng-template>
+            <ng-template let-tienda pTemplate="item">
+              <div class="flex align-items-center gap-2">
+                <div>{{ tienda.nombreTienda }}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+        </div>
+
+        <div class="p-field p-col-3 p-lg-3 p-md-6 p-sm-12">
+          <label for="tipoDoc">Tienda SAP:</label>
+          <input
+            type="text"
+            autofocus
+            autocomplete="off"
+            pInputText
+            aria-describedby="tiendaSap-help"
+            [(ngModel)]="apertura.tiendaSap"
+            required
+            tabindex="1"
+            name="tiendaSap"
+            #tiendasap="ngModel"
+          />
+          <small class="p-error" *ngIf="tiendasap.invalid && (tiendasap.dirty || tiendasap.touched)">Campo Obligatorio</small>
+        </div>
+        <div class="p-field p-col-3 p-lg-3 p-md-6 p-sm-12">
+          <label for="tipoDoc">Tienda Pixel:</label>
+          <input
+            type="text"
+            autofocus
+            autocomplete="off"
+            pInputText
+            aria-describedby="tiendaPixel-help"
+            [(ngModel)]="apertura.tiendaPixel"
+            required
+            tabindex="1"
+            name="tiendaPixel"
+            #tiendapixel="ngModel"
+          />
+          <small class="p-error" *ngIf="tiendapixel.invalid && (tiendapixel.dirty || tiendapixel.touched)">Campo Obligatorio</small>
+        </div>
+        <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+          <label for="documento">IP Base:</label>
+          <input
+            type="text"
+            autofocus
+            autocomplete="off"
+            pInputText
+            aria-describedby="ip-help"
+            [(ngModel)]="apertura.ip"
+            required
+            tabindex="1"
+            name="ip"
+            #ipbase="ngModel"
+          />
+          <small class="p-error" *ngIf="ipbase.invalid && (ipbase.dirty || ipbase.touched)">Campo Obligatorio, máximo 10 caracteres</small>
+        </div>
+        <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+          <label for="documento">Código Base:</label>
+          <input
+            type="text"
+            autofocus
+            autocomplete="off"
+            pInputText
+            aria-describedby="codBase-help"
+            [(ngModel)]="apertura.codigoBase"
+            required
+            tabindex="1"
+            name="codBase"
+            #codbase="ngModel"
+          />
+          <small class="p-error" *ngIf="codbase.invalid && (codbase.dirty || codbase.touched)">Campo Obligatorio, máximo 10 caracteres</small>
+        </div>
+        <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+          <label for="documento">Centro Beneficio:</label>
+          <input
+            type="text"
+            autofocus
+            autocomplete="off"
+            pInputText
+            aria-describedby="centroBene-help"
+            [(ngModel)]="apertura.centroBeneficio"
+            required
+            tabindex="1"
+            maxlength="10"
+            name="centroBene"
+            #centrobene="ngModel"
+          />
+          <small class="p-error" *ngIf="centrobene.invalid && (centrobene.dirty || centrobene.touched)">Campo Obligatorio, máximo 10 caracteres</small>
+        </div>
+        <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+          <label for="documento">Nombre Tienda:</label>
+          <input
+            type="text"
+            autofocus
+            autocomplete="off"
+            pInputText
+            aria-describedby="nombreTienda-help"
+            [(ngModel)]="apertura.nombreTienda"
+            required
+            tabindex="1"
+            name="nombreTienda"
+            #nombretienda="ngModel"
+          />
+          <small class="p-error" *ngIf="nombretienda.invalid && (nombretienda.dirty || nombretienda.touched)">Campo Obligatorio, máximo 10 caracteres</small>
+        </div>
+        <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+          <label for="documento">Fecha Inicio Operacion:</label>
+          <p-calendar dateFormat="dd/mm/yy" name="fechaInicio" [(ngModel)]="apertura.fechaInicioOpera" [showIcon]="true"></p-calendar>
+        </div>
+        <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+          <label for="documento">Email Tienda:</label>
+          <input
+            type="text"
+            autofocus
+            autocomplete="off"
+            pInputText
+            aria-describedby="tiendaEmail-help"
+            [(ngModel)]="apertura.emailTienda"
+            required
+            tabindex="1"
+            name="tiendaEmail"
+            type="email"
+            #emailtienda="ngModel"
+          />
+          <small class="p-error" *ngIf="emailtienda.invalid && (emailtienda.dirty || emailtienda.touched)">Campo Obligatorio, máximo 10 caracteres</small>
+        </div>
+
+        <div class="p-field p-col-2 p-lg-2 p-md-2 p-sm-12 p-mt-4">
+
+        </div>
+      </form>
+
+      <div class="p-d-flex p-jc-end p-mt-3">
+        <button pButton pRipple pTooltip="Guardar"  tooltipPosition="bottom" label="Guardar"  icon="pi pi-save"  class="p-button-success p-mr-2" (click)="save()" [disabled]="!aperturaForm.form.valid"></button>
+        <button pButton pRipple pTooltip="Cancelar" tooltipPosition="bottom" label="Cancelar" icon="pi pi-times" class="p-button-secondary" (click)="cancelar()"></button>
+      </div>
+    </div>
+  </div>
+</div>

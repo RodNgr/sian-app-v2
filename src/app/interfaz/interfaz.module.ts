@@ -39,6 +39,7 @@ import { EstadoInterfacePipe } from './pipes/estado-interface.pipe';
 import { VerIncidenteComponent } from './components/ver-incidente/ver-incidente.component';
 import { TipoIncidenteLogPipe } from './pipes/tipo-incidente-log.pipe';
 import { AsumirIncidenteComponent } from './components/asumir-incidente/asumir-incidente.component';
+import { AperturaTiendaComponent } from './components/apertura-tienda/apertura-tienda.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { AsumirIncidenteComponent } from './components/asumir-incidente/asumir-i
     EstadoInterfacePipe, 
     VerIncidenteComponent, 
     TipoIncidenteLogPipe, 
-    AsumirIncidenteComponent
+    AsumirIncidenteComponent,
+    AperturaTiendaComponent,
   ], 
   imports: [
     CommonModule,
