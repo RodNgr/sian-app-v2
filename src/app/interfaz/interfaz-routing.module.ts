@@ -27,6 +27,7 @@ import { ReprocesarInterfaceComponent } from './pages/reprocesar-interface/repro
 import { BloqueoInterfacesComponent } from './pages/bloqueo-interfaces/bloqueo-interfaces.component';
 import { IncidentesComponent } from './pages/incidentes/incidentes.component';
 import { AperturaTiendaComponent } from './components/apertura-tienda/apertura-tienda.component';
+import { ListaAperturaTiendaComponent } from './components/lista-apertura-tienda/lista-apertura-tienda.component';
 
 const routes: Routes = [
   { path: '', children: 
@@ -61,6 +62,7 @@ const routes: Routes = [
       { path: 'resumen-bloqueo', component: ResumenInterfacesBloqueadasComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_ITZ_RESUMEN_BLOQUEO']} },
       { path: 'incidente', component: IncidentesComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_ITZ_INCIDENTE']} },
       { path: 'apertura-tienda', component: AperturaTiendaComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_ITZ_INCIDENTE']} },
+      { path: 'lista-apertura-tienda', component: ListaAperturaTiendaComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_ITZ_INCIDENTE']} },
     ]
   }
 ];

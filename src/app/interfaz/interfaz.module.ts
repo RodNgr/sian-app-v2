@@ -1,5 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
 
@@ -40,6 +41,7 @@ import { VerIncidenteComponent } from './components/ver-incidente/ver-incidente.
 import { TipoIncidenteLogPipe } from './pipes/tipo-incidente-log.pipe';
 import { AsumirIncidenteComponent } from './components/asumir-incidente/asumir-incidente.component';
 import { AperturaTiendaComponent } from './components/apertura-tienda/apertura-tienda.component';
+import { ListaAperturaTiendaComponent } from './components/lista-apertura-tienda/lista-apertura-tienda.component';
 
 @NgModule({
   declarations: [
@@ -76,13 +78,15 @@ import { AperturaTiendaComponent } from './components/apertura-tienda/apertura-t
     TipoIncidenteLogPipe, 
     AsumirIncidenteComponent,
     AperturaTiendaComponent,
+    ListaAperturaTiendaComponent,
   ], 
   imports: [
     CommonModule,
     InterfazRoutingModule,
     PrimengModule,
     NgxSpinnerModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

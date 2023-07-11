@@ -120,7 +120,7 @@ export class SidenavComponent implements OnInit {
 
       let mantenimiento: MenuItem = { label: 'Mantenimiento', icon: 'pi pi-fw pi-folder', items: [] };
       if (this.authService.hasRole('ROL_SIAN_ITZ_TIPO_CONSUMO')) {
-        mantenimiento.items?.push({ label: 'Apertura Tienda', icon: 'pi pi-fw pi-table', routerLink: '/home/interfaz/apertura-tienda', routerLinkActiveOptions: {exact: true} });
+        mantenimiento.items?.push({ label: 'Apertura Tienda', icon: 'pi pi-fw pi-table', routerLink: '/home/interfaz/lista-apertura-tienda', routerLinkActiveOptions: {exact: true} });
         mantenimiento.items?.push({ label: 'Tipo de Consumo', icon: 'pi pi-fw pi-table', routerLink: '/home/interfaz/lista-tipo-consumo', routerLinkActiveOptions: {exact: true} });
       }
 

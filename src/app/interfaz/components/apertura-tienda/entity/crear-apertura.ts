@@ -26,7 +26,7 @@ export class CrearApertura {
       !body.tiendaSap ||
       !body.tiendaPixel || 
       !body.codigoBase || 
-      !(body.centroBeneficio.length > 10) || 
+      !body.centroBeneficio || 
       !body.nombreTienda ||
       !(body.MVFormato || body.tiendaSapPadre)
     ) {

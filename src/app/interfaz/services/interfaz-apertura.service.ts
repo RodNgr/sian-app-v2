@@ -10,6 +10,22 @@ interface IEmpresaResponse {
     empresaSAP: string;
 }
 
+interface ITiendaByEmpresaResponse {
+    nombreTienda: string;
+    tiendaSAP: string;
+    usuarioInterface: string;
+    tiendaPixel: string;
+    tiendaCodigo: string;
+    usuario: string;
+    clienteSAP: string;
+}
+
+interface IKeysResponse {
+  label_key: string;
+  label_value: string;
+  label_placeholder: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -27,6 +43,14 @@ export class InterfazAperturaService {
 
   getFormatoTienda(idEmpresa: number): Observable<string[]> {
     return this.http.get<string[]>(`${this.urlEndPoint}/api/apertura-tienda/${idEmpresa}/formatos`);
+  }
+
+  getTiendasByEmpresa(idEmpresa: number): Observable<ITiendaByEmpresaResponse[]> {
+    return this.http.get<ITiendaByEmpresaResponse[]>(`${this.urlEndPoint}/api/apertura-tienda/empresas/${idEmpresa}/tiendas`);
+  }
+
+  getKeys(): Observable<IKeysResponse[]> {
+    return this.http.get<IKeysResponse[]>(`${this.urlEndPoint}/api/apertura-tienda/keys`);
   }
 
   create(aperturaTienda: CrearApertura): Observable<any> {
