@@ -56,7 +56,7 @@ export class CuponOmnicanalC {
 }
 
 export class detalle{
-	Canal!: string;
+	canal!: string;
 	nomProducto!: string;
 	codProducto!: string;
 }

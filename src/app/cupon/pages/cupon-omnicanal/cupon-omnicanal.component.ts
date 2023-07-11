@@ -326,7 +326,6 @@ export class CuponOmnicanalComponent implements OnInit {
         this.formatoCodigo = true; } else { this.formatoCodigo = false; }
     }
 
-    //console.log("this.formatoCodigo", this.formatoCodigo);
     
   }
 
@@ -839,24 +838,23 @@ export class CuponOmnicanalComponent implements OnInit {
   showTableWeb(event) {
     this.showProductsWeb = event.checked;
     this.getCartaxTipo(this.obtenerCartaWeb(),this.nombreMarca()); //Modificar según especificación de POS
-    console.log(this.webVal);    
+    
   }
   showTableCall(event) {
     this.showProductsCall = event.checked;
     this.getCartaxTipoCall(this.obtenerCartaCall(),this.nombreMarca()); //Modificar según especificación de POS
-    console.log(this.callVal);
-    console.log(this.Exento);
+    
   }
   showTableSalon(event) {
     this.showProductsSalon = event.checked;
     this.getCartaxTipoSalon(this.obtenerCartaSalon(),this.nombreMarca()); //Modificar según especificación de POS
-    console.log(this.salonVal);
+    
   }
 
   showTableRColas(event) {
     this.showProductsRColas = event.checked;
     this.getCartaxTipoRcolas('22106','Bembos-RompeColaLima'); //Modificar según especificación de POS
-    console.log(this.salonVal);
+    
   }
 
 
@@ -904,8 +902,6 @@ export class CuponOmnicanalComponent implements OnInit {
         this.selectCountTimes = this.cuponOmniD[0].tipo.toString();
         this.VisCodCupon = this.cuponOmniD[0].cuponCabecera;
         this.VisCodProceso = this.cuponOmniD[0].codProceso + 1;
-        console.log(this.VisCodCupon);
-        console.log(this.VisCodProceso);
         this.selectionTypeCupon = this.cuponOmniD[0].tipoCupon.toString();
         this.cuponOmni.tipoCupon = this.cuponOmniD[0].tipoCupon;
         this.CantidadAntigua = this.cuponOmniD[0].nroCuponAGenerar;
@@ -929,7 +925,6 @@ export class CuponOmnicanalComponent implements OnInit {
           this.tipos.forEach(r => {            
             if (r.codigo.toString() === this.cuponOmniD[0].tipoCupon.toString()) {
               this.selectionTypeCupon = r.codigo.toString();              
-              console.log(this.selectionTypeCupon);
               $("#TiposC").val(r.nombre);
 
             }
@@ -940,7 +935,6 @@ export class CuponOmnicanalComponent implements OnInit {
           this.origenes.forEach(r => {            
             if (r.codigo.toString() === this.cuponOmniD[0].origen.toString()) {
               this.SeleccionOrigen = r.codigo.toString();              
-              console.log(this.SeleccionOrigen);
               $("#Origen").val(r.nombre);
 
             }
@@ -951,7 +945,6 @@ export class CuponOmnicanalComponent implements OnInit {
           this.Aliados.forEach(r => {            
             if (r.codigo.toString() === this.cuponOmniD[0].aliados.toString()) {
               this.SeleccionAliados = r.codigo.toString();              
-              console.log(this.SeleccionAliados);
               $("#Aliados").val(r.nombre);
 
             }
@@ -1372,7 +1365,6 @@ export class CuponOmnicanalComponent implements OnInit {
 
     this.cartaService.getDataCartaxTipo(dto).subscribe(
       carta => {
-        console.log("cartaService.getDataCartaxTipo",carta);
         this.productosCartaWebTemp = carta;
         this.productosCartaWeb=this.productosCartaWebTemp;
         this.spinner.hide();
@@ -1414,9 +1406,7 @@ export class CuponOmnicanalComponent implements OnInit {
     this.cartaService.getDataCartaxTipo(dto).subscribe(
       carta => {
         this.productosRcolasTemp = carta;
-        this.productosCartaRcolas=this.productosRcolasTemp;
-        console.log("productosRcolasTemp: " , this.productosRcolasTemp);
-        console.log("productosCartaRcolas: ",this.productosCartaRcolas);
+        this.productosCartaRcolas=this.productosRcolasTemp;        
         this.spinner.hide();
       },
       err =>{
@@ -1448,7 +1438,6 @@ export class CuponOmnicanalComponent implements OnInit {
 
   public onRowSelectProduct(event) {
     this.selectionProduct = event.data;
-    console.log(event);
     //console.log("this.selectionProduct", this.selectionProduct);
   }
 
@@ -1593,10 +1582,8 @@ export class CuponOmnicanalComponent implements OnInit {
   }
 
   public guardarCupon() {    
-    console.log(sessionStorage.getItem('token_genesys'));
     sessionStorage.removeItem('token_genesys');
     this.isAuthenticated();
-    console.log(sessionStorage.getItem('token_genesys'));
   }
 
   private Validacion!: number;
@@ -1607,10 +1594,8 @@ export class CuponOmnicanalComponent implements OnInit {
     this.ajaxQueryPostValida(ruta);
 
     if(this.Validacion == 1){
-      console.log("Token Antiguo: ",sessionStorage.getItem('token_genesys'));
       sessionStorage.removeItem('token_genesys');
       this.AutenticadoCupones();
-      console.log(sessionStorage.getItem('token_genesys'));
     } 
     else{
       swal.fire(
@@ -1724,8 +1709,8 @@ export class CuponOmnicanalComponent implements OnInit {
     }
 
     if(this.detalles.length > 0){
-      for (let index = 0; index < this.detalles.length; index++) {
-        var element = this.detalles[index].Canal;
+      for (let index = 0; index < this.detalles.length; index++) {        
+        var element = this.detalles[index].canal;
         var canal = 0;
         if(element == 'Web'){
           canal = 2;
@@ -1736,8 +1721,7 @@ export class CuponOmnicanalComponent implements OnInit {
         }else {
           canal = 2;
         }
-        console.log(this.detalles[index].codProducto);
-        console.log(this.detalles[index].nomProducto);
+
         this.CartaFinal.push({canal:canal,producto:this.detalles[index].nomProducto,cantidad:this.cuponOmni.nroCuponAGenerar,nombreProducto:this.detalles[index].codProducto})
       }
     } else {
@@ -1805,8 +1789,7 @@ export class CuponOmnicanalComponent implements OnInit {
       }
     }
 
-    else if (this.selectionTypeCupon == '2' && tipo == 1) {
-      console.log(this.productosCartaConsolidado);
+    else if (this.selectionTypeCupon == '2' && tipo == 1) {  
       this.cuponOmni2 = {
         nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),          
         activoCompraMin: 1,
@@ -2097,7 +2080,7 @@ export class CuponOmnicanalComponent implements OnInit {
     }
     if(this.cuponOmni.nroCuponAGenerar > 0){
       var sumaCant = this.cuponOmni.nroCuponAGenerar * this.CartaFinal.length;
-      console.log(sumaCant);
+
       if(sumaCant < 1000001){        
         if(parseInt(this.selectCountTimes) == 1){
           this.ajaxQueryPost(`${this.urlEndPointOmnicanal}/generarcupon`, this.dataCupones.token, this.cuponOmni2);
@@ -2144,8 +2127,6 @@ export class CuponOmnicanalComponent implements OnInit {
     if(this.cuponOmni.nroCuponAGenerar == 0 ){ console.log('Ingresar el numero de Cupon a Generar'); validation = false;} 
     
     if (this.cuponOmni.tipoCupon == 1 && this.selectCountTimes == '1') {
-      console.log("this.cuponOmni.tipoCupon", this.cuponOmni.tipoCupon);    
-      console.log("this.cuponOmni.tipoCupon", this.selectCountTimes);
       if(this.cuponOmni.monto == 0 ){ console.log('Ingresar el Monto a Pagar'); validation = false;}
       if(this.cuponOmni.compraMin == 0 && this.cuponOmni.activoCompraMin == 1){ console.log('Ingresar el monto minimo'); validation = false;}
       if(this.CartaFinal.length == 0 ){ console.log('Debe ingresar productos a la carta');  validation = false;}
@@ -2875,7 +2856,6 @@ export class CuponOmnicanalComponent implements OnInit {
       
       
       this.cuponOmni4 = this.cuponOmni2;
-      console.log(this.validacion);
       
         // this.ajaxQueryPostCSV(`${this.urlEndPointOmnicanal}/generatecsv`, this.dataCupones.token, this.cuponOmni3);
     
@@ -3631,7 +3611,6 @@ export class CuponOmnicanalComponent implements OnInit {
       crossDomain: true,
       contentType: 'application/json',
       success: (result) => {
-        console.log("Codigo Cabecera: ", result);
         this.CodigoCabecera = result;
       },
       error: (error) => {
@@ -3656,17 +3635,13 @@ export class CuponOmnicanalComponent implements OnInit {
       crossDomain: true,
       contentType: 'application/json',
       success: (result) => {
-        console.log("result: ", result);
 
         for (let index = 0; index < result.length; index++) {
           var element = result[index].nombre;
-          var element1 = result[index].codigo;
-          console.log(element, element1);
+          var element1 = result[index].codigo;        
 
           this.Aliados.push({ nombre: element, estado: false, codigo: element1 },);
         }
-
-        console.log(this.Aliados);
       },
       error: (error) => {
         Swal.fire(
@@ -3689,17 +3664,14 @@ export class CuponOmnicanalComponent implements OnInit {
       crossDomain: true,
       contentType: 'application/json',
       success: (result) => {
-        console.log("result: ", result);
 
         for (let index = 0; index < result.length; index++) {
           var element = result[index].nombre;
-          var element1 = result[index].codigo;
-          console.log(element, element1);
+          var element1 = result[index].codigo;          
 
           this.origenes.push({ nombre: element, estado: false, codigo: element1 },);
         }
 
-        console.log(this.origenes);
       },
       error: (error) => {
         Swal.fire(
