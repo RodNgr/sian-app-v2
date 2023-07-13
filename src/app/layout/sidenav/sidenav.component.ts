@@ -119,9 +119,12 @@ export class SidenavComponent implements OnInit {
       let menu: MenuItem = { label: 'Interfaz', icon: 'pi pi-fw pi-cog', items: [] };
 
       let mantenimiento: MenuItem = { label: 'Mantenimiento', icon: 'pi pi-fw pi-folder', items: [] };
+      if (this.authService.hasRole('ROL_SIAN_ITZ_APERTURA_TIENDA')) {
+        mantenimiento.items?.push({ label: 'Apertura Tienda', icon: 'pi pi-fw pi-table', routerLink: '/home/interfaz/lista-apertura-tienda', routerLinkActiveOptions: {exact: true} });
+      }
+
       if (this.authService.hasRole('ROL_SIAN_ITZ_TIPO_CONSUMO')) {
         mantenimiento.items?.push({ label: 'Apertura Tienda', icon: 'pi pi-fw pi-table', routerLink: '/home/interfaz/lista-apertura-tienda', routerLinkActiveOptions: {exact: true} });
-        mantenimiento.items?.push({ label: 'Tipo de Consumo', icon: 'pi pi-fw pi-table', routerLink: '/home/interfaz/lista-tipo-consumo', routerLinkActiveOptions: {exact: true} });
       }
 
       if (this.authService.hasRole('ROL_SIAN_ITZ_FAMILIA')) {
