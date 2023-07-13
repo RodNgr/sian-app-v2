@@ -93,7 +93,7 @@ export class AperturaTiendaComponent implements OnInit {
   save() {
     const idEmpresa = this.aperturaForm.get('idEmpresa').value;
     const fechaInicioOpera = this.aperturaForm.get('fechaInicioOpera').value;
-    const date = this.pipe.transform(fechaInicioOpera, 'dd/MM/yyyy') || '';
+    const date = this.pipe.transform(fechaInicioOpera, 'MM/dd/yyyy') || '';
     const payload = {
       ...this.aperturaForm.value,
       codeEmpresa: this.codeEmpresas[idEmpresa],

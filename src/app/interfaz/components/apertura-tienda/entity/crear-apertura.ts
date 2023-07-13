@@ -38,7 +38,7 @@ export class CrearApertura {
 
   static format(body): CrearApertura {
     const [first, second, third] = body.ip.split('.');
-    const newIp = `${first}${second}${third}`;
+    const newIp = `${first}.${second}.${third}`;
     return {
         ...body,
         ip: newIp,
