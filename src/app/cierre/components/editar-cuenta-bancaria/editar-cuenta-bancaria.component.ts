@@ -14,13 +14,14 @@ import Swal from 'sweetalert2';
 })
 export class EditarCuentaBancariaComponent implements OnInit {  
   
-  public Banco: string = '0';
+  public IdCuenta: number = 0;
   public Numero: string;
   public Cuenta: string;
   private urlCuentaBancaria: String;
+  public CuentaSel!: CuentaBancarias;
 
   public bancoss: cbobancos[] = [
-    {codBanco: 0, banco: 'Seleccionar banco' },
+    /* {idCuenta: 0, banco: 'Seleccionar banco',cuenta:'',moneda:'',numero:'', cuentaDescipcion: '--- Seleccionar banco  ---'}, */
   ];
 
   constructor(public ref: DynamicDialogRef,
@@ -28,41 +29,61 @@ export class EditarCuentaBancariaComponent implements OnInit {
               public config: DynamicDialogConfig,
               private cambioCuentaService: CambioCuentaService) { 
     this.urlCuentaBancaria = environment.urlCierre;
+    this.CuentaSel =this.config.data;
   }
 
   ngOnInit(): void {
-    this.cambioCuentaService.getBancos().subscribe(
+    this.cambioCuentaService.getBancos(this.CuentaSel.marca,this.CuentaSel.codMoneda).subscribe(
       Bancos2 => {
-        for (let index = 0; index < Bancos2.length; index++) {
-          var element = Bancos2[index].banco;
-          var element1 = Bancos2[index].codBanco;          
-          this.bancoss.push({ codBanco: element1, banco: element },);
-        }        
+        for (let index = 0; index < Bancos2.length; index++) {      
+          this.bancoss.push({ idCuenta: Bancos2[index].idCuenta,
+                              codBanco: Bancos2[index].codBanco,
+                              banco: Bancos2[index].banco,
+                              cuenta:Bancos2[index].cuenta,
+                              moneda:Bancos2[index].moneda,
+                              numero:Bancos2[index].numero,
+                              codNumero:Bancos2[index].codNumero,
+                              cuentaDescipcion: Bancos2[index].banco+'  '+ Bancos2[index].moneda+' N° Cuenta:'+Bancos2[index].numero
+                            },);
+        }
+        this.selBanco();      
       }
     )
 
-    this.Banco = this.config.data.codBanco;    
+    //this.Banco = this.config.data.codBanco;    
     this.Numero = this.config.data.numero;    
     this.Cuenta = this.config.data.cuenta;    
 
-    this.bancoss = this.bancoss.filter(r => {          
+    /* this.bancoss = this.bancoss.filter(r => {          
       return r.banco = this.config.data.banco;
-    });
+    }); */
 
-    if (this.config.data.codBanco) {
-      this.bancoss.forEach(r => {              
-        if (r.codBanco.toString() === this.config.data.codBanco.toString()) {
-          this.Banco = r.codBanco.toString();              
-          
-          $("#Banco2").val(r.banco);
-
-        }
-      })
+    if (this.bancoss) {
+     
+     
     }
   }
-
+  private selBanco(){
+    this.IdCuenta=this.CuentaSel.idCuenta;
+    /* this.bancoss.forEach(r => {  
+      if (r.idCuenta.toString() === this.config.data.idCuenta.toString()) {
+        //this.Banco = r.idCuenta.toString();   
+        $("#Banco2").val(r.idCuenta.toString());
+      }
+    }) */
+  }
   public MostrarDatos(){
-    this.cambioCuentaService.getCuentaBancariaSeleccionada(this.config.data.marca,this.config.data.codTienda,this.Banco,this.config.data.codMoneda).subscribe(
+    this.CuentaSel.idCuenta=this.IdCuenta;
+
+    var selbanco = this.bancoss.find(banco => banco.idCuenta === this.IdCuenta);
+    this.CuentaSel.banco = selbanco.banco;
+    this.CuentaSel.cuenta = selbanco.cuenta;
+    this.CuentaSel.moneda = selbanco.moneda;
+    this.CuentaSel.numero = selbanco.numero;
+    this.CuentaSel.codBanco = selbanco.codBanco;
+    this.CuentaSel.codNumero = selbanco.codNumero;
+
+    /* this.cambioCuentaService.getCuentaBancariaSeleccionada(this.config.data.marca,this.config.data.codTienda,this.CuentaSel.idCuenta,this.config.data.codMoneda).subscribe(
       result => {
         if(result.length == 0){
           this.Numero = "";    
@@ -72,11 +93,18 @@ export class EditarCuentaBancariaComponent implements OnInit {
           this.Cuenta = result[0].cuenta;   
         }
       }
-    )
+    ) */
   }
 
   public Guardar(){
-    this.cambioCuentaService.GuardarCuenta(this.config.data.marca,this.config.data.codTienda,this.Banco,this.config.data.codMoneda,this.Numero,this.Cuenta).subscribe(
+    this.cambioCuentaService.GuardarCuenta(
+      this.CuentaSel.idCuenta,
+      this.CuentaSel.marca,
+      this.CuentaSel.codTienda,
+      this.CuentaSel.codBanco,
+      this.CuentaSel.codMoneda,
+      this.CuentaSel.numero,
+      this.CuentaSel.cuenta).subscribe(
       result => {
         Swal.fire(
           'Ejecutado!',
@@ -85,6 +113,6 @@ export class EditarCuentaBancariaComponent implements OnInit {
         )
         this.ref.close(1);
       }
-    )
+    );
   }
 }

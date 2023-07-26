@@ -26,15 +26,15 @@ export class CambioCuentaService {
         return this.http.get<CuentaBancarias[]>(ruta);
       }
 
-      getCuentaBancariaSeleccionada(Marca: number, Tienda: number, Banco: string, Moneda: number): Observable<CuentaBancarias[]>{
-        return this.http.get<CuentaBancarias[]>(`${this.urlEndPoint}/api/CambioCuenta/CuentaBancariaSeleccionada?Marca=${Marca}&Tienda=${Tienda}&Banco=${Banco}&Moneda=${Moneda}`);
+      getCuentaBancariaSeleccionada(Marca: number, Tienda: number, idcuenta: number, Moneda: number): Observable<CuentaBancarias[]>{
+        return this.http.get<CuentaBancarias[]>(`${this.urlEndPoint}/api/CambioCuenta/CuentaBancariaSeleccionada?Marca=${Marca}&Tienda=${Tienda}&Banco=${idcuenta}&Moneda=${Moneda}`);
       }
 
-      getBancos(): Observable<cbobancos[]>{
-        return this.http.get<cbobancos[]>(`${this.urlEndPoint}/api/CambioCuenta/Bancos`);
+      getBancos(Marca: number,Moneda: number): Observable<cbobancos[]>{
+        return this.http.get<cbobancos[]>(`${this.urlEndPoint}/api/CambioCuenta/Bancos?Marca=${Marca}&Moneda=${Moneda}`);
       }
     
-      GuardarCuenta(Marca: number, Tienda: number, Banco: string, Moneda: number, Numero: string, Cuenta: string): Observable<number> {
-        return this.http.post<number>(`${this.urlEndPoint}/api/CambioCuenta/GuardarCuenta?Marca=${Marca}&Tienda=${Tienda}&Banco=${Banco}&Moneda=${Moneda}&Numero=${Numero}&Cuenta=${Cuenta}`, null);
+      GuardarCuenta(IdCuenta: number,Marca: number, Tienda: number, Banco: number, Moneda: number, Numero: string, Cuenta: string): Observable<number> {
+        return this.http.post<number>(`${this.urlEndPoint}/api/CambioCuenta/GuardarCuenta?IdCuenta=${IdCuenta}&Marca=${Marca}&Tienda=${Tienda}&Banco=${Banco}&Moneda=${Moneda}&Numero=${Numero}&Cuenta=${Cuenta}`, null);
       }
 }

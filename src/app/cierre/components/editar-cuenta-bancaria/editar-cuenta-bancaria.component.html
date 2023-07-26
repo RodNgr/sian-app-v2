@@ -1,22 +1,47 @@
-    <div class="p-d-flex p-flex-column w-100">
-        <div class="p-field p-col-4 p-md-4 p-sm-4">
-            <label for="tipo">Banco:&nbsp;&nbsp;</label> 
-            <p-dropdown [options]="bancoss" [(ngModel)]="Banco" name="Banco" optionLabel="banco" [showClear]="true" [ngModelOptions]="{standalone: true}"
-            optionDisabled="inactive" optionValue="codBanco" (onChange)="MostrarDatos()" id="Banco2">
-            </p-dropdown>
-          </div>
-    
-        <div class="p-field p-col-6 p-md-6 p-sm-6">
-            <label for="tipo">Numero:&nbsp;&nbsp;</label>
-            <input type="text" pInputText [(ngModel)]="Numero"/>
-        </div>
-    
-        <div class="p-field p-col-6 p-md-6 p-sm-6">
-            <label for="tipo">Cuenta:&nbsp;&nbsp;</label>
-            <input type="text" pInputText [(ngModel)]="Cuenta"/>
-        </div>
-
-        <div class="p-field p-col-6 p-md-6 p-sm-6">
-            <button pButton type="button" label="Guardar" icon="pi pi-save" class="p-button" (click)="Guardar()"></button>
-        </div>
+<div class="w-100 row">
+    <div class="p-col-12 p-md-12 p-sm-12 label-dropdown-container">
+      <label for="tipo">Tienda:&nbsp;&nbsp;</label>
+      <input type="text" pInputText [(ngModel)]="CuentaSel.tienda" [disabled]="true"/>
     </div>
+    <div class="p-col-6 p-md-6 p-sm-6">
+        <label for="tipo">Moneda:&nbsp;&nbsp;</label>
+        <input type="text" pInputText [(ngModel)]="CuentaSel.moneda" [disabled]="true"/>
+      </div>
+    <div style="margin-top: 10px;" class="p-col-12 p-md-12 p-sm-12 label-dropdown-container">
+      <label for="tipo">Banco:</label>
+      <p-dropdown
+        class="custom-dropdown"
+        [options]="bancoss"
+        [(ngModel)]="IdCuenta"
+        name="Banco"
+        optionLabel="cuentaDescipcion"
+        
+        [ngModelOptions]="{ standalone: true }"
+        optionDisabled="inactive"
+        optionValue="idCuenta"
+        (onChange)="MostrarDatos()"
+        id="Banco2"
+      ></p-dropdown>
+    </div>
+ 
+    <div class="p-col-12 p-md-12 p-sm-12">
+        <label for="tipo">Cuenta Contable:&nbsp;&nbsp;</label>
+        <input type="text" class="inputtext" pInputText [(ngModel)]="CuentaSel.cuenta" [disabled]="true"/>
+      </div>
+    <div class="p-col-12 p-md-12 p-sm-12">
+      <label for="tipo">N° de cuenta:&nbsp;&nbsp;</label>
+      <input type="text" class="inputtext" pInputText [(ngModel)]="CuentaSel.numero" [disabled]="true"/>
+    </div>
+
+    <div class="p-col-12 p-md-12 p-sm-12 p-text-right btnguarda">
+      <button
+        pButton
+        type="button"
+        label="Guardar"
+        icon="pi pi-save"
+        class="p-button"
+        (click)="Guardar()"
+      ></button>
+    </div>
+  </div>
+  

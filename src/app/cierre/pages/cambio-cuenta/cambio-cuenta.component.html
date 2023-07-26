@@ -7,11 +7,11 @@
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-4">
                  <label for="lblNombreTienda">Nombre Tienda:</label>
-                 <input type="text" pInputText [(ngModel)]="Tienda"/>                 
+                 <input type="text" pInputText [(ngModel)]="Tienda" (keyup)="onKDownTienda($event)"/>                 
              </div>
-            <div class="p-field p-col-2 p-mt-4">
+            <!-- <div class="p-field p-col-2 p-mt-4">
                 <button pButton type="button" label="Buscar" icon="pi pi-search" class="p-button" (click)="Buscar()"></button>
-            </div>            
+            </div>    -->         
             <div class="p-field p-col-3 p-mt-4">
                 <button pButton pRipple pTooltip="Selecciona una cuenta" tooltipPosition="bottom" (click)="editarCuentaBancaria()" label="Editar cuenta bancaria" icon="pi pi-user-edit"
                         class="p-button-primary p-mr-2" ></button>
@@ -26,6 +26,7 @@
 
         <ng-template pTemplate="header">
           <tr>
+            <th>Marca</th>
             <th pSortableColumn="campanha">Tienda<p-sortIcon field="Tienda"></p-sortIcon>
             </th>
             <th pSortableColumn="tipo">Banco<p-sortIcon field="tipo"></p-sortIcon>
@@ -42,7 +43,8 @@
         <ng-template pTemplate="body" let-CuentaBancaria>
           
           <tr [pSelectableRow]="CuentaBancaria">
-            <td>{{CuentaBancaria.tienda}}</td>            
+            <td>{{CuentaBancaria.marcaDesc}}</td>
+            <td>{{CuentaBancaria.tienda}}</td>
             <td>{{CuentaBancaria.banco}}</td>
             <td>{{CuentaBancaria.moneda}}</td>
             <td>{{CuentaBancaria.numero}}</td>
