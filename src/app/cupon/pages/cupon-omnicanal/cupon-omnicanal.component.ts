@@ -1590,86 +1590,47 @@ export class CuponOmnicanalComponent implements OnInit {
   }
 
   public guardarCupon() {    
-    sessionStorage.removeItem('token_genesys');
-    this.isAuthenticated();
+    this.spinner.show();
+    this.GeneraTokenYCreaCampanha();
   }
 
   private Validacion!: number;
 
-  public MasCupones(){  
-    var ruta = `${this.urlLista}/ValidarCreacion`;    
-  
+  public MasCupones() {
+    var ruta = `${this.urlLista}/ValidarCreacion`;
+
     this.ajaxQueryPostValida(ruta);
 
-    if(this.Validacion == 1){
+    if (this.Validacion == 1) {
       sessionStorage.removeItem('token_genesys');
-      this.AutenticadoCupones();
-    } 
-    else{
+      this.GeneraTokenYCreaCupones();
+    } else {
       swal.fire(
         'Alto',
         'Se debe crear una nueva campaña cada 30 minutos',
         'error'
       )
-    }      
-  }
-
-
-  private isAuthenticated(): void {    
-    this.spinner.show();
-    if (this.dataCupones.isAuthenticated()) {      
-      this.spinner.show();
-      var sumaCant = this.cuponOmni.nroCuponAGenerar * this.CartaFinal.length;
-      if(sumaCant < 1000001){
-        this.validarDataCupon();
-      } else {
-        Swal.fire(
-          'Advertencia',
-          'Excediste el número máximo de registros a generar (1,000,000)',
-          'warning'
-        );
-        this.spinner.hide();
-      }
-    } else {      
-      this.spinner.show();
-      this.TokenClient();
     }
-
   }
 
-
-  private AutenticadoCupones(): void {    
+  private GeneraTokenYCreaCupones(): void {
+    sessionStorage.removeItem('token_genesys');
     this.spinner.show();
-    if (this.dataCupones.isAuthenticated()) {      
-      this.spinner.show();
+    this.dataCupones.TokenClient().subscribe(resp => {
       this.GeneraMasCupones();
-    } else {      
-      this.spinner.show();
-      this.TokenClientCupones();
-    }
-
-  }
-
-
-  private TokenClientCupones(): void {
-    this.spinner.show();
-    this.dataCupones.TokenClient().subscribe( resp => {
-      setTimeout(() => {}, 3000);
-      this.GeneraMasCupones();      
     }, e => {
-      
       console.error(e);
+      Swal.fire('Error', e.message, 'error');
     })
   }
 
-
-  private TokenClient(): void {
+  private GeneraTokenYCreaCampanha(): void {
+    sessionStorage.removeItem('token_genesys');
     this.spinner.show();
-    this.dataCupones.TokenClient().subscribe( resp => {
-      setTimeout(() => {}, 3000);
+    this.dataCupones.TokenClient().subscribe(resp => {
       var sumaCant = this.cuponOmni.nroCuponAGenerar * this.CartaFinal.length;
       if(sumaCant < 1000001){
-        this.validarDataCupon();
+        this.validaYCreaCampanha();
       } else {
         Swal.fire(
           'Advertencia',
@@ -1679,8 +1640,9 @@ export class CuponOmnicanalComponent implements OnInit {
         this.spinner.hide();
       }
     }, e => {
-      
       console.error(e);
+      this.spinner.hide();
+      Swal.fire('Error', e.message, 'error');
     })
   }
 
@@ -2124,7 +2086,7 @@ export class CuponOmnicanalComponent implements OnInit {
     }   
   }
 
-  private validarDataCupon(): void {
+  private validaYCreaCampanha(): void {
     this.spinner.show();
     let validation: boolean = true;
     if(this.cuponOmni.alianza == ''){ console.log('Agregar nombre de la alianza'); validation = false;}
@@ -3097,6 +3059,13 @@ export class CuponOmnicanalComponent implements OnInit {
         this.validacion = result;
        },
       error: (error) => {
+        // TODO: ENDPOINT PARA ROLBACK DE CAMPAÑA
+        this.dataCupones.rollbackCampanha(this.CodigoCabecera, 'Generacion cupones fallida.')
+          .subscribe({
+            next: () => {
+              console.log(`Campaña rollback`);
+            }
+          });
         this.validacion = error.responseText;
         this.validacionC = error.status.toString();
         console.log(error);

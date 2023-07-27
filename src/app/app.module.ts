@@ -18,6 +18,8 @@ import { AppComponent } from './app.component';
 import localeEsPE from '@angular/common/locales/es-PE';
 import { TokenInterceptorService } from './shared/interceptors/token.interceptor';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
+import { environment } from 'src/environments/environment';
 
 registerLocaleData(localeEsPE, 'es-PE');
 
@@ -35,7 +37,13 @@ registerLocaleData(localeEsPE, 'es-PE');
     AppRoutingModule,
     SharedModule,
     HighlightModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LoggerModule.forRoot({
+      serverLoggingUrl: `${environment.urlCarta}/RegistrarLogs`,
+      serverLogLevel: NgxLoggerLevel.DEBUG,
+      disableConsoleLogging: false,
+      level: NgxLoggerLevel.LOG,
+    })
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
