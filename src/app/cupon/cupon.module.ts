@@ -43,6 +43,7 @@ import { ReporteCuponOmnicanalComponent } from './pages/reporte-cupon-omnicanal/
 import { ActualizarFechaCuponOmnicanalComponent } from './components/actualizar-fecha-cupon-omnicanal/actualizar-fecha-cupon-omnicanal.component';
 import { RegistraCantidadProdComponent } from './components/registra-cantidad-prod/registra-cantidad-prod.component';
 import { AnularCuponComponent } from './components/anular-cupon/anular-cupon.component';
+import { LoggerModule } from 'ngx-logger';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { AnularCuponComponent } from './components/anular-cupon/anular-cupon.com
     PrimengModule,
     NgxSpinnerModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    LoggerModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

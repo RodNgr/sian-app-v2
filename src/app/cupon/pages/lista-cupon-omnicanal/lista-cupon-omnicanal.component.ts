@@ -63,7 +63,6 @@ export class ListaCuponOmnicanalComponent implements OnInit {
   ngOnInit(): void {
     this.SeleccionarCupon = '1';
     this.isAuthenticated();
-    
   }
 
   public newVale(): void {
@@ -127,13 +126,14 @@ export class ListaCuponOmnicanalComponent implements OnInit {
   
 
   private isAuthenticated(): void {
-    this.spinner.show();    
-    // if (this.dataCupones.isAuthenticated()) {
+    this.spinner.show();
+    if (this.dataCupones.isAuthenticated()) {
       this.listarCupones();
-    // } else {      
-    //   this.TokenClient();
-    // }
-
+      this.spinner.hide();
+    } else {
+      this.dataCupones.TokenClient();
+      this.spinner.hide();
+    }
   }
 
   // private TokenClient(): void {
@@ -149,13 +149,6 @@ export class ListaCuponOmnicanalComponent implements OnInit {
   // }
 
   private listarCupones(): void {
-
-    let data = {
-    };
-
-    setTimeout(() => {
-      
-    }, 200);
     var desde, hasta,campana;
     if($('#Campanha').val() == undefined){
       campana = '';
@@ -177,8 +170,8 @@ export class ListaCuponOmnicanalComponent implements OnInit {
     }
     var ruta = `${this.urlLista}/Cupones?Marca=` + this.empresaService.getEmpresaSeleccionada().idEmpresa.toString() + `&nombre` +  campana + `&fecini` + desde + `&fecfin` + hasta+ `&estado=` + this.SeleccionarCupon;    
     console.log(ruta);
-  
-    this.ajaxQueryPost(ruta, data);
+    this.dataCupones.registrarLog('Omnicanal', 'Get Cupones', `Obtener cupones -> ${ruta}`);
+    this.ajaxQueryPost(ruta, {});
   }
 
   private errorCredenciales(e: any): void {
@@ -252,13 +245,13 @@ export class ListaCuponOmnicanalComponent implements OnInit {
   }
 
   private ajaxQueryPost(urlEndPoint: string, data: any): any {
-    let t_result!: any;
+    const payload = JSON.stringify(data);
     $.ajax({
       url: urlEndPoint,
       async: false,
       type: 'POST',
       crossDomain: true,
-      data: JSON.stringify(data),
+      data: payload,
       contentType: 'application/json',
       success: (result) => {
         this.Campanhas = result;
@@ -266,13 +259,13 @@ export class ListaCuponOmnicanalComponent implements OnInit {
       },
       error: (error) => {
         console.log(error);
+        this.dataCupones.registrarLog('Omnicanal', 'Get Cupones', `Ajax Query Post -> ${payload}`);
         this.spinner.hide();
       }
     });
   }
 
   private ajaxQueryPostValida(urlEndPoint: string): any {
-    let t_result!: any;
     $.ajax({
       url: urlEndPoint,
       async: false,
@@ -286,6 +279,7 @@ export class ListaCuponOmnicanalComponent implements OnInit {
       error: (error) => {
         console.log(error);
         this.spinner.hide();
+        this.dataCupones.registrarLog('Omnicanal', 'Get Cupones', `Ajax Post Valida -> ${urlEndPoint}`);
       }
     });
   }
