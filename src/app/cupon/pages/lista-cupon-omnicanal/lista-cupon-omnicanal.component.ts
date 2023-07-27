@@ -85,6 +85,10 @@ export class ListaCuponOmnicanalComponent implements OnInit {
   }
 
   public viewValeOmnicanal(): void {
+    if (!this.CampanhasSelected) {
+      swal.fire('Advertencia', 'Debe seleccionar un cupón', 'warning');
+      return;
+    }
     sessionStorage.setItem('tipoOperacion', 'V');
     sessionStorage.setItem('cupon-omnicanal', this.CampanhasSelected.cdCodigoCuponCabecera.toString());
     this.router.navigateByUrl('/home/cupon/cupon-omnicanal');
@@ -230,7 +234,6 @@ export class ListaCuponOmnicanalComponent implements OnInit {
     } else{
       this.visualizaExportar = true;
     }
-    console.log(this.visualizaExportar);
   }
 
   private ajaxQueryPost(urlEndPoint: string, data: any): any {
