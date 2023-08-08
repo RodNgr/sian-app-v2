@@ -128,28 +128,14 @@ export class ListaCuponOmnicanalComponent implements OnInit {
   private isAuthenticated(): void {
     this.spinner.show();
     if (this.dataCupones.isAuthenticated()) {
-      this.listarCupones();
-      this.spinner.hide();
-    } else {
       this.dataCupones.TokenClient();
-      this.spinner.hide();
     }
+    this.listarCupones();
+    this.spinner.hide();
   }
 
-  // private TokenClient(): void {
-  //   this.dataCupones.TokenClient().subscribe( resp => {
-  //     setTimeout(() => {}, 200);
-  //     this.listarCupones();
-  //     this.spinner.hide();
-  //   }, e => {
-      
-  //     console.error(e);
-  //     this.errorCredenciales(e);
-  //   })
-  // }
-
   private listarCupones(): void {
-    var desde, hasta,campana;
+    let desde, hasta,campana;
     if($('#Campanha').val() == undefined){
       campana = '';
     }
@@ -168,7 +154,10 @@ export class ListaCuponOmnicanalComponent implements OnInit {
     else{
       hasta = '=' +$('#Hasta').val();
     }
-    var ruta = `${this.urlLista}/Cupones?Marca=` + this.empresaService.getEmpresaSeleccionada().idEmpresa.toString() + `&nombre` +  campana + `&fecini` + desde + `&fecfin` + hasta+ `&estado=` + this.SeleccionarCupon;    
+    const ruta = `${this.urlLista}/Cupones?Marca=` + 
+      this.empresaService.getEmpresaSeleccionada().idEmpresa.toString() + 
+      `&nombre` +  campana + `&fecini` + desde + `&fecfin` + 
+      hasta+ `&estado=` + this.SeleccionarCupon;
     console.log(ruta);
     this.dataCupones.registrarLog('Omnicanal', 'Get Cupones', `Obtener cupones -> ${ruta}`);
     this.ajaxQueryPost(ruta, {});

@@ -42,7 +42,6 @@ export class CuponesOmnicanalService {
   }
 
   getDataCupones() {
-    //console.log(this.empresaService.getEmpresaSeleccionada());
     const idEmpresa = this.empresaService.getEmpresaSeleccionada().codSap;
     console.log(idEmpresa);
     console.log(`${this.urlEndPoint}/listarcupon`);
@@ -85,27 +84,13 @@ export class CuponesOmnicanalService {
   }
 
   getCupones(id: number): Observable<CuponOmnicanalDetalle[]> {
-    //let httpHeaders = new HttpHeaders({'Access-Control-Allow-Origin': '*'});
     return this.http.get<CuponOmnicanalDetalle[]>(
       `${this.urlLista}/getDataCupones?Codigo=${id}`
     );
   }
 
   isAuthenticated(): boolean {
-    console.log('this.token', this.token);
-    let payload = this.obtenerDatosToken(this.token);
-    console.log(payload);
-    if (payload !== null && payload.length > 0) {
-      return true;
-    }
-    return false;
-  }
-
-  private obtenerDatosToken(accesToken: string): any {
-    if (accesToken && accesToken.length > 0) {
-      return accesToken;
-    }
-    return null;
+    return !!this.token;
   }
 
   TokenOmnicanal() {
