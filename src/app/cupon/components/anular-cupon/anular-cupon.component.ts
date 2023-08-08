@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 export class AnularCuponComponent implements OnInit {
 
   public Campanha: String = "Debe Seleccionar una campaña";
+  public idCabecera: String;
   private urlEndPointOmnicanal: string;
   private urlLista: string;
 
@@ -36,6 +37,7 @@ export class AnularCuponComponent implements OnInit {
     console.log(this.config.data);
     if(this.config.data){
       this.Campanha = this.config.data.cdNombreCampanha;
+      this.idCabecera = this.config.data.cdCodigoCuponCabecera.toString();
     }
   }  
 
@@ -69,7 +71,8 @@ export class AnularCuponComponent implements OnInit {
     this.cuponOmni = {
       'codMarca':  this.empresaService.getEmpresaSeleccionada().idEmpresa.toString(),
       'nombreCampanha' : this.Campanha,
-      'usuarioActualiza': this.getUsuario()
+      'usuarioActualiza': this.getUsuario(),
+      "idCabecera": this.idCabecera,
     }
 
     console.log(this.cuponOmni);

@@ -25,6 +25,7 @@ export class AmpliarFechaComponent implements OnInit {
   public fecha: Date = new Date();
   public fin: Date = new Date();
   public Campanha: String = "Debe Seleccionar una campaña";
+  public idCabecera: String;
 
   public vale!: CabValeVerde;
   private urlEndPointOmnicanal: string;
@@ -48,6 +49,7 @@ export class AmpliarFechaComponent implements OnInit {
       this.fecha = new Date(this.config.data.dtFecInicio);
       this.fin = new Date(this.config.data.dtFecFin);
       this.Campanha = this.config.data.cdNombreCampanha;
+      this.idCabecera = this.config.data.cdCodigoCuponCabecera.toString();
       console.log(this.config.data);
     }
     // this.vale = this.config.data;
@@ -90,6 +92,7 @@ export class AmpliarFechaComponent implements OnInit {
       "fecFin" : fecfin,
       "usuarioActualiza": this.getUsuario(),
       "nombreCampanha": this.Campanha,
+      "idCabecera": this.idCabecera,
       "codMarca": this.empresaService.getEmpresaSeleccionada().idEmpresa.toString()
     }
 
