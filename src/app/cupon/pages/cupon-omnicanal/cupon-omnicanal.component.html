@@ -139,7 +139,7 @@
 
                 <div class="p-field p-col-6 p-md-6 p-sm-6" *ngIf="showNecesitaMontoMinimo" style="padding-left: 25px;">
                   <label  for="ny"> Necesita monto mínimo de compra</label>
-                  <p-checkbox name="compraminima" value="1" inputId="ny" (onChange)="valueMinimo($event)" [disabled]="type === 'V'"></p-checkbox>
+                  <p-checkbox name="compraminima" value="1" inputId="ny"  (onChange)="valueMinimo($event)" [(ngModel)]="isChecked" [disabled]="type === 'V'"></p-checkbox>
                 </div>
 
                 <div class="p-field p-col-6 p-md-6 p-sm-6" [hidden]="!showMontoMinimo">
