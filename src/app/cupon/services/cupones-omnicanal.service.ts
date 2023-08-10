@@ -75,7 +75,7 @@ export class CuponesOmnicanalService {
 
   rollbackCampanha(codigoCabecera: number, motivo: string) {
     return this.http.post<any>(
-      `${this.urlLista}/AnularCampanha?Codigo=` +
+      `${this.urlLista}/RollbackCampanha?Codigo=` +
         codigoCabecera +
         `&Motivo=` +
         motivo,
