@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TipoCuponOmnicanal } from '../../entity/tipo-cupon-omnicanal';
 import {
@@ -7,7 +7,6 @@ import {
   ProductoCarta,
 } from '../../entity/producto-carta';
 import { ProductoCartaService } from '../../services/producto-carta.service';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { OmnicanalDto } from '../../dto/omnicalanal-dto';
 import swal from 'sweetalert2';
@@ -169,7 +168,7 @@ export class CuponOmnicanalComponent implements OnInit {
     private dataCupones: CuponesOmnicanalService,
     private authService: AuthService,
     private spinner: NgxSpinnerService,
-    private datePipe: DatePipe,
+    private datePipe: DatePipe
   ) {
     this.urlEndPointOmnicanal = environment.urlOmnicanalA;
     this.urlLista = environment.urlCarta;
@@ -797,7 +796,7 @@ export class CuponOmnicanalComponent implements OnInit {
     let codCodigo = '';
     switch (idEmpresa) {
       case 2:
-        codMarca = '22101';//Antiguo 22089
+        codMarca = '22101'; //Antiguo 22089
         codCodigo = 'Bembos';
         break;
       case 3:
@@ -832,7 +831,7 @@ export class CuponOmnicanalComponent implements OnInit {
     let codCodigo = '';
     switch (idEmpresa) {
       case 2:
-        codMarca = '22139';//antiguo 22102
+        codMarca = '22139'; //antiguo 22102
         codCodigo = 'Bembos';
         break;
       case 3:
@@ -1348,43 +1347,47 @@ export class CuponOmnicanalComponent implements OnInit {
           this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
           this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
           this.cuponOmni.percentdsct = this.cuponOmniD[0].delivery;
-          this.activarBlur(this.cuponOmni.percentdsct,'percentdsct');
-        }
-    
-        else if (this.cuponOmniD[0].tipoCupon == 4 && this.cuponOmniD[0].tipo == 2) {  
+          this.activarBlur(this.cuponOmni.percentdsct, 'percentdsct');
+        } else if (
+          this.cuponOmniD[0].tipoCupon == 4 &&
+          this.cuponOmniD[0].tipo == 2
+        ) {
           // this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
           this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
           this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
           this.cuponOmni.percentdsct = this.cuponOmniD[0].delivery;
           this.cuponOmni.nroUso = this.cuponOmniD[0].maximouso;
-          this.cuponOmni.codigo = this.cuponOmniD[0].codigo;          
-        }
-    
-        else if (this.cuponOmniD[0].tipoCupon == 5 && this.cuponOmniD[0].tipo == 1) {
-          this.cuponOmni.nroCuponAGenerar = 0;          
+          this.cuponOmni.codigo = this.cuponOmniD[0].codigo;
+        } else if (
+          this.cuponOmniD[0].tipoCupon == 5 &&
+          this.cuponOmniD[0].tipo == 1
+        ) {
+          this.cuponOmni.nroCuponAGenerar = 0;
           alert(this.cuponOmniD[0].activoCompraMin);
           if (this.cuponOmniD[0].activoCompraMin == 1) {
             this.isChecked = true;
           }
           this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
           this.cuponOmni.percentdsct = this.cuponOmniD[0].montodescuento;
-          this.activarBlur(this.cuponOmni.percentdsct,'percentdsct');
-        }
-    
-        else if (this.cuponOmniD[0].tipoCupon == 5 && this.cuponOmniD[0].tipo == 2) {
-          // this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;          
+          this.activarBlur(this.cuponOmni.percentdsct, 'percentdsct');
+        } else if (
+          this.cuponOmniD[0].tipoCupon == 5 &&
+          this.cuponOmniD[0].tipo == 2
+        ) {
+          // this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
           if (this.cuponOmniD[0].activoCompraMin == 1) {
             this.isChecked = true;
-          }       
+          }
           this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
           this.cuponOmni.percentdsct = this.cuponOmniD[0].montodescuento;
           this.cuponOmni.nroUso = this.cuponOmniD[0].maximouso;
           this.cuponOmni.codigo = this.cuponOmniD[0].codigo;
-          
-          this.activarBlur(this.cuponOmni.percentdsct,'percentdsct'); 
-        }
-    
-        else if (this.cuponOmniD[0].tipoCupon == 6 && this.cuponOmniD[0].tipo == 1) {
+
+          this.activarBlur(this.cuponOmni.percentdsct, 'percentdsct');
+        } else if (
+          this.cuponOmniD[0].tipoCupon == 6 &&
+          this.cuponOmniD[0].tipo == 1
+        ) {
           this.cuponOmni.nroCuponAGenerar = 0;
           this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
           this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
@@ -3761,6 +3764,18 @@ export class CuponOmnicanalComponent implements OnInit {
           .subscribe({
             next: () => {
               console.log(`Campaña rollback`);
+              this.dataCupones.registrarLog(
+                'CREACION CAMPANHA',
+                'ROLLBACK',
+                `${this.CodigoCabecera} rollback exitoso`
+              );
+            },
+            error: () => {
+              this.dataCupones.registrarLog(
+                'CREACION CAMPANHA',
+                'ROLLBACK',
+                'Error al realizaar rollback'
+              );
             },
           });
         this.validacion = error.responseText;

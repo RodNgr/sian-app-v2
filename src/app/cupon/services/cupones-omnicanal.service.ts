@@ -30,7 +30,7 @@ export class CuponesOmnicanalService {
     private http: HttpClient,
     private empresaService: EmpresaService,
     private authService: AuthService,
-    private logger: NGXLogger
+    private logger: NGXLogger,
   ) {
     this.urlEndPoint = environment.urlTstdrpApi;
     this.urlEndPointOmnicanal = environment.urlOmnicanalA;
@@ -142,14 +142,19 @@ export class CuponesOmnicanalService {
   }
 
   public get token(): string {
-    if (this._token !== undefined) {
-      return this._token;
+    if (!this._token) {
+      this.TokenClient().subscribe({
+        next: (data) => {
+          this._token = data.access_token;
+          return data.access_token;
+        } 
+      })
     } else if (sessionStorage.getItem('token_genesys') !== null) {
       this._token = sessionStorage.getItem('token_genesys')!;
       return this._token;
     }
 
-    return '';
+    return this._token;
   }
 
   registrarLog(module: string, action: string, message: string) {
