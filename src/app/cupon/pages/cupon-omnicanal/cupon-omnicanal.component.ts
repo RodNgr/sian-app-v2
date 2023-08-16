@@ -3759,28 +3759,28 @@ export class CuponOmnicanalComponent implements OnInit {
       },
       error: (error) => {
         // TODO: ENDPOINT PARA ROLBACK DE CAMPAÑA
-        this.dataCupones
-          .rollbackCampanha(this.CodigoCabecera, 'Generacion cupones fallida.')
-          .subscribe({
-            next: () => {
-              console.log(`Campaña rollback`);
-              this.dataCupones.registrarLog(
-                'CREACION CAMPANHA',
-                'ROLLBACK',
-                `${this.CodigoCabecera} rollback exitoso`
-              );
-            },
-            error: () => {
-              this.dataCupones.registrarLog(
-                'CREACION CAMPANHA',
-                'ROLLBACK',
-                'Error al realizaar rollback'
-              );
-            },
-          });
+        if (error.status !== 200) {
+          this.dataCupones
+            .rollbackCampanha(this.CodigoCabecera, 'Generacion cupones fallida.')
+            .subscribe({
+              next: () => {
+                this.dataCupones.registrarLog(
+                  'CREACION CAMPANHA',
+                  'ROLLBACK',
+                  `${this.CodigoCabecera} rollback exitoso`
+                );
+              },
+              error: () => {
+                this.dataCupones.registrarLog(
+                  'CREACION CAMPANHA',
+                  'ROLLBACK',
+                  'Error al realizaar rollback'
+                );
+              },
+            });
+        }
         this.validacion = error.responseText;
         this.validacionC = error.status.toString();
-        console.log(error);
         console.log(this.validacionC);
         this.spinner.hide();
       },
