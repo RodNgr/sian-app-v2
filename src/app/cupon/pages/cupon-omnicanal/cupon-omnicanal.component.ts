@@ -70,7 +70,7 @@ export class CuponOmnicanalComponent implements OnInit {
   public type: string = 'V';
   public campana: string;
   public displayModal: boolean;
-  isChecked: boolean = true;
+  isChecked: boolean = false;
 
   public nameProductSelect: string;
 
@@ -180,7 +180,7 @@ export class CuponOmnicanalComponent implements OnInit {
     this.clearCuponData();
     this.tipoOperacion();
     this.disCupones;
-    this.isChecked = true;
+    this.isChecked = false;
     this.showMontoMinimo = false;
     this.getProductSelect = this.cartaService.getDataProductSelect();
 
@@ -1673,9 +1673,11 @@ export class CuponOmnicanalComponent implements OnInit {
     if ($event.checked) {
       this.cuponOmni.activoCompraMin = 1;
       this.showMontoMinimo = true;
+      this.isChecked = true;
     } else {
       this.cuponOmni.activoCompraMin = 2;
       this.showMontoMinimo = false;
+      this.isChecked = false;
     }
     //console.log(this.cuponOmni.activoCompraMin);
   }
@@ -3456,16 +3458,29 @@ export class CuponOmnicanalComponent implements OnInit {
           this.ajaxQueryPostSQLDetalleVista(rutaDetalleVista);
         }
       } else {
-        var tipocupon: String;
+        let tipocupon: String = 'Cupón descuento % al monto total';
         var tipoN;
-        String;
-        var tipo = parseInt(this.selectCountTimes);
-        var tipocuponn = this.selectionTypeCupon;
+        const tipo = parseInt(this.selectCountTimes);
+        const tipocuponn = this.selectionTypeCupon;
 
         if (tipo == 1) {
           tipoN = 'Autogenerado';
         } else {
           tipoN = 'Unico';
+        }
+
+        if (tipocuponn == '1') {
+          tipocupon = 'Cupón Precio Fijo a un producto';
+        } else if (tipocuponn == '2') {
+          tipocupon = 'Cupón descuento % a un producto';
+        } else if (tipocuponn == '3') {
+          tipocupon = 'Cupón descuento % a varios producto';
+        } else if (tipocuponn == '4') {
+          tipocupon = 'Cupón descuento Recargo de Delivery';
+        } else if (tipocuponn == '5') {
+          tipocupon = 'Cupón descuento monto fijo al  total';
+        } else if (tipocuponn == '6') {
+          tipocupon = 'Cupón descuento % al monto total';
         }
 
         var canales = '';
@@ -3844,11 +3859,11 @@ export class CuponOmnicanalComponent implements OnInit {
       crossDomain: true,
       contentType: 'application/json',
       success: (result) => {
-        var tipocupon: String;
-        var tipoN;
+        let tipocupon: String;
+        let tipoN;
         String;
-        var tipo = parseInt(this.selectCountTimes);
-        var tipocuponn = this.selectionTypeCupon;
+        const tipo = parseInt(this.selectCountTimes);
+        const tipocuponn = this.selectionTypeCupon;
 
         if (tipo == 1) {
           tipoN = 'Autogenerado';
