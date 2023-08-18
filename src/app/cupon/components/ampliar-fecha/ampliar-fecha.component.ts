@@ -160,7 +160,7 @@ export class AmpliarFechaComponent implements OnInit {
             //this.listaCuponOmnicanalComponent.Buscar();
           }
         })
-        this.ref.close();
+        this.ref.close(1);
       },
       error: (error) => {
         console.log(error);

@@ -134,7 +134,7 @@ export class AnularCuponComponent implements OnInit {
             this.router.navigateByUrl('/home/cupon/lista-cupon-omnicanal');
           }
         })
-        this.ref.close();
+        this.ref.close(1);
       },
       error: (error) => {
         console.log(error);

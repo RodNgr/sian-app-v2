@@ -689,8 +689,8 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showCantidadMaximaUso = false;
       this.showCodigo = false;
       this.showMontoPagar = false;
-      this.showNecesitaMontoMinimo = true;
-      this.showMontoMinimo = false;
+      this.showNecesitaMontoMinimo = false;
+      this.showMontoMinimo = true;
       this.showCanales = false;
       this.showTableProducts = false;
       this.showMaximoDescuento = false;
@@ -707,8 +707,8 @@ export class CuponOmnicanalComponent implements OnInit {
       this.cuponOmni.nroCuponAGenerar = 1;
       this.showCodigo = true;
       this.showMontoPagar = false;
-      this.showNecesitaMontoMinimo = true;
-      this.showMontoMinimo = false;
+      this.showNecesitaMontoMinimo = false;
+      this.showMontoMinimo = true;
       this.showCanales = false;
       this.showTableProducts = false;
       this.showMaximoDescuento = false;
@@ -1180,8 +1180,8 @@ export class CuponOmnicanalComponent implements OnInit {
           this.showCantidadMaximaUso = false;
           this.showCodigo = false;
           this.showMontoPagar = false;
-          this.showNecesitaMontoMinimo = true;
-          this.showMontoMinimo = false;
+          this.showNecesitaMontoMinimo = false;
+          this.showMontoMinimo = true;
           this.showCanales = false;
           this.showTableProducts = false;
           this.showMaximoDescuento = false;
@@ -1203,8 +1203,8 @@ export class CuponOmnicanalComponent implements OnInit {
           this.cuponOmni.nroCuponAGenerar = 1;
           this.showCodigo = true;
           this.showMontoPagar = false;
-          this.showNecesitaMontoMinimo = true;
-          this.showMontoMinimo = false;
+          this.showNecesitaMontoMinimo = false;
+          this.showMontoMinimo = true;
           this.showCanales = false;
           this.showTableProducts = false;
           this.showMaximoDescuento = false;
@@ -1363,7 +1363,7 @@ export class CuponOmnicanalComponent implements OnInit {
           this.cuponOmniD[0].tipo == 1
         ) {
           this.cuponOmni.nroCuponAGenerar = 0;
-          alert(this.cuponOmniD[0].activoCompraMin);
+          
           if (this.cuponOmniD[0].activoCompraMin == 1) {
             this.isChecked = true;
           }

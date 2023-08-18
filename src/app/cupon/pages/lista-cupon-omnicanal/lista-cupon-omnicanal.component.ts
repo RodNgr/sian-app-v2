@@ -101,6 +101,10 @@ export class ListaCuponOmnicanalComponent implements OnInit {
       contentStyle: { "max-height": "360px", "overflow": "auto" },
       data: this.CampanhasSelected
     });
+
+    this.ref.onClose.subscribe((Val: number) => {
+      this.listarCupones();
+    });
   }
 
   public Buscar(){
@@ -113,6 +117,10 @@ export class ListaCuponOmnicanalComponent implements OnInit {
       width: '25%',
       contentStyle: { "max-height": "360px", "overflow": "auto" },
       data: this.CampanhasSelected
+    });
+
+    this.ref.onClose.subscribe((Val: number) => {
+      this.listarCupones();
     });
   }
 
