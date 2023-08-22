@@ -85,7 +85,7 @@ export class AmpliarFechaComponent implements OnInit {
     let mesInicio = this.fecha.getMonth() + 1;
     let mesFin = this.fin.getMonth() + 1;
     fecinicio = this.fecha.getFullYear() + "-" + mesInicio.toString().padStart(2, '0') + "-" + this.fecha.getDate().toString().padStart(2, '0') + " 00:00:00";
-    fecfin = this.fin.getFullYear() + "-" + mesFin.toString().padStart(2, '0') + "-" + this.fin.getDate().toString().padStart(2, '0') + " 00:00:00";
+    fecfin = this.fin.getFullYear() + "-" + mesFin.toString().padStart(2, '0') + "-" + this.fin.getDate().toString().padStart(2, '0') + " 23:59:59";
 
     this.cuponOmni = {
       "fecInicio": fecinicio,
