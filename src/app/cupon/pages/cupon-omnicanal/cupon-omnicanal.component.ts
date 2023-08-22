@@ -2227,6 +2227,9 @@ export class CuponOmnicanalComponent implements OnInit {
         cabeceraId: this.VisCodCupon,
       };
     }
+
+    this.bloquear();
+
     if (this.cuponOmni.nroCuponAGenerar > 0) {
       var sumaCant = this.cuponOmni.nroCuponAGenerar * this.CartaFinal.length;
 
@@ -2720,6 +2723,12 @@ export class CuponOmnicanalComponent implements OnInit {
     if (this.Cantidad > 0) {
       console.log('Ya existe una campaña con este nombre');
       validation = false;
+      
+      this.dataCupones.registrarLog(
+        'NOMBRE CAMPANHA REPETIDO',
+        'NOMBRE REPETIDO',
+        `${this.cuponOmni.codigo} NOMBRE REPETIDO`
+      );
     }
 
     this.cuponOmni3 = {

@@ -578,7 +578,7 @@
     </div>
     <div class="p-d-flex mt-2 mb-2 w-100">
       <div class="p-inputgroup p-d-flex p-jc-end ">
-        <button pButton pRipple label="Guardar" icon="pi pi-save" class="p-button-lg p-button-success p-mr-2" (click)="bloquear(); guardarCupon()" *ngIf="type != 'V'" [disabled]="isClicked"></button>
+        <button pButton pRipple label="Guardar" icon="pi pi-save" class="p-button-lg p-button-success p-mr-2" (click)="guardarCupon();" *ngIf="type != 'V'" [disabled]="isClicked"></button>
       </div>
       <div class="p-inputgroup p-d-flex p-jc-end ">
         <button pButton pRipple label="Generar Cupones" icon="pi pi-save" class="p-button-lg p-button-success p-mr-2" (click)="bloquear(); MasCupones()"  *ngIf="type == 'V'" [disabled]="isClicked"></button>
