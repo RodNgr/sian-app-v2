@@ -21,6 +21,8 @@ import { EstadoProcesoPipe } from './pipes/estado-proceso.pipe';
 import { EstadoSunatPipe } from './pipes/estado-sunat.pipe';
 import { TipoComprobantePipe } from './pipes/tipo-comprobante.pipe';
 import { ListaCuadraturaVisaComponent } from './pages/lista-cuadratura-visa/lista-cuadratura-visa.component';
+import { ListaCuadraturaPeyaComponent } from './pages/lista-cuadratura-peya/lista-cuadratura-peya.component';
+import { CuadraturaAgregadorPeyaComponent } from './pages/cuadratura-agregador-peya/cuadratura-agregador-peya.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { ListaCuadraturaVisaComponent } from './pages/lista-cuadratura-visa/list
     EstadoProcesoPipe,
     EstadoSunatPipe,
     TipoComprobantePipe,
-    ListaCuadraturaVisaComponent
+    ListaCuadraturaVisaComponent,
+    ListaCuadraturaPeyaComponent,
+    CuadraturaAgregadorPeyaComponent
   ],
   imports: [
     CommonModule,

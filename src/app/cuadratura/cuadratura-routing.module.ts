@@ -12,12 +12,16 @@ import { ListaCuadraturaAgregadorComponent } from './pages/lista-cuadratura-agre
 import { ListaCuadraturaMallComponent } from './pages/lista-cuadratura-mall/lista-cuadratura-mall.component';
 import { ListaCuadraturaSovosComponent } from './pages/lista-cuadratura-sovos/lista-cuadratura-sovos.component';
 import { ListaCuadraturaUrbanovaComponent } from './pages/lista-cuadratura-urbanova/lista-cuadratura-urbanova.component';
+import { CuadraturaAgregadorPeyaComponent } from './pages/cuadratura-agregador-peya/cuadratura-agregador-peya.component';
+import { ListaCuadraturaPeyaComponent } from './pages/lista-cuadratura-peya/lista-cuadratura-peya.component';
 
 const routes: Routes = [
   { path: '', children: 
     [
       { path: 'lista-cuadratura-rappi', component: ListaCuadraturaAgregadorComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_CUAD_AGREGADOR_RAPPI']} },
+      { path: 'lista-cuadratura-peya', component: ListaCuadraturaPeyaComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_CUAD_AGREGADOR_RAPPI']} },
       { path: 'pedidos-rappi', component: CuadraturaAgregadorComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_CUAD_AGREGADOR_RAPPI']} },
+      { path: 'pedidos-peya', component: CuadraturaAgregadorPeyaComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_CUAD_AGREGADOR_RAPPI']} },
 
       { path: 'lista-configuracion', component: ListaConfiguracionSovosComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_CUAD_SOVOS_CONF']} },
 
