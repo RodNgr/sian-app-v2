@@ -1731,6 +1731,11 @@ export class CuponOmnicanalComponent implements OnInit {
     this.spinner.show();
     this.dataCupones.TokenClient().subscribe(
       (resp) => {
+        this.dataCupones.registrarLog(
+          'Omnicanal',
+          'Crear Campanha',
+          `${this.cuponOmni.codigo} Token creado`
+        );
         var sumaCant = this.cuponOmni.nroCuponAGenerar * this.CartaFinal.length;
         if (sumaCant < 1000001) {
           this.validaYCreaCampanha();
@@ -1741,6 +1746,11 @@ export class CuponOmnicanalComponent implements OnInit {
             'warning'
           );
           this.spinner.hide();
+          this.dataCupones.registrarLog(
+            'Omnicanal',
+            'Crear Campanha',
+            `${this.cuponOmni.codigo} - Numero de cupones mayor a 1,000,000`
+          );
         }
       },
       (e) => {
@@ -2725,8 +2735,8 @@ export class CuponOmnicanalComponent implements OnInit {
       validation = false;
       
       this.dataCupones.registrarLog(
-        'NOMBRE CAMPANHA REPETIDO',
-        'NOMBRE REPETIDO',
+        'Omnicanal',
+        'Crear Campanha',
         `${this.cuponOmni.codigo} NOMBRE REPETIDO`
       );
     }
@@ -3791,7 +3801,7 @@ export class CuponOmnicanalComponent implements OnInit {
                 this.dataCupones.registrarLog(
                   'CREACION CAMPANHA',
                   'ROLLBACK',
-                  `${this.CodigoCabecera} rollback exitoso`
+                  `${JSON.stringify({ url: urlEndPoint, body: JSON.stringify(data) })}`
                 );
               },
               error: () => {
@@ -4663,6 +4673,11 @@ export class CuponOmnicanalComponent implements OnInit {
       contentType: 'application/json',
       success: (result) => {
         this.CodigoCabecera = result;
+        this.dataCupones.registrarLog(
+          'Omnicanal',
+          'Crear Campanha',
+          `SUCCESS -> ${urlEndPoint}`
+        );
       },
       error: (error) => {
         Swal.fire(
@@ -4671,6 +4686,11 @@ export class CuponOmnicanalComponent implements OnInit {
           'info'
         );
         console.log(error);
+        this.dataCupones.registrarLog(
+          'Omnicanal',
+          'Crear Campanha',
+          `ERROR -> ${urlEndPoint}`
+        );
         this.spinner.hide();
       },
     });
