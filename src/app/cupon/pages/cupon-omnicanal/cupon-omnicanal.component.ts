@@ -120,19 +120,23 @@ export class CuponOmnicanalComponent implements OnInit {
   inputValueCaracter: string = '';
   inputValueValidacionCodigo: string = '';
 
+  // public tipos: TipoCuponOmnicanal[] = [
+  //   { nombre: 'Seleccionar tipo', estado: true, codigo: 0 },
+  //   { nombre: 'Cupón Precio Fijo a un producto', estado: false, codigo: 1 },
+  //   { nombre: 'Cupón descuento % a un producto', estado: false, codigo: 2 },
+  //   { nombre: 'Cupón descuento % a varios producto', estado: false, codigo: 3 },
+  //   { nombre: 'Cupón descuento Recargo de Delivery', estado: false, codigo: 4 },
+  //   {
+  //     nombre: 'Cupón descuento monto fijo al  total',
+  //     estado: false,
+  //     codigo: 5,
+  //   },
+  //   { nombre: 'Cupón descuento % al monto total', estado: false, codigo: 6 },
+  //   { nombre: 'Cupón 2 x 1', estado: false, codigo: 7 },
+  // ];
+
   public tipos: TipoCuponOmnicanal[] = [
     { nombre: 'Seleccionar tipo', estado: true, codigo: 0 },
-    { nombre: 'Cupón Precio Fijo a un producto', estado: false, codigo: 1 },
-    { nombre: 'Cupón descuento % a un producto', estado: false, codigo: 2 },
-    { nombre: 'Cupón descuento % a varios producto', estado: false, codigo: 3 },
-    { nombre: 'Cupón descuento Recargo de Delivery', estado: false, codigo: 4 },
-    {
-      nombre: 'Cupón descuento monto fijo al  total',
-      estado: false,
-      codigo: 5,
-    },
-    { nombre: 'Cupón descuento % al monto total', estado: false, codigo: 6 },
-    { nombre: 'Cupón 2 x 1', estado: false, codigo: 7 },
   ];
 
   public origenes: TipoCuponOmnicanal[] = [
@@ -171,6 +175,7 @@ export class CuponOmnicanalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.ListadoTipo();
     this.ListadoOrigen();
     this.ListadoAliados();
     this.clearCuponData();
@@ -185,6 +190,12 @@ export class CuponOmnicanalComponent implements OnInit {
     if (this.empresaService.getEmpresaSeleccionada().idEmpresa == 2) {
       this.validaBembos = true;
     }
+  }
+
+  ListadoTipo() {
+    const ruta = `${this.urlLista}/getCombosId/3`;
+
+    this.ajaxQueryPostListaTipo(ruta);
   }
 
   ListadoOrigen() {
@@ -5159,6 +5170,38 @@ export class CuponOmnicanalComponent implements OnInit {
           var element1 = result[index].codigo;
 
           this.Aliados.push({
+            nombre: element,
+            estado: false,
+            codigo: element1,
+          });
+        }
+      },
+      error: (error) => {
+        Swal.fire(
+          'Ocurrio un accidente',
+          'Comunicate con sistemas: ' + error,
+          'info'
+        );
+        console.log(error);
+        this.spinner.hide();
+      },
+    });
+  }
+
+  private ajaxQueryPostListaTipo(urlEndPoint: string): any {
+    let t_result!: any;
+    $.ajax({
+      url: urlEndPoint,
+      async: false,
+      type: 'GET',
+      crossDomain: true,
+      contentType: 'application/json',
+      success: (result) => {
+        for (let index = 0; index < result.length; index++) {
+          var element = result[index].nombre;
+          var element1 = result[index].codigo;
+
+          this.tipos.push({
             nombre: element,
             estado: false,
             codigo: element1,
