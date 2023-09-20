@@ -117,6 +117,7 @@ export class CuponOmnicanalComponent implements OnInit {
   public cantidadActivo: boolean = false;
   public CodigoCabecera: number;
 
+<<<<<<< HEAD
   inputValueCaracter: string = '';
   inputValueValidacionCodigo: string = '';
 
@@ -138,6 +139,16 @@ export class CuponOmnicanalComponent implements OnInit {
   public tipos: TipoCuponOmnicanal[] = [
     { nombre: 'Seleccionar tipo', estado: true, codigo: 0 },
   ];
+=======
+  public tipos: TipoCuponOmnicanal[] = [{ nombre: 'Seleccionar tipo', estado: true, codigo: 0 },
+  { nombre: 'Cupón Precio Fijo a un producto', estado: false, codigo: 1 },
+  { nombre: 'Cupón descuento % a un producto', estado: false, codigo: 2 },
+  { nombre: 'Cupón descuento % a varios producto', estado: false, codigo: 3 },
+  { nombre: 'Cupón descuento Recargo de Delivery', estado: false, codigo: 4 },
+  { nombre: 'Cupón descuento monto fijo al  total', estado: false, codigo: 5 },
+  { nombre: 'Cupón descuento % al monto total', estado: false, codigo: 6 },
+  { nombre: 'Cupón Precio Fijo a varios producto', estado: false, codigo: 8 }]
+>>>>>>> 0504a37578c4c309aada388f857881ee93f39123
 
   public origenes: TipoCuponOmnicanal[] = [
     { nombre: 'Seleccionar origen', estado: true, codigo: 0 },
@@ -824,6 +835,235 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showMontoDescuento = false;
       this.showExento = true;
     }
+<<<<<<< HEAD
+=======
+
+    else if (this.selectionTypeCupon == '2' && tipo == 1) {
+      this.showCuponesGenerar = true;
+      this.showCantidadMaximaUso = false;
+      this.showCodigo = false;
+      this.showMontoPagar = false;
+      this.showNecesitaMontoMinimo = false;
+      this.showMontoMinimo = false;
+      this.showCanales = true;
+      this.showTableProducts = true;
+      this.showMaximoDescuento = true;
+      this.shoPorcentajeDescuento = true;
+      this.showVacio = true;
+      this.showVacio2 = true;
+      this.showVacio3 = true;
+      this.showDelivery = false;
+      this.showMontoDescuento = false;
+      this.showExento = false;
+    }
+
+    else if (this.selectionTypeCupon == '2' && tipo == 2) { 
+      this.showCuponesGenerar = true;
+      this.showCantidadMaximaUso = true;
+      this.showCodigo = true;
+      this.cuponOmni.nroCuponAGenerar = 1;
+      this.showMontoPagar = false;
+      this.showNecesitaMontoMinimo = false;
+      this.showCanales = true;
+      this.showMontoMinimo = false;
+      this.showTableProducts = true;
+      this.showMaximoDescuento = true;
+      this.shoPorcentajeDescuento = true;
+      this.showVacio = false;
+      this.showDelivery = false;
+      this.showMontoDescuento = false;
+      this.showExento = false;
+    }
+
+    else if (this.selectionTypeCupon == '3' && tipo == 1) {
+      this.showCuponesGenerar = true;
+      this.showCantidadMaximaUso = false;
+      this.showCodigo = false;
+      this.showMontoPagar = false;
+      this.showNecesitaMontoMinimo = false;
+      this.showMontoMinimo = false;
+      this.showCanales = true;
+      this.showTableProducts = true;
+      this.showMaximoDescuento = true;
+      this.shoPorcentajeDescuento = true;
+      this.showVacio = true;
+      this.showVacio2 = true;
+      this.showVacio3 = true;
+      this.showDelivery = false;
+      this.showMontoDescuento = false;
+      this.showExento = true;
+    }
+
+    else if (this.selectionTypeCupon == '3' && tipo == 2) {
+      this.showCuponesGenerar = true;
+      this.cuponOmni.nroCuponAGenerar = 1;
+      this.showCantidadMaximaUso = true;
+      this.showCodigo = true;
+      this.showMontoPagar = false;
+      this.showNecesitaMontoMinimo = false;
+      this.showMontoMinimo = false;
+      this.showCanales = true;
+      this.showTableProducts = true;
+      this.showMaximoDescuento = true;
+      this.shoPorcentajeDescuento = true;
+      this.showVacio = true;
+      this.showDelivery = false;
+      this.showMontoDescuento = false;
+      this.showExento = true;
+    }
+
+    else if (this.selectionTypeCupon == '4' && tipo == 1) {
+      this.showCuponesGenerar = true;
+      this.showCantidadMaximaUso = false;
+      this.showCodigo = false;
+      this.showMontoPagar = false;
+      this.showNecesitaMontoMinimo = true;
+      this.showMontoMinimo = false;
+      this.showCanales = true;
+      this.showTableProducts = true;
+      this.showMaximoDescuento = false;
+      this.shoPorcentajeDescuento = false;
+      this.showVacio = true;
+      this.showVacio2 = true;
+      this.showVacio3 = false;
+      this.showDelivery = true;
+      this.cuponOmni.percentdsct = 100;
+      this.showMontoDescuento = false;
+      this.showExento = true;
+    }
+
+    else if (this.selectionTypeCupon == '4' && tipo == 2) {      
+      this.showCuponesGenerar = true;
+      this.cuponOmni.nroCuponAGenerar = 1;
+      this.showCantidadMaximaUso = true;
+      this.showCodigo = true;
+      this.showMontoPagar = false;
+      this.showNecesitaMontoMinimo = true;
+      this.showMontoMinimo = false;
+      this.showCanales = true;
+      this.showTableProducts = true;
+      this.showMaximoDescuento = false;
+      this.shoPorcentajeDescuento = false;
+      this.showVacio = true;
+      this.showDelivery = true;
+      this.cuponOmni.percentdsct = 100;
+      this.showMontoDescuento = false;
+      this.showExento = true;
+    }
+
+    else if (this.selectionTypeCupon == '5' && tipo == 1) {
+      this.showCuponesGenerar = true;
+      this.showCantidadMaximaUso = false;
+      this.showCodigo = false;
+      this.showMontoPagar = false;
+      this.showNecesitaMontoMinimo = true;
+      this.showMontoMinimo = false;
+      this.showCanales = false;
+      this.showTableProducts = false;
+      this.showMaximoDescuento = false;
+      this.shoPorcentajeDescuento = false;
+      this.showVacio = true;
+      this.showVacio2 = true;
+      this.showVacio3 = false;
+      this.showDelivery = false;
+      this.showMontoDescuento = true;
+      this.showExento = true;
+    }
+
+    else if (this.selectionTypeCupon == '5' && tipo == 2) {
+      this.showCuponesGenerar = true;
+      this.showCantidadMaximaUso = true;
+      this.cuponOmni.nroCuponAGenerar = 1;
+      this.showCodigo = true;
+      this.showMontoPagar = false;
+      this.showNecesitaMontoMinimo = true;
+      this.showMontoMinimo = false;
+      this.showCanales = false;
+      this.showTableProducts = false;
+      this.showMaximoDescuento = false;
+      this.shoPorcentajeDescuento = false;
+      this.showVacio = true;
+      this.showDelivery = false;
+      this.showMontoDescuento = true;
+      this.showExento = true;
+    }
+
+    else if (this.selectionTypeCupon == '6' && tipo == 1) {
+      this.showCuponesGenerar = true;
+      this.showCantidadMaximaUso = false;
+      this.showCodigo = false;
+      this.showMontoPagar = false;
+      this.showNecesitaMontoMinimo = false;
+      this.showMontoMinimo = true;
+      this.showCanales = false;
+      this.showTableProducts = false;
+      this.showMaximoDescuento = true;
+      this.shoPorcentajeDescuento = true;
+      this.showVacio = false;
+      this.showVacio2 = false;
+      this.showVacio3 = false;
+      this.showDelivery = false;
+      this.showMontoDescuento = false;
+      this.showExento = false;
+    }
+
+    else if (this.selectionTypeCupon == '6' && tipo == 2) {
+      this.showCuponesGenerar = true;
+      this.showCantidadMaximaUso = true;
+      this.showCodigo = true;
+      this.cuponOmni.nroCuponAGenerar = 1;
+      this.showMontoPagar = false;
+      this.showNecesitaMontoMinimo = false;
+      this.showMontoMinimo = true;
+      this.showCanales = false;
+      this.showTableProducts = false;
+      this.showMaximoDescuento = true;
+      this.shoPorcentajeDescuento = true;
+      this.showVacio = false;
+      this.showDelivery = false;
+      this.showMontoDescuento = false;
+      this.showExento = false;
+    }
+
+    else if (this.selectionTypeCupon == '8' && tipo == 1) {
+      this.showCuponesGenerar = true;
+      this.showCantidadMaximaUso = false;
+      this.showCodigo = false;
+      this.showMontoPagar = true;
+      this.showNecesitaMontoMinimo = false;
+      this.showMontoMinimo = false;
+      this.showCanales = true;
+      this.showTableProducts = true;
+      this.showMaximoDescuento = false;
+      this.shoPorcentajeDescuento = false;
+      this.showVacio = false;
+      this.showVacio2 = false;
+      this.showVacio3 = false;
+      this.showDelivery = false;
+      this.showMontoDescuento = false;
+      this.showExento = true;
+    }
+
+    else if (this.selectionTypeCupon == '8' && tipo == 2) {
+      this.showCuponesGenerar = true;
+      this.showCantidadMaximaUso = true;
+      this.showCodigo = true;
+      this.cuponOmni.nroCuponAGenerar = 1;
+      this.showMontoPagar = true;
+      this.showNecesitaMontoMinimo = false;
+      this.showMontoMinimo = false;
+      this.showCanales = true;
+      this.showTableProducts = true;
+      this.showMaximoDescuento = false;
+      this.shoPorcentajeDescuento = false;
+      this.showVacio = false;
+      this.showVacio2 = false;
+      this.showVacio3 = false;
+      this.showDelivery = false;
+      this.showMontoDescuento = false;
+      this.showExento = true;
+    }
+>>>>>>> 0504a37578c4c309aada388f857881ee93f39123
   }
 
   // Agregar Codigo Carta Web
@@ -1420,6 +1660,260 @@ export class CuponOmnicanalComponent implements OnInit {
           this.showMontoDescuento = false;
           this.showExento = true;
         }
+<<<<<<< HEAD
+=======
+    
+        else if (this.cuponOmniD[0].tipoCupon == 2 && this.cuponOmniD[0].tipo == 1) {
+          this.showtipo1 = true;
+          this.showtipo2 = false;
+          this.showCuponesGenerar = true;
+          this.showCantidadMaximaUso = false;
+          this.showCodigo = false;
+          this.showMontoPagar = false;
+          this.showNecesitaMontoMinimo = true;
+          this.showMontoMinimo = false;
+          this.showCanales = true;
+          this.showTableProducts = true;
+          this.showMaximoDescuento = true;
+          this.shoPorcentajeDescuento = true;
+          this.showVacio = true;
+          this.showVacio2 = true;
+          this.showVacio3 = true;
+          this.showDelivery = false;
+          this.showMontoDescuento = false;
+          this.showExento = false;
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 2 && this.cuponOmniD[0].tipo == 2) { 
+          this.showtipo1 = false;
+          this.showtipo2 = true;
+          this.showCuponesGenerar = true;
+          this.showCantidadMaximaUso = true;
+          this.showCodigo = true;
+          this.cuponOmni.nroCuponAGenerar = 1;
+          this.showMontoPagar = false;
+          this.showNecesitaMontoMinimo = true;
+          this.showCanales = true;
+          this.showMontoMinimo = false;
+          this.showTableProducts = true;
+          this.showMaximoDescuento = true;
+          this.shoPorcentajeDescuento = true;
+          this.showVacio = false;
+          this.showDelivery = false;
+          this.showMontoDescuento = false;
+          this.showExento = false;
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 3 && this.cuponOmniD[0].tipo == 1) {
+          this.showtipo1 = true;
+          this.showtipo2 = false;
+          this.showCuponesGenerar = true;
+          this.showCantidadMaximaUso = false;
+          this.showCodigo = false;
+          this.showMontoPagar = false;
+          this.showNecesitaMontoMinimo = true;
+          this.showMontoMinimo = false;
+          this.showCanales = true;
+          this.showTableProducts = true;
+          this.showMaximoDescuento = true;
+          this.shoPorcentajeDescuento = true;
+          this.showVacio = true;
+          this.showVacio2 = true;
+          this.showVacio3 = true;
+          this.showDelivery = false;
+          this.showMontoDescuento = false;
+          this.showExento = true;
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 3 && this.cuponOmniD[0].tipo == 2) {
+          this.showtipo1 = false;
+          this.showtipo2 = true;
+          this.showCuponesGenerar = true;
+          this.cuponOmni.nroCuponAGenerar = 1;
+          this.showCantidadMaximaUso = true;
+          this.showCodigo = true;
+          this.showMontoPagar = false;
+          this.showNecesitaMontoMinimo = true;
+          this.showMontoMinimo = false;
+          this.showCanales = true;
+          this.showTableProducts = true;
+          this.showMaximoDescuento = true;
+          this.shoPorcentajeDescuento = true;
+          this.showVacio = true;
+          this.showDelivery = false;
+          this.showMontoDescuento = false;
+          this.showExento = true;
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 4 && this.cuponOmniD[0].tipo == 1) {
+          this.showtipo1 = true;
+          this.showtipo2 = false;
+          this.showCuponesGenerar = true;
+          this.showCantidadMaximaUso = false;
+          this.showCodigo = false;
+          this.showMontoPagar = false;
+          this.showNecesitaMontoMinimo = true;
+          this.showMontoMinimo = false;
+          this.showCanales = true;
+          this.showTableProducts = true;
+          this.showMaximoDescuento = false;
+          this.shoPorcentajeDescuento = false;
+          this.showVacio = true;
+          this.showVacio2 = true;
+          this.showVacio3 = false;
+          this.showDelivery = true;
+          this.cuponOmni.percentdsct = 100;
+          this.showMontoDescuento = false;
+          this.showExento = true;
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 4 && this.cuponOmniD[0].tipo == 2) {      
+          this.showtipo1 = false;
+          this.showtipo2 = true;
+          this.showCuponesGenerar = true;
+          this.cuponOmni.nroCuponAGenerar = 1;
+          this.showCantidadMaximaUso = true;
+          this.showCodigo = true;
+          this.showMontoPagar = false;
+          this.showNecesitaMontoMinimo = true;
+          this.showMontoMinimo = false;
+          this.showCanales = true;
+          this.showTableProducts = true;
+          this.showMaximoDescuento = false;
+          this.shoPorcentajeDescuento = false;
+          this.showVacio = true;
+          this.showDelivery = true;
+          this.cuponOmni.percentdsct = 100;
+          this.showMontoDescuento = false;
+          this.showExento = true;
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 5 && this.cuponOmniD[0].tipo == 1) {
+          this.showtipo1 = true;
+          this.showtipo2 = false;
+          this.showCuponesGenerar = true;
+          this.showCantidadMaximaUso = false;
+          this.showCodigo = false;
+          this.showMontoPagar = false;
+          this.showNecesitaMontoMinimo = true;
+          this.showMontoMinimo = false;
+          this.showCanales = false;
+          this.showTableProducts = false;
+          this.showMaximoDescuento = false;
+          this.shoPorcentajeDescuento = false;
+          this.showVacio = true;
+          this.showVacio2 = true;
+          this.showVacio3 = false;
+          this.showDelivery = false;
+          this.showMontoDescuento = true;
+          this.showExento = true;
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 5 && this.cuponOmniD[0].tipo == 2) {
+          this.showtipo1 = false;
+          this.showtipo2 = true;
+          this.showCuponesGenerar = true;
+          this.showCantidadMaximaUso = true;
+          this.cuponOmni.nroCuponAGenerar = 1;
+          this.showCodigo = true;
+          this.showMontoPagar = false;
+          this.showNecesitaMontoMinimo = true;
+          this.showMontoMinimo = false;
+          this.showCanales = false;
+          this.showTableProducts = false;
+          this.showMaximoDescuento = false;
+          this.shoPorcentajeDescuento = false;
+          this.showVacio = true;
+          this.showDelivery = false;
+          this.showMontoDescuento = true;
+          this.showExento = true;
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 6 && this.cuponOmniD[0].tipo == 1) {
+          this.showtipo1 = true;
+          this.showtipo2 = false;
+          this.showCuponesGenerar = true;
+          this.showCantidadMaximaUso = false;
+          this.showCodigo = false;
+          this.showMontoPagar = false;
+          this.showNecesitaMontoMinimo = false;
+          this.showMontoMinimo = true;
+          this.showCanales = false;
+          this.showTableProducts = false;
+          this.showMaximoDescuento = true;
+          this.shoPorcentajeDescuento = true;
+          this.showVacio = false;
+          this.showVacio2 = false;
+          this.showVacio3 = false;
+          this.showDelivery = false;
+          this.showMontoDescuento = false;
+          this.showExento = false;
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 6 && this.cuponOmniD[0].tipo == 2) {
+          this.showtipo1 = false;
+          this.showtipo2 = true;
+          this.showCuponesGenerar = true;
+          this.showCantidadMaximaUso = true;
+          this.showCodigo = true;
+          this.cuponOmni.nroCuponAGenerar = 1;
+          this.showMontoPagar = false;
+          this.showNecesitaMontoMinimo = false;
+          this.showMontoMinimo = true;
+          this.showCanales = false;
+          this.showTableProducts = false;
+          this.showMaximoDescuento = true;
+          this.shoPorcentajeDescuento = true;
+          this.showVacio = false;
+          this.showDelivery = false;
+          this.showMontoDescuento = false;
+          this.showExento = false;
+        }
+
+        else if (this.cuponOmniD[0].tipoCupon == 8 && this.cuponOmniD[0].tipo == 1) {
+          this.showtipo1 = true;
+          this.showtipo2 = false;
+          this.showCuponesGenerar = true;
+          this.showCantidadMaximaUso = false;
+          this.showCodigo = false;
+          this.showMontoPagar = true;
+          this.showNecesitaMontoMinimo = true;
+          this.showMontoMinimo = false;
+          this.showCanales = true;
+          this.showTableProducts = true;
+          this.showMaximoDescuento = false;
+          this.shoPorcentajeDescuento = false;
+          this.showVacio = false;
+          this.showVacio2 = false;
+          this.showVacio3 = false;
+          this.showDelivery = false;
+          this.showMontoDescuento = false;
+          this.showExento = true;
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 8 && this.cuponOmniD[0].tipo == 2) {
+          this.showtipo1 = false;
+          this.showtipo2 = true;
+          this.showCuponesGenerar = true;
+          this.showCantidadMaximaUso = true;
+          this.showCodigo = true;
+          this.cuponOmni.nroCuponAGenerar = 1;
+          this.showMontoPagar = true;
+          this.showNecesitaMontoMinimo = true;
+          this.showMontoMinimo = false;
+          this.showCanales = true;
+          this.showTableProducts = true;
+          this.showMaximoDescuento = false;
+          this.shoPorcentajeDescuento = false;
+          this.showVacio = false;
+          this.showVacio2 = false;
+          this.showVacio3 = false;
+          this.showDelivery = false;
+          this.showMontoDescuento = false;
+          this.showExento = true;
+        }
+
+>>>>>>> 0504a37578c4c309aada388f857881ee93f39123
 
         // if (this.cuponOmniD[0].tipoCupon == 1 && this.cuponOmniD[0].tipo == 1) {
 
@@ -1604,7 +2098,128 @@ export class CuponOmnicanalComponent implements OnInit {
           this.cuponOmni.codigo = this.cuponOmniD[0].codigo;
           this.activarBlur(this.cuponOmni.monto,'monto');
         }
+<<<<<<< HEAD
 
+=======
+    
+        else if (this.cuponOmniD[0].tipoCupon == 2 && this.cuponOmniD[0].tipo == 1) {
+          this.cuponOmni.nroCuponAGenerar = 0;
+          this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
+          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
+          this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
+          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
+          this.activarBlur(this.cuponOmni.montoMax,'montoMax');
+          this.activarBlur(this.cuponOmni.percentdsct,'percentdsct');        
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 2 && this.cuponOmniD[0].tipo == 2) { 
+          // this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
+          this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
+          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
+          this.cuponOmni.nroUso = this.cuponOmniD[0].maximouso;
+          this.cuponOmni.codigo = this.cuponOmniD[0].codigo;
+          this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
+          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
+          this.activarBlur(this.cuponOmni.montoMax,'montoMax');
+          this.activarBlur(this.cuponOmni.percentdsct,'percentdsct');         
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 3 && this.cuponOmniD[0].tipo == 1) {
+          this.cuponOmni.nroCuponAGenerar = 0;
+          this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
+          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
+          this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
+          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
+          this.activarBlur(this.cuponOmni.montoMax,'montoMax');
+          this.activarBlur(this.cuponOmni.percentdsct,'percentdsct'); 
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 3 && this.cuponOmniD[0].tipo == 2) {
+          // this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
+          this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
+          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
+          this.cuponOmni.nroUso = this.cuponOmniD[0].maximouso;
+          this.cuponOmni.codigo = this.cuponOmniD[0].codigo;
+          this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
+          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
+          this.activarBlur(this.cuponOmni.montoMax,'montoMax');
+          this.activarBlur(this.cuponOmni.percentdsct,'percentdsct');
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 4 && this.cuponOmniD[0].tipo == 1) {
+          this.cuponOmni.nroCuponAGenerar = 0;
+          this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
+          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
+          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
+          this.activarBlur(this.cuponOmni.percentdsct,'percentdsct');
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 4 && this.cuponOmniD[0].tipo == 2) {  
+          // this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
+          this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
+          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
+          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
+          this.cuponOmni.nroUso = this.cuponOmniD[0].maximouso;
+          this.cuponOmni.codigo = this.cuponOmniD[0].codigo;          
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 5 && this.cuponOmniD[0].tipo == 1) {
+          this.cuponOmni.nroCuponAGenerar = 0;
+          this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
+          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
+          this.cuponOmni.percentdsct = this.cuponOmniD[0].montodescuento;
+          this.activarBlur(this.cuponOmni.percentdsct,'percentdsct');
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 5 && this.cuponOmniD[0].tipo == 2) {
+          // this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
+          this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
+          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
+          this.cuponOmni.percentdsct = this.cuponOmniD[0].montodescuento;
+          this.cuponOmni.nroUso = this.cuponOmniD[0].maximouso;
+          this.cuponOmni.codigo = this.cuponOmniD[0].codigo;
+          this.activarBlur(this.cuponOmni.percentdsct,'percentdsct'); 
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 6 && this.cuponOmniD[0].tipo == 1) {
+          this.cuponOmni.nroCuponAGenerar = 0;
+          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
+          this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
+          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
+          this.activarBlur(this.cuponOmni.montoMax,'montoMax');
+          this.activarBlur(this.cuponOmni.percentdsct,'percentdsct'); 
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 6 && this.cuponOmniD[0].tipo == 2) {
+          // this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
+          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
+          this.cuponOmni.montoMax = this.cuponOmniD[0].montoMax;
+          this.cuponOmni.percentdsct = this.cuponOmniD[0].percentdsct;
+          this.cuponOmni.nroUso = this.cuponOmniD[0].maximouso;
+          this.cuponOmni.codigo = this.cuponOmniD[0].codigo; 
+          this.activarBlur(this.cuponOmni.montoMax,'montoMax');
+          this.activarBlur(this.cuponOmni.percentdsct,'percentdsct');  
+        }
+
+        else if (this.cuponOmniD[0].tipoCupon == 8 && this.cuponOmniD[0].tipo == 1) {
+          this.cuponOmni.nroCuponAGenerar = 0;
+          this.cuponOmni.monto = this.cuponOmniD[0].monto;
+          this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
+          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
+          this.activarBlur(this.cuponOmni.monto,'monto');         
+        }
+    
+        else if (this.cuponOmniD[0].tipoCupon == 8 && this.cuponOmniD[0].tipo == 2) {
+          // this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
+          this.cuponOmni.monto = this.cuponOmniD[0].monto;
+          this.cuponOmni.activoCompraMin = this.cuponOmniD[0].activoCompraMin;
+          this.cuponOmni.compraMin = this.cuponOmniD[0].compraMin;
+          this.cuponOmni.nroUso = this.cuponOmniD[0].maximouso;
+          this.cuponOmni.codigo = this.cuponOmniD[0].codigo;
+          this.activarBlur(this.cuponOmni.monto,'monto');
+        }
+        
+>>>>>>> 0504a37578c4c309aada388f857881ee93f39123
         this.cartaService.getDetalleVales(id).subscribe(
           (detalles) => {
             this.spinner.hide();
@@ -2558,7 +3173,331 @@ export class CuponOmnicanalComponent implements OnInit {
 
     this.bloquear();
 
+<<<<<<< HEAD
     if (this.cuponOmni.nroCuponAGenerar > 0) {
+=======
+    else if (this.selectionTypeCupon == '2' && tipo == 2) { 
+      this.cuponOmni2 = {
+        nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
+        nombreCupon:this.cuponOmni.codigo.toUpperCase(),
+        activoCompraMin: 1,
+        codMarca:  this.empresaService.getEmpresaSeleccionada().idEmpresa.toString(),
+        monto: this.cuponOmni.percentdsct,
+        idTipoCupon:this.cuponOmni.tipoCupon,
+        usuarioReg:this.getUsuario(),
+        fecInicio:fecinicio,
+        fecFin: fecfin,
+        nroUso: this.cuponOmni.nroUso,
+        montoMax:this.cuponOmni.montoMax,
+        anulado:0,
+        compraMin:this.cuponOmni.compraMin,
+        estado:0,
+        cantidadProductUso:1,
+        validaDelivery:EXternoV,
+        fecReg:fecRegistro,
+        fecActualizacion:'',
+        usuarioActualizacion:'',
+        cantidadRedimido:0,
+        alianza: this.cuponOmni.alianza.toUpperCase(),
+        canalDetalle:this.CartaFinal,
+        procesoId: this.VisCodProceso,
+        cabeceraId:this.VisCodCupon
+      }
+    }
+
+    else if (this.selectionTypeCupon == '3' && tipo == 1) {
+      this.cuponOmni2 = {
+        nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
+        activoCompraMin: 1,
+        codMarca:  this.empresaService.getEmpresaSeleccionada().idEmpresa.toString(),
+        monto: this.cuponOmni.percentdsct,
+        idTipoCupon:this.cuponOmni.tipoCupon,
+        usuarioReg:this.getUsuario(),
+        fecInicio:fecinicio,
+        fecFin: fecfin,
+        nroUso: 1,
+        nroCuponAGenerar: this.cuponOmni.nroCuponAGenerar,
+        montoMax:this.cuponOmni.montoMax,
+        anulado:0,
+        compraMin:this.cuponOmni.compraMin,
+        estado:0,
+        cantidadProductUso:1,
+        validaDelivery:0,
+        fecReg:fecRegistro,
+        fecActualizacion:'',
+        usuarioActualizacion:'',
+        cantidadRedimido:0,
+        alianza: this.cuponOmni.alianza.toUpperCase(),
+        canalDetalle:this.CartaFinal,
+        procesoId: this.VisCodProceso,
+        cabeceraId:this.VisCodCupon
+      }
+    }
+
+    else if (this.selectionTypeCupon == '3' && tipo == 2) {
+      this.cuponOmni2 = {
+        nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
+        nombreCupon:this.cuponOmni.codigo.toUpperCase(),
+        activoCompraMin: 1,
+        codMarca:  this.empresaService.getEmpresaSeleccionada().idEmpresa.toString(),
+        monto: this.cuponOmni.percentdsct,
+        idTipoCupon:this.cuponOmni.tipoCupon,
+        usuarioReg:this.getUsuario(),
+        fecInicio:fecinicio,
+        fecFin: fecfin,
+        nroUso: this.cuponOmni.nroUso,
+        montoMax:this.cuponOmni.montoMax,
+        anulado:0,
+        compraMin:this.cuponOmni.compraMin,
+        estado:0,
+        cantidadProductUso:1,
+        validaDelivery:0,
+        fecReg:fecRegistro,
+        fecActualizacion:'',
+        usuarioActualizacion:'',
+        cantidadRedimido:0,
+        alianza: this.cuponOmni.alianza.toUpperCase(),
+        canalDetalle:this.CartaFinal,
+        procesoId: this.VisCodProceso,
+        cabeceraId:this.VisCodCupon
+      }
+    }
+
+    else if (this.selectionTypeCupon == '4' && tipo == 1) {
+      this.cuponOmni2 = {
+        nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
+        activoCompraMin: 1,
+        codMarca:  this.empresaService.getEmpresaSeleccionada().idEmpresa.toString(),
+        monto: this.cuponOmni.percentdsct,
+        idTipoCupon:this.cuponOmni.tipoCupon,
+        usuarioReg:this.getUsuario(),
+        fecInicio:fecinicio,
+        fecFin: fecfin,
+        nroUso: 1,
+        nroCuponAGenerar: this.cuponOmni.nroCuponAGenerar,
+        montoMax:this.cuponOmni.montoMax,
+        anulado:0,
+        compraMin:this.cuponOmni.compraMin,
+        estado:0,
+        cantidadProductUso:1,
+        validaDelivery:0,
+        fecReg:fecRegistro,
+        fecActualizacion:'',
+        usuarioActualizacion:'',
+        cantidadRedimido:0,
+        alianza: this.cuponOmni.alianza.toUpperCase(),
+        canalDetalle:this.CartaFinal,
+        procesoId: this.VisCodProceso,
+        cabeceraId:this.VisCodCupon
+      }
+    }
+
+    else if (this.selectionTypeCupon == '4' && tipo == 2) {
+      this.cuponOmni2 = {
+        nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
+        nombreCupon:this.cuponOmni.codigo.toUpperCase(),
+        activoCompraMin: 1,
+        codMarca:  this.empresaService.getEmpresaSeleccionada().idEmpresa.toString(),
+        monto: this.cuponOmni.percentdsct,
+        idTipoCupon:this.cuponOmni.tipoCupon,
+        usuarioReg:this.getUsuario(),
+        fecInicio:fecinicio,
+        fecFin: fecfin,
+        nroUso: this.cuponOmni.nroUso,
+        montoMax:this.cuponOmni.montoMax,
+        anulado:0,
+        compraMin:this.cuponOmni.compraMin,
+        estado:0,
+        cantidadProductUso:1,
+        validaDelivery:0,
+        fecReg:fecRegistro,
+        fecActualizacion:'',
+        usuarioActualizacion:'',
+        cantidadRedimido:0,
+        alianza: this.cuponOmni.alianza.toUpperCase(),
+        canalDetalle:this.CartaFinal,
+        procesoId: this.VisCodProceso,
+        cabeceraId:this.VisCodCupon
+      }
+    }
+
+    else if (this.selectionTypeCupon == '5' && tipo == 1) {
+      this.cuponOmni2 = {
+        nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
+        activoCompraMin: 1,
+        codMarca:  this.empresaService.getEmpresaSeleccionada().idEmpresa.toString(),
+        monto: this.cuponOmni.percentdsct,
+        idTipoCupon:this.cuponOmni.tipoCupon,
+        usuarioReg:this.getUsuario(),
+        fecInicio:fecinicio,
+        fecFin: fecfin,
+        nroUso: 1,
+        nroCuponAGenerar: this.cuponOmni.nroCuponAGenerar,
+        anulado:0,
+        montoMax:this.cuponOmni.montoMax,
+        compraMin:this.cuponOmni.compraMin,
+        estado:0,
+        cantidadProductUso:1,
+        validaDelivery:0,
+        fecReg:fecRegistro,
+        fecActualizacion:'',
+        usuarioActualizacion:'',
+        cantidadRedimido:0,
+        alianza: this.cuponOmni.alianza.toUpperCase(),
+        canalDetalle:this.CartaFinaltipos,
+        procesoId: this.VisCodProceso,
+        cabeceraId:this.VisCodCupon
+      }
+    }
+
+    else if (this.selectionTypeCupon == '5' && tipo == 2) {
+      this.cuponOmni2 = {
+        nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
+        nombreCupon:this.cuponOmni.codigo.toUpperCase(),
+        activoCompraMin: 1,
+        codMarca:  this.empresaService.getEmpresaSeleccionada().idEmpresa.toString(),
+        monto: this.cuponOmni.percentdsct,
+        idTipoCupon:this.cuponOmni.tipoCupon,
+        usuarioReg:this.getUsuario(),
+        fecInicio:fecinicio,
+        fecFin: fecfin,
+        nroUso: this.cuponOmni.nroUso,
+        anulado:0,
+        montoMax:this.cuponOmni.montoMax,
+        compraMin:this.cuponOmni.compraMin,
+        estado:0,
+        cantidadProductUso:1,
+        validaDelivery:0,
+        fecReg:fecRegistro,
+        fecActualizacion:'',
+        usuarioActualizacion:'',
+        cantidadRedimido:0,
+        alianza: this.cuponOmni.alianza.toUpperCase(),
+        canalDetalle:this.CartaFinaltipos,
+        procesoId: this.VisCodProceso,
+        cabeceraId:this.VisCodCupon
+      }
+    }
+
+    else if (this.selectionTypeCupon == '6' && tipo == 1) {
+      this.cuponOmni2 = {
+        nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
+        activoCompraMin: 1,
+        codMarca:  this.empresaService.getEmpresaSeleccionada().idEmpresa.toString(),
+        monto: this.cuponOmni.percentdsct,
+        idTipoCupon:this.cuponOmni.tipoCupon,
+        usuarioReg:this.getUsuario(),
+        fecInicio:fecinicio,
+        fecFin: fecfin,
+        nroUso: 1,
+        nroCuponAGenerar: this.cuponOmni.nroCuponAGenerar,
+        montoMax:this.cuponOmni.montoMax,
+        anulado:0,
+        compraMin:this.cuponOmni.compraMin,
+        estado:0,
+        cantidadProductUso:1,
+        validaDelivery:EXternoV,
+        fecReg:fecRegistro,
+        fecActualizacion:'',
+        usuarioActualizacion:'',
+        cantidadRedimido:0,
+        alianza: this.cuponOmni.alianza.toUpperCase(),
+        canalDetalle:this.CartaFinaltipos,
+        procesoId: this.VisCodProceso,
+        cabeceraId:this.VisCodCupon
+      }
+    }
+
+    else if (this.selectionTypeCupon == '6' && tipo == 2) {
+      this.cuponOmni2 = {
+        nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
+        nombreCupon:this.cuponOmni.codigo.toUpperCase(),
+        activoCompraMin: 1,
+        codMarca:  this.empresaService.getEmpresaSeleccionada().idEmpresa.toString(),
+        monto: this.cuponOmni.percentdsct,
+        idTipoCupon:this.cuponOmni.tipoCupon,
+        usuarioReg:this.getUsuario(),
+        fecInicio:fecinicio,
+        fecFin: fecfin,
+        nroUso: this.cuponOmni.nroUso,
+        montoMax:this.cuponOmni.montoMax,
+        anulado:0,
+        compraMin:this.cuponOmni.compraMin,
+        estado:0,
+        cantidadProductUso:1,
+        validaDelivery:EXternoV,
+        fecReg:fecRegistro,
+        fecActualizacion:'',
+        usuarioActualizacion:'',
+        cantidadRedimido:0,
+        alianza: this.cuponOmni.alianza.toUpperCase(),
+        canalDetalle:this.CartaFinaltipos,
+        procesoId: this.VisCodProceso,
+        cabeceraId:this.VisCodCupon
+      }
+    }
+
+    else if (this.selectionTypeCupon == '8' && tipo == 1) {
+      this.cuponOmni2 = {
+        nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
+        activoCompraMin: 1,
+        codMarca:  this.empresaService.getEmpresaSeleccionada().idEmpresa.toString(),
+        monto: this.cuponOmni.monto,
+        idTipoCupon:this.cuponOmni.tipoCupon,
+        usuarioReg:this.getUsuario(),
+        fecInicio:fecinicio,
+        fecFin: fecfin,
+        nroUso: 1,
+        anulado:0,
+        montoMax:this.cuponOmni.montoMax,
+        compraMin:this.cuponOmni.compraMin,
+        estado:0,
+        cantidadProductUso:1,
+        validaDelivery:0,
+        fecReg:fecRegistro,
+        fecActualizacion:'',
+        usuarioActualizacion:'',
+        cantidadRedimido:0,
+        alianza: this.cuponOmni.alianza.toUpperCase(),
+        nroCuponAGenerar: this.cuponOmni.nroCuponAGenerar,
+        canalDetalle:this.CartaFinal,
+        procesoId: this.VisCodProceso,
+        cabeceraId:this.VisCodCupon
+      }
+    }
+
+    else if (this.selectionTypeCupon == '8' && tipo == 2) {
+      
+      this.cuponOmni2 = {
+        nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
+        nombreCupon:this.cuponOmni.codigo.toUpperCase(),
+        activoCompraMin: 1,
+        codMarca:  this.empresaService.getEmpresaSeleccionada().idEmpresa.toString(),
+        monto: this.cuponOmni.monto,
+        idTipoCupon:this.cuponOmni.tipoCupon,
+        usuarioReg:this.getUsuario(),
+        fecInicio:fecinicio,
+        fecFin: fecfin,
+        nroUso: this.cuponOmni.nroUso,
+        anulado:0,
+        montoMax:this.cuponOmni.montoMax,
+        compraMin:this.cuponOmni.compraMin,
+        estado:0,
+        cantidadProductUso:1,
+        validaDelivery:0,
+        fecReg:fecRegistro,
+        fecActualizacion:'',
+        usuarioActualizacion:'',
+        cantidadRedimido:0,
+        alianza: this.cuponOmni.alianza.toUpperCase(),          
+        canalDetalle:this.CartaFinal,
+        procesoId: this.VisCodProceso,
+        cabeceraId:this.VisCodCupon
+      }
+    }
+
+    if(this.cuponOmni.nroCuponAGenerar > 0){
+>>>>>>> 0504a37578c4c309aada388f857881ee93f39123
       var sumaCant = this.cuponOmni.nroCuponAGenerar * this.CartaFinal.length;
 
       if (sumaCant < 1000001) {
@@ -3143,8 +4082,124 @@ export class CuponOmnicanalComponent implements OnInit {
       `${this.urlLista}/ValidaCupones?Nombre=` + this.cuponOmni.nombreCampanha;
     this.ajaxQueryPostSQL1(ruta);
 
+<<<<<<< HEAD
     if (this.Cantidad > 0) {
       console.log('Ya existe una campaña con este nombre');
+=======
+    else if (this.cuponOmni.tipoCupon == 2 && this.selectCountTimes == '2') { 
+      if(!this.cuponOmni.nroCuponAGenerar && this.cuponOmni.nroCuponAGenerar == 0){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.nroUso && this.cuponOmni.nroUso <= 0 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.codigo && this.cuponOmni.codigo == "" ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.compraMin && this.cuponOmni.compraMin == 0  && this.cuponOmni.activoCompraMin == 1){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(this.CartaFinal.length == 0 ){ console.error('Debe ingresar productos a la carta'); validation = false;}
+      if(!this.cuponOmni.montoMax && this.cuponOmni.montoMax == 0 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.percentdsct && this.cuponOmni.percentdsct == 0 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(this.cuponOmni.percentdsct > 100){ console.error('Monto debe ser menor a 100'); validation = false;}
+    }
+
+    else if (this.cuponOmni.tipoCupon == 3 && this.selectCountTimes == '1') {
+      if(!this.cuponOmni.nroCuponAGenerar && this.cuponOmni.nroCuponAGenerar > 1 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.compraMin && this.cuponOmni.compraMin == 0  && this.cuponOmni.activoCompraMin == 1){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(this.CartaFinal.length == 0 ){ console.error('Debe ingresar productos a la carta'); validation = false;}
+      if(!this.cuponOmni.montoMax && this.cuponOmni.montoMax == 0 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.percentdsct && this.cuponOmni.percentdsct == 0 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(this.cuponOmni.percentdsct > 100){ console.error('Monto debe ser menor a 100'); validation = false;}
+    }
+
+    else if (this.cuponOmni.tipoCupon == 3 && this.selectCountTimes == '2') {
+      if(!this.cuponOmni.nroCuponAGenerar && this.cuponOmni.nroCuponAGenerar == 0){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.nroUso && this.cuponOmni.nroUso <= 0 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.codigo && this.cuponOmni.codigo == "" ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.compraMin && this.cuponOmni.compraMin == 0 && this.cuponOmni.activoCompraMin == 1){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(this.CartaFinal.length == 0 ){ console.error('Debe ingresar productos a la carta'); validation = false;}
+      if(!this.cuponOmni.montoMax && this.cuponOmni.montoMax == 0 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.percentdsct && this.cuponOmni.percentdsct == 0 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(this.cuponOmni.percentdsct > 100){ console.error('Monto debe ser menor a 100'); validation = false;}
+    }
+
+    else if (this.cuponOmni.tipoCupon == 4 && this.selectCountTimes == '1') {
+      if(!this.cuponOmni.nroCuponAGenerar && this.cuponOmni.nroCuponAGenerar > 1 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.compraMin && this.cuponOmni.compraMin == 0  && this.cuponOmni.activoCompraMin == 1){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(this.CartaFinal.length == 0 ){ console.error('Debe ingresar productos a la carta'); validation = false;}
+      if(!this.cuponOmni.percentdsct && this.cuponOmni.percentdsct == 0 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}    
+    }
+
+    else if (this.cuponOmni.tipoCupon == 4 && this.selectCountTimes == '2') {      
+      if(!this.cuponOmni.nroCuponAGenerar && this.cuponOmni.nroCuponAGenerar == 0){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.nroUso && this.cuponOmni.nroUso <= 0 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.codigo && this.cuponOmni.codigo == "" ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.compraMin && this.cuponOmni.compraMin == 0  && this.cuponOmni.activoCompraMin == 1){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(this.CartaFinal.length == 0 ){ console.error('Debe ingresar productos a la carta'); validation = false;}
+      if(!this.cuponOmni.percentdsct && this.cuponOmni.percentdsct == 0 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}      
+    }
+
+    else if (this.cuponOmni.tipoCupon == 5 && this.selectCountTimes == '1') {
+      if(!this.cuponOmni.nroCuponAGenerar && this.cuponOmni.nroCuponAGenerar > 1 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.compraMin && this.cuponOmni.compraMin == 0 && this.cuponOmni.activoCompraMin == 1){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.percentdsct && this.cuponOmni.percentdsct == 0 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      let minimo:number =  Number(this.cuponOmni.compraMin);
+      let monto:number= Number(this.cuponOmni.percentdsct);      
+      if(minimo<monto && this.cuponOmni.activoCompraMin == 1){ console.error('Compra Minima debe ser mayor a Monto de descuento'); validation = false;}
+    }
+
+    else if (this.cuponOmni.tipoCupon == 5 && this.selectCountTimes == '2') {
+      if(!this.cuponOmni.nroCuponAGenerar && this.cuponOmni.nroCuponAGenerar == 0){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.nroUso && this.cuponOmni.nroUso <= 0 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.codigo && this.cuponOmni.codigo == "" ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.compraMin && this.cuponOmni.compraMin == 0 && this.cuponOmni.activoCompraMin == 1){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.percentdsct && this.cuponOmni.percentdsct == 0 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      let minimo:number =  Number(this.cuponOmni.compraMin);
+      let monto:number= Number(this.cuponOmni.percentdsct);      
+      if(minimo<monto && this.cuponOmni.activoCompraMin == 1){ console.error('Compra Minima debe ser mayor a Monto de descuento'); validation = false;}
+    }
+
+    else if (this.cuponOmni.tipoCupon == 6 && this.selectCountTimes == '1') {
+      if(!this.cuponOmni.nroCuponAGenerar && this.cuponOmni.nroCuponAGenerar > 1 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.compraMin && this.cuponOmni.compraMin == 0 && this.cuponOmni.activoCompraMin == 1){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.montoMax && this.cuponOmni.montoMax == 0 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.percentdsct && this.cuponOmni.percentdsct == 0 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}  
+      if(this.cuponOmni.percentdsct > 100){ console.error('Monto debe ser menor a 100'); validation = false;}
+    }
+
+    else if (this.cuponOmni.tipoCupon == 6 && this.selectCountTimes == '2') {
+      if(!this.cuponOmni.nroCuponAGenerar && this.cuponOmni.nroCuponAGenerar == 0){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.nroUso && this.cuponOmni.nroUso <= 0 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.codigo && this.cuponOmni.codigo == "" ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.compraMin && this.cuponOmni.compraMin == 0 && this.cuponOmni.activoCompraMin == 1){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      
+      if(!this.cuponOmni.montoMax && this.cuponOmni.montoMax == 0 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(!this.cuponOmni.percentdsct && this.cuponOmni.percentdsct == 0 ){ console.error('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}      
+      if(this.cuponOmni.percentdsct > 100){ console.error('Monto debe ser menor a 100'); validation = false;}
+    }  
+    
+    else if (this.cuponOmni.tipoCupon == 8 && this.selectCountTimes == '1') {
+      if(this.cuponOmni.monto == 0 ){ console.log('Ingresar el Monto a Pagar'); validation = false;}
+      if(this.cuponOmni.compraMin == 0 && this.cuponOmni.activoCompraMin == 1){ console.log('Ingresar el monto minimo'); validation = false;}
+      if(this.CartaFinal.length == 0 ){ console.log('Debe ingresar productos a la carta');  validation = false;}
+      let minimo:number =  Number(this.cuponOmni.compraMin);
+      let monto:number= Number(this.cuponOmni.monto);      
+      if(minimo > monto && this.cuponOmni.activoCompraMin == 1){ console.log('Compra Minima debe ser menor a Monto'); validation = false;} 
+      else {console.log("valores: ", minimo + ">" + monto)}
+    }
+
+    else if (this.cuponOmni.tipoCupon == 8 && this.selectCountTimes == '2') {
+      if(this.cuponOmni.nroCuponAGenerar == 0){ console.log('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(this.cuponOmni.nroUso <= 1 ){ console.log('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(this.cuponOmni.codigo == "" ){ console.log('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(this.cuponOmni.monto == 0 ){ console.log('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(this.cuponOmni.compraMin == 0 && this.cuponOmni.activoCompraMin == 1 ){ console.log('Ingresar el numero de Cupon a Generar Mayor a 1'); validation = false;}
+      if(this.CartaFinal.length == 0 ){ console.log('Debe ingresar productos a la carta'); validation = false;}
+      let minimo:number =  Number(this.cuponOmni.compraMin);
+      let monto:number= Number(this.cuponOmni.monto);      
+      if(minimo > monto && this.cuponOmni.activoCompraMin == 1){ console.log('Compra Minima debe ser menor a Monto'); validation = false;}
+    }
+
+    var ruta = `${this.urlLista}/ValidaCupones?Nombre=`+this.cuponOmni.nombreCampanha
+    this.ajaxQueryPostSQL1(ruta)
+
+    if(this.Cantidad > 0){ 
+      console.log("Ya existe una campaña con este nombre"); 
+>>>>>>> 0504a37578c4c309aada388f857881ee93f39123
       validation = false;
       
       this.dataCupones.registrarLog(
@@ -3409,6 +4464,7 @@ export class CuponOmnicanalComponent implements OnInit {
         montodescuento = '';
       }
 
+<<<<<<< HEAD
       const ruta2 =
         `${this.urlLista}/CrearCampanha2?cdNombreCampanha=` +
         this.cuponOmni.nombreCampanha.toUpperCase() +
@@ -3459,6 +4515,37 @@ export class CuponOmnicanalComponent implements OnInit {
         this.SeleccionOrigen +
         `&aliados=` +
         this.SeleccionAliados;
+=======
+      else if (this.cuponOmni.tipoCupon == 8 && tipo == 1) {
+        cuponesagenerar = '=' + this.cuponOmni.nroCuponAGenerar;
+        nuevoprecio = '=' + this.cuponOmni.monto;
+        fgminimocompra = '=' + this.cuponOmni.activoCompraMin;
+        montominimo = '=' + this.cuponOmni.compraMin;
+        maximouso = '';
+        codigo = '';
+        montomaximodescuento = '';
+        porcentajedescuento = '';
+        descuentodelivery = '';
+        montodescuento = '';
+      }
+  
+      else if (this.cuponOmni.tipoCupon == 8 && tipo == 2) {
+        cuponesagenerar = '=' + this.cuponOmni.nroCuponAGenerar;
+        nuevoprecio = '=' + this.cuponOmni.monto;
+        fgminimocompra = '=' + this.cuponOmni.activoCompraMin;
+        montominimo = '=' + this.cuponOmni.compraMin;
+        maximouso = '=' + this.cuponOmni.nroUso;
+        codigo = '=' + this.cuponOmni.codigo.toUpperCase();
+        montomaximodescuento = '';
+        porcentajedescuento = '';
+        descuentodelivery = '';
+        montodescuento = '';
+      }
+
+      var ruta = `${this.urlLista}/CrearCampanha2?cdNombreCampanha=`+this.cuponOmni.nombreCampanha.toUpperCase()+`&idTipoCupon=`+this.cuponOmni.tipoCupon+`&dtFecInicio=`+fecinicio+`&dtFecFin=`+fecfin+`&cdAlianza=`+this.cuponOmni.alianza.toUpperCase()+`&cdCantidad=`+cantidad+`&idMarca=` + this.empresaService.getEmpresaSeleccionada().idEmpresa.toString()+`&Bucket`+`&Web=`+web+`&Salon=`+salon+`&Call=`+call+`&cdtipo=`+tipo +`&cdcuponesgenerar`+cuponesagenerar +`&cdmaximouso`+ maximouso +`&cdcodigo`+ codigo +`&cdnuevoprecio`+ nuevoprecio +`&fgMinimoCompra`+ fgminimocompra +`&cdmontoMinimo`+ montominimo +`&cdmontoMaximoDescuento`+ montomaximodescuento +`&cdPorcentajeDescuento`+ porcentajedescuento +`&cdDescuentoDelivery`+ descuentodelivery +`&cdMontoDescuento`+montodescuento+`&nrodoc=`+this.authService.usuario.user.nrodoc+`&origen=`+this.SeleccionOrigen+`&aliados=`+this.SeleccionAliados;
+      
+      this.ajaxQueryPostsql(ruta, this.dataCupones.token);
+>>>>>>> 0504a37578c4c309aada388f857881ee93f39123
 
       this.ajaxQueryPostsql(ruta2, this.dataCupones.token);
 
@@ -4005,6 +5092,360 @@ export class CuponOmnicanalComponent implements OnInit {
           cabeceraId:this.CodigoCabecera
         }
       }
+<<<<<<< HEAD
+=======
+  
+      else if (this.selectionTypeCupon == '2' && tipo == 1) {
+        console.log(this.productosCartaConsolidado);
+        this.cuponOmni2 = {
+          nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),          
+          activoCompraMin: 1,
+          codMarca:  this.empresaService.getEmpresaSeleccionada().idEmpresa.toString(),
+          monto: this.cuponOmni.percentdsct,
+          idTipoCupon:this.cuponOmni.tipoCupon,
+          usuarioReg:this.getUsuario(),
+          fecInicio:fecinicio,
+          fecFin: fecfin,
+          nroUso: 1,
+          nroCuponAGenerar: this.cuponOmni.nroCuponAGenerar,
+          montoMax:this.cuponOmni.montoMax,
+          anulado:0,
+          compraMin:this.cuponOmni.compraMin,
+          estado:0,
+          cantidadProductUso:1,
+          validaDelivery:EXternoV,
+          fecReg:fecRegistro,
+          fecActualizacion:'',
+          usuarioActualizacion:'',
+          cantidadRedimido:0,
+          alianza: this.cuponOmni.alianza.toUpperCase(),
+          canalDetalle:this.CartaFinal,
+          procesoId:1,
+          cabeceraId:this.CodigoCabecera
+        }
+      }
+  
+      else if (this.selectionTypeCupon == '2' && tipo == 2) { 
+        this.cuponOmni2 = {
+          nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
+          nombreCupon:this.cuponOmni.codigo.toUpperCase(),
+          activoCompraMin: 1,
+          codMarca:  this.empresaService.getEmpresaSeleccionada().idEmpresa.toString(),
+          monto: this.cuponOmni.percentdsct,
+          idTipoCupon:this.cuponOmni.tipoCupon,
+          usuarioReg:this.getUsuario(),
+          fecInicio:fecinicio,
+          fecFin: fecfin,
+          nroUso: this.cuponOmni.nroUso,
+          montoMax:this.cuponOmni.montoMax,
+          anulado:0,
+          compraMin:this.cuponOmni.compraMin,
+          estado:0,
+          cantidadProductUso:1,
+          validaDelivery:EXternoV,
+          fecReg:fecRegistro,
+          fecActualizacion:'',
+          usuarioActualizacion:'',
+          cantidadRedimido:0,
+          alianza: this.cuponOmni.alianza.toUpperCase(),
+          canalDetalle:this.CartaFinal,
+          procesoId:1,
+          cabeceraId:this.CodigoCabecera
+        }
+      }
+  
+      else if (this.selectionTypeCupon == '3' && tipo == 1) {
+        this.cuponOmni2 = {
+          nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
+          activoCompraMin: 1,
+          codMarca:  this.empresaService.getEmpresaSeleccionada().idEmpresa.toString(),
+          monto: this.cuponOmni.percentdsct,
+          idTipoCupon:this.cuponOmni.tipoCupon,
+          usuarioReg:this.getUsuario(),
+          fecInicio:fecinicio,
+          fecFin: fecfin,
+          nroUso: 1,
+          nroCuponAGenerar: this.cuponOmni.nroCuponAGenerar,
+          montoMax:this.cuponOmni.montoMax,
+          anulado:0,
+          compraMin:this.cuponOmni.compraMin,
+          estado:0,
+          cantidadProductUso:1,
+          validaDelivery:0,
+          fecReg:fecRegistro,
+          fecActualizacion:'',
+          usuarioActualizacion:'',
+          cantidadRedimido:0,
+          alianza: this.cuponOmni.alianza.toUpperCase(),
+          canalDetalle:this.CartaFinal,
+          procesoId:1,
+          cabeceraId:this.CodigoCabecera
+        }
+      }
+  
+      else if (this.selectionTypeCupon == '3' && tipo == 2) {
+        this.cuponOmni2 = {
+          nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
+          nombreCupon:this.cuponOmni.codigo.toUpperCase(),
+          activoCompraMin: 1,
+          codMarca:  this.empresaService.getEmpresaSeleccionada().idEmpresa.toString(),
+          monto: this.cuponOmni.percentdsct,
+          idTipoCupon:this.cuponOmni.tipoCupon,
+          usuarioReg:this.getUsuario(),
+          fecInicio:fecinicio,
+          fecFin: fecfin,
+          nroUso: this.cuponOmni.nroUso,
+          montoMax:this.cuponOmni.montoMax,
+          anulado:0,
+          compraMin:this.cuponOmni.compraMin,
+          estado:0,
+          cantidadProductUso:1,
+          validaDelivery:0,
+          fecReg:fecRegistro,
+          fecActualizacion:'',
+          usuarioActualizacion:'',
+          cantidadRedimido:0,
+          alianza: this.cuponOmni.alianza.toUpperCase(),
+          canalDetalle:this.CartaFinal,
+          procesoId:1,
+          cabeceraId:this.CodigoCabecera
+        }
+      }
+  
+      else if (this.selectionTypeCupon == '4' && tipo == 1) {
+        this.cuponOmni2 = {
+          nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
+          activoCompraMin: 1,
+          codMarca:  this.empresaService.getEmpresaSeleccionada().idEmpresa.toString(),
+          monto: this.cuponOmni.percentdsct,
+          idTipoCupon:this.cuponOmni.tipoCupon,
+          usuarioReg:this.getUsuario(),
+          fecInicio:fecinicio,
+          fecFin: fecfin,
+          nroUso: 1,
+          nroCuponAGenerar: this.cuponOmni.nroCuponAGenerar,
+          montoMax:this.cuponOmni.montoMax,
+          anulado:0,
+          compraMin:this.cuponOmni.compraMin,
+          estado:0,
+          cantidadProductUso:1,
+          validaDelivery:0,
+          fecReg:fecRegistro,
+          fecActualizacion:'',
+          usuarioActualizacion:'',
+          cantidadRedimido:0,
+          alianza: this.cuponOmni.alianza.toUpperCase(),
+          canalDetalle:this.CartaFinal,
+          procesoId:1,
+          cabeceraId:this.CodigoCabecera
+        }
+      }
+  
+      else if (this.selectionTypeCupon == '4' && tipo == 2) {
+        this.cuponOmni2 = {
+          nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
+          nombreCupon:this.cuponOmni.codigo.toUpperCase(),
+          activoCompraMin: 1,
+          codMarca:  this.empresaService.getEmpresaSeleccionada().idEmpresa.toString(),
+          monto: this.cuponOmni.percentdsct,
+          idTipoCupon:this.cuponOmni.tipoCupon,
+          usuarioReg:this.getUsuario(),
+          fecInicio:fecinicio,
+          fecFin: fecfin,
+          nroUso: this.cuponOmni.nroUso,
+          montoMax:this.cuponOmni.montoMax,
+          anulado:0,
+          compraMin:this.cuponOmni.compraMin,
+          estado:0,
+          cantidadProductUso:1,
+          validaDelivery:0,
+          fecReg:fecRegistro,
+          fecActualizacion:'',
+          usuarioActualizacion:'',
+          cantidadRedimido:0,
+          alianza: this.cuponOmni.alianza.toUpperCase(),
+          canalDetalle:this.CartaFinal,
+          procesoId:1,
+          cabeceraId:this.CodigoCabecera
+        }
+      }
+  
+      else if (this.selectionTypeCupon == '5' && tipo == 1) {
+        this.cuponOmni2 = {
+          nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
+          activoCompraMin: 1,
+          codMarca:  this.empresaService.getEmpresaSeleccionada().idEmpresa.toString(),
+          monto: this.cuponOmni.percentdsct,
+          idTipoCupon:this.cuponOmni.tipoCupon,
+          usuarioReg:this.getUsuario(),
+          fecInicio:fecinicio,
+          fecFin: fecfin,
+          nroUso: 1,
+          nroCuponAGenerar: this.cuponOmni.nroCuponAGenerar,
+          anulado:0,
+          montoMax:this.cuponOmni.montoMax,
+          compraMin:this.cuponOmni.compraMin,
+          estado:0,
+          cantidadProductUso:1,
+          validaDelivery:0,
+          fecReg:fecRegistro,
+          fecActualizacion:'',
+          usuarioActualizacion:'',
+          cantidadRedimido:0,
+          alianza: this.cuponOmni.alianza.toUpperCase(),
+          canalDetalle:this.CartaFinaltipos,
+          procesoId:1,
+          cabeceraId:this.CodigoCabecera
+        }
+      }
+  
+      else if (this.selectionTypeCupon == '5' && tipo == 2) {
+        this.cuponOmni2 = {
+          nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
+          nombreCupon:this.cuponOmni.codigo.toUpperCase(),
+          activoCompraMin: 1,
+          codMarca:  this.empresaService.getEmpresaSeleccionada().idEmpresa.toString(),
+          monto: this.cuponOmni.percentdsct,
+          idTipoCupon:this.cuponOmni.tipoCupon,
+          usuarioReg:this.getUsuario(),
+          fecInicio:fecinicio,
+          fecFin: fecfin,
+          nroUso: this.cuponOmni.nroUso,
+          anulado:0,
+          montoMax:this.cuponOmni.montoMax,
+          compraMin:this.cuponOmni.compraMin,
+          estado:0,
+          cantidadProductUso:1,
+          validaDelivery:0,
+          fecReg:fecRegistro,
+          fecActualizacion:'',
+          usuarioActualizacion:'',
+          cantidadRedimido:0,
+          alianza: this.cuponOmni.alianza.toUpperCase(),
+          canalDetalle:this.CartaFinaltipos,
+          procesoId:1,
+          cabeceraId:this.CodigoCabecera
+        }
+      }
+  
+      else if (this.selectionTypeCupon == '6' && tipo == 1) {
+        this.cuponOmni2 = {
+          nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
+          activoCompraMin: 1,
+          codMarca:  this.empresaService.getEmpresaSeleccionada().idEmpresa.toString(),
+          monto: this.cuponOmni.percentdsct,
+          idTipoCupon:this.cuponOmni.tipoCupon,
+          usuarioReg:this.getUsuario(),
+          fecInicio:fecinicio,
+          fecFin: fecfin,
+          nroUso: 1,
+          nroCuponAGenerar: this.cuponOmni.nroCuponAGenerar,
+          montoMax:this.cuponOmni.montoMax,
+          anulado:0,
+          compraMin:this.cuponOmni.compraMin,
+          estado:0,
+          cantidadProductUso:1,
+          validaDelivery:EXternoV,
+          fecReg:fecRegistro,
+          fecActualizacion:'',
+          usuarioActualizacion:'',
+          cantidadRedimido:0,
+          alianza: this.cuponOmni.alianza.toUpperCase(),
+          canalDetalle:this.CartaFinaltipos,
+          procesoId:1,
+          cabeceraId:this.CodigoCabecera
+        }
+      }
+  
+      else if (this.selectionTypeCupon == '6' && tipo == 2) {
+        this.cuponOmni2 = {
+          nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
+          nombreCupon:this.cuponOmni.codigo.toUpperCase(),
+          activoCompraMin: 1,
+          codMarca:  this.empresaService.getEmpresaSeleccionada().idEmpresa.toString(),
+          monto: this.cuponOmni.percentdsct,
+          idTipoCupon:this.cuponOmni.tipoCupon,
+          usuarioReg:this.getUsuario(),
+          fecInicio:fecinicio,
+          fecFin: fecfin,
+          nroUso: this.cuponOmni.nroUso,
+          montoMax:this.cuponOmni.montoMax,
+          anulado:0,
+          compraMin:this.cuponOmni.compraMin,
+          estado:0,
+          cantidadProductUso:1,
+          validaDelivery:EXternoV,
+          fecReg:fecRegistro,
+          fecActualizacion:'',
+          usuarioActualizacion:'',
+          cantidadRedimido:0,
+          alianza: this.cuponOmni.alianza.toUpperCase(),
+          canalDetalle:this.CartaFinaltipos,
+          procesoId:1,
+          cabeceraId:this.CodigoCabecera
+        }
+      }
+
+      else if (this.selectionTypeCupon == '8' && tipo == 1) {
+        this.cuponOmni2 = {
+          nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
+          activoCompraMin: 1,
+          codMarca:  this.empresaService.getEmpresaSeleccionada().idEmpresa.toString(),
+          monto: this.cuponOmni.monto,
+          idTipoCupon:this.cuponOmni.tipoCupon,
+          usuarioReg:this.getUsuario(),
+          fecInicio:fecinicio,
+          fecFin: fecfin,
+          nroUso: 1,
+          anulado:0,
+          montoMax:this.cuponOmni.montoMax,
+          compraMin:this.cuponOmni.compraMin,
+          estado:0,
+          cantidadProductUso:1,
+          validaDelivery:0,
+          fecReg:fecRegistro,
+          fecActualizacion:'',
+          usuarioActualizacion:'',
+          cantidadRedimido:0,
+          alianza: this.cuponOmni.alianza.toUpperCase(),
+          nroCuponAGenerar: this.cuponOmni.nroCuponAGenerar,
+          canalDetalle:this.CartaFinal,
+          procesoId:1,
+          cabeceraId:this.CodigoCabecera
+        }
+      }
+  
+      else if (this.selectionTypeCupon == '8' && tipo == 2) {
+        
+        this.cuponOmni2 = {
+          nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
+          nombreCupon:this.cuponOmni.codigo.toUpperCase(),
+          activoCompraMin: 1,
+          codMarca:  this.empresaService.getEmpresaSeleccionada().idEmpresa.toString(),
+          monto: this.cuponOmni.monto,
+          idTipoCupon:this.cuponOmni.tipoCupon,
+          usuarioReg:this.getUsuario(),
+          fecInicio:fecinicio,
+          fecFin: fecfin,
+          nroUso: this.cuponOmni.nroUso,
+          anulado:0,
+          montoMax:this.cuponOmni.montoMax,
+          compraMin:this.cuponOmni.compraMin,
+          estado:0,
+          cantidadProductUso:1,
+          validaDelivery:0,
+          fecReg:fecRegistro,
+          fecActualizacion:'',
+          usuarioActualizacion:'',
+          cantidadRedimido:0,
+          alianza: this.cuponOmni.alianza.toUpperCase(),          
+          canalDetalle:this.CartaFinal,
+          procesoId:1,
+          cabeceraId:this.CodigoCabecera
+        }
+      }
+
+>>>>>>> 0504a37578c4c309aada388f857881ee93f39123
       this.cuponOmni3 = {
         codMarca: this.empresaService
           .getEmpresaSeleccionada()
@@ -4653,6 +6094,7 @@ export class CuponOmnicanalComponent implements OnInit {
         } else {
           tipoN = 'Unico';
         }
+<<<<<<< HEAD
 
         if (tipocuponn == '1') {
           tipocupon = 'Cupón Precio Fijo a un producto';
@@ -4668,6 +6110,21 @@ export class CuponOmnicanalComponent implements OnInit {
           tipocupon = 'Cupón descuento % al monto total';
         } else if (tipocuponn == '7') {
           tipocupon = 'Cupón 2 X 1';
+=======
+    
+        if(tipocuponn == '1'){
+          tipocupon = "Cupón Precio Fijo a un producto";
+        } else if(tipocuponn == '2'){
+          tipocupon = "Cupón descuento % a un producto";
+        } else if(tipocuponn == '3'){
+          tipocupon = "Cupón descuento % a varios producto";
+        } else if(tipocuponn == '4'){
+          tipocupon = "Cupón descuento Recargo de Delivery";
+        } else if(tipocuponn == '5'){
+          tipocupon = "Cupón descuento monto fijo al  total";
+        } else if(tipocuponn == '6'){
+          tipocupon = "Cupón descuento % al monto total";
+>>>>>>> 0504a37578c4c309aada388f857881ee93f39123
         } else if(tipocuponn == '8'){
           tipocupon = "Cupón Precio Fijo a varios producto";
         }
@@ -4961,6 +6418,7 @@ export class CuponOmnicanalComponent implements OnInit {
             if (result.isConfirmed) {
               this.router.navigateByUrl('/home/cupon/lista-cupon-omnicanal');
             }
+<<<<<<< HEAD
           });
         } else if (this.selectionTypeCupon == '3' && tipo == 1) {
           var sthtml =
@@ -5013,10 +6471,40 @@ export class CuponOmnicanalComponent implements OnInit {
             focusConfirm: false,
             confirmButtonText: 'Aceptar',
             confirmButtonAriaLabel: 'Aceptar',
+=======
+          })
+        }  
+        
+        else if (this.selectionTypeCupon == '8' && tipo == 1) {
+
+          var sthtml ='<label style="color:cornflowerblue;">Nombre de Campaña: </label>'+ this.cuponOmni.nombreCampanha + '</br>' +
+          '<label style="color:cornflowerblue;">Tipo Cupon: </label>'+ tipocupon + '</br>' +
+          '<label style="color:cornflowerblue;">Fecha Inicio: </label>'+ fecinicio + '</br>' +
+          '<label style="color:cornflowerblue;">Fecha Fin: </label>'+ fecfin + '</br>' +
+          '<label style="color:cornflowerblue;">Tipo: </label>'+ tipoN + '</br>' +
+          '<label style="color:cornflowerblue;">Cantidad de Cupones a generar: </label>'+ this.cuponOmni.nroCuponAGenerar + '</br>' +
+          '<label style="color:cornflowerblue;">Nuevo precio del producto: </label>'+ this.cuponOmni.monto + '</br>' +
+          '<label style="color:cornflowerblue;">Mínimo de compra: </label>'+ minimo + '</br>' +
+          '<label style="color:cornflowerblue;">Canales: </label>'+canales+'</br>' +
+          '<label style="color:cornflowerblue;">Productos: </label></br>';
+          for (let index = 0; index < this.productosCartaConsolidado.length; index++) {
+            sthtml += this.productosCartaConsolidado[index].producto  + ' - ' + this.productosCartaConsolidado[index].codigo + '</br>'
+          }
+
+          Swal.fire({
+            title: '<strong style="color:lightgreen;">Registro Exitoso</strong>',
+            icon: 'success',
+            html:sthtml,
+            showCloseButton: true,
+            focusConfirm: false,
+            confirmButtonText:'Aceptar',
+            confirmButtonAriaLabel: 'Aceptar'          
+>>>>>>> 0504a37578c4c309aada388f857881ee93f39123
           }).then((result) => {
             if (result.isConfirmed) {
               this.router.navigateByUrl('/home/cupon/lista-cupon-omnicanal');
             }
+<<<<<<< HEAD
           });
         } else if (this.selectionTypeCupon == '3' && tipo == 2) {
           var sthtml =
@@ -5582,6 +7070,44 @@ export class CuponOmnicanalComponent implements OnInit {
               }
             })
         }
+=======
+          })
+        }
+        else if (this.selectionTypeCupon == '8' && tipo == 2) {
+
+          var sthtml ='<label style="color:cornflowerblue;">Nombre de Campaña: </label>'+ this.cuponOmni.nombreCampanha + '</br>' +
+          '<label style="color:cornflowerblue;">Tipo Cupon: </label>'+ tipocupon + '</br>' +
+          '<label style="color:cornflowerblue;">Fecha Inicio: </label>'+ fecinicio + '</br>' +
+          '<label style="color:cornflowerblue;">Fecha Fin: </label>'+ fecfin + '</br>' +
+          '<label style="color:cornflowerblue;">Tipo: </label>'+ tipoN + '</br>' +
+          '<label style="color:cornflowerblue;">Cantidad de Cupones a generar: </label>'+ this.cuponOmni.nroCuponAGenerar + '</br>' +
+          '<label style="color:cornflowerblue;">Cantidad máxima de uso: </label>'+ this.cuponOmni.nroUso + '</br>' +
+          '<label style="color:cornflowerblue;">Código de cupón: </label>'+ this.cuponOmni.codigo + '</br>' +
+          '<label style="color:cornflowerblue;">Monto a pagar: </label>'+ this.cuponOmni.monto + '</br>' +
+          '<label style="color:cornflowerblue;">Mínimo de compra: </label>'+ minimo + '</br>' +
+          '<label style="color:cornflowerblue;">Canales: </label>'+canales+'</br>' +
+          '<label style="color:cornflowerblue;">Productos: </label></br>';
+          for (let index = 0; index < this.productosCartaConsolidado.length; index++) {
+            sthtml += this.productosCartaConsolidado[index].producto  + ' - ' + this.productosCartaConsolidado[index].codigo + '</br>'
+          }
+
+
+          Swal.fire({
+            title: '<strong style="color:lightgreen;">Registro Exitoso</strong>',
+            icon: 'success',
+            html:sthtml,
+            showCloseButton: true,
+            focusConfirm: false,
+            confirmButtonText:'Aceptar',
+            confirmButtonAriaLabel: 'Aceptar'          
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.router.navigateByUrl('/home/cupon/lista-cupon-omnicanal');
+            }
+          })
+        }
+      
+>>>>>>> 0504a37578c4c309aada388f857881ee93f39123
       },
       error: (error) => {
         console.log(error);
