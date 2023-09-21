@@ -5,17 +5,24 @@
 <div class="card col">
     <div class="p-mb-2">
         <div class="p-fluid p-formgrid p-grid">
-            <div class="p-field p-col-4">
-                 <label for="lblNombreTienda">Nombre Tienda:</label>
+            <div class="p-field p-col-3">
+                 <label for="lblNombreTienda">Texto a buscar:</label>
                  <input type="text" pInputText [(ngModel)]="Tienda" (keyup)="onKDownTienda($event)"/>                 
-             </div>     
+             </div>      
             <div class="p-field p-col-3 p-mt-4">
                 <button pButton pRipple pTooltip="Selecciona una cuenta" tooltipPosition="bottom" (click)="editarCuentaBancaria()" label="Editar cuenta bancaria" icon="pi pi-user-edit"
                         class="p-button-primary p-mr-2" ></button>
             </div>
+            <div class="p-field p-col-3 p-mt-4">
+              <button pButton pRipple pTooltip="Selecciona una cuenta" tooltipPosition="bottom" (click)="nuevaCuentaBancaria()" label="Nueva cuenta bancaria" icon="pi pi-user-edit"
+                      class="p-button-primary p-mr-2" ></button>
+            </div>
+            <div class="p-field p-col-1 p-mt-4">
+              <button pButton pRipple pTooltip="Anular" tooltipPosition="bottom" label="Anular" icon="pi pi-minus-circle" class="p-button-danger p-mr-2" (click)="anularSolicitud()"></button>
+            </div>
         </div>
     </div>
-    <p-table #dt [value]="CuentasTiendas" [responsive]="true" [rows]="15" [paginator]="true" [rowHover]="true"
+    <p-table #dt [value]="CuentasBancaria" [responsive]="true" [rows]="15" [paginator]="true" [rowHover]="true"
           [globalFilterFields]="['CodTienda,CodBanco,CodMoneda,CodNumero']" [scrollable]="true" scrollHeight="40vh"
           selectionMode="single" [(selection)]="CuentaSelected" styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
           currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
@@ -23,16 +30,15 @@
 
         <ng-template pTemplate="header">
           <tr>
-            <th>Marca</th>
-            <th pSortableColumn="campanha">Tienda<p-sortIcon field="Tienda"></p-sortIcon>
+            <th pSortableColumn="empresa">Marca<p-sortIcon field="empresa"></p-sortIcon>
             </th>
-            <th pSortableColumn="tipo">Banco<p-sortIcon field="tipo"></p-sortIcon>
+            <th pSortableColumn="banco">Banco<p-sortIcon field="banco"></p-sortIcon>
             </th>
-            <th pSortableColumn="nombreCupon">Moneda<p-sortIcon field="nombreCupon"></p-sortIcon>
+            <th pSortableColumn="moneda">Moneda<p-sortIcon field="moneda"></p-sortIcon>
             </th>
-            <th pSortableColumn="desde">Numero Cuenta<p-sortIcon field="desde"></p-sortIcon>
+            <th>Numero Cuenta
             </th>            
-            <th pSortableColumn="creacion">Cuenta Contable<p-sortIcon field="desde"></p-sortIcon>
+            <th>Cuenta Contable
             </th>
           </tr>
         </ng-template>
@@ -40,12 +46,11 @@
         <ng-template pTemplate="body" let-CuentaBancaria>
           
           <tr [pSelectableRow]="CuentaBancaria">
-            <td>{{CuentaBancaria.marcaDesc}}</td>
-            <td>{{CuentaBancaria.tienda}}</td>
+            <td>{{CuentaBancaria.empresa}}</td>
             <td>{{CuentaBancaria.banco}}</td>
             <td>{{CuentaBancaria.moneda}}</td>
             <td>{{CuentaBancaria.numero}}</td>
-            <td>{{CuentaBancaria.cuenta}}</td>
+            <td>{{CuentaBancaria.cuentaContable}}</td>
           </tr> 
 
         </ng-template>
