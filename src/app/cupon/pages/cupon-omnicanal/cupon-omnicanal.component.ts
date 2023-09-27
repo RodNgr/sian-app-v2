@@ -1009,6 +1009,7 @@ export class CuponOmnicanalComponent implements OnInit {
 
     this.cartaService.getCampana(id).subscribe(
       (cuponOmni) => {
+        //console.log(cuponOmni);
         this.cuponOmniD = cuponOmni;
 
         this.CantidadInter = this.cuponOmniD[0].nroCuponAGenerar;
@@ -1581,7 +1582,7 @@ export class CuponOmnicanalComponent implements OnInit {
           this.cuponOmniD[0].tipo == 2
         ) {
           //this.cuponOmni.nroCuponAGenerar = this.cuponOmniD[0].nroCuponAGenerar;
-          this.cuponOmni.nroCuponAGenerar = 0;
+          this.cuponOmni.nroCuponAGenerar = 1;
           this.cuponOmni.nroUso = this.cuponOmniD[0].maximouso;
           this.cuponOmni.codigo = this.cuponOmniD[0].codigo;
         } else if (
@@ -3158,14 +3159,12 @@ export class CuponOmnicanalComponent implements OnInit {
       );
 
       if (this.Bucket != 'ok') {
-        Swal.fire(
-          'Validar Información.',
-          'El codigo ya ha sido registrado',
-          'error'
-        );
-        this.spinner.hide();
+        validation = false; this.spinner.hide();
+        console.log("El codigo ya ha sido registrado.", this.Bucket);
       }
     }
+
+    console.log("validation", validation);
     if (validation) {
       var cantidad: number;
       var cantidadn: number;
@@ -3922,7 +3921,7 @@ export class CuponOmnicanalComponent implements OnInit {
           usuarioReg: this.getUsuario(),
           fecInicio: fecinicio,
           fecFin: fecfin,
-          nroUso: this.cuponOmni.nroUso,
+          nroUso: 1,
           montoMax: 0.00,
           anulado: 0,
           compraMin: 0.0,
@@ -4482,6 +4481,12 @@ export class CuponOmnicanalComponent implements OnInit {
           'El nombre de campaña ya ha sido registrado',
           'error'
         );
+      } else if (this.Bucket != 'ok') {
+        Swal.fire(
+          'Validar Información.',
+          'El codigo ya ha sido registrado',
+          'error'
+        );
       } else {
         Swal.fire(
           'Validar Información.',
@@ -4579,7 +4584,9 @@ export class CuponOmnicanalComponent implements OnInit {
     token: string,
     data: any
   ): any {
-    let t_result!: any;
+
+    this.Bucket = "error";
+
     $.ajax({
       url: urlEndPoint,
       async: false,
@@ -4595,12 +4602,24 @@ export class CuponOmnicanalComponent implements OnInit {
         Authorization: 'Bearer ' + token,
       },
       success: (result) => {
-        this.Bucket = result;
+        console.log("resul", result);
+        //this.Bucket = result;
       },
       error: (error) => {
-        console.log(error);
-        this.spinner.hide();
+        //this.Bucket = "error";
+        if(error){
+          console.log(error.status);
+          console.log(error.responseText);
+          if(error.status == 200){
+            this.Bucket = error.responseText;
+          }else{
+            this.Bucket = error.responseText;
+          }
+        }
       },
+      complete: () => {
+        this.spinner.hide();
+      }
     });
   }
 
