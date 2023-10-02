@@ -17,6 +17,7 @@ import * as $ from 'jquery';
 import { environment } from 'src/environments/environment';
 import { CuponesOmnicanalService } from '../../services/cupones-omnicanal.service';
 import { DatePipe } from '@angular/common';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-cupon-omnicanal',
@@ -3208,6 +3209,13 @@ export class CuponOmnicanalComponent implements OnInit {
       fecinicio = this.FormatoFecha(this.cuponOmni.fecInicio); //.getFullYear() + "-" + (this.cuponOmni.fecInicio.getMonth()+1).toString().padStart(2, '0') + "-" + (this.cuponOmni.fecInicio.getDate()).toString().padStart(2, '0') + " " + this.cuponOmni.fecInicio.getHours() + ":" + this.cuponOmni.fecInicio.getMinutes() + ":" + this.cuponOmni.fecInicio.getSeconds();
       fecfin = this.FormatoFecha(this.cuponOmni.fecFin); //.getFullYear() + "-" + (this.cuponOmni.fecFin.getMonth()+1).toString().padStart(2, '0') + "-" + (this.cuponOmni.fecFin.getDate()).toString().padStart(2, '0') + " " + this.cuponOmni.fecFin.getHours() + ":" + this.cuponOmni.fecFin.getMinutes() + ":" + this.cuponOmni.fecFin.getSeconds();
       var tipo = parseInt(this.selectCountTimes);
+
+      if(this.cuponOmni.activoCompraMin == 1){
+        this.cuponOmni.compraMin == this.cuponOmni.compraMin;
+      } else {
+        this.cuponOmni.activoCompraMin = 0;
+        this.cuponOmni.compraMin = 0;
+      }
       // cdtipo, cdcuponesgenerar, cdmaximouso, cdcodigo, cdnuevoprecio, fgMinimoCompra, cdmontoMinimo, cdmontoMaximoDescuento, cdPorcentajeDescuento, cdDescuentoDelivery, cdMontoDescuento
       var cuponesagenerar,
         maximouso,
@@ -3528,13 +3536,16 @@ export class CuponOmnicanalComponent implements OnInit {
           cantidad: 1,
           nombreProducto: 'SN',
         });
-      }
-      var compraminima;
+      }      
       if(this.cuponOmni.activoCompraMin == 1){
-        compraminima == this.cuponOmni.compraMin ;
+        
+        this.cuponOmni.compraMin == this.cuponOmni.compraMin;
       } else {
-        compraminima == 0;
+        this.cuponOmni.activoCompraMin = 0;
+        this.cuponOmni.compraMin == this.cuponOmni.compraMin-this.cuponOmni.compraMin;
       }
+
+
       if (this.selectionTypeCupon == '1' && tipo == 1) {
         this.cuponOmni2 = {
           nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
@@ -3550,7 +3561,7 @@ export class CuponOmnicanalComponent implements OnInit {
           nroUso: 1,
           anulado: 0,
           montoMax: this.cuponOmni.montoMax,
-          compraMin: compraminima,
+          compraMin: this.cuponOmni.compraMin,
           estado: 0,
           cantidadProductUso: 1,
           validaDelivery: 0,
@@ -3580,7 +3591,7 @@ export class CuponOmnicanalComponent implements OnInit {
           nroUso: this.cuponOmni.nroUso,
           anulado: 0,
           montoMax: this.cuponOmni.montoMax,
-          compraMin: compraminima,
+          compraMin: this.cuponOmni.compraMin,
           estado: 0,
           cantidadProductUso: 1,
           validaDelivery: 0,
@@ -3610,7 +3621,7 @@ export class CuponOmnicanalComponent implements OnInit {
           nroCuponAGenerar: this.cuponOmni.nroCuponAGenerar,
           montoMax: this.cuponOmni.montoMax,
           anulado: 0,
-          compraMin: compraminima,
+          compraMin: this.cuponOmni.compraMin,
           estado: 0,
           cantidadProductUso: 1,
           validaDelivery: EXternoV,
@@ -3639,7 +3650,7 @@ export class CuponOmnicanalComponent implements OnInit {
           nroUso: this.cuponOmni.nroUso,
           montoMax: this.cuponOmni.montoMax,
           anulado: 0,
-          compraMin: compraminima,
+          compraMin: this.cuponOmni.compraMin,
           estado: 0,
           cantidadProductUso: 1,
           validaDelivery: EXternoV,
@@ -3668,7 +3679,7 @@ export class CuponOmnicanalComponent implements OnInit {
           nroCuponAGenerar: this.cuponOmni.nroCuponAGenerar,
           montoMax: this.cuponOmni.montoMax,
           anulado: 0,
-          compraMin: compraminima,
+          compraMin: this.cuponOmni.compraMin,
           estado: 0,
           cantidadProductUso: 1,
           validaDelivery: 0,
@@ -3697,7 +3708,7 @@ export class CuponOmnicanalComponent implements OnInit {
           nroUso: this.cuponOmni.nroUso,
           montoMax: this.cuponOmni.montoMax,
           anulado: 0,
-          compraMin: compraminima,
+          compraMin: this.cuponOmni.compraMin,
           estado: 0,
           cantidadProductUso: 1,
           validaDelivery: 0,
@@ -3726,7 +3737,7 @@ export class CuponOmnicanalComponent implements OnInit {
           nroCuponAGenerar: this.cuponOmni.nroCuponAGenerar,
           montoMax: this.cuponOmni.montoMax,
           anulado: 0,
-          compraMin: compraminima,
+          compraMin: this.cuponOmni.compraMin,
           estado: 0,
           cantidadProductUso: 1,
           validaDelivery: 0,
@@ -3755,7 +3766,7 @@ export class CuponOmnicanalComponent implements OnInit {
           nroUso: this.cuponOmni.nroUso,
           montoMax: this.cuponOmni.montoMax,
           anulado: 0,
-          compraMin: compraminima,
+          compraMin: this.cuponOmni.compraMin,
           estado: 0,
           cantidadProductUso: 1,
           validaDelivery: 0,
