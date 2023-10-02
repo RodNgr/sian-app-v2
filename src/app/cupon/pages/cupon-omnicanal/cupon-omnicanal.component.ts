@@ -662,8 +662,8 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showCantidadMaximaUso = false;
       this.showCodigo = false;
       this.showMontoPagar = false;
-      this.showNecesitaMontoMinimo = false;
-      this.showMontoMinimo = true;
+      this.showNecesitaMontoMinimo = true;
+      this.showMontoMinimo = false;
       this.showCanales = true;
       this.showTableProducts = true;
       this.showMaximoDescuento = false;
@@ -681,8 +681,8 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showCantidadMaximaUso = true;
       this.showCodigo = true;
       this.showMontoPagar = false;
-      this.showNecesitaMontoMinimo = false;
-      this.showMontoMinimo = true;
+      this.showNecesitaMontoMinimo = true;
+      this.showMontoMinimo = false;
       this.showCanales = true;
       this.showTableProducts = true;
       this.showMaximoDescuento = false;
@@ -3529,11 +3529,16 @@ export class CuponOmnicanalComponent implements OnInit {
           nombreProducto: 'SN',
         });
       }
-
+      var compraminima;
+      if(this.cuponOmni.activoCompraMin == 1){
+        compraminima == this.cuponOmni.compraMin ;
+      } else {
+        compraminima == 0;
+      }
       if (this.selectionTypeCupon == '1' && tipo == 1) {
         this.cuponOmni2 = {
           nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
-          activoCompraMin: 1,
+          activoCompraMin: this.cuponOmni.activoCompraMin,
           codMarca: this.empresaService
             .getEmpresaSeleccionada()
             .idEmpresa.toString(),
@@ -3545,7 +3550,7 @@ export class CuponOmnicanalComponent implements OnInit {
           nroUso: 1,
           anulado: 0,
           montoMax: this.cuponOmni.montoMax,
-          compraMin: this.cuponOmni.compraMin,
+          compraMin: compraminima,
           estado: 0,
           cantidadProductUso: 1,
           validaDelivery: 0,
@@ -3563,7 +3568,7 @@ export class CuponOmnicanalComponent implements OnInit {
         this.cuponOmni2 = {
           nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
           nombreCupon: this.cuponOmni.codigo.toUpperCase(),
-          activoCompraMin: 1,
+          activoCompraMin: this.cuponOmni.activoCompraMin,
           codMarca: this.empresaService
             .getEmpresaSeleccionada()
             .idEmpresa.toString(),
@@ -3575,7 +3580,7 @@ export class CuponOmnicanalComponent implements OnInit {
           nroUso: this.cuponOmni.nroUso,
           anulado: 0,
           montoMax: this.cuponOmni.montoMax,
-          compraMin: this.cuponOmni.compraMin,
+          compraMin: compraminima,
           estado: 0,
           cantidadProductUso: 1,
           validaDelivery: 0,
@@ -3592,7 +3597,7 @@ export class CuponOmnicanalComponent implements OnInit {
         console.log(this.productosCartaConsolidado);
         this.cuponOmni2 = {
           nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
-          activoCompraMin: 1,
+          activoCompraMin: this.cuponOmni.activoCompraMin,
           codMarca: this.empresaService
             .getEmpresaSeleccionada()
             .idEmpresa.toString(),
@@ -3605,7 +3610,7 @@ export class CuponOmnicanalComponent implements OnInit {
           nroCuponAGenerar: this.cuponOmni.nroCuponAGenerar,
           montoMax: this.cuponOmni.montoMax,
           anulado: 0,
-          compraMin: this.cuponOmni.compraMin,
+          compraMin: compraminima,
           estado: 0,
           cantidadProductUso: 1,
           validaDelivery: EXternoV,
@@ -3622,7 +3627,7 @@ export class CuponOmnicanalComponent implements OnInit {
         this.cuponOmni2 = {
           nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
           nombreCupon: this.cuponOmni.codigo.toUpperCase(),
-          activoCompraMin: 1,
+          activoCompraMin: this.cuponOmni.activoCompraMin,
           codMarca: this.empresaService
             .getEmpresaSeleccionada()
             .idEmpresa.toString(),
@@ -3634,7 +3639,7 @@ export class CuponOmnicanalComponent implements OnInit {
           nroUso: this.cuponOmni.nroUso,
           montoMax: this.cuponOmni.montoMax,
           anulado: 0,
-          compraMin: this.cuponOmni.compraMin,
+          compraMin: compraminima,
           estado: 0,
           cantidadProductUso: 1,
           validaDelivery: EXternoV,
@@ -3650,7 +3655,7 @@ export class CuponOmnicanalComponent implements OnInit {
       } else if (this.selectionTypeCupon == '3' && tipo == 1) {
         this.cuponOmni2 = {
           nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
-          activoCompraMin: 1,
+          activoCompraMin: this.cuponOmni.activoCompraMin,
           codMarca: this.empresaService
             .getEmpresaSeleccionada()
             .idEmpresa.toString(),
@@ -3663,7 +3668,7 @@ export class CuponOmnicanalComponent implements OnInit {
           nroCuponAGenerar: this.cuponOmni.nroCuponAGenerar,
           montoMax: this.cuponOmni.montoMax,
           anulado: 0,
-          compraMin: this.cuponOmni.compraMin,
+          compraMin: compraminima,
           estado: 0,
           cantidadProductUso: 1,
           validaDelivery: 0,
@@ -3680,7 +3685,7 @@ export class CuponOmnicanalComponent implements OnInit {
         this.cuponOmni2 = {
           nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
           nombreCupon: this.cuponOmni.codigo.toUpperCase(),
-          activoCompraMin: 1,
+          activoCompraMin: this.cuponOmni.activoCompraMin,
           codMarca: this.empresaService
             .getEmpresaSeleccionada()
             .idEmpresa.toString(),
@@ -3692,7 +3697,7 @@ export class CuponOmnicanalComponent implements OnInit {
           nroUso: this.cuponOmni.nroUso,
           montoMax: this.cuponOmni.montoMax,
           anulado: 0,
-          compraMin: this.cuponOmni.compraMin,
+          compraMin: compraminima,
           estado: 0,
           cantidadProductUso: 1,
           validaDelivery: 0,
@@ -3708,7 +3713,7 @@ export class CuponOmnicanalComponent implements OnInit {
       } else if (this.selectionTypeCupon == '4' && tipo == 1) {
         this.cuponOmni2 = {
           nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
-          activoCompraMin: 1,
+          activoCompraMin: this.cuponOmni.activoCompraMin,
           codMarca: this.empresaService
             .getEmpresaSeleccionada()
             .idEmpresa.toString(),
@@ -3721,7 +3726,7 @@ export class CuponOmnicanalComponent implements OnInit {
           nroCuponAGenerar: this.cuponOmni.nroCuponAGenerar,
           montoMax: this.cuponOmni.montoMax,
           anulado: 0,
-          compraMin: this.cuponOmni.compraMin,
+          compraMin: compraminima,
           estado: 0,
           cantidadProductUso: 1,
           validaDelivery: 0,
@@ -3738,7 +3743,7 @@ export class CuponOmnicanalComponent implements OnInit {
         this.cuponOmni2 = {
           nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
           nombreCupon: this.cuponOmni.codigo.toUpperCase(),
-          activoCompraMin: 1,
+          activoCompraMin: this.cuponOmni.activoCompraMin,
           codMarca: this.empresaService
             .getEmpresaSeleccionada()
             .idEmpresa.toString(),
@@ -3750,7 +3755,7 @@ export class CuponOmnicanalComponent implements OnInit {
           nroUso: this.cuponOmni.nroUso,
           montoMax: this.cuponOmni.montoMax,
           anulado: 0,
-          compraMin: this.cuponOmni.compraMin,
+          compraMin: compraminima,
           estado: 0,
           cantidadProductUso: 1,
           validaDelivery: 0,
