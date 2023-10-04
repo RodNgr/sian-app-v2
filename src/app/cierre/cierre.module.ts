@@ -16,8 +16,14 @@ import { DepositoSinEfectivoComponent } from './pages/deposito-sin-efectivo/depo
 import { OtrasCuadraturasComponent } from './pages/otras-cuadraturas/otras-cuadraturas.component';
 import { CambioCuentaComponent } from './pages/cambio-cuenta/cambio-cuenta.component';
 import { EditarCuentaBancariaComponent } from './components/editar-cuenta-bancaria/editar-cuenta-bancaria.component';
+<<<<<<< HEAD
 import { CuentaBancariaComponent } from './pages/cuenta-bancaria/cuenta-bancaria.component';
 import { EditarCuentaComponent } from './components/editar-cuenta/editar-cuenta.component';
+=======
+import { TiendaDepositoComponent } from './pages/tienda-deposito/tienda-deposito.component';
+
+
+>>>>>>> a26d767 (feat: modulo actualizar tienda deposito)
 @NgModule({
   declarations: [
     CierreDiaComponent,
@@ -28,9 +34,15 @@ import { EditarCuentaComponent } from './components/editar-cuenta/editar-cuenta.
     DepositoSinEfectivoComponent,
     OtrasCuadraturasComponent,
     CambioCuentaComponent,
+<<<<<<< HEAD
     EditarCuentaBancariaComponent,
     CuentaBancariaComponent,
     EditarCuentaComponent
+=======
+    CambioCuentaComponent,
+    EditarCuentaBancariaComponent,
+    TiendaDepositoComponent,
+>>>>>>> a26d767 (feat: modulo actualizar tienda deposito)
   ],
   imports: [
     CommonModule,

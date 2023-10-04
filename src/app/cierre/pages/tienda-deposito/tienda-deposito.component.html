@@ -1,0 +1,52 @@
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-spin"
+  [fullScreen]="true"
+>
+  <p style="color: white">Cargando...</p>
+</ngx-spinner>
+
+<div class="card col">
+  <div class="p-fluid p-grid">
+    <div class="p-fluid p-grid p-col-12" style="height: 50px !important">
+      <div class="p-fluid f-formgrid p-grid p-col-12">
+        <div class="p-field p-col-4 p-lg-4 p-md-4 p-sm-4">
+          <label for="idFamilia">Tienda:</label>
+          <p-dropdown
+            #dpTienda
+            [options]="tiendaList"
+            [autofocus]="true"
+            [(ngModel)]="tiendaSeleccionada"
+            optionLabel="nombreTienda"
+            [filter]="true"
+            filterBy="nombreTienda"
+            placeholder="Seleccione una Tienda"
+            name="idFamilia"
+            #tienda="ngModel"
+            (onChange)="changeTienda()"
+          ></p-dropdown>
+        </div>
+        <div class="p-field p-col-4 p-lg-4 p-md-4 p-sm-4">
+          <label for="">Estado:</label>
+          <p-dropdown
+            id="cmbTipoDeposito"
+            [options]="tipoUsaDeposito"
+            [(ngModel)]="depositoSeleccionado"
+            name="code"
+            optionLabel="nombre"
+            (onChange)="onChangeTipoDeposito()"
+            placeholder="Seleccione un tipo de depósito"
+          ></p-dropdown>
+        </div>
+        <div
+          class="p-field p-col-4 p-lg-4 p-md-4 p-sm-4"
+          style="margin-top: 1.75rem"
+        >
+          <p-button (click)="onEditar()" label="Editar"></p-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

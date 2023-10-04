@@ -57,4 +57,8 @@ export class ReporteService {
     return this.http.post<any>(`${this.urlEndPoint}/api/reporte/tablero-control`, dto);
   }
 
+  updateTiendaDeposito(idEmpresa: number, payload): Observable<any> {
+    return this.http.put<any>(`${this.urlEndPoint}/api/reporte/tienda/${idEmpresa}`, payload);
+  }
+
 }
