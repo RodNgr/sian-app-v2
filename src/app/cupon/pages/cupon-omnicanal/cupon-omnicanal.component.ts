@@ -3536,15 +3536,7 @@ export class CuponOmnicanalComponent implements OnInit {
           cantidad: 1,
           nombreProducto: 'SN',
         });
-      }      
-      if(this.cuponOmni.activoCompraMin == 1){
-        
-        this.cuponOmni.compraMin == this.cuponOmni.compraMin;
-      } else {
-        this.cuponOmni.activoCompraMin = 0;
-        this.cuponOmni.compraMin == this.cuponOmni.compraMin-this.cuponOmni.compraMin;
       }
-
 
       if (this.selectionTypeCupon == '1' && tipo == 1) {
         this.cuponOmni2 = {
@@ -3722,6 +3714,14 @@ export class CuponOmnicanalComponent implements OnInit {
           cabeceraId: this.CodigoCabecera,
         };
       } else if (this.selectionTypeCupon == '4' && tipo == 1) {
+        if(this.cuponOmni.activoCompraMin == 1){
+        
+          this.cuponOmni.compraMin == this.cuponOmni.compraMin;
+        } else {
+          this.cuponOmni.activoCompraMin = 0;
+          this.cuponOmni.compraMin == this.cuponOmni.compraMin-this.cuponOmni.compraMin;
+        }
+
         this.cuponOmni2 = {
           nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
           activoCompraMin: this.cuponOmni.activoCompraMin,
@@ -3751,6 +3751,13 @@ export class CuponOmnicanalComponent implements OnInit {
           cabeceraId: this.CodigoCabecera,
         };
       } else if (this.selectionTypeCupon == '4' && tipo == 2) {
+        if(this.cuponOmni.activoCompraMin == 1){
+        
+          this.cuponOmni.compraMin == this.cuponOmni.compraMin;
+        } else {
+          this.cuponOmni.activoCompraMin = 0;
+          this.cuponOmni.compraMin == this.cuponOmni.compraMin-this.cuponOmni.compraMin;
+        }
         this.cuponOmni2 = {
           nombreCampanha: this.cuponOmni.nombreCampanha.toUpperCase(),
           nombreCupon: this.cuponOmni.codigo.toUpperCase(),
