@@ -19,6 +19,7 @@
           <div class="p-field p-col-3 p-md-3 p-sm-3">
             <label for="nombreCampanha">Campaña (*):</label>
             <input required  maxlength="100"
+              (keyup)="caracteres_especiales($event)"
               [ngClass] = "{' ng-invalid ng-dirty ': nombreCampanha.invalid && (nombreCampanha.dirty || nombreCampanha.touched)}" 
               id="nombreCampanha" type="text" pInputText #nombreCampanha="ngModel" [(ngModel)]="cuponOmni.nombreCampanha" name="nombreCampanha"
               [disabled]="type === 'V'">
@@ -50,6 +51,7 @@
             <label for="alianza">Alianzas (*):</label>
             <input required 
               [ngClass] = "{' ng-invalid ng-dirty ': alianza.invalid && (alianza.dirty || alianza.touched)}" 
+              (keyup)="caracteres_especiales_alianza($event)"
               id="alianza" type="text" pInputText #alianza="ngModel" [(ngModel)]="cuponOmni.alianza" name="alianza"
               [disabled]="type === 'V'">
             <small class="p-error" *ngIf="alianza.invalid && (alianza.dirty || alianza.touched)">Campo Obligatorio</small>
@@ -118,7 +120,9 @@
 
                 <div class="p-field p-col-6 p-md-6 p-sm-6" *ngIf="showCodigo">
                   <label for="codigo">Código:</label>
-                  <input id="codigo" pTooltip="Al crear el código tener en cuenta :
+                  <input id="codigo" 
+                  (keyup)="caracteres_validacion_codigo($event)"
+                  pTooltip="Al crear el código tener en cuenta :
                   *mínimo 4 carácteres
                   *máximo 30 carácteres
                   *sin espacios
@@ -139,7 +143,8 @@
 
                 <div class="p-field p-col-6 p-md-6 p-sm-6" *ngIf="showNecesitaMontoMinimo" style="padding-left: 25px;">
                   <label  for="ny"> Necesita monto mínimo de compra</label>
-                  <p-checkbox name="compraminima" value="1" inputId="ny"  (onChange)="valueMinimo($event)" [(ngModel)]="isChecked" [disabled]="type === 'V'" [binary]="true"></p-checkbox>
+                  <p-checkbox name="compraminima" value="1" inputId="ny"  (onChange)="valueMinimo($event)" [(ngModel)]="isChecked" [disabled]="type === 'V'"></p-checkbox>
+                  <!-- p-checkbox name="compraminima" value="1" inputId="ny"  (onChange)="valueMinimo($event)" [(ngModel)]="isChecked" [disabled]="type === 'V'" [binary]="true"></p-checkbox -->
                 </div>
 
                 <div class="p-field p-col-6 p-md-6 p-sm-6" [hidden]="!showMontoMinimo">
