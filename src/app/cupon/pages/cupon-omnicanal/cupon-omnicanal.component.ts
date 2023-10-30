@@ -381,7 +381,6 @@ export class CuponOmnicanalComponent implements OnInit {
         this.cuponOmni.codigo.length > 3 &&
         this.cuponOmni.codigo.length < 31 &&
         this.cuponOmni.codigo.toUpperCase().search('Ñ') < 0 &&
-        this.cuponOmni.codigo.toUpperCase().search('O') < 0 &&
         this.cuponOmni.codigo.toUpperCase().search(' ') < 0
       ) {
         this.formatoCodigo = true;
@@ -438,6 +437,7 @@ export class CuponOmnicanalComponent implements OnInit {
       this.CartaWebSelected
     );
     this.CartaFinal.push(...productsToValidation);
+    this.CartaFinaltipos.push(...productsToValidation);
     this.CartaDetalleVista.push(...productsToValidation);
   }
 
@@ -456,6 +456,9 @@ export class CuponOmnicanalComponent implements OnInit {
     }
     this.productosCartaConsolidado.push(...this.CartaRcolasSelected);
     this.CartaFinal.push(
+      ...this.parseProductToValidate(CHANNEL, this.CartaRcolasSelected)
+    );
+    this.CartaFinaltipos.push(
       ...this.parseProductToValidate(CHANNEL, this.CartaRcolasSelected)
     );
     this.CartaDetalleVista.push(
@@ -489,6 +492,7 @@ export class CuponOmnicanalComponent implements OnInit {
       this.CartaCallSelected
     );
     this.CartaFinal.push(...productsToValidation);
+    this.CartaFinaltipos.push(...productsToValidation);
     this.CartaDetalleVista.push(...productsToValidation);
   }
 
@@ -518,6 +522,7 @@ export class CuponOmnicanalComponent implements OnInit {
       this.CartaSalonSelected
     );
     this.CartaFinal.push(...productsToValidation);
+    this.CartaFinaltipos.push(...productsToValidation);
     this.CartaDetalleVista.push(...productsToValidation);
   }
 
@@ -573,7 +578,8 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showVacio3 = false;
       this.showDelivery = false;
       this.showMontoDescuento = false;
-      this.showExento = true;
+      this.showExento = true; 
+      this.TextoSeleccionado  = "Productos Seleccionados";
     } else if (this.selectionTypeCupon == '1' && tipo == 2) {
       this.showCuponesGenerar = true;
       this.showCantidadMaximaUso = true;
@@ -592,6 +598,7 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showDelivery = false;
       this.showMontoDescuento = false;
       this.showExento = true;
+      this.TextoSeleccionado  = "Productos Seleccionados";
     } else if (this.selectionTypeCupon == '2' && tipo == 1) {
       this.showCuponesGenerar = true;
       this.showCantidadMaximaUso = false;
@@ -609,6 +616,7 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showDelivery = false;
       this.showMontoDescuento = false;
       this.showExento = false;
+      this.TextoSeleccionado  = "Productos Seleccionados";
     } else if (this.selectionTypeCupon == '2' && tipo == 2) {
       this.showCuponesGenerar = true;
       this.showCantidadMaximaUso = true;
@@ -625,6 +633,7 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showDelivery = false;
       this.showMontoDescuento = false;
       this.showExento = false;
+      this.TextoSeleccionado  = "Productos Seleccionados";
     } else if (this.selectionTypeCupon == '3' && tipo == 1) {
       this.showCuponesGenerar = true;
       this.showCantidadMaximaUso = false;
@@ -642,6 +651,7 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showDelivery = false;
       this.showMontoDescuento = false;
       this.showExento = true;
+      this.TextoSeleccionado  = "Productos Seleccionados";
     } else if (this.selectionTypeCupon == '3' && tipo == 2) {
       this.showCuponesGenerar = true;
       this.cuponOmni.nroCuponAGenerar = 1;
@@ -658,6 +668,7 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showDelivery = false;
       this.showMontoDescuento = false;
       this.showExento = true;
+      this.TextoSeleccionado  = "Productos Seleccionados";
     } else if (this.selectionTypeCupon == '4' && tipo == 1) {
       this.showCuponesGenerar = true;
       this.showCantidadMaximaUso = false;
@@ -676,6 +687,7 @@ export class CuponOmnicanalComponent implements OnInit {
       this.cuponOmni.percentdsct = 100;
       this.showMontoDescuento = false;
       this.showExento = true;
+      this.TextoSeleccionado  = "Productos Seleccionados";
     } else if (this.selectionTypeCupon == '4' && tipo == 2) {
       this.showCuponesGenerar = true;
       this.cuponOmni.nroCuponAGenerar = 1;
@@ -693,6 +705,7 @@ export class CuponOmnicanalComponent implements OnInit {
       this.cuponOmni.percentdsct = 100;
       this.showMontoDescuento = false;
       this.showExento = true;
+      this.TextoSeleccionado  = "Productos Seleccionados";
     } else if (this.selectionTypeCupon == '5' && tipo == 1) {
       this.showCuponesGenerar = true;
       this.showCantidadMaximaUso = false;
@@ -700,14 +713,15 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showMontoPagar = false;
       this.showNecesitaMontoMinimo = false;
       this.showMontoMinimo = true;
-      this.showCanales = false;
-      this.showTableProducts = false;
+      this.showCanales = true;
+      this.showTableProducts = true;
       this.showMaximoDescuento = false;
       this.shoPorcentajeDescuento = false;
       this.showVacio = true;
       this.showDelivery = false;
       this.showMontoDescuento = true;
       this.showExento = true;
+      this.TextoSeleccionado  = "Productos Excluidos";
     } else if (this.selectionTypeCupon == '5' && tipo == 2) {
       this.showCuponesGenerar = true;
       this.showCantidadMaximaUso = true;
@@ -716,14 +730,15 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showMontoPagar = false;
       this.showNecesitaMontoMinimo = false;
       this.showMontoMinimo = true;
-      this.showCanales = false;
-      this.showTableProducts = false;
+      this.showCanales = true;
+      this.showTableProducts = true;
       this.showMaximoDescuento = false;
       this.shoPorcentajeDescuento = false;
       this.showVacio = true;
       this.showDelivery = false;
       this.showMontoDescuento = true;
       this.showExento = true;
+      this.TextoSeleccionado  = "Productos Excluidos";
     } else if (this.selectionTypeCupon == '6' && tipo == 1) {
       this.showCuponesGenerar = true;
       this.showCantidadMaximaUso = false;
@@ -731,8 +746,8 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showMontoPagar = false;
       this.showNecesitaMontoMinimo = false;
       this.showMontoMinimo = true;
-      this.showCanales = false;
-      this.showTableProducts = false;
+      this.showCanales = true;
+      this.showTableProducts = true;
       this.showMaximoDescuento = true;
       this.shoPorcentajeDescuento = true;
       this.showVacio = false;
@@ -741,6 +756,7 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showDelivery = false;
       this.showMontoDescuento = false;
       this.showExento = false;
+      this.TextoSeleccionado  = "Productos Excluidos";
     } else if (this.selectionTypeCupon == '6' && tipo == 2) {
       this.showCuponesGenerar = true;
       this.showCantidadMaximaUso = true;
@@ -749,14 +765,15 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showMontoPagar = false;
       this.showNecesitaMontoMinimo = false;
       this.showMontoMinimo = true;
-      this.showCanales = false;
-      this.showTableProducts = false;
+      this.showCanales = true;
+      this.showTableProducts = true;
       this.showMaximoDescuento = true;
       this.shoPorcentajeDescuento = true;
       this.showVacio = false;
       this.showDelivery = false;
       this.showMontoDescuento = false;
       this.showExento = false;
+      this.TextoSeleccionado  = "Productos Excluidos";
     } else if (this.selectionTypeCupon == '7' && tipo == 1) {
       this.showCuponesGenerar = true;
       this.showCantidadMaximaUso = false;
@@ -774,6 +791,7 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showDelivery = false;
       this.showMontoDescuento = false;
       this.showExento = true;
+      this.TextoSeleccionado  = "Productos Seleccionados";
     } else if (this.selectionTypeCupon == '7' && tipo == 2) {
       this.showCuponesGenerar = true;
       this.cuponOmni.nroCuponAGenerar = 1;
@@ -790,6 +808,7 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showDelivery = false;
       this.showMontoDescuento = false;
       this.showExento = true;
+      this.TextoSeleccionado  = "Productos Seleccionados";
     } else if (this.selectionTypeCupon == '8' && tipo == 1) {
       this.showCuponesGenerar = true;
       this.showCantidadMaximaUso = false;
@@ -807,6 +826,7 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showDelivery = false;
       this.showMontoDescuento = false;
       this.showExento = true;
+      this.TextoSeleccionado  = "Productos Seleccionados";
     } else if (this.selectionTypeCupon == '8' && tipo == 2) {
       this.showCuponesGenerar = true;
       this.showCantidadMaximaUso = true;
@@ -825,6 +845,7 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showDelivery = false;
       this.showMontoDescuento = false;
       this.showExento = true;
+      this.TextoSeleccionado  = "Productos Seleccionados";
     }
   }
 
@@ -926,7 +947,7 @@ export class CuponOmnicanalComponent implements OnInit {
         codCodigo = 'Papa Johns';
         break;
       case 8:
-        codMarca = '22030';
+        codMarca = '22046';
         codCodigo = 'Dunkin Donuts';
         break;
     }
@@ -1003,6 +1024,7 @@ export class CuponOmnicanalComponent implements OnInit {
   public CantidadAntigua!: number;
   public CantidadAntigu2!: number;
   public CantidadInter!: number;
+  public TextoSeleccionado !: string;
   public CantidadInte2!: number;
 
   public getDetailsSelectCupon() {
@@ -1258,8 +1280,8 @@ export class CuponOmnicanalComponent implements OnInit {
           this.showMontoPagar = false;
           this.showNecesitaMontoMinimo = false;
           this.showMontoMinimo = true;
-          this.showCanales = false;
-          this.showTableProducts = false;
+          this.showCanales = true;
+          this.showTableProducts = true;
           this.showMaximoDescuento = false;
           this.shoPorcentajeDescuento = false;
           this.showVacio = true;
@@ -1281,8 +1303,8 @@ export class CuponOmnicanalComponent implements OnInit {
           this.showMontoPagar = false;
           this.showNecesitaMontoMinimo = false;
           this.showMontoMinimo = true;
-          this.showCanales = false;
-          this.showTableProducts = false;
+          this.showCanales = true;
+          this.showTableProducts = true;
           this.showMaximoDescuento = false;
           this.shoPorcentajeDescuento = false;
           this.showVacio = true;
@@ -1301,8 +1323,8 @@ export class CuponOmnicanalComponent implements OnInit {
           this.showMontoPagar = false;
           this.showNecesitaMontoMinimo = false;
           this.showMontoMinimo = true;
-          this.showCanales = false;
-          this.showTableProducts = false;
+          this.showCanales = true;
+          this.showTableProducts = true;
           this.showMaximoDescuento = true;
           this.shoPorcentajeDescuento = true;
           this.showVacio = false;
@@ -1324,8 +1346,8 @@ export class CuponOmnicanalComponent implements OnInit {
           this.showMontoPagar = false;
           this.showNecesitaMontoMinimo = false;
           this.showMontoMinimo = true;
-          this.showCanales = false;
-          this.showTableProducts = false;
+          this.showCanales = true;
+          this.showTableProducts = true;
           this.showMaximoDescuento = true;
           this.shoPorcentajeDescuento = true;
           this.showVacio = false;
@@ -2070,6 +2092,13 @@ export class CuponOmnicanalComponent implements OnInit {
         }
 
         this.CartaFinal.push({
+          canal: canal,
+          producto: this.detalles[index].nomProducto,
+          cantidad: this.cuponOmni.nroCuponAGenerar,
+          nombreProducto: this.detalles[index].codProducto,
+        });
+
+        this.CartaFinaltipos.push({
           canal: canal,
           producto: this.detalles[index].nomProducto,
           cantidad: this.cuponOmni.nroCuponAGenerar,
@@ -3210,12 +3239,6 @@ export class CuponOmnicanalComponent implements OnInit {
       fecfin = this.FormatoFecha(this.cuponOmni.fecFin); //.getFullYear() + "-" + (this.cuponOmni.fecFin.getMonth()+1).toString().padStart(2, '0') + "-" + (this.cuponOmni.fecFin.getDate()).toString().padStart(2, '0') + " " + this.cuponOmni.fecFin.getHours() + ":" + this.cuponOmni.fecFin.getMinutes() + ":" + this.cuponOmni.fecFin.getSeconds();
       var tipo = parseInt(this.selectCountTimes);
 
-      if(this.cuponOmni.activoCompraMin == 1){
-        this.cuponOmni.compraMin == this.cuponOmni.compraMin;
-      } else {
-        this.cuponOmni.activoCompraMin = 0;
-        this.cuponOmni.compraMin = 0;
-      }
       // cdtipo, cdcuponesgenerar, cdmaximouso, cdcodigo, cdnuevoprecio, fgMinimoCompra, cdmontoMinimo, cdmontoMaximoDescuento, cdPorcentajeDescuento, cdDescuentoDelivery, cdMontoDescuento
       var cuponesagenerar,
         maximouso,
@@ -3537,6 +3560,36 @@ export class CuponOmnicanalComponent implements OnInit {
           nombreProducto: 'SN',
         });
       }
+
+      if (this.detalles.length > 0) {
+        for (let index = 0; index < this.detalles.length; index++) {
+          var element = this.detalles[index].canal;
+          var canal = 0;
+          if (element == 'Web') {
+            canal = 2;
+          } else if (element == 'Call Center') {
+            canal = 1;
+          } else if (element == 'Salon') {
+            canal = 0;
+          } else {
+            canal = 2;
+          }
+  
+          this.CartaFinal.push({
+            canal: canal,
+            producto: this.detalles[index].nomProducto,
+            cantidad: this.cuponOmni.nroCuponAGenerar,
+            nombreProducto: this.detalles[index].codProducto,
+          });
+
+          this.CartaFinaltipos.push({
+            canal: canal,
+            producto: this.detalles[index].nomProducto,
+            cantidad: this.cuponOmni.nroCuponAGenerar,
+            nombreProducto: this.detalles[index].codProducto,
+          });
+        }
+      } 
 
       if (this.selectionTypeCupon == '1' && tipo == 1) {
         this.cuponOmni2 = {
@@ -5890,7 +5943,7 @@ export class CuponOmnicanalComponent implements OnInit {
     //console.log(newValue.substr(0, 1));
     this.inputValueValidacionCodigo = '';
     for (let i = 0; i < newValue.length; i++) {
-      if (/^[a-np-zA-Z0-9]*$/.test(newValue[i]) && i<30) {
+      if (/^[a-op-zA-Z0-9]*$/.test(newValue[i]) && i<30) {
         this.inputValueValidacionCodigo += newValue[i].toUpperCase();
       }
     }
