@@ -195,10 +195,6 @@ export class ListaBeneficioEmpleadoComponent implements OnInit {
     this.beneficioForm
       .get('codCargo')
       .setValue(this.cargoSeleccionado?.coPuesto);
-2
-    console.log('this.beneficioSelected?.sk?.split("#")[1]', this.beneficioSelected?.sk?.split('#')[1]);
-    console.log('this.cargoSeleccionado', this.cargoSeleccionado);
-    console.log('this.beneficioSelected', this.beneficioSelected);
 
     this.display = true;
   }

@@ -250,4 +250,32 @@ export class CuponesOmnicanalService {
       { headers: httpHeaders }
     ).toPromise();
   }
+
+  async createStores(body) {
+    const dataToken = await this.generateBenefitToken();
+    let Bearer: string = `Bearer ${dataToken.access_token}`;
+
+    const httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+    }).set('Authorization', Bearer);
+    return this.http.post<any>(
+      `${this.urlEndPointOmnicanal}/crearTiendaDescuento`,
+      { ...body },
+      { headers: httpHeaders }
+    ).toPromise();
+  }
+
+  async createHolidays(body) {
+    const dataToken = await this.generateBenefitToken();
+    let Bearer: string = `Bearer ${dataToken.access_token}`;
+
+    const httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+    }).set('Authorization', Bearer);
+    return this.http.post<any>(
+      `${this.urlEndPointOmnicanal}/crearFeriado`,
+      { ...body },
+      { headers: httpHeaders }
+    ).toPromise();
+  }
 }

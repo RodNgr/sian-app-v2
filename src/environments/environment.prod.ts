@@ -27,7 +27,7 @@ export const environment = {
   urlAmauta: 'https://api.dev.amauta.api-ngr.com',
 
   //DESARROLLO
-  // urlSecurity: 'http://vsrvprdweb01:9999',
+  // urlSecurity: 'http://vsrvdevapp07.ngr.com.pe:9999',
   // urlCupones: 'http://VSRVDEVAPP07.ngr.com.pe:9837',
   // urlInterfazProducto: 'http://VSRVDEVAPP07.ngr.com.pe:9838',
   // urlCuadratura: 'http://VSRVDEVAPP07.ngr.com.pe:9839',
@@ -46,9 +46,9 @@ export const environment = {
   // gtype: 'client_credentials',
   // clientid: '7tj4d2jf2kenqkra76ga751omni',
   // clientsecret: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliigen',
+  // clientsecretdescuento: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliigen',
   // clientidunico: '7tj4d2jf2kenqkra76ga751clienteunico',
-  // clientsecretunico:
-  //   'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliiclienteunico',
+  // clientsecretunico: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliiclienteunico',
   // urlAmauta: 'https://api.dev.amauta.api-ngr.com',
 
   //QA

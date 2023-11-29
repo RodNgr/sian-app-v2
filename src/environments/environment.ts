@@ -49,6 +49,7 @@ export const environment = {
   // gtype: 'client_credentials',
   // clientid: '7tj4d2jf2kenqkra76ga751omni',
   // clientsecret: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliigen',
+  // clientsecretdescuento: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliigen',
   // clientidunico: '7tj4d2jf2kenqkra76ga751clienteunico',
   // clientsecretunico: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliiclienteunico',
   // urlAmauta: 'https://api.dev.amauta.api-ngr.com',
