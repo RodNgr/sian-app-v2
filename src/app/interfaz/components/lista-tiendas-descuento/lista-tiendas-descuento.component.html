@@ -1,0 +1,109 @@
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-spin"
+  [fullScreen]="true"
+>
+  <p style="color: white">Cargando...</p>
+</ngx-spinner>
+
+<div class="card col">
+  <p-toolbar styleClass="p-mb-4">
+    <ng-template pTemplate="left">
+      <button
+        pButton
+        pRipple
+        label="Nuevo"
+        icon="pi pi-plus"
+        class="p-button-success p-mr-2"
+        (click)="add()"
+        pTooltip="Nuevo"
+        tooltipPosition="bottom"
+      ></button>
+      <!-- <button pButton pRipple label="Editar" icon="pi pi-pencil" class="p-button-info p-mr-5" (click)="edit()" pTooltip="Editar" tooltipPosition="bottom"></button>
+              <button pButton pRipple label="Eliminar" icon="pi pi-times" class="p-button-danger p-mr-5" (click)="remove()" pTooltip="Eliminar" tooltipPosition="bottom"></button>
+              <button pButton pRipple label="Consultar" icon="pi pi-eye" class="p-button-help" (click)="view()" pTooltip="Consultar" tooltipPosition="bottom"></button> -->
+    </ng-template>
+
+    <ng-template pTemplate="right"> </ng-template>
+  </p-toolbar>
+
+  <p-table
+    #dt
+    [value]="tiendaBeneficioLista"
+    [responsive]="true"
+    [rows]="25"
+    [paginator]="true"
+    [rowHover]="true"
+    dataKey="id"
+    [globalFilterFields]="['descuentoMaximo']"
+    [scrollable]="true"
+    scrollHeight="40vh"
+    styleClass="p-datatable-sm p-datatable-striped"
+    columnResizeMode="expand"
+    currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[15, 25, 50, 100]"
+  >
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        <h1 class="p-m-0">Beneficio Empleado</h1>
+
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            #txtFind
+            type="text"
+            (input)="applyFilterGlobal($event, 'contains')"
+            placeholder="Buscar..."
+            autocomplete="off"
+          />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="colgroup">
+      <colgroup *ngIf="!isMobile">
+        <col style="width: 10%" />
+      </colgroup>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="marca">Marca <p-sortIcon field="marca"></p-sortIcon></th>
+        <th pSortableColumn="sk">Sk <p-sortIcon field="sk"></p-sortIcon></th>
+        <th pSortableColumn="porcentaje">
+          Porcentaje <p-sortIcon field="porcentaje"></p-sortIcon>
+        </th>
+        <th pSortableColumn="desMaximo">
+          Descuento máximo <p-sortIcon field="desMaximo"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-benEmple>
+      <tr>
+        <td>
+          <span class="p-column-title">Marca</span>{{ benEmple.codMarca }}
+        </td>
+        <td>
+          <span class="p-column-title">Sk</span>{{ benEmple.sk }}
+        </td>
+        <td>
+          <span class="p-column-title">Porcentaje</span
+          >{{ benEmple.porcentaje }}
+        </td>
+        <td>
+          <span class="p-column-title">Descuento máximo</span
+          >{{ benEmple.descuentoMaximo }}
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        {{
+          (tiendaBeneficioLista ? tiendaBeneficioLista.length : 0) | i18nPlural : cantidadMap
+        }}
+      </div>
+    </ng-template>
+  </p-table>
+</div>

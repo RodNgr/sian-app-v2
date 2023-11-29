@@ -19,7 +19,8 @@ export const environment = {
   //urlCarta: 'http://VSRVPRDAPP07.ngr.com.pe:9833/api/omnicanal',
   gtype: 'client_credentials',
   clientid: '7tj4d2jf2kenqkra76ga751omni',
-  //clientsecret: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliiomni',
+  clientsecret: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliiomni',
+  clientsecretdescuento: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliigen',
   clientidunico: '7tj4d2jf2kenqkra76ga751clienteunico',
   clientsecretunico:
     'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliiclienteunico',
@@ -54,5 +55,4 @@ export const environment = {
   urlOmnicanalA: 'https://api-qa.dev.omnicanal.api-ngr.com/motorpromocion',
   urlCarta: 'http://VSRVDEVAPP07.ngr.com.pe:9833/api/omnicanal',
   urlTstdrpApi: 'https://tstdrp.api-ngr.com/oauth2/token',
-  clientsecret: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliigen',
 };

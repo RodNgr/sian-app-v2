@@ -68,12 +68,22 @@ export const environment = {
   urlOmnicanal: 'http://VSRVPRDAPP07.ngr.com.pe:9833',
   urlSecurityShared: 'http://vsrvprdweb01.ngr.com.pe/security-shared',
   urlGenesys: 'https://genesys.dev.audex.api-ngr.com/genesys',
+<<<<<<< HEAD
   //urlOmnicanalA: 'https://api.omnicanal.api-ngr.com/motorpromocion',
   //urlTstdrpApi: 'https://prod.api-ngr.com/oauth2/token',
   //urlCarta: 'http://VSRVPRDAPP07.ngr.com.pe:9833/api/omnicanal',
   gtype: 'client_credentials',
   clientid: '7tj4d2jf2kenqkra76ga751omni',
   //clientsecret: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliiomni',
+=======
+  urlOmnicanalA: 'https://api.dev.omnicanal.api-ngr.com/motorpromocion',
+  urlTstdrpApi: 'https://tstdrp.api-ngr.com/oauth2/token',
+  urlCarta: 'http://VSRVPRDAPP07.ngr.com.pe:9833/api/omnicanal',
+  gtype: 'client_credentials',
+  clientid: '7tj4d2jf2kenqkra76ga751omni',
+  clientsecret: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliiomni',
+  clientsecretdescuento: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliigen',
+>>>>>>> b9ef577 (feat: mantenimiento descuento empleado)
   clientidunico: '7tj4d2jf2kenqkra76ga751clienteunico',
   clientsecretunico: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliiclienteunico',
   urlAmauta: 'https://api.dev.amauta.api-ngr.com',

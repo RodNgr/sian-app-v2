@@ -151,6 +151,18 @@ export class SidenavComponent implements OnInit {
         mantenimiento.items?.push({ label: 'Tiendas', icon: 'pi pi-fw pi-table', routerLink: '/home/interfaz/lista-tienda', routerLinkActiveOptions: {exact: true} });
       }
 
+      if (this.authService.hasRole('ROL_SIAN_ITZ_TIENDA')) {
+        mantenimiento.items?.push({ label: 'Feriados', icon: 'pi pi-fw pi-table', routerLink: '/home/interfaz/feriados', routerLinkActiveOptions: {exact: true} });
+      }
+
+      if (this.authService.hasRole('ROL_SIAN_ITZ_TIENDA')) {
+        mantenimiento.items?.push({ label: 'Beneficio Empleado', icon: 'pi pi-fw pi-table', routerLink: '/home/interfaz/beneficio-empleado', routerLinkActiveOptions: {exact: true} });
+      }
+
+      if (this.authService.hasRole('ROL_SIAN_ITZ_TIENDA')) {
+        mantenimiento.items?.push({ label: 'Beneficio Tienda', icon: 'pi pi-fw pi-table', routerLink: '/home/interfaz/beneficio-tienda', routerLinkActiveOptions: {exact: true} });
+      }
+
       let proceso: MenuItem = { label: 'Proceso', icon: 'pi pi-fw pi-folder', items: [] };
       if (this.authService.hasRole('ROL_SIAN_ITZ_ARTICULO') || this.authService.hasRole('ROL_SIAN_ITZ_MOD_ARTICULO') || this.authService.hasRole('ROL_SIAN_ITZ_MASIVA_ARTICULO')) {
         proceso.items?.push({ label: 'Interfaz Artículo', icon: 'pi pi-fw pi-cog', routerLink: '/home/interfaz/interfaz-articulo', routerLinkActiveOptions: {exact: true} });

@@ -42,6 +42,9 @@ import { TipoIncidenteLogPipe } from './pipes/tipo-incidente-log.pipe';
 import { AsumirIncidenteComponent } from './components/asumir-incidente/asumir-incidente.component';
 import { AperturaTiendaComponent } from './components/apertura-tienda/apertura-tienda.component';
 import { ListaAperturaTiendaComponent } from './components/lista-apertura-tienda/lista-apertura-tienda.component';
+import { ListaFeriadosComponent } from './components/lista-feriados/lista-feriados.component';
+import { ListaBeneficioEmpleadoComponent } from './components/lista-beneficio-empleado/lista-beneficio-empleado.component';
+import { ListaTiendasBeneficioComponent } from './components/lista-tiendas-descuento/lista-tiendas-descuento.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +82,9 @@ import { ListaAperturaTiendaComponent } from './components/lista-apertura-tienda
     AsumirIncidenteComponent,
     AperturaTiendaComponent,
     ListaAperturaTiendaComponent,
+    ListaFeriadosComponent,
+    ListaBeneficioEmpleadoComponent,
+    ListaTiendasBeneficioComponent,
   ], 
   imports: [
     CommonModule,
