@@ -47,7 +47,7 @@ const routes: Routes = [
       { path: 'reporte-control-comparativo-horas', component: ReporteControlComparativoHoraComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_REP_CON_COMPARATIVO']} },
       { path: 'lista-reporte', component: ListaTransaccionComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_REP_EJECUTAR_CONSULTA']} },
       { path: 'reporte-redimido', component: ReporteRedimidoComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_REP_CON_REDIMIDO']} },
-      { path: 'anular-pedido', component: AnularPedidosHubComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_REP_EJECUTAR_CONSULTA']} }, //ROL_SIAN_ANULAR_PEDIDO_HUB
+      { path: 'anular-pedido', component: AnularPedidosHubComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_ANULAR_PEDIDO_HUB']} },
       { path: 'lista-reporte', component: ListaTransaccionComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_REP_EJECUTAR_CONSULTA']} },
       
     ]
