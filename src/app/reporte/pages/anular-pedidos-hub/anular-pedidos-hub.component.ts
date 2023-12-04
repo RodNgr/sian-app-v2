@@ -15,7 +15,7 @@ export class AnularPedidosHubComponent implements OnInit {
   public title: string = 'ANULAR PEDIDOS HUB'; 
 
   public SeleccionHUB: number;
-  public numeroPedido: String;
+  public numeroPedido: String = '';
   public ListadoHUB: hub[] = [
     { idHub: 0 , descripcionHub: 'Seleccionar HUB'},
   ];
@@ -44,20 +44,24 @@ export class AnularPedidosHubComponent implements OnInit {
   }
 
   AnularPedido(){
-    this.reporteService.anularPedidoHub(this.SeleccionHUB, this.numeroPedido).subscribe(      
-      tiendaList => {        
-        Swal.fire({
-          title: "Bien!",
-          text: "Se eliminaron los pedidos multiplicados",
-          icon: "success"
-        });
-        this.spinner.hide();
-      },
-      _err => {
-        this.spinner.hide();
-        Swal.fire('Error', 'No se pudieron eliminar los pedidos multiplicados', 'error');
-      }
-    );
+    if(this.numeroPedido == ""){
+      Swal.fire('Error', 'Debe ingresar un numero de pedido', 'error');
+    } else {
+      this.reporteService.anularPedidoHub(this.SeleccionHUB, this.numeroPedido).subscribe(      
+        tiendaList => {        
+          Swal.fire({
+            title: "Bien!",
+            text: "Se eliminaron los pedidos multiplicados",
+            icon: "success"
+          });
+          this.spinner.hide();
+        },
+        _err => {
+          this.spinner.hide();
+          Swal.fire('Error', 'No se pudieron eliminar los pedidos multiplicados', 'error');
+        }
+      );
+    }    
   }
 }
   
