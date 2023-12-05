@@ -126,7 +126,7 @@
                   *mínimo 4 carácteres
                   *máximo 30 carácteres
                   *sin espacios
-                  *sin letra Ñ y O
+                  *sin letra Ñ
                   " type="text" aria-describedby="username2-help" tooltipEvent="focus" maxlength="30" pInputText 
                     [(ngModel)]="cuponOmni.codigo" name="codigo" (change) = "codigoChange()" 
                     [ngClass] = "{' ng-invalid ng-dirty ': !formatoCodigo }" [disabled]="type === 'V'"
@@ -505,7 +505,7 @@
               <div class="p-fluid ">
                 <div class="p-d-flex p-jc-between">
                   <div>
-                    <p class="title-carta">Productos Seleccionados</p>
+                    <p class="title-carta">{{TextoSeleccionado}}</p>
 
                   </div>
 

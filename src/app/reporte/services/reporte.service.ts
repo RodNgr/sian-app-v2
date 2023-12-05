@@ -12,6 +12,7 @@ import { TreeNode } from 'primeng/api';
 import { map } from 'rxjs/operators';
 import { CallVentasBaseDto } from '../dto/call-ventas-base-dto';
 import { ProcesoAutomatico } from '../entity/procesoautomatico';
+import { hub } from '../entity/hub';
 
 @Injectable({
   providedIn: 'root'
@@ -223,5 +224,11 @@ export class ReporteService {
     return this.http.post<any>(`${this.urlEndPoint}/api/reporte/procesoautomatico`, objProceso);
   }
 
+  getListaHub(): Observable<hub[]> {
+    return this.http.get<hub[]>(`${this.urlEndPoint}/api/reporte/lista/hub`);
+  }
 
+  anularPedidoHub(idHub: number, numeroPedido: String ): Observable<hub[]> {
+    return this.http.get<hub[]>(`${this.urlEndPoint}/api/reporte/anular-pedido-hub/${idHub}/${numeroPedido}`);
+  }
 }
