@@ -268,9 +268,49 @@
             "
             >Campo debe ser un correo</small
           >
-        </div>
+        </div>        
 
         <div class="p-field p-col-2 p-lg-2 p-md-2 p-sm-12 p-mt-4"></div>
+<!-- CAMPOS REAL PLAZA -->
+        <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+          <label for="documento">{{ this.keys['inmuebleRP']?.label_value || 'Inmueble RP:' }}</label>
+          <input
+            type="text"
+            autofocus
+            autocomplete="off"
+            pInputText
+            aria-describedby="inmuebleRP-help"
+            formControlName="inmuebleRP"
+            tabindex="1"
+            name="inmuebleRP"
+            type="text"
+            placeholder="Ingrese el codigo de inmueble de Real Plaza "
+          />
+          <small
+            class="p-message-info"
+            >Este Campo NO es Obligatorio</small
+          >          
+        </div>
+
+        <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+          <label for="documento">{{ this.keys['localRP']?.label_value || 'Local RP:' }}</label>
+          <input
+            type="text"
+            autofocus
+            autocomplete="off"
+            pInputText
+            aria-describedby="localRP-help"
+            formControlName="localRP"
+            tabindex="1"
+            name="localRP"
+            type="text"
+            placeholder="Ingrese el codigo local de Real Plaza"
+          />
+          <small
+            class="p-message-info"
+            >Este Campo NO es Obligatorio</small
+          >
+        </div>
       </form>
 
       <div class="p-d-flex p-jc-end p-mt-3">

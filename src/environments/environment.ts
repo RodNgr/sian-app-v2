@@ -8,7 +8,7 @@ export const environment = {
   //LOCAL
   // urlSecurity: 'http://localhost:9999',
   // urlCupones: 'http://localhost:9837',
-  // urlInterfazProducto: 'http://localhost:9838',
+   urlInterfazProducto: 'http://localhost:9838',
   // urlCuadratura: 'http://localhost:9839',
   // urlEjecutor: 'http://localhost:9845',
   // urlEjecutorSybase: 'http://localhost:9753',
@@ -57,7 +57,7 @@ export const environment = {
   //PRODUCCION
   urlSecurity: 'http://VSRVPRDAPP07.ngr.com.pe:9999',
   urlCupones: 'http://VSRVPRDAPP07.ngr.com.pe:9837',
-  urlInterfazProducto: 'http://VSRVPRDAPP07.ngr.com.pe:9838',
+  //urlInterfazProducto: 'http://VSRVPRDAPP07.ngr.com.pe:9838',
   urlCuadratura: 'http://VSRVPRDAPP07.ngr.com.pe:9839',
   urlEjecutor: 'http://VSRVPRDAPP07.ngr.com.pe:9845',
   urlEjecutorSybase: 'http://VSRVPRDAPP07.ngr.com.pe:9753',
@@ -68,21 +68,21 @@ export const environment = {
   urlOmnicanal: 'http://VSRVPRDAPP07.ngr.com.pe:9833',
   urlSecurityShared: 'http://vsrvprdweb01.ngr.com.pe/security-shared',
   urlGenesys: 'https://genesys.dev.audex.api-ngr.com/genesys',
-  //urlOmnicanalA: 'https://api.omnicanal.api-ngr.com/motorpromocion',
-  //urlTstdrpApi: 'https://prod.api-ngr.com/oauth2/token',
-  //urlCarta: 'http://VSRVPRDAPP07.ngr.com.pe:9833/api/omnicanal',
+  urlOmnicanalA: 'https://api.omnicanal.api-ngr.com/motorpromocion',
+  urlTstdrpApi: 'https://prod.api-ngr.com/oauth2/token',
+  urlCarta: 'http://VSRVPRDAPP07.ngr.com.pe:9833/api/omnicanal',
   gtype: 'client_credentials',
   clientid: '7tj4d2jf2kenqkra76ga751omni',
-  //clientsecret: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliiomni',
+  clientsecret: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliiomni',
   clientidunico: '7tj4d2jf2kenqkra76ga751clienteunico',
   clientsecretunico: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliiclienteunico',
   urlAmauta: 'https://api.dev.amauta.api-ngr.com',
 
   //QA
-  urlOmnicanalA: 'https://api-qa.dev.omnicanal.api-ngr.com/motorpromocion',
-  urlCarta: 'http://VSRVDEVAPP07.ngr.com.pe:9833/api/omnicanal',
-  urlTstdrpApi: 'https://tstdrp.api-ngr.com/oauth2/token',
-  clientsecret: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliigen',
+  //urlOmnicanalA: 'https://api-qa.dev.omnicanal.api-ngr.com/motorpromocion',
+  //urlCarta: 'http://VSRVDEVAPP07.ngr.com.pe:9833/api/omnicanal',
+  //urlTstdrpApi: 'https://tstdrp.api-ngr.com/oauth2/token',
+  //clientsecret: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliigen',
 
 };
 

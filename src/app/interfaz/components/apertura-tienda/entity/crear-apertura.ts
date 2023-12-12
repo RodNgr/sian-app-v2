@@ -11,8 +11,9 @@ export class CrearApertura {
   nombreTienda: string;
   fechaInicioOpera: string;
   emailTienda: string;
-
-  tiendaSapPadre: string;
+  inmuebleRP: string;
+  localRP?: string;
+  tiendaSapPadre?: string;
 
   static validate(body: CrearApertura) {
     // const ipRegex = new RegExp('^((25[0-5]|(2[0-4]|1d|[1-9]|)d).?\b){3}$');

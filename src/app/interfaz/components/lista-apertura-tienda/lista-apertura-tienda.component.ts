@@ -7,6 +7,9 @@ import swal from 'sweetalert2';
 
 import { EmpresaService } from 'src/app/shared/services/empresa.service';
 import { InterfazAperturaService } from '../../services/interfaz-apertura.service';
+import { TiendaByEmpresaResponse } from '../../entity/TiendaByEmpresaResponse';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { EditarAperturaTiendaComponent } from '../editar-apertura-tienda/editar-apertura-tienda.component';
 
 @Component({
   selector: 'app-lista-apertura-tienda',
@@ -16,7 +19,10 @@ import { InterfazAperturaService } from '../../services/interfaz-apertura.servic
 export class ListaAperturaTiendaComponent implements OnInit {
   @ViewChild('dt') table!: Table;
 
-  public tiendasByMarcaList = [];
+  private ref!: DynamicDialogRef;
+
+  public tiendasByMarcaList: TiendaByEmpresaResponse[];
+  public tiendaSeleccionada: TiendaByEmpresaResponse;
 
   public cantidadMap = {
     '=0': 'No existen tiendas',
@@ -29,6 +35,7 @@ export class ListaAperturaTiendaComponent implements OnInit {
   constructor(
     private spinner: NgxSpinnerService,
     private empresaService: EmpresaService,
+    private dialogService: DialogService,
     private aperturaService: InterfazAperturaService,
     private router: Router
   ) {}
@@ -65,6 +72,22 @@ export class ListaAperturaTiendaComponent implements OnInit {
 
   public add() {
     this.router.navigateByUrl('/home/interfaz/apertura-tienda');
+  }
+
+  public edit() {    
+    this.ref = this.dialogService.open(EditarAperturaTiendaComponent, {
+      header: this.tiendaSeleccionada.nombreTienda,
+      width: '25%',
+      contentStyle: { 'max-height': '360px', overflow: 'auto' },
+      data: {
+        tiendaSAP: this.tiendaSeleccionada.tiendaSAP,
+        nombreTienda: this.tiendaSeleccionada.nombreTienda
+      },
+    });
+
+    this.ref.onClose.subscribe((Val: number) => {
+      this.list();
+    });
   }
 
   @HostListener('window:resize', ['$event'])
