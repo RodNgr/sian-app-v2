@@ -74,6 +74,14 @@ export class ListaFeriadosComponent implements OnInit {
             this.feriadosLista = list.map(l => ({ ...l, uniqueKey: `${l.dia}-${l.mes}` }));
             this.spinner.hide();
           },
+          error: () => {
+            this.spinner.hide();
+            swal.fire(
+              'Error',
+              'Problemas al obtener la información de los feriados',
+              'error'
+            );
+          }
         });
       },
       error: () => {
@@ -133,6 +141,10 @@ export class ListaFeriadosComponent implements OnInit {
       .setValue(this.feriadoSelected.descripcion);
 
     this.display = true;
+  }
+
+  async remove() {
+
   }
 
   cancelar() {
