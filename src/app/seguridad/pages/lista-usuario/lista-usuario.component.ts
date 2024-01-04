@@ -16,6 +16,7 @@ import { VerDispositivosComponent } from '../../components/ver-dispositivos/ver-
 import swal from 'sweetalert2';
 import { CopiarAccesoComponent } from '../../components/copiar-acceso/copiar-acceso.component';
 import { CopiarPermisoDto } from '../../dto/copiar-permiso-dto';
+import { AsignarTiendasComponent } from '../../components/asignar-tiendas/asignar-tiendas.component';
 
 @Component({
   selector: 'app-lista-usuario',
@@ -106,6 +107,24 @@ export class ListaUsuarioComponent implements OnInit, OnDestroy {
 
     this.ref = this.dialogService.open(AsignarAccesosComponent, {
       header: 'Accesos asignados al Usuario: ' + this.usuarioSelected.fullName,
+      width: '60%',
+      contentStyle: {"overflow": "auto"},
+      data: this.usuarioSelected
+    });
+  }
+
+  public asignarTiendas(): void {
+    if (!this.usuarioSelected) {
+      swal.fire('Alerta!', 'Debe seleccionar un usuario', 'warning');
+      return;
+    }
+    if (!this.usuarioSelected.applicationRolList.some(a => ['ROL_EPICO_GERENTE', 'ROL_SUPERVISOR'].includes(a.rol.id))) {
+      swal.fire('Alerta!', 'Debe ser supervisor o gerente', 'warning');
+      return;
+    }
+
+    this.ref = this.dialogService.open(AsignarTiendasComponent, {
+      header: 'Asignar tiendas al usuario: ' + this.usuarioSelected.fullName,
       width: '60%',
       contentStyle: {"overflow": "auto"},
       data: this.usuarioSelected
