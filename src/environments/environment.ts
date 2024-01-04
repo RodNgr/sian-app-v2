@@ -8,7 +8,7 @@ export const environment = {
   //LOCAL
   // urlSecurity: 'http://localhost:9999',
   // urlCupones: 'http://localhost:9837',
-   urlInterfazProducto: 'http://localhost:9838',
+  // urlInterfazProducto: 'http://localhost:9838',
   // urlCuadratura: 'http://localhost:9839',
   // urlEjecutor: 'http://localhost:9845',
   // urlEjecutorSybase: 'http://localhost:9753',
@@ -57,7 +57,7 @@ export const environment = {
   //PRODUCCION
   urlSecurity: 'http://VSRVPRDAPP07.ngr.com.pe:9999',
   urlCupones: 'http://VSRVPRDAPP07.ngr.com.pe:9837',
-  //urlInterfazProducto: 'http://VSRVPRDAPP07.ngr.com.pe:9838',
+  urlInterfazProducto: 'http://VSRVPRDAPP07.ngr.com.pe:9838',
   urlCuadratura: 'http://VSRVPRDAPP07.ngr.com.pe:9839',
   urlEjecutor: 'http://VSRVPRDAPP07.ngr.com.pe:9845',
   urlEjecutorSybase: 'http://VSRVPRDAPP07.ngr.com.pe:9753',
