@@ -713,7 +713,7 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showMontoPagar = false;
       this.showNecesitaMontoMinimo = false;
       this.showMontoMinimo = true;
-      this.showCanales = true; //cambia aqui
+      this.showCanales = false; //cambia aqui
       this.showTableProducts = true;
       this.showMaximoDescuento = false;
       this.shoPorcentajeDescuento = false;
@@ -730,7 +730,7 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showMontoPagar = false;
       this.showNecesitaMontoMinimo = false;
       this.showMontoMinimo = true;
-      this.showCanales = true; //cambia aqui
+      this.showCanales = false; //cambia aqui
       this.showTableProducts = true;
       this.showMaximoDescuento = false;
       this.shoPorcentajeDescuento = false;
@@ -746,7 +746,7 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showMontoPagar = false;
       this.showNecesitaMontoMinimo = false;
       this.showMontoMinimo = true;
-      this.showCanales = true;//cambia aqui
+      this.showCanales = false;//cambia aqui
       this.showTableProducts = true;
       this.showMaximoDescuento = true;
       this.shoPorcentajeDescuento = true;
@@ -765,7 +765,7 @@ export class CuponOmnicanalComponent implements OnInit {
       this.showMontoPagar = false;
       this.showNecesitaMontoMinimo = false;
       this.showMontoMinimo = true;
-      this.showCanales = true; //cambia aqui
+      this.showCanales = false; //cambia aqui
       this.showTableProducts = true;
       this.showMaximoDescuento = true;
       this.shoPorcentajeDescuento = true;
