@@ -18,6 +18,7 @@ import { CambioCuentaComponent } from './pages/cambio-cuenta/cambio-cuenta.compo
 import { EditarCuentaBancariaComponent } from './components/editar-cuenta-bancaria/editar-cuenta-bancaria.component';
 import { CuentaBancariaComponent } from './pages/cuenta-bancaria/cuenta-bancaria.component';
 import { EditarCuentaComponent } from './components/editar-cuenta/editar-cuenta.component';
+import { AnularPedidosHubComponent } from './pages/anular-pedidos-hub/anular-pedidos-hub.component';
 @NgModule({
   declarations: [
     CierreDiaComponent,
@@ -30,7 +31,8 @@ import { EditarCuentaComponent } from './components/editar-cuenta/editar-cuenta.
     CambioCuentaComponent,
     EditarCuentaBancariaComponent,
     CuentaBancariaComponent,
-    EditarCuentaComponent
+    EditarCuentaComponent,
+    AnularPedidosHubComponent
   ],
   imports: [
     CommonModule,

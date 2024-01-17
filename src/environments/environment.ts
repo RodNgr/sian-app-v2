@@ -12,11 +12,11 @@ export const environment = {
   // urlCuadratura: 'http://localhost:9839',
   // urlEjecutor: 'http://localhost:9845',
   // urlEjecutorSybase: 'http://localhost:9753',
-  // urlReporte: 'http://localhost:9811',
+  //urlReporte: 'http://localhost:9811',
   // urlRrhh: 'http://localhost:9822',
   // urlOmnicanal: 'http://localhost:9833',
   // urlSecurityShared: 'http://localhost:4201', 
-  // urlInterfaz: 'http://localhost:9842',
+  //urlInterfaz: 'http://localhost:9842',
   // urlCierre: 'http://VSRVDEVAPP07.ngr.com.pe:9899',
   // urlGenesys: 'https://genesys.dev.audex.api-ngr.com/genesys',
   // urlOmnicanalA: 'https://api.dev.omnicanal.api-ngr.com/motorpromocion',
@@ -68,32 +68,20 @@ export const environment = {
   urlOmnicanal: 'http://VSRVPRDAPP07.ngr.com.pe:9833',
   urlSecurityShared: 'http://vsrvprdweb01.ngr.com.pe/security-shared',
   urlGenesys: 'https://genesys.dev.audex.api-ngr.com/genesys',
-  //urlOmnicanalA: 'https://api.omnicanal.api-ngr.com/motorpromocion',
-  //urlTstdrpApi: 'https://prod.api-ngr.com/oauth2/token',
-  //urlCarta: 'http://VSRVPRDAPP07.ngr.com.pe:9833/api/omnicanal',
+  urlOmnicanalA: 'https://api.omnicanal.api-ngr.com/motorpromocion',
+  urlTstdrpApi: 'https://prod.api-ngr.com/oauth2/token',
+  urlCarta: 'http://VSRVPRDAPP07.ngr.com.pe:9833/api/omnicanal',
   gtype: 'client_credentials',
   clientid: '7tj4d2jf2kenqkra76ga751omni',
-  //clientsecret: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliiomni',
+  clientsecret: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliiomni',
   clientidunico: '7tj4d2jf2kenqkra76ga751clienteunico',
   clientsecretunico: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliiclienteunico',
   urlAmauta: 'https://api.dev.amauta.api-ngr.com',
 
   //QA
-  urlOmnicanalA: 'https://api-qa.dev.omnicanal.api-ngr.com/motorpromocion',
-  urlCarta: 'http://VSRVDEVAPP07.ngr.com.pe:9833/api/omnicanal',
-  urlTstdrpApi: 'https://tstdrp.api-ngr.com/oauth2/token',
-  clientsecret: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliigen',
+  //urlOmnicanalA: 'https://api-qa.dev.omnicanal.api-ngr.com/motorpromocion',
+  //urlCarta: 'http://VSRVDEVAPP07.ngr.com.pe:9833/api/omnicanal',
+  //urlTstdrpApi: 'https://tstdrp.api-ngr.com/oauth2/token',
+  //clientsecret: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliigen',
 
 };
-
-
-
-
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.

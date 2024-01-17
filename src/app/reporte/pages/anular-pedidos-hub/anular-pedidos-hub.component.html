@@ -1,0 +1,26 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+    <h1>{{title}}</h1>
+    <hr>
+
+    <form #formatoForm="ngForm" class="p-fluid p-formgrid p-grid" autocomplete="off">
+        <div class="p-grid p-col-12">
+            <div class="p-field p-col-5">
+                <label style="font-weight: bold;" for="prefijo">HUB</label>
+                <p-dropdown [options]="ListadoHUB" [(ngModel)]="SeleccionHUB" optionLabel="descripcionHub" [showClear]="true" [ngModelOptions]="{standalone: true}"
+                optionDisabled="inactive" optionValue="idHub" id="idHub">
+                </p-dropdown>
+            </div>
+            <div class="p-field p-col-5">
+                <label style="font-weight: bold;" for="prefijo">Número Pedido</label>
+                <input type="number" name="numeroPedido" [(ngModel)]="numeroPedido" id="numeroPedido" pInputText required>
+            </div>
+            <div class="p-field p-col-2">
+                <button pButton pRipple pTooltip="Anular Pedidos"  tooltipPosition="bottom" label="Anular Pedidos"  icon="pi pi-save"  class="p-button-success p-mr-2" style="margin-top: 15px;" (click)="AnularPedido()" ></button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -37,6 +37,7 @@ import { ReporteRedimidoComponent } from './pages/reporte-redimido/reporte-redim
 import { GestionClienteComponent } from './pages/gestion-cliente/gestion-cliente.component';
 import { ProcesoAutomaticoComponent } from './pages/proceso-automatico/proceso-automatico.component';
 import { DetalleProcesoAutomaticoComponent } from './components/detalle-procesoautomatico/detalle-procesoautomatico.component';
+import { AnularPedidosHubComponent } from './pages/anular-pedidos-hub/anular-pedidos-hub.component';
 @NgModule({
   declarations: [
     EjecutarConsultaComponent, 
@@ -69,7 +70,8 @@ import { DetalleProcesoAutomaticoComponent } from './components/detalle-procesoa
     ReporteRedimidoComponent,
     GestionClienteComponent,
     ProcesoAutomaticoComponent,
-    DetalleProcesoAutomaticoComponent
+    DetalleProcesoAutomaticoComponent,
+    AnularPedidosHubComponent
   ],
   imports: [
     CommonModule,

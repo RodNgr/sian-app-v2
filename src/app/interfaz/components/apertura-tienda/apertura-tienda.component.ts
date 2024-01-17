@@ -71,6 +71,8 @@ export class AperturaTiendaComponent implements OnInit {
       ]),
       fechaInicioOpera: new FormControl('', []),
       emailTienda: new FormControl('', [Validators.required, Validators.email]),
+      inmuebleRP: new FormControl(),
+      localRP: new FormControl(),
     });
     this.aperturaService.getKeys().subscribe({
       next: (data) => {
@@ -203,5 +205,13 @@ export class AperturaTiendaComponent implements OnInit {
 
   get emailTienda() {
     return this.aperturaForm.get('emailTienda');
+  }
+
+  get inmuebleRP() {
+    return this.aperturaForm.get('inmuebleRP');
+  }
+
+  get localRP() {
+    return this.aperturaForm.get('localRP');
   }
 }
