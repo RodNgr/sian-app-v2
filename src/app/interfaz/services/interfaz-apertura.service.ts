@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CrearApertura } from '../components/apertura-tienda/entity/crear-apertura';
+import { TiendaByEmpresaResponse } from '../entity/TiendaByEmpresaResponse';
+import { tiendaSeleccionada } from '../entity/tiendaSeleccionada';
 
 interface IEmpresaResponse {
     idEmpresa: number;
@@ -45,8 +47,8 @@ export class InterfazAperturaService {
     return this.http.get<string[]>(`${this.urlEndPoint}/api/apertura-tienda/${idEmpresa}/formatos`);
   }
 
-  getTiendasByEmpresa(idEmpresa: number): Observable<ITiendaByEmpresaResponse[]> {
-    return this.http.get<ITiendaByEmpresaResponse[]>(`${this.urlEndPoint}/api/apertura-tienda/empresas/${idEmpresa}/tiendas`);
+  getTiendasByEmpresa(idEmpresa: number): Observable<TiendaByEmpresaResponse[]> {
+    return this.http.get<TiendaByEmpresaResponse[]>(`${this.urlEndPoint}/api/apertura-tienda/empresas/${idEmpresa}/tiendas`);
   }
 
   getKeys(): Observable<IKeysResponse[]> {
@@ -56,4 +58,13 @@ export class InterfazAperturaService {
   create(aperturaTienda: CrearApertura): Observable<any> {
     return this.http.post<{ usuarioInterface }>(`${this.urlEndPoint}/api/apertura-tienda`, aperturaTienda);
   }
+
+  edit(tiendaSeleccionada: tiendaSeleccionada): Observable<any> {
+    return this.http.post<{ usuarioInterface }>(`${this.urlEndPoint}/api/apertura-tienda/editar-apertura-tienda`, tiendaSeleccionada);
+  }
+
+  getTiendaporCodigoSAP(codigoSAP: number): Observable<tiendaSeleccionada[]> {
+    return this.http.get<tiendaSeleccionada[]>(`${this.urlEndPoint}/api/apertura-tienda/obtener/${codigoSAP}`);
+  }
+  
 }

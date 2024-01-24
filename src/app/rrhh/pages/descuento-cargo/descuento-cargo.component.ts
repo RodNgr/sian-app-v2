@@ -5,6 +5,7 @@ import swal from 'sweetalert2';
 import { DescuentoCargo } from '../../entity/descuento-cargo';
 import { DescuentoCargoService } from '../../services/descuento-cargo.service';
 import { AuthService } from '../../../auth/services/auth.service';
+import { EmpresaService } from 'src/app/shared/services/empresa.service';
 
 interface Empresa {
   idEmpresa: number,
@@ -39,6 +40,7 @@ export class DescuentoCargoComponent implements OnInit {
   constructor(private spiner: NgxSpinnerService,
               private descuentoService: DescuentoCargoService,
               private authService: AuthService,
+              private empresaService: EmpresaService,
               private router: Router) { }
 
   ngOnInit(): void {
@@ -93,6 +95,8 @@ export class DescuentoCargoComponent implements OnInit {
     this.spiner.show();
 
     this.descuento.idCreacion = this.authService.usuario.username;
+    this.descuento.idEmpresa = this.empresaService.getEmpresaSeleccionada().idEmpresa;
+    this.descuento.estado = 1;
     this.descuentoService.createDescuentoCargo(this.descuento).subscribe(
       _data => {
         sessionStorage.setItem('message', 'Descuento por Cargo creado exitosamente!');

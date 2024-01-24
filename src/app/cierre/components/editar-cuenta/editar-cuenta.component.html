@@ -1,0 +1,49 @@
+<div class="w-100 row">
+    <div class="p-col-6 p-md-6 p-sm-6 label-dropdown-container">
+      <label for="tipo">Tienda:&nbsp;&nbsp;</label>
+      <p-dropdown id="cmbEmpresa" 
+                  [options]="empresaList" 
+                  [(ngModel)]="empresSelect" 
+                  optionLabel="nombreComercial">
+        </p-dropdown>
+
+    </div>
+    <div style="margin-top: 10px;" class="p-col-6 p-md-6 p-sm-6 label-dropdown-container">
+      <label for="tipo">Banco:</label>
+      <p-dropdown id="cmbBanco" 
+      [options]="bancoList" 
+      [(ngModel)]="bancoSelect" 
+      optionLabel="nombre">
+      </p-dropdown>
+    </div>
+    <div class="p-col-6 p-md-6 p-sm-6">
+        <label for="tipo">Moneda:&nbsp;&nbsp;</label>
+        <p-dropdown id="cmbMoneda" 
+        [options]="monedaList" 
+        [(ngModel)]="monedaSelect" 
+        optionLabel="nombre">
+        </p-dropdown>
+    </div>
+    
+ 
+    <div class="p-col-12 p-md-12 p-sm-12">
+      <label for="tipo">Cuenta Contable:&nbsp;&nbsp;</label>
+      <input type="text" class="inputtext" pInputText [(ngModel)]="CuentaSel.cuentaContable"/>
+    </div>
+    <div class="p-col-12 p-md-12 p-sm-12">
+      <label for="tipo">N° de cuenta:&nbsp;&nbsp;</label><!-- [disabled]="true" -->
+      <input type="text" class="inputtext" pInputText [(ngModel)]="CuentaSel.numero" />
+    </div>
+
+    <div class="p-col-12 p-md-12 p-sm-12 p-text-right btnguarda">
+      <button
+        pButton
+        type="button"
+        label="Guardar"
+        icon="pi pi-save"
+        class="p-button"
+        (click)="Guardar()"
+      ></button>
+    </div>
+  </div>
+  

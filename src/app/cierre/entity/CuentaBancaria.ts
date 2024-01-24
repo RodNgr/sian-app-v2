@@ -27,3 +27,17 @@ export class cbobancos{
         return `${this.banco} (${this.moneda}) - ${this.numero}- ${this.cuenta}`;
     }
 }
+
+
+export class CuentaBancariasGeneral {
+	idCuenta: number;
+    idEmpresa: number;
+    idBanco: number;
+    idMoneda:number;
+    activo: number;
+    moneda:String;
+    numero: String;
+    banco:String;
+    empresa: string;
+    cuentaContable:String;
+}

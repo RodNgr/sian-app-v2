@@ -1,0 +1,59 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+    <div class="p-mb-2">
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-3">
+                 <label for="lblNombreTienda">Texto a buscar:</label>
+                 <input type="text" pInputText [(ngModel)]="Tienda" (keyup)="onKDownTienda($event)"/>                 
+             </div>      
+            <div class="p-field p-col-3 p-mt-4">
+                <button pButton pRipple pTooltip="Selecciona una cuenta" tooltipPosition="bottom" (click)="editarCuentaBancaria()" label="Editar cuenta bancaria" icon="pi pi-user-edit"
+                        class="p-button-primary p-mr-2" ></button>
+            </div>
+            <div class="p-field p-col-3 p-mt-4">
+              <button pButton pRipple pTooltip="Selecciona una cuenta" tooltipPosition="bottom" (click)="nuevaCuentaBancaria()" label="Nueva cuenta bancaria" icon="pi pi-user-edit"
+                      class="p-button-primary p-mr-2" ></button>
+            </div>
+            <div class="p-field p-col-1 p-mt-4">
+              <button pButton pRipple pTooltip="Anular" tooltipPosition="bottom" label="Anular" icon="pi pi-minus-circle" class="p-button-danger p-mr-2" (click)="anularSolicitud()"></button>
+            </div>
+        </div>
+    </div>
+    <p-table #dt [value]="CuentasBancaria" [responsive]="true" [rows]="15" [paginator]="true" [rowHover]="true"
+          [globalFilterFields]="['CodTienda,CodBanco,CodMoneda,CodNumero']" [scrollable]="true" scrollHeight="40vh"
+          selectionMode="single" [(selection)]="CuentaSelected" styleClass="p-datatable-sm p-datatable-striped" columnResizeMode="expand"
+          currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+          [rowsPerPageOptions]="[15,25,50,100]" (onRowSelect)="onRowSelect($event)">
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="empresa">Marca<p-sortIcon field="empresa"></p-sortIcon>
+            </th>
+            <th pSortableColumn="banco">Banco<p-sortIcon field="banco"></p-sortIcon>
+            </th>
+            <th pSortableColumn="moneda">Moneda<p-sortIcon field="moneda"></p-sortIcon>
+            </th>
+            <th>Numero Cuenta
+            </th>            
+            <th>Cuenta Contable
+            </th>
+          </tr>
+        </ng-template>
+  
+        <ng-template pTemplate="body" let-CuentaBancaria>
+          
+          <tr [pSelectableRow]="CuentaBancaria">
+            <td>{{CuentaBancaria.empresa}}</td>
+            <td>{{CuentaBancaria.banco}}</td>
+            <td>{{CuentaBancaria.moneda}}</td>
+            <td>{{CuentaBancaria.numero}}</td>
+            <td>{{CuentaBancaria.cuentaContable}}</td>
+          </tr> 
+
+        </ng-template>
+      
+      </p-table> 
+</div>

@@ -1,0 +1,23 @@
+<div id="container">
+  <p-listbox [options]="stores" [(ngModel)]="selectedStore" [multiple]="false" optionLabel="nombreTienda" [metaKeySelection]="false" 
+  [checkbox]="true" [filter]="true" [listStyle]="{'max-height':'250px'}" ></p-listbox>
+</div>
+
+<div class="p-d-flex p-jc-end p-mt-3">
+  <button
+    pButton
+    pRipple
+    label="Aplicar"
+    (click)="aplicar()"
+    icon="pi pi-check-circle"
+    class="p-button-success p-mr-2"
+  ></button>
+  <button
+    pButton
+    pRipple
+    label="Cerrar"
+    (click)="cerrar()"
+    icon="pi pi-times"
+    class="p-button-secondary"
+  ></button>
+</div>

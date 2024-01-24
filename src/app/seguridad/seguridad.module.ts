@@ -32,6 +32,7 @@ import { AttemptTypePipe } from './pipes/attempt-type.pipe';
 import { BuscarUsuarioComponent } from './components/buscar-usuario/buscar-usuario.component';
 import { ConsultaRolesUsuarioComponent } from './pages/consulta-roles-usuario/consulta-roles-usuario.component';
 import { CopiarAccesoComponent } from './components/copiar-acceso/copiar-acceso.component';
+import { AsignarTiendasComponent } from './components/asignar-tiendas/asignar-tiendas.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { CopiarAccesoComponent } from './components/copiar-acceso/copiar-acceso.
     GrupoComponent, 
     AsignarTiendaComponent, 
     AsignarUsuarioTiendaComponent, 
+    AsignarTiendasComponent,
     AsignarAccesosComponent, 
     VerDispositivosComponent, 
     VerLoginsComponent, 

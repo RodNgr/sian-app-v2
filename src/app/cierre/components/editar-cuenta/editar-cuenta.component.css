@@ -1,0 +1,40 @@
+
+  /* styles.css */
+.label-dropdown-container {
+    /* display: flex; */ /* Para alinear el label y el p-dropdown en línea */
+    display: inline-block;
+    align-items: center; /* Para centrar verticalmente los elementos */
+  }
+  
+  /* Espacio entre el label y el p-dropdown */
+  .label-dropdown-container label {
+    margin-right: 10px; /* Puedes ajustar el valor según el espacio deseado */
+  }
+  
+  .label-dropdown-container p-dropdown {
+    margin-left: 4px; /* Puedes ajustar el valor según el espacio deseado */
+  }
+  
+  /* Estilos adicionales para el p-dropdown si es necesario */
+  .custom-dropdown {
+    width: 100%;
+    font-size: 16px;
+   /*  padding: 10px; */
+  }
+
+ .btnguarda{
+    margin-top: 36px;
+ }
+
+ :host ::ng-deep .p-dropdown {
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    cursor: pointer;
+    display: flex !important;
+    position: relative;
+    user-select: none;
+}
+
+.inputtext {
+    width: 100%;
+}

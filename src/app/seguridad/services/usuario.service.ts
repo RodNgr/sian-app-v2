@@ -11,8 +11,8 @@ import { UsuarioGrupoDto } from '../dto/usuario-grupo-dto';
 
 import { environment } from 'src/environments/environment';
 import { UsuarioRolDto } from '../dto/usuario-rol-dto';
-import { UserDto } from '../../auth/dto/user-dto';
 import { CopiarPermisoDto } from '../dto/copiar-permiso-dto';
+import { UsuarioTienda } from 'src/app/shared/entity/usuariotienda';
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +20,13 @@ import { CopiarPermisoDto } from '../dto/copiar-permiso-dto';
 export class UsuarioService {
 
   private urlEndPoint: string;
+  private urlEndPointEpico: string;
 
   constructor(private http: HttpClient,
               private authService: AuthService,
               private router: Router) {
     this.urlEndPoint = environment.urlSecurity + '/api/users';
+    this.urlEndPointEpico = environment.urlSecurity + '/api/epico';
   }
 
   getAllUsuarios(): Observable<Usuario[]> {
@@ -64,6 +66,18 @@ export class UsuarioService {
   copiarPrivilegios(dto: CopiarPermisoDto): Observable<any> {
     console.log(dto);
     return this.http.post<any>(this.urlEndPoint + '/copiar-permiso', dto);
+  }
+
+  getTiendasPorUsuario(codigoUsuario: string): Observable<UsuarioTienda[]> {
+    return this.http.get<UsuarioTienda[]>(`${this.urlEndPointEpico}/user-store/${codigoUsuario}`);
+  }
+
+  saveTiendasPorUsuario(codusuario: string, codtienda: number): Observable<any> {
+    return this.http.post<any>(`${this.urlEndPointEpico}/user-store`, { codusuario, codtienda });
+  }
+
+  deleteTiendasPorUsuario(codigoUsuario: string, codTienda: number): Observable<{ message: string }> {
+    return this.http.delete<{ message: string }>(`${this.urlEndPointEpico}/user-store/${codigoUsuario}/${codTienda}`);
   }
 
 }

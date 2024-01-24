@@ -20,7 +20,7 @@ export class CambioCuentaComponent implements OnInit {
   public CuentasTiendas: CuentaBancarias[] = [];
   public CuentasTiendasTodo: CuentaBancarias[] = [];
   public CuentaSelected!: CuentaBancarias;
-  public Tienda!: String;
+  public Tienda: String='';
   public TiendaValida: String = "";
   private ref!: DynamicDialogRef;
 
@@ -65,32 +65,39 @@ export class CambioCuentaComponent implements OnInit {
       CuentasTiendas2 => {
         this.CuentasTiendasTodo = CuentasTiendas2;
         this.CuentasTiendas = this.CuentasTiendasTodo;
+
+        this.onKDownTienda(null);
       }
     )
   }
 
   public editarCuentaBancaria(): void {    
-    this.ref = this.dialogService.open(EditarCuentaBancariaComponent, {
-      header: `${this.CuentaSelected.marcaDesc} - ${this.CuentaSelected.tienda}  ${this.CuentaSelected.moneda}`,
-      width: '50%',
-      contentStyle: { "max-height": "360px", "overflow": "auto" },
-      data: this.CuentaSelected
-    });
-
-    this.ref.onClose.subscribe((Val: number) => {
-      this.ListarCuentas(this.empresaService.getEmpresaSeleccionada().idEmpresa,this.Tienda);
-});
+    if(this.CuentaSelected !== undefined && this.CuentaSelected !== null){
+      this.ref = this.dialogService.open(EditarCuentaBancariaComponent, {
+        header: `${this.CuentaSelected.marcaDesc} - ${this.CuentaSelected.tienda}  ${this.CuentaSelected.moneda}`,
+        width: '50%',
+        contentStyle: { "max-height": "360px", "overflow": "auto" },
+        data: this.CuentaSelected
+      });
+      this.ref.onClose.subscribe((Val: number) => {
+        this.ListarCuentas(this.empresaService.getEmpresaSeleccionada().idEmpresa,undefined);
+      });
+    } else{
+      swal.fire('Información', 'Seleccionar un registro', 'info');
+    }
   }
 
   onKDownTienda(event: any) {
-    const filtro = this.Tienda.toLowerCase();
-    this.CuentasTiendas = this.CuentasTiendasTodo.filter(item => {
-      const camposConcatenados = item.tienda.toLowerCase() +"-"+ item.tienda.toLowerCase();
-      const camposConcatenados2 = item.cuenta.toLowerCase() +"-"+item.cuenta.toLowerCase();
-      const camposConcatenados3 = item.numero.toLowerCase() +"-"+item.numero.toLowerCase();
-      return camposConcatenados.includes(filtro)|| camposConcatenados2.includes(filtro) || camposConcatenados2.includes(filtro);
-    });
-
-
+      const filtro = this.Tienda.toLowerCase();
+      if(filtro !=''){
+        this.CuentasTiendas = this.CuentasTiendasTodo.filter(item => {
+          const camposConcatenados = item.tienda.toLowerCase() +"-"+ item.tienda.toLowerCase();
+          const camposConcatenados2 = item.cuenta.toLowerCase() +"-"+item.cuenta.toLowerCase();
+          const camposConcatenados3 = item.numero.toLowerCase() +"-"+item.numero.toLowerCase();
+          return camposConcatenados.includes(filtro)|| camposConcatenados2.includes(filtro) || camposConcatenados3.includes(filtro);
+        });
+      }else{
+        this.CuentasTiendas = this.CuentasTiendasTodo;
+      }
   }
 }

@@ -1,0 +1,87 @@
+<div id="container" class="p-d-flex p-flex-column">
+  <div style="display: grid; justify-content: center">
+
+    <div class="p-mb-12">
+      <div class="p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12">
+        <label
+          for="Email"
+          class="p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12"
+          >Email:</label
+        >
+        <div class="p-col p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12">
+          <input
+            type="tex"
+            name="emailTienda"
+            [(ngModel)]="emailTienda"
+            id="emailTienda"
+            pInputText
+            required
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="p-mb-12">
+      <div class="p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12">
+        <label
+          for="Inmueble R.P"
+          class="p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12"
+          >Inmueble R.P:</label
+        >
+        <div class="p-col p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12">
+          <input
+            type="text"
+            name="codigoInmuebleRP"
+            [(ngModel)]="codigoInmuebleRP"
+            id="codigoInmuebleRP"
+            pInputText
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="p-mb-12">
+      <div class="p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12">
+        <label
+          for="Local R.P"
+          class="p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12"
+          >Local R.P:</label
+        >
+        <div class="p-col p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12">
+          <input
+            type="text"
+            name="codigoLocalRP"
+            [(ngModel)]="codigoLocalRP"
+            id="codigoLocalRP"
+            pInputText
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-mb-2 p-d-flex p-jc-center">
+    <div class="p-d-flex p-jc-end">
+      <button
+        pButton
+        pRipple
+        pTooltip="Editar"
+        tooltipPosition="bottom"
+        label="Guardar"
+        (click)="editar()"
+        icon="pi pi-calendar-plus"
+        class="p-button-success p-mr-2"
+      ></button>
+      <button
+        pButton
+        pRipple
+        pTooltip="Cancelar"
+        tooltipPosition="bottom"
+        label="Cancelar"
+        (click)="cancelar()"
+        icon="pi pi-times"
+        class="p-button-secondary"
+      ></button>
+    </div>
+  </div>
+</div>

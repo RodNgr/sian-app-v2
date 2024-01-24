@@ -33,7 +33,7 @@ export class EditarCuentaBancariaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cambioCuentaService.getBancos(this.CuentaSel.marca,this.CuentaSel.codMoneda).subscribe(
+    this.cambioCuentaService.getBancosCambioCuenta(this.CuentaSel.marca,this.CuentaSel.codMoneda).subscribe(
       Bancos2 => {
         for (let index = 0; index < Bancos2.length; index++) {      
           this.bancoss.push({ idCuenta: Bancos2[index].idCuenta,
@@ -51,12 +51,8 @@ export class EditarCuentaBancariaComponent implements OnInit {
     )
 
     //this.Banco = this.config.data.codBanco;    
-    this.Numero = this.config.data.numero;    
-    this.Cuenta = this.config.data.cuenta;    
-
-    /* this.bancoss = this.bancoss.filter(r => {          
-      return r.banco = this.config.data.banco;
-    }); */
+    this.Numero = this.config.data.numero;
+    this.Cuenta = this.config.data.cuenta;
 
     if (this.bancoss) {
      
@@ -65,12 +61,6 @@ export class EditarCuentaBancariaComponent implements OnInit {
   }
   private selBanco(){
     this.IdCuenta=this.CuentaSel.idCuenta;
-    /* this.bancoss.forEach(r => {  
-      if (r.idCuenta.toString() === this.config.data.idCuenta.toString()) {
-        //this.Banco = r.idCuenta.toString();   
-        $("#Banco2").val(r.idCuenta.toString());
-      }
-    }) */
   }
   public MostrarDatos(){
     this.CuentaSel.idCuenta=this.IdCuenta;
@@ -82,18 +72,6 @@ export class EditarCuentaBancariaComponent implements OnInit {
     this.CuentaSel.numero = selbanco.numero;
     this.CuentaSel.codBanco = selbanco.codBanco;
     this.CuentaSel.codNumero = selbanco.codNumero;
-
-    /* this.cambioCuentaService.getCuentaBancariaSeleccionada(this.config.data.marca,this.config.data.codTienda,this.CuentaSel.idCuenta,this.config.data.codMoneda).subscribe(
-      result => {
-        if(result.length == 0){
-          this.Numero = "";    
-          this.Cuenta = "";    
-        } else {
-          this.Numero = result[0].numero;
-          this.Cuenta = result[0].cuenta;   
-        }
-      }
-    ) */
   }
 
   public Guardar(){

@@ -232,6 +232,10 @@ export class SidenavComponent implements OnInit {
         proceso.items?.push({ label: 'Cambio Cuenta', icon: 'pi pi-fw pi-money-bill', routerLink: '/home/cierre/cambio-cuenta', routerLinkActiveOptions: {exact: true} });
       }
 
+      if (this.authService.hasRole('ROL_SIAN_CIERRE_CAMBIO_CUENTA')) {
+        proceso.items?.push({ label: 'Cuenta Bancaria', icon: 'pi pi-fw pi-money-bill', routerLink: '/home/cierre/cuenta-bancaria', routerLinkActiveOptions: {exact: true} });
+      }
+
       if (this.authService.hasRole('ROL_SIAN_CIERRE_CAJA_CHICA')) {
         proceso.items?.push({ label: 'Caja Chica', icon: 'pi pi-fw pi-money-bill', routerLink: '/home/cierre/caja-chica', routerLinkActiveOptions: {exact: true} });
       }
@@ -331,6 +335,10 @@ export class SidenavComponent implements OnInit {
 
       if (this.authService.hasRole('ROL_SIAN_REP_PROCESO_AUTOMATICO')) {
         configuracion.items?.push({ label: 'Proceso Automatico', icon: 'pi pi-fw pi-file', routerLink: '/home/reporte/proceso-automatico', routerLinkActiveOptions: {exact: true} });
+      }
+
+      if (this.authService.hasRole('ROL_SIAN_ANULAR_PEDIDO_HUB')) {
+        configuracion.items?.push({ label: 'Anular Pedido HUB', icon: 'pi pi-fw pi-file', routerLink: '/home/reporte/anular-pedido', routerLinkActiveOptions: {exact: true} });
       }
 
       menu.items?.push(gestion);
