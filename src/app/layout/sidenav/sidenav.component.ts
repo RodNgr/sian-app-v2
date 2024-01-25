@@ -201,6 +201,10 @@ export class SidenavComponent implements OnInit {
         proceso.items?.push({ label: 'Rappi', icon: 'pi pi-fw pi-shopping-cart', routerLink: '/home/cuadratura/lista-cuadratura-rappi', routerLinkActiveOptions: {exact: true} });
       }
 
+      if (this.authService.hasRole('ROL_SIAN_CUAD_AGREGADOR_RAPPI')) {
+        proceso.items?.push({ label: 'PEYA', icon: 'pi pi-fw pi-shopping-cart', routerLink: '/home/cuadratura/lista-cuadratura-peya', routerLinkActiveOptions: {exact: true} });
+      }
+
       if (this.authService.hasRole('ROL_SIAN_CUAD_MALL')) {
         proceso.items?.push({ label: 'Mall', icon: 'pi pi-fw pi-home', routerLink: '/home/cuadratura/lista-cuadratura-mall', routerLinkActiveOptions: {exact: true} });
       }

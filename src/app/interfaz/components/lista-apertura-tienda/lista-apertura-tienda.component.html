@@ -67,6 +67,7 @@
     [(selection)]="tiendaSeleccionada"
     dataKey="tiendaCodigo"
     [rowsPerPageOptions]="[15, 25, 50, 100]"
+    [globalFilterFields]="['nombreTienda']"
   >
     <ng-template pTemplate="caption">
       <div class="p-d-flex p-ai-center p-jc-between">
