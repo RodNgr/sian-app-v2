@@ -9,6 +9,7 @@ import { ReporteOtrasCuadraturasComponent } from './pages/reporte-otras-cuadratu
 import { TableroControlComponent } from './pages/tablero-control/tablero-control.component';
 import { CambioCuentaComponent } from './pages/cambio-cuenta/cambio-cuenta.component';
 import { CuentaBancariaComponent } from './pages/cuenta-bancaria/cuenta-bancaria.component';
+import { TiendaDepositoComponent } from './pages/tienda-deposito/tienda-deposito.component';
 
 const routes: Routes = [
   { path: '', children: 
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: 'reporte-depositos', component: ReporteDepositosComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_CIERRE_REP_DEPOSITO']} },
       { path: 'tablero-control', component: TableroControlComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_CIERRE_REP_TAB_CONTROL']} },
       { path: 'reporte-otras-cuadraturas', component: ReporteOtrasCuadraturasComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_CIERRE_REP_OTRA_CUADRATURA']} },
+      { path: 'tienda-deposito', component: TiendaDepositoComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_CIERRE_DIA']}},
     ]
   }
 ];

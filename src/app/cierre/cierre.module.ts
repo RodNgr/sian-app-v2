@@ -19,20 +19,29 @@ import { EditarCuentaBancariaComponent } from './components/editar-cuenta-bancar
 import { CuentaBancariaComponent } from './pages/cuenta-bancaria/cuenta-bancaria.component';
 import { EditarCuentaComponent } from './components/editar-cuenta/editar-cuenta.component';
 import { AnularPedidosHubComponent } from './pages/anular-pedidos-hub/anular-pedidos-hub.component';
+import { TiendaDepositoComponent } from './pages/tienda-deposito/tienda-deposito.component';
+
+
 @NgModule({
   declarations: [
     CierreDiaComponent,
     CajaChicaComponent, 
     ReporteDepositosComponent, 
     TableroControlComponent, 
-    ReporteOtrasCuadraturasComponent, DepositosPixelComponent, DepositoConEfectivoComponent,
+    ReporteOtrasCuadraturasComponent, 
+    DepositosPixelComponent, 
+    DepositoConEfectivoComponent,
     DepositoSinEfectivoComponent,
     OtrasCuadraturasComponent,
     CambioCuentaComponent,
     EditarCuentaBancariaComponent,
     CuentaBancariaComponent,
     EditarCuentaComponent,
-    AnularPedidosHubComponent
+    AnularPedidosHubComponent,
+    EditarCuentaComponent,
+    CambioCuentaComponent,
+    EditarCuentaBancariaComponent,
+    TiendaDepositoComponent,
   ],
   imports: [
     CommonModule,
