@@ -19,7 +19,7 @@ export const environment = {
   urlInterfaz: 'http://localhost:9842',*/
   // urlCupones: 'http://localhost:9837',
   // urlInterfazProducto: 'http://localhost:9838',
-  urlCuadratura: 'http://localhost:9839',
+  // urlCuadratura: 'http://localhost:9839',
   // urlEjecutor: 'http://localhost:9845',
   // urlEjecutorSybase: 'http://localhost:9753',
   urlReporte: 'http://localhost:9811',
@@ -59,6 +59,7 @@ export const environment = {
   // gtype: 'client_credentials',
   // clientid: '7tj4d2jf2kenqkra76ga751omni',
   // clientsecret: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliigen',
+  // clientsecretdescuento: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliigen',
   // clientidunico: '7tj4d2jf2kenqkra76ga751clienteunico',
   // clientsecretunico: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliiclienteunico',
   // urlAmauta: 'https://api.dev.amauta.api-ngr.com',
@@ -68,7 +69,7 @@ export const environment = {
   urlSecurity: 'http://VSRVPRDAPP07.ngr.com.pe:9999',
   urlCupones: 'http://VSRVPRDAPP07.ngr.com.pe:9837',
   urlInterfazProducto: 'http://VSRVPRDAPP07.ngr.com.pe:9838',
-  //urlCuadratura: 'http://VSRVPRDAPP07.ngr.com.pe:9839',
+  urlCuadratura: 'http://VSRVPRDAPP07.ngr.com.pe:9839',
   urlEjecutor: 'http://VSRVPRDAPP07.ngr.com.pe:9845',
   urlEjecutorSybase: 'http://VSRVPRDAPP07.ngr.com.pe:9753',
   // urlInterfaz: 'http://VSRVPRDAPP07.ngr.com.pe:9842',
@@ -84,10 +85,10 @@ export const environment = {
   gtype: 'client_credentials',
   clientid: '7tj4d2jf2kenqkra76ga751omni',
   clientsecret: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliiomni',
+  clientsecretdescuento: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliigen',
   clientidunico: '7tj4d2jf2kenqkra76ga751clienteunico',
   clientsecretunico: 'mgps0alo77vpdviokkumq2njk3vggki7rnam9ho02sluvliiclienteunico',
   urlAmauta: 'https://api.dev.amauta.api-ngr.com'
-
 };
 
 

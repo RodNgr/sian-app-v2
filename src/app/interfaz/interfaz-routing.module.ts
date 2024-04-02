@@ -28,6 +28,9 @@ import { BloqueoInterfacesComponent } from './pages/bloqueo-interfaces/bloqueo-i
 import { IncidentesComponent } from './pages/incidentes/incidentes.component';
 import { AperturaTiendaComponent } from './components/apertura-tienda/apertura-tienda.component';
 import { ListaAperturaTiendaComponent } from './components/lista-apertura-tienda/lista-apertura-tienda.component';
+import { ListaBeneficioEmpleadoComponent } from './components/lista-beneficio-empleado/lista-beneficio-empleado.component';
+import { ListaFeriadosComponent } from './components/lista-feriados/lista-feriados.component';
+import { ListaTiendasBeneficioComponent } from './components/lista-tiendas-descuento/lista-tiendas-descuento.component';
 
 const routes: Routes = [
   { path: '', children: 
@@ -63,6 +66,13 @@ const routes: Routes = [
       { path: 'incidente', component: IncidentesComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_ITZ_INCIDENTE']} },
       { path: 'apertura-tienda', component: AperturaTiendaComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_ITZ_INCIDENTE']} },
       { path: 'lista-apertura-tienda', component: ListaAperturaTiendaComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_ITZ_INCIDENTE']} },
+      
+      { path: 'feriados', component: ListaFeriadosComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_ITZ_INCIDENTE']} },
+      { path: 'nuevo-feriado', component: ListaFeriadosComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_ITZ_INCIDENTE']} },      
+      { path: 'beneficio-empleado', component: ListaBeneficioEmpleadoComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_ITZ_INCIDENTE']} },
+      { path: 'nuevo-feriado', component: ListaBeneficioEmpleadoComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_ITZ_INCIDENTE']} },
+      { path: 'beneficio-tienda', component: ListaTiendasBeneficioComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_ITZ_INCIDENTE']} },
+      { path: 'nuevo-beneficio-tienda', component: ListaTiendasBeneficioComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_ITZ_INCIDENTE']} },
     ]
   }
 ];
