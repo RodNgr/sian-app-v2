@@ -1,0 +1,112 @@
+.btnconsultar {
+    background-color: #6847BA;
+}
+
+.btnconsultar:hover {
+    background-color: #6847BA;
+}
+
+.contenido {
+
+    display: flex;
+}
+
+.divsfiltro {
+    margin: auto;
+    /*  text-align: center; */
+}
+
+.w96 {
+    width: 96% !important;
+}
+.w100 {
+    width: 100% !important;
+}
+::ng-deep .p-datatable-tbody {
+    font-size: 10px;
+}
+
+.divdetalle {
+    gap: 0px;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    margin-top: 20px;
+}
+
+.cabecerasdiv {
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid #CED4DA;
+    padding-bottom: 20px;
+}
+
+.mt20 {
+    margin-top: 20px;
+}
+
+.btnexport {
+    width: 154px;
+}
+
+.ma {
+    margin: auto;
+}
+
+.mb20 {
+    margin-bottom: 20px;
+}
+
+.btnregresar {
+    width: 154px;
+    height: 46px;
+    gap: 0px;
+    border-radius: 6px;
+    background-color: #5E5E5E;
+    color: #FFFFFF;
+}
+
+.btnregresar:hover {
+    width: 154px;
+    height: 46px;
+    gap: 0px;
+    border-radius: 6px;
+    background-color: #5E5E5E;
+    color: #FFFFFF;
+}
+
+::ng-deep .p-sortable-column {
+    font-size: 12px;
+}
+
+.lblcabecera {
+    /* font-family: Phetsarath; */
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 14px;
+    text-align: left;
+    color: #353535;
+}
+
+.lbldetalle {
+    /* font-family: Phetsarath; */
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 14px;
+    text-align: left;
+    color: #525252;
+}
+
+.vercomprobante {
+   /*  font-family: Phetsarath; */
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 14px;
+    text-align: left;
+    color: #2E7CF6;
+    border-bottom: 1px solid #2E7CF6;
+    cursor: pointer;
+}
+
+.mt4{
+    margin-top: 4px;
+}
