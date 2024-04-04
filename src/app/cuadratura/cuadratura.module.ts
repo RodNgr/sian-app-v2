@@ -23,6 +23,7 @@ import { TipoComprobantePipe } from './pipes/tipo-comprobante.pipe';
 import { ListaCuadraturaVisaComponent } from './pages/lista-cuadratura-visa/lista-cuadratura-visa.component';
 import { ListaCuadraturaPeyaComponent } from './pages/lista-cuadratura-peya/lista-cuadratura-peya.component';
 import { CuadraturaAgregadorPeyaComponent } from './pages/cuadratura-agregador-peya/cuadratura-agregador-peya.component';
+import { ListaCuadraturaDidiComponent } from './pages/lista-cuadratura-didi/lista-cuadratura-didi.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { CuadraturaAgregadorPeyaComponent } from './pages/cuadratura-agregador-p
     TipoComprobantePipe,
     ListaCuadraturaVisaComponent,
     ListaCuadraturaPeyaComponent,
-    CuadraturaAgregadorPeyaComponent
+    CuadraturaAgregadorPeyaComponent,
+    ListaCuadraturaDidiComponent
   ],
   imports: [
     CommonModule,

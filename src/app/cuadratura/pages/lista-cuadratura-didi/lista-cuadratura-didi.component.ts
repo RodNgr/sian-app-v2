@@ -28,13 +28,12 @@ interface Estado {
   codigo: string,
   descripcion: string
 }
-
 @Component({
-  selector: 'app-lista-cuadratura-peya',
-  templateUrl: './lista-cuadratura-peya.component.html',
-  styleUrls: ['./lista-cuadratura-peya.component.css']
+  selector: 'app-lista-cuadratura-didi',
+  templateUrl: './lista-cuadratura-didi.component.html',
+  styleUrls: ['./lista-cuadratura-didi.component.css']
 })
-export class ListaCuadraturaPeyaComponent implements OnInit {
+export class ListaCuadraturaDidiComponent implements OnInit {
   public procesoList: Proceso[] = [];
 
   public procesoSelected!: Proceso;
@@ -57,7 +56,7 @@ export class ListaCuadraturaPeyaComponent implements OnInit {
 
   private estadoPipe = new EstadoProcesoPipe();
 
-  private type: number = 5;
+  private type: number = 4;
 
   private ref!: DynamicDialogRef;
 
@@ -88,7 +87,7 @@ export class ListaCuadraturaPeyaComponent implements OnInit {
 
   public newProceso(): void {
     if (this.type === 1) {
-      this.router.navigateByUrl('/home/cuadratura/pedidos-peya')
+      this.router.navigateByUrl('/home/cuadratura/pedidos-didi')
     }
   }
 
@@ -108,11 +107,11 @@ export class ListaCuadraturaPeyaComponent implements OnInit {
 
   public exportXLS(): void {
     let workbook = new Workbook();
-    let worksheet = workbook.addWorksheet('Proceso Cuadratura Peya');
+    let worksheet = workbook.addWorksheet('Proceso Cuadratura Didi');
 
     // Título del archivo
     worksheet.addRow(['']);
-    worksheet.addRow(['Listado de Procesos de Cuadratura Peya']);
+    worksheet.addRow(['Listado de Procesos de Cuadratura Didi']);
     worksheet.addRow(['']);
     worksheet.mergeCells('A2:H2');
     worksheet.getCell('A2').font = { size: 12, bold: true,  name: 'Arial' };
@@ -150,7 +149,7 @@ export class ListaCuadraturaPeyaComponent implements OnInit {
     
     workbook.xlsx.writeBuffer().then((data) => {
       let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-      fs.saveAs(blob, 'Proceso_Cuadratura_Peya.xlsx');
+      fs.saveAs(blob, 'Proceso_Cuadratura_Didi.xlsx');
     });
   }
 

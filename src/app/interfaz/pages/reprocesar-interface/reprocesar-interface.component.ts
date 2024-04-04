@@ -13,6 +13,8 @@ import { InterfazTiendaService } from '../../services/interfaz-tienda.service';
 import { AuthService } from '../../../auth/services/auth.service';
 import { ReporteService } from '../../../cierre/services/reporte.service';
 import { Tienda } from '../../../cierre/entity/tienda';
+import { InterfazLog } from '../../entity/logInterfaz';
+import { tiendaSeleccionada } from '../../entity/tiendaSeleccionada';
 
 @Component({
   selector: 'app-reprocesar-interface',
@@ -80,11 +82,13 @@ export class ReprocesarInterfaceComponent implements OnInit {
   }
 
   public procesarInterface(tipo: string) {
-    this.spinnerMessage = 'Procesando...';
-    this.spinner.show();
+    let ArrTiendas: String[] = [];
+    this.tiendasSeleccionadas.forEach(value => {
+      ArrTiendas.push(value.tiendaSAP);
+    })
+
     let fecIni = this.rangeDates[0];
     let fecFin = this.rangeDates[1];
-    let ArrTiendas: String[] = [];
 
     let dto = new FiltroDto();
     dto.fecha = formatDate(fecIni, 'yyyyMMdd', 'en_US');
@@ -95,9 +99,29 @@ export class ReprocesarInterfaceComponent implements OnInit {
       dto.fechaFin = formatDate(fecFin, 'yyyyMMdd', 'en_US');
     }
 
-    this.tiendasSeleccionadas.forEach(value => {
-      ArrTiendas.push(value.tiendaSAP);
-    })
+    console.log(fecIni, fecFin);
+
+    console.log(dto.fecha, dto.fechaFin);
+
+    let logInterfaz: InterfazLog = new InterfazLog();
+
+    logInterfaz.dfecinicio = dto.fecha;
+    logInterfaz.vatipointerfaz = tipo;
+    logInterfaz.dfecfin = dto.fechaFin; 
+    logInterfaz.cdusuario = this.authService.usuario.user.nrodoc;
+    logInterfaz.vatiendas = ArrTiendas.toString();
+    logInterfaz.mensaje = "Se inicio el proceso de interfaz desde el front para las tiendas" + ArrTiendas.toString();
+    console.log(logInterfaz);
+    this.interfaztiendaService.insertarLogStatus(logInterfaz).subscribe(
+      resultado => {
+        console.log("Se inserto el log de inicio");
+      }
+    )
+
+    this.spinnerMessage = 'Procesando...';
+    this.spinner.show();    
+
+    
     dto.lisTiendas = ArrTiendas;
 
     if(this.mixVentas){
@@ -115,26 +139,41 @@ export class ReprocesarInterfaceComponent implements OnInit {
 
     dto.idUsuario = parseInt(this.authService.usuario.user.codigo);
 
-    this.mensajeList = [];
-    this.spinner.show();
+    this.mensajeList = [];    
     this.interfaztiendaService.getResultadosProcesoInterfaz(dto).subscribe(
       resultado => {
         resultado.forEach(mensaje => {
           mensaje.fecDate = new Date(parseInt(mensaje.fecha.substring(0, 4)), parseInt(mensaje.fecha.substring(4, 6)) - 1, parseInt(mensaje.fecha.substring(6, 8)));
           this.mensajeList.push(mensaje);
         })
-        
+        logInterfaz.mensaje = "Se finalizo el proceso de interfaz desde el front para las tiendas" + ArrTiendas.toString();
+        console.log(logInterfaz);
+        this.interfaztiendaService.insertarLogStatus(logInterfaz).subscribe(
+          resultado => {
+            console.log("Se cerro la insercion el log de inicio");
+          }
+        )
         this.spinner.hide();
-        this.spinnerMessage = 'Cargando...';
+        
       },
       _err => {
         dto.fecDate = new Date(parseInt(dto.fecha.substring(0, 4)), parseInt(dto.fecha.substring(4, 6)) - 1, parseInt(dto.fecha.substring(6, 8)));
         dto.mensaje = "Error interno al procesar la interfaz";
         this.mensajeList.push(dto);
-        this.spinner.hide();
-        this.spinnerMessage = 'Cargando...';
+        logInterfaz.mensaje = "Se finalizo el proceso de interfaz desde el front para las tiendas" + ArrTiendas.toString();
+        console.log(logInterfaz);
+        this.interfaztiendaService.insertarLogStatus(logInterfaz).subscribe(
+          resultado => {
+            console.log("Se cerro la insercion el log de inicio - ERROR");
+          }
+        )
+        this.spinner.hide();        
       }
     )
+
+    logInterfaz.mensaje = "Se finalizo el proceso de interfaz desde el front para las tiendas" + ArrTiendas.toString();
+
+    
   }
 
   public changeFecIni(): void {    
