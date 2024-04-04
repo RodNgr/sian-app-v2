@@ -38,6 +38,8 @@ import { GestionClienteComponent } from './pages/gestion-cliente/gestion-cliente
 import { ProcesoAutomaticoComponent } from './pages/proceso-automatico/proceso-automatico.component';
 import { DetalleProcesoAutomaticoComponent } from './components/detalle-procesoautomatico/detalle-procesoautomatico.component';
 import { AnularPedidosHubComponent } from './pages/anular-pedidos-hub/anular-pedidos-hub.component';
+import { LibroReclamacionesComponent } from './pages/reporte-libro-reclamaciones/reporte-libro-reclamaciones.component';
+
 @NgModule({
   declarations: [
     EjecutarConsultaComponent, 
@@ -71,7 +73,8 @@ import { AnularPedidosHubComponent } from './pages/anular-pedidos-hub/anular-ped
     GestionClienteComponent,
     ProcesoAutomaticoComponent,
     DetalleProcesoAutomaticoComponent,
-    AnularPedidosHubComponent
+    AnularPedidosHubComponent,
+    LibroReclamacionesComponent
   ],
   imports: [
     CommonModule,
