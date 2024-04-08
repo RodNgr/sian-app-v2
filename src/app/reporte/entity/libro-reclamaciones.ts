@@ -6,7 +6,8 @@ export class LibroReclamaciones {
     nombre: string;
     departamento: string;
     direccion: string;
-    dni: string;
+    tipodocumento: string;
+    nrodoc: string;
     telefono: string;
     email: string;
     datospadres: string;
@@ -17,6 +18,7 @@ export class LibroReclamaciones {
     tipo: string;
     tipodealle: string;
     nombrearchivo: string;
+    numeropedido: string;
     observacionesyacciones: string;
     fecha: Date;
 }

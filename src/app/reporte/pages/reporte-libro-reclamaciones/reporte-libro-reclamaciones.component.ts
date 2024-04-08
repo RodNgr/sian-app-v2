@@ -50,7 +50,7 @@ export class LibroReclamacionesComponent implements OnInit {
       // Convertir los valores de los campos a minúsculas para que la búsqueda sea insensible a mayúsculas y minúsculas
       const codigoMinusculas = item.codigo.toLowerCase();
       const nombreMinusculas = item.nombre.toLowerCase();
-      const dniMinusculas = item.dni.toLowerCase();
+      const dniMinusculas = item.nrodoc.toLowerCase();
   
       // Concatenar los valores de los campos en una sola cadena para realizar la búsqueda
       const camposConcatenados = `${codigoMinusculas} ${nombreMinusculas} ${dniMinusculas}`;
@@ -113,7 +113,8 @@ export class LibroReclamacionesComponent implements OnInit {
       "Nombre",
       "Departamento",
       "Dirección",
-      "DNI",
+      "Tipo Doc.",
+      "N° Doc.",
       "Teléfono",
       "Email",
       "Datos Padres",
@@ -123,6 +124,7 @@ export class LibroReclamacionesComponent implements OnInit {
       "Tienda",
       "Tipo",
       "Tipo de Alcance",
+      "Numero de Pedido",
       "Nombre de Archivo",
       "Observaciones y Acciones",
       "Fecha"
@@ -135,6 +137,7 @@ export class LibroReclamacionesComponent implements OnInit {
       { width: 40 },   // Nombre
       { width: 40 },   // Departamento
       { width: 40 },   // Dirección
+      { width: 20 },   // Tipo Docum
       { width: 20 },   // DNI
       { width: 20 },   // Teléfono
       { width: 40 },   // Email
@@ -145,6 +148,7 @@ export class LibroReclamacionesComponent implements OnInit {
       { width: 40 },   // Tienda
       { width: 20 },   // Tipo
       { width: 20 },   // Tipo de Alcance
+      { width: 20 },   // Numero de Pedido
       { width: 40 },   // Nombre de Archivo
       { width: 40 },   // Observaciones y Acciones
       { width: 15 },   // Fecha
@@ -165,7 +169,8 @@ export class LibroReclamacionesComponent implements OnInit {
       obj.nombre,
       obj.departamento,
       obj.direccion,
-      obj.dni,
+      obj.tipodocumento,
+      obj.nrodoc,
       obj.telefono,
       obj.email,
       obj.datospadres,
@@ -175,15 +180,16 @@ export class LibroReclamacionesComponent implements OnInit {
       obj.tienda,
       obj.tipo,
       obj.tipodealle,
-      obj.nombrearchivo,
+      obj.numeropedido,
+      { text: 'Descargar', hyperlink: obj.nombrearchivo },
       obj.observacionesyacciones,
       this.pipe.transform(obj.fecha, "dd/MM/yyyy HH:mm:ss") || ''
     ]);
 
-      worksheet.getRow(contador).eachCell(function (cell: Cell, colNumber: number) {
-        cell.border = { top: { style: 'thin', color: { argb: '000000' } }, left: { style: 'thin', color: { argb: '000000' } }, bottom: { style: 'thin', color: { argb: '000000' } }, right: { style: 'thin', color: { argb: '000000' } } };
-        cell.font = { size: 8, name: 'Arial' };
-      });
+    worksheet.getRow(contador).eachCell(function (cell: Cell, colNumber: number) {
+      cell.border = { top: { style: 'thin', color: { argb: '000000' } }, left: { style: 'thin', color: { argb: '000000' } }, bottom: { style: 'thin', color: { argb: '000000' } }, right: { style: 'thin', color: { argb: '000000' } } };
+      cell.font = { size: 8, name: 'Arial' };
+    });
 
       contador++;
     })
@@ -214,7 +220,8 @@ export class LibroReclamacionesComponent implements OnInit {
       "Nombre",
       "Departamento",
       "Dirección",
-      "DNI",
+      "Tipo Doc.",
+      "N° Doc.",
       "Teléfono",
       "Email",
       "Datos Padres",
@@ -224,6 +231,7 @@ export class LibroReclamacionesComponent implements OnInit {
       "Tienda",
       "Tipo",
       "Tipo de Alcance",
+      "Numero de Pedido",
       "Nombre de Archivo",
       "Observaciones y Acciones",
       "Fecha"
@@ -235,7 +243,8 @@ export class LibroReclamacionesComponent implements OnInit {
       { width: 40 },   // Nombre
       { width: 40 },   // Departamento
       { width: 40 },   // Dirección
-      { width: 20 },   // DNI
+      { width: 20 },   // Tipo Docum
+      { width: 20 },   // nrdoc
       { width: 20 },   // Teléfono
       { width: 40 },   // Email
       { width: 40 },   // Datos Padres
@@ -245,6 +254,7 @@ export class LibroReclamacionesComponent implements OnInit {
       { width: 40 },   // Tienda
       { width: 20 },   // Tipo
       { width: 20 },   // Tipo de Alcance
+      { width: 20 },   // Numero de Pedido
       { width: 40 },   // Nombre de Archivo
       { width: 40 },   // Observaciones y Acciones
       { width: 15 },   // Fecha
@@ -285,7 +295,8 @@ export class LibroReclamacionesComponent implements OnInit {
       this.reporteSelected.nombre,
       this.reporteSelected.departamento,
       this.reporteSelected.direccion,
-      this.reporteSelected.dni,
+      this.reporteSelected.tipodocumento,
+      this.reporteSelected.nrodoc,
       this.reporteSelected.telefono,
       this.reporteSelected.email,
       this.reporteSelected.datospadres,
@@ -295,7 +306,8 @@ export class LibroReclamacionesComponent implements OnInit {
       this.reporteSelected.tienda,
       this.reporteSelected.tipo,
       this.reporteSelected.tipodealle,
-      this.reporteSelected.nombrearchivo,
+      this.reporteSelected.numeropedido,
+      { text: 'Descargar', hyperlink: this.reporteSelected.nombrearchivo },
       this.reporteSelected.observacionesyacciones,
       this.pipe.transform(this.reporteSelected.fecha, "dd/MM/yyyy HH:mm:ss") || ''
     ]);
