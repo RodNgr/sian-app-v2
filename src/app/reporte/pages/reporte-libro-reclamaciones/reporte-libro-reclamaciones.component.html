@@ -72,11 +72,12 @@
                     <col style="width:6%;">
                     <col style="width:15%;">
                     <col style="width:6%;">
+                    <col style="width:6%;">
                     <col style="width:5%;">
                     <col style="width:6%;">
                     <col style="width:5%;">
                     <col style="width:13%;">
-                    <col style="width:6%;">
+                    <col style="width:5%;">
                     <col style="width:6%;">
                </colgroup>
           </ng-template>
@@ -84,7 +85,8 @@
                <tr>
                      <th pSortableColumn="codigo">Codigo<p-sortIcon field="codigo"></p-sortIcon></th>
                     <th pSortableColumn="nombre">Nombre <p-sortIcon field="nombre"></p-sortIcon></th>
-                    <th pSortableColumn="email">Nro Doc <p-sortIcon field="dni"></p-sortIcon></th>
+                    <th pSortableColumn="email">Tipo Doc<p-sortIcon field="tipodocumento"></p-sortIcon></th>
+                    <th pSortableColumn="email">Nro Doc <p-sortIcon field="nrodoc"></p-sortIcon></th>
                      <th pSortableColumn="fecha">F.Reg. <p-sortIcon field="fecha"></p-sortIcon></th>
                     <th pSortableColumn="tienda">Tienda <p-sortIcon field="tienda"></p-sortIcon></th>
 
@@ -99,7 +101,8 @@
                <tr [pSelectableRow]="obj">
                      <td ><span class="p-column-title">Codigo</span>{{obj.codigo | uppercase }}</td>
                     <td><span class="p-column-title">Nombre</span>{{obj.nombre | uppercase }}</td>
-                    <td><span class="p-column-title">Doc.</span>{{obj.dni}}</td>
+                    <td><span class="p-column-title">Tipo Doc.</span>{{obj.tipodocumento}}</td>
+                    <td><span class="p-column-title">Nro Doc.</span>{{obj.nrodoc}}</td>
                     <td><span class="p-column-title">F.Reg</span>{{obj.fecha | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
                     <td><span class="p-column-title">Tienda</span>{{obj.tienda}}</td>
                     <td><span class="p-column-title">Teléf.</span>{{obj.telefono}}</td>
@@ -154,10 +157,10 @@
           </div>
           <div style="width: 100%;display: flex;" class="mb20">
                <div style="width: 20%;">
-                    <label class="lbldetalle" for="">Documento :</label>
+                    <label class="lbldetalle" for="">{{reporteSelected?.tipodocumento}} :</label>
                </div>
                <div style="width: 80%;">
-                    <label for="">{{reporteSelected?.dni}}</label>
+                    <label for="">{{reporteSelected?.nrodoc}}</label>
                </div>
           </div>
           <div style="width: 100%;display: flex;" class="mb20">
@@ -234,6 +237,15 @@
                          </label>
                     </div>
 
+               </div>
+          </div>
+          <div style="width: 100%;display: flex;" class="mb20">
+               <div style="width: 20%;">
+                    <label class="lbldetalle" for="">Numero de Pedido :</label>
+               </div>
+               <div style="width: 80%;">
+                    <label for="">{{reporteSelected?.numeropedido}}
+                    </label>
                </div>
           </div>
           <div style="width: 100%;display: flex;" class="mb20">

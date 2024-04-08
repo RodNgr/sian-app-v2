@@ -51,7 +51,7 @@ const routes: Routes = [
       { path: 'reporte-redimido', component: ReporteRedimidoComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_REP_CON_REDIMIDO']} },
       { path: 'anular-pedido', component: AnularPedidosHubComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_ANULAR_PEDIDO_HUB']} },
       { path: 'lista-reporte', component: ListaTransaccionComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_REP_EJECUTAR_CONSULTA']} },
-      { path: 'reporte-libro-reclamaciones', component: LibroReclamacionesComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_REPORTE_CYBER']} },
+      { path: 'reporte-libro-reclamaciones', component: LibroReclamacionesComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_FORMULARIO_WEB']} },
     ]
   }
 ];
