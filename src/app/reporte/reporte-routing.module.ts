@@ -25,6 +25,7 @@ import { ProcesoAutomaticoComponent } from './pages/proceso-automatico/proceso-a
 import { AnularPedidosHubComponent } from './pages/anular-pedidos-hub/anular-pedidos-hub.component';
 
 import { LibroReclamacionesComponent } from './pages/reporte-libro-reclamaciones/reporte-libro-reclamaciones.component';
+import { DerechosArcoComponent } from './pages/reporte-derechos-arco/reporte-derechos-arco.component';
 
 const routes: Routes = [
   { path: '',  children: 
@@ -51,7 +52,8 @@ const routes: Routes = [
       { path: 'reporte-redimido', component: ReporteRedimidoComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_REP_CON_REDIMIDO']} },
       { path: 'anular-pedido', component: AnularPedidosHubComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_ANULAR_PEDIDO_HUB']} },
       { path: 'lista-reporte', component: ListaTransaccionComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_REP_EJECUTAR_CONSULTA']} },
-      { path: 'reporte-libro-reclamaciones', component: LibroReclamacionesComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_FORMULARIO_WEB']} },
+      { path: 'reporte-libro-reclamaciones', component: LibroReclamacionesComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_FORMULARIO_WEB_LIBRO']} },
+      { path: 'reporte-derechos-arco', component: DerechosArcoComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_FORMULARIO_WEB_ARCO']} },
     ]
   }
 ];
