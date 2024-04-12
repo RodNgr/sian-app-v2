@@ -1,0 +1,272 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div *ngIf="!bodetalle" class="card col">
+    <!-- <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+       </ng-template>
+
+        <ng-template pTemplate="right">
+             <button pButton pRipple pTooltip="Exportar" tooltipPosition="bottom" label="Exportar" icon="pi pi-upload" (click)="exportXLS()" styleClass="p-button-info"></button>
+        </ng-template>
+   </p-toolbar>
+-->
+    <div style="width: 100%;">
+         <h1>Derechos ARCO</h1>
+    </div>
+    <p-table [value]="obj" [responsive]="true" [rows]="25" [paginator]="true" [rowHover]="true" [scrollable]="true"
+         scrollHeight="40vh" [rowsPerPageOptions]="[15,25,50,100]" [(selection)]="reporteSelected"
+         selectionMode="single" currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros"
+         [showCurrentPageReport]="true" styleClass="p-datatable-sm p-datatable-striped">
+         <ng-template pTemplate="caption">
+              <div class="row contenido">
+                   <div style="width:14.2%;padding: 3px;" class="divsfiltro">
+                        <label class="w96" for="cantidad">Buscar :</label> <!-- [(ngModel)]="stbuscar" -->
+                        <input type="text" autofocus autocomplete="off" pInputText aria-describedby="tipoDoc-help" [(ngModel)]="stbuscar"  (keyup)="filterList()"
+                             class="w100 mt4" required tabindex="1" name="documento" />
+                   </div>
+                   <div style="width:14.2%;padding: 3px;" class="divsfiltro">
+                        <div style="width: 100%;">
+                             <label class="w96" for="cantidad">Fecha de Inicio:</label>
+                        </div>
+                        <div style="width: 100%;" class="mt4">
+                             <p-calendar class="w96" [(ngModel)]="rangeDates[0]" dateFormat="dd/mm/yy"
+                             inputStyleClass="p-text-center" [touchUI]="isMobile"></p-calendar>
+                        </div>
+                   </div>
+                   <div style="width:14.2%;padding: 3px;" class="divsfiltro">
+                        <div style="width: 100%;">
+                             <label class="w96" for="cantidad">Fecha de Fin:</label>
+                        </div>
+                        <div style="width: 100%;" class="mt4">
+                             <p-calendar class="w96" [(ngModel)]="rangeDates[1]" dateFormat="dd/mm/yy"
+                             inputStyleClass="p-text-center" [touchUI]="isMobile"></p-calendar>
+                        </div>
+                   </div>
+                   <div style="width:14.2%;padding: 3px;" class="divsfiltro">
+                      
+                        <button class="" pButton pRipple pTooltip="Buscar" tooltipPosition="bottom" type="button"
+                             label="" style="margin-top: 1.20rem" icon="pi pi-search" (click)="buscar()"></button>
+                   </div>
+
+                   <div style="width:14.2%;padding: 3px;" class="divsfiltro">
+
+                   </div>
+                   <div style="width:14.2%;padding: 3px;" class="divsfiltro">
+                        <button pButton pRipple pTooltip="Exportar" tooltipPosition="bottom" label="Consultar"
+                             style="margin-top: 0.75rem" icon="pi pi-eye" (click)="detalleReporte()"
+                             class="btnconsultar w96" styleClass="p-button-info btnconsultar"></button>
+                   </div>
+                   <div style="width:14.2%;padding: 3spx;" class="divsfiltro">
+                        <button pButton pRipple pTooltip="Exportar" tooltipPosition="bottom" label="Descargar"
+                             style="margin-top: 0.75rem" icon="pi pi-download" (click)="exportXLS()" class="w96"
+                             styleClass="p-button-info"></button>
+                   </div>
+              </div>
+         </ng-template>
+
+
+         <ng-template pTemplate="colgroup">
+              <colgroup *ngIf="!isMobile">
+                   <col style="width:10%;">
+                   <col style="width:20%;">
+                   <col style="width:10%;">
+                   <col style="width:20%;">
+                   <col style="width:10%;">
+                   <col style="width:10%;">
+                   <col style="width:20%;">
+              </colgroup>
+         </ng-template>
+         <ng-template pTemplate="header">
+              <tr>
+                    <th pSortableColumn="codigo">Correlativo<p-sortIcon field="codigo"></p-sortIcon></th>
+                   <th pSortableColumn="nombres">Nombre <p-sortIcon field="nombres"></p-sortIcon></th>
+                   <!-- <th pSortableColumn="tipodocumento">Tipo Doc<p-sortIcon field="tipodocumento"></p-sortIcon></th> -->
+                   <th pSortableColumn="nrodoc">Documento<p-sortIcon field="nrodoc"></p-sortIcon></th>
+                    <th pSortableColumn="fecha">Fecha Registro<p-sortIcon field="fecha"></p-sortIcon></th>
+                    <th pSortableColumn="tiposolicitud">Tipo Solicitud<p-sortIcon field="tiposolicitud"></p-sortIcon></th>
+                    <th pSortableColumn="tipousuario">Tipo Usuario<p-sortIcon field="tipousuario"></p-sortIcon></th>
+                   <th pSortableColumn="email">email <p-sortIcon field="email"></p-sortIcon></th>
+              </tr>
+         </ng-template>
+         <ng-template pTemplate="body" let-obj>
+              <tr [pSelectableRow]="obj">
+                    <td ><span class="p-column-title">Codigo</span>{{obj.codigo | uppercase }}</td>
+                   <td><span class="p-column-title">Nombres</span>{{obj.nombres | uppercase }} {{obj.apellidos | uppercase }}</td>
+                   <!-- <td><span class="p-column-title">Tipo Doc.</span>{{obj.tipodocumento}}</td> -->
+                   <td><span class="p-column-title">Nro Doc.</span>{{obj.nrodoc}}</td>
+                   <td><span class="p-column-title">F.Reg</span>{{obj.fecha | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+                   <td><span class="p-column-title">tiposolicitud</span>{{obj.tiposolicitud | uppercase}}</td>
+                   <td><span class="p-column-title">tipousuario</span>{{obj.tipousuario | uppercase}}</td>
+                   <td><span class="p-column-title">email</span>{{obj.email | uppercase}}</td>
+
+              </tr>
+         </ng-template>
+        <!--  <ng-template pTemplate="summary">
+              <div class="p-d-flex p-ai-center p-jc-between">
+                   {{(obj ? obj.length : 0) | i18nPlural: cantidadMap}}
+              </div>
+         </ng-template> -->
+    </p-table>
+</div>
+<div *ngIf="bodetalle" style="width: 100%;" class="divdetalle">
+    <div style="width: 100%;padding: 34px;">
+         <div class="cabecerasdiv">
+              <div class="ma" style="width: 50%;">
+                   <label class="lblcabecera" for="">Solicitud ARCO {{reporteSelected?.codigo}}</label>
+              </div>
+              <div class="ma" style="width: 50%;text-align: end;">
+                   <button pButton pRipple pTooltip="Exportar" tooltipPosition="bottom" label="Descargar"
+                        style="margin-top: 0.75rem" icon="pi pi-download" (click)="exportXLSxRegistro()" class="btnexport"
+                        styleClass="p-button-info"></button>
+              </div>
+         </div>
+         <div style="width: 100%;display: flex;" class="mt20 mb20">
+              <div style="width: 20%;">
+                   <label class="lbldetalle" for="">Fecha de Registro :</label>
+              </div>
+              <div style="width: 80%;">
+                   <label for="">{{reporteSelected?.fecha | date: 'dd/MM/yyyy HH:mm:ss'}}</label>
+              </div>
+         </div>
+         <div style="width: 100%;display: flex;" class="mb20">
+              <div style="width: 20%;">
+                   <label class="lbldetalle" for="">Correlativo :</label>
+              </div>
+              <div style="width: 80%;">
+                   <label for="">{{reporteSelected?.codigo}}</label>
+              </div>
+         </div>
+         <div style="width: 100%;display: flex;" class="mb20">
+              <div style="width: 20%;">
+                   <label class="lbldetalle" for="">Nombres :</label>
+              </div>
+              <div style="width: 80%;">
+                   <label for="">{{reporteSelected?.nombres}}</label>
+              </div>
+         </div>
+         <div style="width: 100%;display: flex;" class="mb20">
+               <div style="width: 20%;">
+                    <label class="lbldetalle" for="">Apellidos :</label>
+               </div>
+               <div style="width: 80%;">
+                    <label for="">{{reporteSelected?.apellidos}}</label>
+               </div>
+          </div>
+          <div style="width: 100%;display: flex;" class="mb20">
+               <div style="width: 20%;">
+                    <label class="lbldetalle" for="">Tipo de Documento :</label>
+               </div>
+               <div style="width: 80%;">
+                    <label for="">{{reporteSelected?.tipodocumento}}</label>
+               </div>
+          </div>
+          <div style="width: 100%;display: flex;" class="mb20">
+               <div style="width: 20%;">
+                    <label class="lbldetalle" for="">N° Documento :</label>
+               </div>
+               <div style="width: 80%;">
+                    <label for="">{{reporteSelected?.nrodoc}}</label>
+               </div>
+          </div>
+          <div style="width: 100%;display: flex;" class="mb20">
+              <div style="width: 20%;">
+                   <label class="lbldetalle" for="">Archivo Documento :</label>
+              </div>
+              <div style="width: 80%;">
+                   <label class="vercomprobante" (click)="nombrearchivodoc_downloadFile()" for="">Ver Comprobante</label>
+              </div>
+         </div>
+         <div style="width: 100%;display: flex;" class="mb20">
+              <div style="width: 20%;">
+                   <label class="lbldetalle" for="">Correo :</label>
+              </div>
+              <div style="width: 80%;">
+                   <label for="">{{reporteSelected?.email}}</label>
+              </div>
+         </div>
+         <div style="width: 100%;display: flex;" class="mb20">
+               <div style="width: 20%;">
+                    <label class="lbldetalle" for="">Domicilio :</label>
+               </div>
+               <div style="width: 80%;">
+                    <label for="">{{reporteSelected?.domicilio}}</label>
+               </div>
+          </div>
+          <div style="width: 100%;display: flex;" class="mb20">
+               <div style="width: 20%;">
+                    <label class="lbldetalle" for="">Tipo de Usuario :</label>
+               </div>
+               <div style="width: 80%;">
+                    <label for="">{{reporteSelected?.tipousuario}}</label>
+               </div>
+          </div>
+          <div style="width: 100%;display: flex;" class="mb20" *ngIf="reporteSelected?.esrepresentantelegal">
+               <div style="width: 20%;">
+                    <label class="lbldetalle" for="">Representante Legal :</label>
+               </div>
+               <div style="width: 80%;">
+                    <div>
+                         <label class="lbldetalle" for="">Nombres : </label>
+                         <label for="">{{reporteSelected?.nombresrl}}</label>
+                    </div>
+                    <br>
+                    <div>
+                         <label class="lbldetalle" for="">Apellidos : </label>
+                         <label for="">{{reporteSelected?.apellidosrl}}</label>
+                    </div>
+                    <br>
+                    <div>
+                         <label class="lbldetalle" for="">Tipo de Documento : </label>
+                         <label for="">{{reporteSelected?.tipodocumentorl}}</label>
+                    </div>
+                    <br>
+                    <div>
+                         <label class="lbldetalle" for="">N° Documento : </label>
+                         <label for="">{{reporteSelected?.nrodocrl}}</label>
+                    </div>
+                    <br>
+                    <div *ngIf="reporteSelected?.nombrearchivodocrl !== ''">
+                         <label class="lbldetalle" for="">Archivo Documento : </label>
+                         <label class="vercomprobante" (click)="nombrearchivodocrl_downloadFile()" for="">Ver Comprobante</label>
+                    </div>
+                    <br>
+                    <div *ngIf="reporteSelected?.nombrearchivodocrlacreditacion !== ''">
+                         <label class="lbldetalle" for="">Documento que Acredite Representación : </label>
+                         <label class="vercomprobante" (click)="nombrearchivodocrlacreditacion_downloadFile()" for="">Ver Comprobante</label>
+                    </div>
+               </div>
+          </div>
+          <div style="width: 100%;display: flex;" class="mb20">
+               <div style="width: 20%;">
+                    <label class="lbldetalle" for="">Tipo de Solicitud :</label>
+               </div>
+               <div style="width: 80%;">
+                    <label for="">{{reporteSelected?.tiposolicitud}}</label>
+               </div>
+          </div>
+          <div style="width: 100%;display: flex;" class="mb20">
+               <div style="width: 20%;">
+                    <label class="lbldetalle" for="">Detalles de solicitud :</label>
+               </div>
+               <div style="width: 80%;">
+                    <label for="">{{reporteSelected?.solicituddetalle}}</label>
+               </div>
+          </div>
+          <div style="width: 100%;display: flex;" class="mb20" *ngIf="reporteSelected?.nombrearchivosolicitud !== ''">
+               <div style="width: 20%;">
+                    <label class="lbldetalle" for="">Archivos adicionales :</label>
+               </div>
+               <div style="width: 80%;">
+                    <label class="vercomprobante" (click)="nombrearchivosolicitud_downloadFile()" for="">Ver Archivo</label>
+               </div>
+          </div>
+
+         <div style="width: 100%;display: flex;text-align: center;">
+              <button pButton pRipple pTooltip="Regresar" tooltipPosition="bottom" label="Regresar"
+                        style="margin-top: 0.75rem" (click)="Regresar()" class="btnregresar ma"
+                        styleClass="p-button-info"></button>
+         </div>
+    </div>
+</div>
