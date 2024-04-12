@@ -39,6 +39,7 @@ import { ProcesoAutomaticoComponent } from './pages/proceso-automatico/proceso-a
 import { DetalleProcesoAutomaticoComponent } from './components/detalle-procesoautomatico/detalle-procesoautomatico.component';
 import { AnularPedidosHubComponent } from './pages/anular-pedidos-hub/anular-pedidos-hub.component';
 import { LibroReclamacionesComponent } from './pages/reporte-libro-reclamaciones/reporte-libro-reclamaciones.component';
+import { DerechosArcoComponent } from './pages/reporte-derechos-arco/reporte-derechos-arco.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { LibroReclamacionesComponent } from './pages/reporte-libro-reclamaciones
     ProcesoAutomaticoComponent,
     DetalleProcesoAutomaticoComponent,
     AnularPedidosHubComponent,
-    LibroReclamacionesComponent
+    LibroReclamacionesComponent,
+    DerechosArcoComponent
   ],
   imports: [
     CommonModule,

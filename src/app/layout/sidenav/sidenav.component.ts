@@ -446,11 +446,14 @@ export class SidenavComponent implements OnInit {
 
   generaMenuFormularioWeb(): void {
     if (this.authService.hasRole('ROL_SIAN_FORMULARIO_WEB')) {
-
       let menu: MenuItem = { label: 'Formularios Web', icon: 'pi pi-fw pi-bars', items: [] };
-      menu.items?.push({ label: 'Libro de Reclamaciones', icon: 'pi pi-fw pi-folder', routerLink: '/home/reporte/reporte-libro-reclamaciones', routerLinkActiveOptions: { exact: true } });
+      if (this.authService.hasRole('ROL_SIAN_FORMULARIO_WEB_LIBRO')) {
+        menu.items?.push({ label: 'Libro de Reclamaciones', icon: 'pi pi-fw pi-folder', routerLink: '/home/reporte/reporte-libro-reclamaciones', routerLinkActiveOptions: { exact: true } });
+      }
+      if (this.authService.hasRole('ROL_SIAN_FORMULARIO_WEB_ARCO')) {
+        menu.items?.push({ label: 'Derechos ARCO', icon: 'pi pi-fw pi-folder', routerLink: '/home/reporte/reporte-derechos-arco', routerLinkActiveOptions: { exact: true } });
+      }
       this.items.push(menu);
-      
     }
   }
 
