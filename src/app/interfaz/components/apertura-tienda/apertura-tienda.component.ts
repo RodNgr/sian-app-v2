@@ -58,7 +58,11 @@ export class AperturaTiendaComponent implements OnInit {
     this.aperturaForm = this._formBuilder.group({
       idEmpresa: new FormControl({ value: '', disabled: true }, []),
       MVFormato: new FormControl('', []),
-      tiendaSap: new FormControl('', [Validators.maxLength(5)]),
+      //tiendaSap: new FormControl('', [Validators.maxLength(5)]),
+      tiendaSap: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^t\d{4}$/)
+      ]),
       tiendaPixel: new FormControl('', []),
       ip: new FormControl('', [
         Validators.pattern(new RegExp(/\..*\..*\..*/i)),
