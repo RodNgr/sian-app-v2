@@ -81,11 +81,12 @@
             tabindex="1"
             [placeholder]="this.keys['tiendasap']?.label_placeholder || ''"
           />
-          <small
-            class="p-error"
-            *ngIf="tiendaSap.invalid && (tiendaSap.dirty || tiendaSap.touched)"
-            >Campo Obligatorio</small
-          >
+          <small class="p-error" *ngIf="tiendaSap.errors?.required && (tiendaSap.dirty || tiendaSap.touched)">
+            Campo Obligatorio
+          </small>
+          <small class="p-error" *ngIf="tiendaSap.errors?.pattern && (tiendaSap.dirty || tiendaSap.touched)">
+            Debe comenzar con 't' seguido de 4 dígitos.
+          </small>
         </div>
         <div class="p-field p-col-3 p-lg-3 p-md-6 p-sm-12">
           <label for="tipoDoc">{{ this.keys['tiendaPixel']?.label_value || 'Tienda Pixel:' }}</label>
