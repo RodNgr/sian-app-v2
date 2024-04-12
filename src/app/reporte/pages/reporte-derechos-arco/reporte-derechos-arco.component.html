@@ -72,8 +72,8 @@
                    <col style="width:10%;">
                    <col style="width:20%;">
                    <col style="width:10%;">
-                   <col style="width:20%;">
-                   <col style="width:10%;">
+                   <col style="width:15%;">
+                   <col style="width:15%;">
                    <col style="width:10%;">
                    <col style="width:20%;">
               </colgroup>
@@ -175,7 +175,7 @@
                    <label class="lbldetalle" for="">Archivo Documento :</label>
               </div>
               <div style="width: 80%;">
-                   <label class="vercomprobante" (click)="nombrearchivodoc_downloadFile()" for="">Ver Comprobante</label>
+                   <label class="vercomprobante" (click)="nombrearchivodoc_downloadFile()" for="">Ver Documento</label>
               </div>
          </div>
          <div style="width: 100%;display: flex;" class="mb20">
@@ -229,12 +229,12 @@
                     <br>
                     <div *ngIf="reporteSelected?.nombrearchivodocrl !== ''">
                          <label class="lbldetalle" for="">Archivo Documento : </label>
-                         <label class="vercomprobante" (click)="nombrearchivodocrl_downloadFile()" for="">Ver Comprobante</label>
+                         <label class="vercomprobante" (click)="nombrearchivodocrl_downloadFile()" for="">Ver Documento</label>
                     </div>
                     <br>
                     <div *ngIf="reporteSelected?.nombrearchivodocrlacreditacion !== ''">
                          <label class="lbldetalle" for="">Documento que Acredite Representación : </label>
-                         <label class="vercomprobante" (click)="nombrearchivodocrlacreditacion_downloadFile()" for="">Ver Comprobante</label>
+                         <label class="vercomprobante" (click)="nombrearchivodocrlacreditacion_downloadFile()" for="">Ver Documento</label>
                     </div>
                </div>
           </div>
