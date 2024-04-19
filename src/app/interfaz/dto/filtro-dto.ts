@@ -20,4 +20,6 @@ export class FiltroDto {
 	public lisTiendas: String[] =[];
 	public forzarEjecucion!: string;
 	public fecDate!: Date;
+
+	public idLogInterfaz: String;
 }

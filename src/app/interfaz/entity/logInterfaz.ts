@@ -7,4 +7,6 @@ export class InterfazLog {
     public mensaje!: string;
     public dfecregistro!: Date;
     public vatipointerfaz: string;
+    public flagEjecucion: number;
+    public idInicio: number;
 }
