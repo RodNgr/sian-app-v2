@@ -24,7 +24,8 @@ export class InterfazTiendaService {
     else if (marca == 5) servicio = environment.urlInterfazCW;
     else if (marca == 7) servicio = environment.urlInterfazPJ;
     else if (marca == 8) servicio = environment.urlInterfazDD;
-    return this.http.post<any>(`${servicio}/api/interface/ejecutainterfaces`, dto);
+    //return this.http.post<any>(`${servicio}/api/interface/ejecutainterfaces`, dto);
+    return this.http.post<any>(`${servicio}/api/interface/ejecutainterfacesnew`, dto);
   }
 
   insertarLogStatus(logInterfaz: InterfazLog): Observable<any>{
