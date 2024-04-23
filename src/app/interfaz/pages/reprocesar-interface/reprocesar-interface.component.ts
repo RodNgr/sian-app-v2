@@ -195,16 +195,16 @@ procesarInterfaceverificado(tipo: string, marca: number){
     let marca = this.empresaService.getEmpresaSeleccionada().idEmpresa;
     let logInterfaz: InterfazLog = new InterfazLog();
   logInterfaz.cdusuario = this.authService.usuario.user.nrodoc;
-    this.interfaztiendaService.verificarLogStatus(logInterfaz).subscribe(
-      resultado => {
-        if (parseInt(resultado.verifica, 10) > 0) {
-          swal.fire('Error', 'El proceso aun se encuentra en ejecución, espere unos instantes', 'error');
-        }
-        else {
+    //this.interfaztiendaService.verificarLogStatus(logInterfaz).subscribe(
+    //  resultado => {
+    //    if (parseInt(resultado.verifica, 10) > 0) {
+    //      swal.fire('Error', 'El proceso aun se encuentra en ejecución, espere unos instantes', 'error');
+    //    }
+    //    else {
           this.procesarInterfaceverificado(tipo, marca);
-        }
-      }
-    )
+    //    }
+    //  }
+    //)
   }
 
   public changeFecIni(): void {    
