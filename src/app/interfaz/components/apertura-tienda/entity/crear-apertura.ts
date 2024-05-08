@@ -15,6 +15,12 @@ export class CrearApertura {
   localRP?: string;
   tiendaSapPadre?: string;
 
+  tipoPA: number;
+  idStore: number;
+  dePrefijo: string;
+  idMall: number;
+  nuStore: string;
+
   static validate(body: CrearApertura) {
     // const ipRegex = new RegExp('^((25[0-5]|(2[0-4]|1d|[1-9]|)d).?\b){3}$');
     // const emailRegex = new RegExp('^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$');

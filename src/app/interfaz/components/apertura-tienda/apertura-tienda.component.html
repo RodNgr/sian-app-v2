@@ -78,7 +78,6 @@
             aria-describedby="tiendaSap-help"
             formControlName="tiendaSap"
             required
-            tabindex="1"
             [placeholder]="this.keys['tiendasap']?.label_placeholder || ''"
             (keypress)="validateTiendaSapInput($event)"
             (input)="onTiendaSapInput($event)"
@@ -100,7 +99,6 @@
             aria-describedby="tiendaPixel-help"
             formControlName="tiendaPixel"
             required
-            tabindex="1"
             name="tiendaPixel"
             [placeholder]="this.keys['tiendaPixel']?.label_placeholder || ''"
             (keydown)="validateNumericInput($event)"
@@ -123,7 +121,6 @@
             aria-describedby="ip-help"
             formControlName="ip"
             required
-            tabindex="1"
             name="ip"
             [placeholder]="this.keys['ipBase']?.label_placeholder || ''"
           />
@@ -152,7 +149,6 @@
             aria-describedby="codBase-help"
             formControlName="codigoBase"
             required
-            tabindex="1"
             name="codBase"
             [placeholder]="this.keys['codigoBase']?.label_placeholder || ''"
             (keydown)="validateNumericInput($event)"
@@ -175,7 +171,6 @@
             aria-describedby="centroBene-help"
             formControlName="centroBeneficio"
             required
-            tabindex="1"
             maxlength="10"
             name="centroBene"
             [placeholder]="this.keys['centroBeneficio']?.label_placeholder || ''"
@@ -209,7 +204,6 @@
             aria-describedby="nombreTienda-help"
             formControlName="nombreTienda"
             required
-            tabindex="1"
             name="nombreTienda"
             placeholder="Ingrese el nombre de la tienda..."
           />
@@ -251,7 +245,6 @@
             aria-describedby="tiendaEmail-help"
             formControlName="emailTienda"
             required
-            tabindex="1"
             name="tiendaEmail"
             type="email"
             placeholder="Ingrese un email..."
@@ -277,7 +270,7 @@
         </div>        
 
         <div class="p-field p-col-2 p-lg-2 p-md-2 p-sm-12 p-mt-4"></div>
-<!-- CAMPOS REAL PLAZA -->
+        <!-- CAMPOS REAL PLAZA -->
         <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
           <label for="documento">{{ this.keys['inmuebleRP']?.label_value || 'Inmueble RP:' }}</label>
           <input
@@ -317,6 +310,107 @@
             >Este Campo NO es Obligatorio</small
           >
         </div>
+
+        <!-- Proceso Automatico -->
+        <div class="p-field-radiobutton">
+          <p-radioButton name="tipoPA" value="1" formControlName="tipoPA" inputId="count-times1">
+          </p-radioButton>
+          <label for="only">Jockey Plaza</label>
+        </div>
+        <div class="p-field-radiobutton ">
+          <p-radioButton name="tipoPA" value="2" formControlName="tipoPA" inputId="count-times2">
+          </p-radioButton>
+          <label for="more">Urbanova</label>
+        </div>
+
+        <ng-container *ngIf="tipoPA.value == 1">
+          <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+            <label for="documento">{{ this.keys['dePrefijo']?.label_value || 'Prefijo:' }}</label>
+            <input
+              type="text"
+              autofocus
+              autocomplete="off"
+              pInputText
+              aria-describedby="dePrefijo-help"
+              formControlName="dePrefijo"
+              name="dePrefijo"
+              type="text"
+              placeholder="Ejm: 194"
+            />
+          </div>
+          <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+            <label for="documento">{{ this.keys['idMall']?.label_value || 'ID Mall:' }}</label>
+            <input
+              type="text"
+              autofocus
+              autocomplete="off"
+              pInputText
+              aria-describedby="idMall-help"
+              formControlName="idMall"
+              name="idMall"
+              type="text"
+              placeholder="Ejm: 194"
+            />      
+          </div>
+          <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+            <label for="documento">{{ this.keys['nuStore']?.label_value || 'NU Store:' }}</label>
+            <input
+              type="text"
+              autofocus
+              autocomplete="off"
+              pInputText
+              aria-describedby="nuStore-help"
+              formControlName="nuStore"
+              name="nuStore"
+              type="text"
+              placeholder="Ejm: 194"
+            />       
+          </div>
+          <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+            <label for="documento">{{ this.keys['idStore']?.label_value || 'ID Store:' }}</label>
+            <input
+              type="text"
+              autofocus
+              autocomplete="off"
+              pInputText
+              aria-describedby="idStore-help"
+              formControlName="idStore"
+              name="idStore"
+              type="text"
+              placeholder="Ejm: 194"
+            />       
+          </div>
+        </ng-container>
+        <ng-container *ngIf="tipoPA.value == 2">
+          <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+            <label for="documento">{{ this.keys['dePrefijo']?.label_value || 'Prefijo:' }}</label>
+            <input
+              type="text"
+              autofocus
+              autocomplete="off"
+              pInputText
+              aria-describedby="dePrefijo-help"
+              formControlName="dePrefijo"
+              name="dePrefijo"
+              type="text"
+              placeholder="Ejm: 194"
+            />         
+          </div>
+          <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+            <label for="documento">{{ this.keys['idStore']?.label_value || 'ID Store:' }}</label>
+            <input
+              type="text"
+              autofocus
+              autocomplete="off"
+              pInputText
+              aria-describedby="idStore-help"
+              formControlName="idStore"
+              name="idStore"
+              type="text"
+              placeholder="Ejm: 194"
+            />
+          </div>
+        </ng-container>
       </form>
 
       <div class="p-d-flex p-jc-end p-mt-3">
