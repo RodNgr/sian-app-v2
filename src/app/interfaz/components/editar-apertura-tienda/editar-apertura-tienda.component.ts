@@ -2,9 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { InterfazAperturaService } from '../../services/interfaz-apertura.service';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
-import { TiendaByEmpresaResponse } from '../../entity/TiendaByEmpresaResponse';
 import { tiendaSeleccionada } from '../../entity/tiendaSeleccionada';
 
 @Component({
@@ -19,6 +17,18 @@ export class EditarAperturaTiendaComponent implements OnInit {
   public codigoInmuebleRP: string = '';
   public codigoLocalRP: string = '';
   public tiendaSAP1: string = '';
+
+  public tienda: number = 0;
+  public clienteSAP: string = '';
+  public idEmpresa: number = 0;
+
+  public tipoPA: number = 0;
+  // Urbanova
+  public idStore: number = 0;
+  public dePrefijo: string = '';
+  // Jockey
+  public idMall: number = 0;
+  public nuStore: string = '';
 
   private tiendaSeleccionada1: tiendaSeleccionada;
 
@@ -37,10 +47,19 @@ export class EditarAperturaTiendaComponent implements OnInit {
   private listaDatos(tiendaSAP: number): void {
     this.aperturaService.getTiendaporCodigoSAP(tiendaSAP).subscribe({
       next: (data) => {
-        this.emailTienda = data[0].email;
-        this.codigoInmuebleRP = data[0].codigoInmuebleRP;
-        this.codigoLocalRP = data[0].codigoLocalRP;   
-        this.tiendaSAP1 = data[0].tiendaSAP;
+        this.emailTienda = data.tienda[0].email;
+        this.codigoInmuebleRP = data.tienda[0].codigoInmuebleRP;
+        this.codigoLocalRP = data.tienda[0].codigoLocalRP;
+        this.tiendaSAP1 = data.tienda[0].tiendaSAP;
+        this.tienda = data.tienda[0].tienda;
+        this.idEmpresa = data.tienda[0].idEmpresa;
+        this.clienteSAP = data.tienda[0].tiendaSAP;
+
+        this.tipoPA = data.proceso[0].tipoPA;
+        this.idStore = data.proceso[0].idStore;
+        this.dePrefijo = data.proceso[0].dePrefijo;
+        this.idMall = data.proceso[0].idMall;
+        this.nuStore = data.proceso[0].nuStore;
       },
       error: () => {
         Swal.fire(
@@ -57,7 +76,15 @@ export class EditarAperturaTiendaComponent implements OnInit {
       tiendaSAP: this.tiendaSAP1,
       email: this.emailTienda,
       codigoInmuebleRP: this.codigoInmuebleRP,
-      codigoLocalRP: this.codigoLocalRP
+      codigoLocalRP: this.codigoLocalRP,
+      tipoProceso: this.tipoPA,
+      dePrefijo: this.dePrefijo,
+      idStore: this.idStore,
+      idMall: this.idMall,
+      nuStore: this.nuStore,
+      clienteSAP: this.clienteSAP,
+      idEmpresa: this.idEmpresa,
+      tienda: this.tienda,
     }    
 
     this.aperturaService.edit(this.tiendaSeleccionada1).subscribe({

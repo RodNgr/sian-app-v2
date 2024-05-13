@@ -63,7 +63,7 @@ export class InterfazAperturaService {
     return this.http.post<{ usuarioInterface }>(`${this.urlEndPoint}/api/apertura-tienda/editar-apertura-tienda`, tiendaSeleccionada);
   }
 
-  getTiendaporCodigoSAP(codigoSAP: number): Observable<tiendaSeleccionada[]> {
+  getTiendaporCodigoSAP(codigoSAP: number): Observable<any> {
     return this.http.get<tiendaSeleccionada[]>(`${this.urlEndPoint}/api/apertura-tienda/obtener/${codigoSAP}`);
   }
   
