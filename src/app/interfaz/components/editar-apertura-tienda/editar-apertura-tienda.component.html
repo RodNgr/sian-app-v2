@@ -69,6 +69,94 @@
       </p-radioButton>
       <label for="more">Urbanova</label>
     </div>
+    <ng-container *ngIf="tipoPA == 1">
+      <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+        <label for="documento">Prefijo</label>
+        <input
+          type="text"
+          autofocus
+          autocomplete="off"
+          pInputText
+          aria-describedby="dePrefijo-help"
+          [(ngModel)]="dePrefijo"
+          name="dePrefijo"
+          type="text"
+          placeholder="Ejm: 194"
+        />
+      </div>
+      <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+        <label for="documento">ID Mall:</label>
+        <input
+          type="text"
+          autofocus
+          autocomplete="off"
+          pInputText
+          aria-describedby="idMall-help"
+          [(ngModel)]="idMall"
+          name="idMall"
+          type="text"
+          placeholder="Ejm: 194"
+        />      
+      </div>
+      <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+        <label for="documento">NU Store:</label>
+        <input
+          type="text"
+          autofocus
+          autocomplete="off"
+          pInputText
+          aria-describedby="nuStore-help"
+          [(ngModel)]="nuStore"
+          name="nuStore"
+          type="text"
+          placeholder="Ejm: 194"
+        />       
+      </div>
+      <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+        <label for="documento">ID Store:</label>
+        <input
+          type="text"
+          autofocus
+          autocomplete="off"
+          pInputText
+          aria-describedby="idStore-help"
+          [(ngModel)]="idStore"
+          name="idStore"
+          type="text"
+          placeholder="Ejm: 194"
+        />       
+      </div>
+    </ng-container>
+    <ng-container *ngIf="tipoPA == 2">
+      <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+        <label for="documento">Prefijo:</label>
+        <input
+          type="text"
+          autofocus
+          autocomplete="off"
+          pInputText
+          aria-describedby="dePrefijo-help"
+          [(ngModel)]="dePrefijo"
+          name="dePrefijo"
+          type="text"
+          placeholder="Ejm: 194"
+        />         
+      </div>
+      <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+        <label for="documento">ID Store:</label>
+        <input
+          type="text"
+          autofocus
+          autocomplete="off"
+          pInputText
+          aria-describedby="idStore-help"
+          [(ngModel)]="idStore"
+          name="idStore"
+          type="text"
+          placeholder="Ejm: 194"
+        />
+      </div>
+    </ng-container>
   </div>
 
   <div class="p-mb-2 p-d-flex p-jc-center">

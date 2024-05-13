@@ -55,11 +55,11 @@ export class EditarAperturaTiendaComponent implements OnInit {
         this.idEmpresa = data.tienda[0].idEmpresa;
         this.clienteSAP = data.tienda[0].tiendaSAP;
 
-        this.tipoPA = data.proceso[0].tipoPA;
-        this.idStore = data.proceso[0].idStore;
-        this.dePrefijo = data.proceso[0].dePrefijo;
-        this.idMall = data.proceso[0].idMall;
-        this.nuStore = data.proceso[0].nuStore;
+        this.tipoPA = data.proceso[0].id_tipo_proceso;
+        this.idStore = data.proceso[0].id_store;
+        this.dePrefijo = data.proceso[0].de_prefijo;
+        this.idMall = data.proceso[0].id_mall;
+        this.nuStore = data.proceso[0].nu_store;
       },
       error: () => {
         Swal.fire(
