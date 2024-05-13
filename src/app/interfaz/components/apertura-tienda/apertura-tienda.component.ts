@@ -67,7 +67,10 @@ export class AperturaTiendaComponent implements OnInit {
       ip: new FormControl('', [
         Validators.pattern(new RegExp(/\..*\..*\..*/i)),
       ]),
-      codigoBase: new FormControl('', []),
+      codigoBase: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(6)
+      ]),
       centroBeneficio: new FormControl('', [Validators.maxLength(10)]),
       nombreTienda: new FormControl('', [
         Validators.required,
