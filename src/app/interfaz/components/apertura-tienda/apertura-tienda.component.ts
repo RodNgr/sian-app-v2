@@ -120,6 +120,7 @@ export class AperturaTiendaComponent implements OnInit {
       fechaInicioOpera: date,
       tiendaSapPadre: this.tiendaPadreSeleccionada?.clienteSAP,
       idEmpresa,
+      mvFormato: this.aperturaForm.get('MVFormato').value,
     };
 
     if (!CrearApertura.validate(payload)) {

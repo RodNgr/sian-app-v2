@@ -1,162 +1,378 @@
 <div id="container" class="p-d-flex p-flex-column">
   <div style="display: grid; justify-content: center">
-
-    <div class="p-mb-12">
-      <div class="p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12">
-        <label
-          for="Email"
-          class="p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12"
-          >Email:</label
+    <form [formGroup]="aperturaForm" class="p-fluid p-formgrid p-grid">
+      <div class="p-field p-col-3 p-lg-3 p-md-6 p-sm-12">
+        <label for="tipoDoc">{{ this.keys['empresa']?.label_value || 'Empresa:' }}</label>
+        <p-dropdown
+          id="tipoDoc"
+          [options]="marcasList"
+          formControlName="idEmpresa"
+          optionLabel="nombreComercial"
+          optionValue="idEmpresa"
+          placeholder="Seleccione una empresa"
+          (onChange)="handleEmpresaChange($event)"
+          name="idEmpresa"
         >
-        <div class="p-col p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12">
-          <input
-            type="tex"
-            name="emailTienda"
-            [(ngModel)]="emailTienda"
-            id="emailTienda"
-            pInputText
-            required
-          />
-        </div>
+        </p-dropdown>
       </div>
-    </div>
-
-    <div class="p-mb-12">
-      <div class="p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12">
-        <label
-          for="Inmueble R.P"
-          class="p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12"
-          >Inmueble R.P:</label
-        >
-        <div class="p-col p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12">
-          <input
-            type="text"
-            name="codigoInmuebleRP"
-            [(ngModel)]="codigoInmuebleRP"
-            id="codigoInmuebleRP"
-            pInputText
-          />
-        </div>
-      </div>
-    </div>
-
-    <div class="p-mb-12">
-      <div class="p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12">
-        <label
-          for="Local R.P"
-          class="p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12"
-          >Local R.P:</label
-        >
-        <div class="p-col p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12">
-          <input
-            type="text"
-            name="codigoLocalRP"
-            [(ngModel)]="codigoLocalRP"
-            id="codigoLocalRP"
-            pInputText
-          />
-        </div>
-      </div>
-    </div>
-
-    <div class="p-mb-12 p-field-radiobutton">
-      <p-radioButton name="tipoPA" value="1" [(ngModel)]="tipoPA" inputId="count-times1">
-      </p-radioButton>
-      <label for="only">Jockey Plaza</label>
-    </div>
-    <div class="p-mb-12 p-field-radiobutton ">
-      <p-radioButton name="tipoPA" value="2" [(ngModel)]="tipoPA" inputId="count-times2">
-      </p-radioButton>
-      <label for="more">Urbanova</label>
-    </div>
-    <ng-container *ngIf="tipoPA == 1">
       <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
-        <label for="documento">Prefijo</label>
+        <label for="documento">{{ this.keys['mvformato']?.label_value || 'MV Formato:' }}</label>
+        <p-dropdown
+          id="mvFormato"
+          [options]="formatosList"
+          formControlName="MVFormato"
+          optionLabel="formato"
+          placeholder="Seleccione un formato"
+          name="mvFormato"
+        >
+        </p-dropdown>
+      </div>
+
+      <div class="p-field p-col-3 p-lg-3 p-md-6 p-sm-12">
+        <label for="tipoDoc">{{ this.keys['tiendasap']?.label_value || 'Tienda SAP:' }}</label>
+        <input
+          type="text"
+          autocomplete="off"
+          pInputText
+          aria-describedby="tiendaSap-help"
+          formControlName="tiendaSap"
+          required
+          [placeholder]="this.keys['tiendasap']?.label_placeholder || ''"
+          (keypress)="validateTiendaSapInput($event)"
+          (input)="onTiendaSapInput($event)"
+        />
+        <small class="p-error" *ngIf="tiendaSap.errors?.required && (tiendaSap.dirty || tiendaSap.touched)">
+          Campo Obligatorio
+        </small>
+        <small class="p-error" *ngIf="tiendaSap.errors?.pattern && (tiendaSap.dirty || tiendaSap.touched)">
+          Debe comenzar con 'T' seguido de 4 dígitos.
+        </small>
+      </div>
+      <div class="p-field p-col-3 p-lg-3 p-md-6 p-sm-12">
+        <label for="tipoDoc">{{ this.keys['tiendaPixel']?.label_value || 'Tienda Pixel:' }}</label>
         <input
           type="text"
           autofocus
           autocomplete="off"
           pInputText
-          aria-describedby="dePrefijo-help"
-          [(ngModel)]="dePrefijo"
-          name="dePrefijo"
+          aria-describedby="tiendaPixel-help"
+          formControlName="tiendaPixel"
+          required
+          name="tiendaPixel"
+          maxlength="5"
+          [placeholder]="this.keys['tiendaPixel']?.label_placeholder || ''"
+          (keydown)="validateNumericInput($event)"
+        />
+        <small
+          class="p-error"
+          *ngIf="
+            tiendaPixel.invalid && (tiendaPixel.dirty || tiendaPixel.touched)
+          "
+          >Campo Obligatorio</small
+        >
+      </div>
+      <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+        <label for="documento">{{ this.keys['ipBase']?.label_value || 'IP Base:' }}</label>
+        <input
+          type="text"
+          autofocus
+          autocomplete="off"
+          pInputText
+          aria-describedby="ip-help"
+          formControlName="ip"
+          required
+          name="ip"
+          [placeholder]="this.keys['ipBase']?.label_placeholder || ''"
+        />
+        <small
+          class="p-error"
+          *ngIf="
+            ip.invalid && (ip.dirty || ip.touched) && ip?.errors?.required
+          "
+          >Campo Obligatorio</small
+        >
+        <small
+          class="p-error"
+          *ngIf="
+            ip.invalid && (ip.dirty || ip.touched) && ip?.errors?.pattern
+          "
+          >Ingrese un IP válido</small
+        >
+      </div>
+      <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+        <label for="documento">{{ this.keys['codigoBase']?.label_value || 'Código Base:' }}</label>
+        <input
+          type="text"
+          autofocus
+          autocomplete="off"
+          pInputText
+          aria-describedby="codBase-help"
+          formControlName="codigoBase"
+          required
+          name="codBase"
+          [placeholder]="this.keys['codigoBase']?.label_placeholder || ''"
+          (keydown)="validateNumericInput($event)"
+        />
+        <small
+          class="p-error"
+          *ngIf="
+            codigoBase.invalid && (codigoBase.dirty || codigoBase.touched)
+          "
+          >Campo Obligatorio y solo 6 caracteres</small
+        >
+      </div>
+      <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+        <label for="documento">{{ this.keys['centroBeneficio']?.label_value || 'Centro Beneficio:' }}</label>
+        <input
+          type="text"
+          autofocus
+          autocomplete="off"
+          pInputText
+          aria-describedby="centroBene-help"
+          formControlName="centroBeneficio"
+          required
+          maxlength="9"
+          name="centroBene"
+          [placeholder]="this.keys['centroBeneficio']?.label_placeholder || ''"
+          (keydown)="validateNumericInput($event)"
+        />
+        <small
+          class="p-error"
+          *ngIf="
+            centroBeneficio.invalid &&
+            (centroBeneficio.dirty || centroBeneficio.touched)
+          "
+          >Campo Obligatorio</small
+        >
+        <small
+          class="p-error"
+          *ngIf="
+            centroBeneficio.invalid &&
+            (centroBeneficio.dirty || centroBeneficio.touched) &&
+            centroBeneficio?.errors?.maxLength
+          "
+          >Máximo 10 caracteres</small
+        >
+      </div>
+      <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+        <label for="documento">{{ this.keys['nombreTienda']?.label_value || 'Nombre Tienda:' }}</label>
+        <input
+          type="text"
+          autofocus
+          autocomplete="off"
+          pInputText
+          aria-describedby="nombreTienda-help"
+          formControlName="nombreTienda"
+          required
+          name="nombreTienda"
+          placeholder="Ingrese el nombre de la tienda..."
+        />
+        <small
+          class="p-error"
+          *ngIf="
+            nombreTienda.invalid &&
+            (nombreTienda.dirty || nombreTienda.touched)
+          "
+          >Campo Obligatorio</small
+        >
+      </div>
+      <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+        <label for="documento">{{ this.keys['fechaInicioOpera']?.label_value || 'Fecha Inicio Operacion:' }}</label>
+        <p-calendar
+          dateFormat="dd/mm/yy"
+          name="fechaInicio"
+          formControlName="fechaInicioOpera"
+          [showIcon]="true"
+          placeholder="Seleccione una fecha de inicio..."
+        ></p-calendar>
+        <small
+          class="p-error"
+          *ngIf="
+            fechaInicioOpera.invalid &&
+            (fechaInicioOpera.dirty || fechaInicioOpera.touched) &&
+            fechaInicioOpera?.errors?.required
+          "
+          >Campo Obligatorio</small
+        >
+      </div>
+      <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+        <label for="documento">{{ this.keys['emailTienda']?.label_value || 'Email Tienda:' }}</label>
+        <input
+          type="text"
+          autofocus
+          autocomplete="off"
+          pInputText
+          aria-describedby="tiendaEmail-help"
+          formControlName="emailTienda"
+          required
+          name="tiendaEmail"
+          type="email"
+          placeholder="Ingrese un email..."
+        />
+        <small
+          class="p-error"
+          *ngIf="
+            emailTienda.invalid &&
+            (emailTienda.dirty || emailTienda.touched) &&
+            emailTienda?.errors?.required
+          "
+          >Campo Obligatorio</small
+        >
+        <small
+          class="p-error"
+          *ngIf="
+            emailTienda.invalid &&
+            (emailTienda.dirty || emailTienda.touched) &&
+            emailTienda?.errors?.email
+          "
+          >Campo debe ser un correo</small
+        >
+      </div>        
+
+      <div class="p-field p-col-6 p-lg-6 p-md-6 p-sm-12 p-mt-4"></div>
+      <!-- CAMPOS REAL PLAZA -->
+      <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+        <label for="documento">{{ this.keys['inmuebleRP']?.label_value || 'Inmueble RP:' }}</label>
+        <input
+          type="text"
+          autofocus
+          autocomplete="off"
+          pInputText
+          aria-describedby="inmuebleRP-help"
+          formControlName="inmuebleRP"
+          tabindex="1"
+          name="inmuebleRP"
           type="text"
           placeholder="Ejm: 194"
         />
+        <small
+          class="p-message-info"
+          >Este Campo NO es Obligatorio</small
+        >          
       </div>
+
       <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
-        <label for="documento">ID Mall:</label>
+        <label for="documento">{{ this.keys['localRP']?.label_value || 'Local RP:' }}</label>
         <input
           type="text"
           autofocus
           autocomplete="off"
           pInputText
-          aria-describedby="idMall-help"
-          [(ngModel)]="idMall"
-          name="idMall"
-          type="number"
-          placeholder="Ejm: 194"
-        />      
-      </div>
-      <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
-        <label for="documento">NU Store:</label>
-        <input
+          aria-describedby="localRP-help"
+          formControlName="localRP"
+          tabindex="1"
+          name="localRP"
           type="text"
-          autofocus
-          autocomplete="off"
-          pInputText
-          aria-describedby="nuStore-help"
-          [(ngModel)]="nuStore"
-          name="nuStore"
-          type="text"
-          placeholder="Ejm: 194"
-        />       
-      </div>
-      <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
-        <label for="documento">ID Store:</label>
-        <input
-          type="text"
-          autofocus
-          autocomplete="off"
-          pInputText
-          aria-describedby="idStore-help"
-          [(ngModel)]="idStore"
-          name="idStore"
-          type="number"
-          placeholder="Ejm: 194"
-        />       
-      </div>
-    </ng-container>
-    <ng-container *ngIf="tipoPA == 2">
-      <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
-        <label for="documento">Prefijo:</label>
-        <input
-          type="text"
-          autofocus
-          autocomplete="off"
-          pInputText
-          aria-describedby="dePrefijo-help"
-          [(ngModel)]="dePrefijo"
-          name="dePrefijo"
-          type="text"
-          placeholder="Ejm: 194"
-        />         
-      </div>
-      <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
-        <label for="documento">ID Store:</label>
-        <input
-          type="text"
-          autofocus
-          autocomplete="off"
-          pInputText
-          aria-describedby="idStore-help"
-          [(ngModel)]="idStore"
-          name="idStore"
-          type="number"
-          placeholder="Ejm: 194"
+          placeholder="Ejm: LCE-105"
         />
+        <small
+          class="p-message-info"
+          >Este Campo NO es Obligatorio</small
+        >
       </div>
-    </ng-container>
+
+      <!-- Proceso Automatico -->
+      <div class="p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12">
+        <div class="p-field-radiobutton p-col-6 p-lg-6 p-md-6 p-sm-12">
+          <p-radioButton name="tipoPA" value="1" formControlName="tipoPA" inputId="count-times1">
+          </p-radioButton>
+          <label for="only">Jockey Plaza</label>
+        </div>
+        <div class="p-field-radiobutton p-col-6 p-lg-6 p-md-6 p-sm-12">
+          <p-radioButton name="tipoPA" value="2" formControlName="tipoPA" inputId="count-times2">
+          </p-radioButton>
+          <label for="more">Urbanova</label>
+        </div>
+        <ng-container *ngIf="tipoPA.value == 1">
+          <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+            <label for="documento">{{ this.keys['dePrefijo']?.label_value || 'Prefijo:' }}</label>
+            <input
+              type="text"
+              autofocus
+              autocomplete="off"
+              pInputText
+              aria-describedby="dePrefijo-help"
+              formControlName="dePrefijo"
+              name="dePrefijo"
+              type="text"
+              placeholder="Ejm: PREFIJO"
+            />
+          </div>
+          <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+            <label for="documento">{{ this.keys['idMall']?.label_value || 'ID Mall:' }}</label>
+            <input
+              type="text"
+              autofocus
+              autocomplete="off"
+              pInputText
+              aria-describedby="idMall-help"
+              formControlName="idMall"
+              name="idMall"
+              type="number"
+              placeholder="Ejm: 194"
+            />      
+          </div>
+          <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+            <label for="documento">{{ this.keys['nuStore']?.label_value || 'NU Store:' }}</label>
+            <input
+              type="text"
+              autofocus
+              autocomplete="off"
+              pInputText
+              aria-describedby="nuStore-help"
+              formControlName="nuStore"
+              name="nuStore"
+              type="text"
+              placeholder="Ejm: XXX"
+            />       
+          </div>
+          <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+            <label for="documento">{{ this.keys['idStore']?.label_value || 'ID Store:' }}</label>
+            <input
+              type="text"
+              autofocus
+              autocomplete="off"
+              pInputText
+              aria-describedby="idStore-help"
+              formControlName="idStore"
+              name="idStore"
+              type="number"
+              placeholder="Ejm: 194"
+            />       
+          </div>
+        </ng-container>
+        <ng-container *ngIf="tipoPA.value == 2">
+          <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+            <label for="documento">{{ this.keys['dePrefijo']?.label_value || 'Prefijo:' }}</label>
+            <input
+              type="text"
+              autofocus
+              autocomplete="off"
+              pInputText
+              aria-describedby="dePrefijo-help"
+              formControlName="dePrefijo"
+              name="dePrefijo"
+              type="text"
+              placeholder="Ejm: 194"
+            />         
+          </div>
+          <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
+            <label for="documento">{{ this.keys['idStore']?.label_value || 'ID Store:' }}</label>
+            <input
+              type="text"
+              autofocus
+              autocomplete="off"
+              pInputText
+              aria-describedby="idStore-help"
+              formControlName="idStore"
+              name="idStore"
+              type="number"
+              placeholder="Ejm: 194"
+            />
+          </div>
+        </ng-container>
+      </div>
+    </form>
   </div>
 
   <div class="p-mb-2 p-d-flex p-jc-center">
