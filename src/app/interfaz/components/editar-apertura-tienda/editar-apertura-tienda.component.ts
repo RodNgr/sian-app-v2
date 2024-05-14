@@ -111,7 +111,8 @@ export class EditarAperturaTiendaComponent implements OnInit {
         this.codigoBaseSelected = _tienda.tienda;
         this.tiendaPixelSelected = _tienda.tiendaPixel;
         this.aperturaForm.get('idEmpresa').setValue(_tienda.idEmpresa || 0);
-        this.aperturaForm.get('MVFormato').setValue(_tienda.mvformato || '');
+        this.aperturaForm.get('MVFormato').setValue(
+          { id: this.mvFormatoSelected, formato: this.mvFormatoSelected } || '');
         this.aperturaForm.get('tiendaSap').setValue(_proceso.cliente_sap || '');
         this.aperturaForm.get('tiendaPixel').setValue(_tienda.tiendaPixel || '');
         this.aperturaForm.get('ip').setValue(_tienda.iptienda || '');
@@ -161,7 +162,8 @@ export class EditarAperturaTiendaComponent implements OnInit {
           .filter((d) => !!d)
           .map((d) => ({ id: d, formato: d }));
         this.formatosList = list;
-        this.aperturaForm.get('MVFormato').setValue(this.mvFormatoSelected || '');
+        this.aperturaForm.get('MVFormato').setValue(
+          { id: this.mvFormatoSelected, formato: this.mvFormatoSelected } || '');
       },
     });
   }
