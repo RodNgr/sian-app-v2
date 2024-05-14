@@ -100,6 +100,7 @@
             formControlName="tiendaPixel"
             required
             name="tiendaPixel"
+            maxlength="5"
             [placeholder]="this.keys['tiendaPixel']?.label_placeholder || ''"
             (keydown)="validateNumericInput($event)"
           />
@@ -158,7 +159,7 @@
             *ngIf="
               codigoBase.invalid && (codigoBase.dirty || codigoBase.touched)
             "
-            >Campo Obligatorio</small
+            >Campo Obligatorio y solo 6 caracteres</small
           >
         </div>
         <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
@@ -171,7 +172,7 @@
             aria-describedby="centroBene-help"
             formControlName="centroBeneficio"
             required
-            maxlength="10"
+            maxlength="9"
             name="centroBene"
             [placeholder]="this.keys['centroBeneficio']?.label_placeholder || ''"
             (keydown)="validateNumericInput($event)"

@@ -71,7 +71,7 @@ export class AperturaTiendaComponent implements OnInit {
         Validators.required,
         Validators.maxLength(6)
       ]),
-      centroBeneficio: new FormControl('', [Validators.maxLength(10)]),
+      centroBeneficio: new FormControl('', [Validators.maxLength(9)]),
       nombreTienda: new FormControl('', [
         Validators.required,
         Validators.maxLength(50),
@@ -124,6 +124,11 @@ export class AperturaTiendaComponent implements OnInit {
 
     if (!CrearApertura.validate(payload)) {
       swal.fire('Informacion', 'Debe completar los datos', 'warning');
+      return;
+    }
+    if (!CrearApertura.validatePA(payload)) {
+      swal.fire('Informacion', 'Debe completar los datos de jockey o urbanova', 'warning');
+      return;
     }
     this.aperturaService.create(CrearApertura.format(payload)).subscribe({
       next: (data) => {
@@ -133,6 +138,8 @@ export class AperturaTiendaComponent implements OnInit {
           'success'
         );
         this.aperturaForm.reset();
+        this.aperturaForm.get('idEmpresa')
+          .setValue(this.empresaService.getEmpresaSeleccionada().idEmpresa);
       },
       error: () => {
         swal.fire('Error', 'Error al crear apertura de tienda.', 'error');
