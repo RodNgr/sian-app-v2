@@ -27,6 +27,12 @@ export const environment = {
   // urlOmnicanal: 'http://localhost:9833',
   // urlSecurityShared: 'http://localhost:4201', 
   // urlInterfaz: 'http://localhost:9842',
+  //urlInterfazBB: 'http://localhost:9841',
+  //urlInterfazDB: 'http://localhost:9843',
+  //urlInterfazPP: 'http://localhost:9844',
+  //urlInterfazCW: 'http://localhost:9845',
+  //urlInterfazPJ: 'http://localhost:9847',
+  //urlInterfazDD: 'http://localhost:9848',
   // urlCierre: 'http://localhost:9899',
   // urlGenesys: 'https://genesys.dev.audex.api-ngr.com/genesys',
   // urlOmnicanalA: 'https://api.dev.omnicanal.api-ngr.com/motorpromocion',
@@ -40,14 +46,14 @@ export const environment = {
   // urlAmauta: 'https://api.dev.amauta.api-ngr.com',
 
   // DESARROLLO
-  urlSecurity: 'http://vsrvdevapp07.ngr.com.pe:9999',
+  // urlSecurity: 'http://vsrvdevapp07.ngr.com.pe:9999',
   urlCupones: 'http://VSRVDEVAPP07.ngr.com.pe:9837',
   urlInterfazProducto: 'http://VSRVDEVAPP07.ngr.com.pe:9838',
   urlCuadratura: 'http://VSRVDEVAPP07.ngr.com.pe:9839',
   urlEjecutor: 'http://VSRVDEVAPP07.ngr.com.pe:9845',
   urlEjecutorSybase: 'http://VSRVDEVAPP07.ngr.com.pe:9753',
   urlInterfaz: 'http://VSRVDEVAPP07.ngr.com.pe:9842',
-  urlInterfazBB: 'http://VSRVDEVAPP07.ngr.com.pe:9842',
+  urlInterfazBB: 'http://VSRVDEVAPP07.ngr.com.pe:9841',
   urlInterfazDB: 'http://VSRVDEVAPP07.ngr.com.pe:9843',
   urlInterfazPP: 'http://VSRVDEVAPP07.ngr.com.pe:9844',
   urlInterfazCW: 'http://VSRVDEVAPP07.ngr.com.pe:9845',
@@ -71,7 +77,7 @@ export const environment = {
   urlAmauta: 'https://api.dev.amauta.api-ngr.com',
 
   // PRODUCCION
-  // urlSecurity: 'http://VSRVPRDAPP07.ngr.com.pe:9999',
+  urlSecurity: 'http://VSRVPRDAPP07.ngr.com.pe:9999',
   // urlCupones: 'http://VSRVPRDAPP07.ngr.com.pe:9837',
   // urlInterfazProducto: 'http://VSRVPRDAPP07.ngr.com.pe:9838',
   // urlCuadratura: 'http://VSRVPRDAPP07.ngr.com.pe:9839',
