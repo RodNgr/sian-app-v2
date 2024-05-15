@@ -540,7 +540,6 @@ export class CierreDiaComponent implements OnInit, OnDestroy {
       { text: 'Boleta', style: 'cabeceraTablader' },
       { text: 'Factura', style: 'cabeceraTablader' },
       { text: 'N/C', style: 'cabeceraTablader' },
-      { text: 'Propinas', style: 'cabeceraTablader' },
       { text: 'Total', style: 'cabeceraTablader' }
     ]);
 
@@ -557,7 +556,6 @@ export class CierreDiaComponent implements OnInit, OnDestroy {
         { text: this.formateaDoubleA2DigitosString(element.tboleta), style: 'fuenteder' },
         { text: this.formateaDoubleA2DigitosString(element.tfactura), style: 'fuenteder' },
         { text: this.formateaDoubleA2DigitosString(element.tnotaCredito), style: 'fuenteder' },
-        { text: this.formateaDoubleA2DigitosString(element.tpropinas), style: 'fuenteder' },
         { text: this.formateaDoubleA2DigitosString(element.ttotal), style: 'fuenteder' }
       ])
       total += element.ttotal;
@@ -570,7 +568,6 @@ export class CierreDiaComponent implements OnInit, OnDestroy {
       { text: '', style: 'fuente' },
       { text: '', style: 'fuente' },
       { text: '', style: 'fuente' },
-      { text: '', style: 'fuente' },
       { text: this.formateaDoubleA2DigitosString(total), bold: true, style: 'fuenteder' }
     ])
 
@@ -578,7 +575,6 @@ export class CierreDiaComponent implements OnInit, OnDestroy {
     this.listTurno.push([
       { text: '', style: 'fuente' },
       { text: '', style: 'fuente' },
-      { text: '', style: 'fuenteder' },
       { text: '', style: 'fuenteder' },
       { text: '', style: 'fuenteder' },
       { text: '', style: 'fuenteder' },

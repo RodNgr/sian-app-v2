@@ -9,7 +9,6 @@ export class CierreTurno{
 	public tboleta!: number;
 	public tfactura!: number;
 	public tnotaCredito!: number;
-	public tpropinas!: number;
 	public ttotal: number = 0;
 	public diferencia!: number;
 	public openDate!: string;
