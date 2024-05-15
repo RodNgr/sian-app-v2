@@ -69,7 +69,7 @@ export class AperturaTiendaComponent implements OnInit {
       ]),
       codigoBase: new FormControl('', [
         Validators.required,
-        Validators.maxLength(6)
+        Validators.maxLength(5)
       ]),
       centroBeneficio: new FormControl('', [Validators.maxLength(9)]),
       nombreTienda: new FormControl('', [

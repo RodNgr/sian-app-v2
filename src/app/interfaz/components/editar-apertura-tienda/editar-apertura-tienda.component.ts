@@ -110,15 +110,15 @@ export class EditarAperturaTiendaComponent implements OnInit {
   private listaDatos(tiendaSAP: number): void {
     this.aperturaService.getTiendaporCodigoSAP(tiendaSAP).subscribe({
       next: (data) => {
-        const _tienda = data.tienda[0];
-        const _proceso = data.proceso[0];
+        const _tienda = data.tienda[0] || {};
+        const _proceso = data.proceso[0] || {};
         this.mvFormatoSelected = _tienda.mvformato;
         this.codigoBaseSelected = _tienda.tienda;
         this.tiendaPixelSelected = _tienda.tiendaPixel;
         this.aperturaForm.get('idEmpresa').setValue(_tienda.idEmpresa || 0);
         this.aperturaForm.get('MVFormato').setValue(
           { id: this.mvFormatoSelected, formato: this.mvFormatoSelected } || '');
-        this.aperturaForm.get('tiendaSap').setValue(_proceso.cliente_sap || '');
+        this.aperturaForm.get('tiendaSap').setValue(_tienda.clienteSAP || '');
         this.aperturaForm.get('tiendaPixel').setValue(_tienda.tiendaPixel || '');
         this.aperturaForm.get('ip').setValue(_tienda.iptienda || '');
         this.aperturaForm.get('codigoBase').setValue(_tienda.tienda || 0);
