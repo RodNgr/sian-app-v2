@@ -51,6 +51,11 @@ export class EditarAperturaTiendaComponent implements OnInit {
     private router: Router,
     private _formBuilder: FormBuilder,
   ) {
+    this.aperturaService.getEmpresas().subscribe({
+      next: (data) => {
+        this.marcasList = data;
+      },
+    });
     this.aperturaForm = this._formBuilder.group({
       idEmpresa: new FormControl({ value: '', disabled: true }, []),
       MVFormato: new FormControl('', []),
@@ -121,12 +126,12 @@ export class EditarAperturaTiendaComponent implements OnInit {
         this.aperturaForm.get('nombreTienda').setValue(_tienda.nombreTienda || '');
         this.aperturaForm.get('fechaInicioOpera').setValue(_tienda.fechaInicio || '');
         this.aperturaForm.get('emailTienda').setValue(_tienda.email || '');
-        this.aperturaForm.get('inmuebleRP').setValue(_tienda.codigoInmuebleRP || '');
-        this.aperturaForm.get('localRP').setValue(_tienda.codigoLocalRP || 0);
+        this.aperturaForm.get('inmuebleRP').setValue(_tienda.codigoInmuebleRP);
+        this.aperturaForm.get('localRP').setValue(_tienda.codigoLocalRP);
         this.aperturaForm.get('tipoPA').setValue(String(_proceso.id_tipo_proceso || 0));
-        this.aperturaForm.get('idStore').setValue(_proceso.id_store || 0);
+        this.aperturaForm.get('idStore').setValue(_proceso.id_store);
         this.aperturaForm.get('dePrefijo').setValue(_proceso.de_prefijo || '');
-        this.aperturaForm.get('idMall').setValue(_proceso.id_mall || 0);
+        this.aperturaForm.get('idMall').setValue(_proceso.id_mall);
         this.aperturaForm.get('nuStore').setValue(_proceso.nu_store || '');
       },
       error: () => {
