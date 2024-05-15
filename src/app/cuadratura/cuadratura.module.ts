@@ -24,6 +24,7 @@ import { ListaCuadraturaVisaComponent } from './pages/lista-cuadratura-visa/list
 import { ListaCuadraturaPeyaComponent } from './pages/lista-cuadratura-peya/lista-cuadratura-peya.component';
 import { CuadraturaAgregadorPeyaComponent } from './pages/cuadratura-agregador-peya/cuadratura-agregador-peya.component';
 import { ListaCuadraturaDidiComponent } from './pages/lista-cuadratura-didi/lista-cuadratura-didi.component';
+import { CuadraturaAgregadorDidiComponent } from './pages/cuadratura-agregador-didi/cuadratura-agregador-didi.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ListaCuadraturaDidiComponent } from './pages/lista-cuadratura-didi/list
     ListaCuadraturaVisaComponent,
     ListaCuadraturaPeyaComponent,
     CuadraturaAgregadorPeyaComponent,
-    ListaCuadraturaDidiComponent
+    ListaCuadraturaDidiComponent,
+    CuadraturaAgregadorDidiComponent
   ],
   imports: [
     CommonModule,
