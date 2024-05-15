@@ -57,7 +57,7 @@ export class ListaCuadraturaPeyaComponent implements OnInit {
 
   private estadoPipe = new EstadoProcesoPipe();
 
-  private type: number = 4;
+  private type: number = 5;
 
   private ref!: DynamicDialogRef;
 
@@ -87,7 +87,7 @@ export class ListaCuadraturaPeyaComponent implements OnInit {
   }
 
   public newProceso(): void {
-    if (this.type === 4) {
+    if (this.type === 1) {
       this.router.navigateByUrl('/home/cuadratura/pedidos-peya')
     }
   }

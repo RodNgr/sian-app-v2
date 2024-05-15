@@ -84,7 +84,7 @@
                                    <div class="p-field p-col-12">
                                         <label for="Excel">Archivo Resumen (Excel): (*)</label>  
                                         <p-fileUpload (onSelect)="onSelectResumen($event)" (onError)="onError($event)" (onClear)="onCancelResumen()" accept=".xlsx" 
-                                             [maxFileSize]="20000000" [multiple]="true" chooseLabel="Buscar" [showUploadButton]="false">
+                                             [maxFileSize]="10000000" [multiple]="true" chooseLabel="Buscar" [showUploadButton]="false">
                                              <ng-template pTemplate="file" let-resumen>
                                                   <strong><i class="pi pi-file-excel"></i> {{resumen.name}} </strong>({{resumen.size | bytes: 2:'B':'MB'}} )<br>
                                              </ng-template>
