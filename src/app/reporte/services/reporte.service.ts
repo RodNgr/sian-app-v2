@@ -20,11 +20,13 @@ import { hub } from '../entity/hub';
 export class ReporteService {
 
   private urlEndPoint: string;
+  private urlEndPoint2: string;
 
   constructor(private http: HttpClient,
               private empresaService: EmpresaService,
               private authService: AuthService) {
     this.urlEndPoint = environment.urlReporte;
+    this.urlEndPoint2 = environment.urlCierre;
   }
 
   getTiendas(): Observable<Tienda[]> {
@@ -34,6 +36,10 @@ export class ReporteService {
 
   getTiendasPorEmpresa(idEmpresa: number): Observable<Tienda[]> {
     return this.http.get<Tienda[]>(`${this.urlEndPoint}/api/tienda/${idEmpresa}/${this.authService.getUsuarioInterface()}`);
+  }
+
+  getTiendasPorEmpresakds(idEmpresa: number, usuario: string): Observable<Tienda[]> {
+    return this.http.get<Tienda[]>(`${this.urlEndPoint2}/api/reporte/tienda/${idEmpresa}/${usuario}`);
   }
 
   getTiendasAgregador(idEmpresa: number): Observable<Tienda[]> {
@@ -58,6 +64,10 @@ export class ReporteService {
   
   getReporteProsegurRemitos(dto: ParamDto): Observable<any> {
     return this.http.post<any>(`${this.urlEndPoint}/api/reporte/gestion/prosegur/remito`, dto);
+  }
+
+  getReporteKDS(dto: ParamDto): Observable<any> {
+    return this.http.post<any>(`${this.urlEndPoint}/api/reporte/gestion/kds`, dto);
   }
 
   getReporteProsegurDiferencia(dto: ParamDto): Observable<any> {

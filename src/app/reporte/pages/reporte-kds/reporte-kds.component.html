@@ -1,0 +1,76 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<div class="card col">
+    <p-table [value]="KdsList" [responsive]="true" [rows]="25" [paginator]="true" [rowHover]="true" 
+              [scrollable]="true" scrollHeight="40vh" [rowsPerPageOptions]="[15,25,50,100]"  
+              currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros" [showCurrentPageReport]="true"
+              styleClass="p-datatable-responsive-scroll">
+         <ng-template pTemplate="caption">
+              <div class="p-d-flex p-grid">
+                   <div class="p-col-12 p-ai-center vertical-container">
+                        <h1 class="p-m-0">Reporte KDS</h1>
+                   </div>
+                   
+                   <div class="p-col-12">
+                        <div class="p-fluid p-formgrid p-grid">
+                            <div class="p-field p-lg-2 p-md-2 p-sm-12">
+                                <label for="cantidad">Tienda:</label>
+                                <p-dropdown #dpTienda [options]="tiendaList" [autofocus]="true" [(ngModel)]="tiendaSeleccionada" optionLabel="nombreTienda" 
+                              [filter]="true" filterBy="nombreTienda" placeholder="Seleccione una Tienda" name="idFamilia" #tienda="ngModel"
+                              (onChange)="changeTienda()"></p-dropdown>
+                            </div>
+                             <div class="p-field p-lg-2 p-md-2 p-sm-12">
+                                  <label for="cantidad">Inicio:</label>
+                                  <p-calendar [(ngModel)]="feInicio" dateFormat="dd/mm/yy" inputStyleClass="p-text-center"></p-calendar>
+                             </div>
+
+                             <div class="p-field p-lg-2 p-md-2 p-sm-12">
+                                  <label for="cantidad">Fin:</label>
+                                  <p-calendar [(ngModel)]="feFin" dateFormat="dd/mm/yy" inputStyleClass="p-text-center"></p-calendar>
+                             </div>
+
+                             <div class="p-field p-lg-2 p-md-2 p-sm-2">
+                                  <button pButton pRipple pTooltip="Buscar" tooltipPosition="bottom" type="button" label="Buscar" style="margin-top: 1.75rem" icon="pi pi-search" (click)="buscar()"></button>                         
+                             </div>
+                             <div class="p-field p-lg-2 p-md-2 p-sm-2">
+                                <button pButton pRipple pTooltip="Exportar" tooltipPosition="bottom" type="button" label="Exportar" style="margin-top: 1.75rem" icon="pi pi-download" ></button>
+                                <!-- (click)="buscar()" -->
+                           </div>
+                        </div>
+                   </div>
+              </div>
+         </ng-template>
+         <ng-template pTemplate="header">
+              <tr>
+                   <th pSortableColumn="name" >Fecha de Venta <p-sortIcon field="name"></p-sortIcon></th>
+                   <th pSortableColumn="name" >Canal de Venta <p-sortIcon field="name"></p-sortIcon></th>
+                   <th pSortableColumn="name" >Inicio de pedido <p-sortIcon field="name"></p-sortIcon></th>
+                   <th pSortableColumn="name" >Fin de pedido <p-sortIcon field="name"></p-sortIcon></th>
+                   <th pSortableColumn="name" >Tipo de Venta <p-sortIcon field="name"></p-sortIcon></th>
+                   <th pSortableColumn="name">N° de Venta <p-sortIcon field="name"></p-sortIcon></th>
+                   <th pSortableColumn="name">Cod. Producto <p-sortIcon field="name"></p-sortIcon></th>
+                   <th pSortableColumn="name">Producto <p-sortIcon field="name"></p-sortIcon></th>
+                   <th pSortableColumn="name">Packer 1 <p-sortIcon field="name"></p-sortIcon></th>
+                   <th pSortableColumn="name">Packer 2 <p-sortIcon field="name"></p-sortIcon></th>
+                   <th pSortableColumn="name">Counter <p-sortIcon field="name"></p-sortIcon></th>
+                   
+              </tr>
+         </ng-template>
+         <!-- <ng-template pTemplate="body" let-client>
+              <tr>
+                   <td ><span class="p-column-title">Nombre</span>{{client.name | uppercase }}</td>
+                   <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">DNI</span>{{client.dni}}</td>
+                   <td><span class="p-column-title">E-Mail</span>{{client.email | uppercase}}</td>
+                   <td><span class="p-column-title">Teléfono</span>{{client.phone}}</td>
+                   <td [ngClass]="{'p-text-center': !isMobile}"><span class="p-column-title">F.Registro</span>{{client.date | date: 'dd/MM/yyyy'}}</td>
+              </tr>
+         </ng-template> -->
+         <ng-template pTemplate="summary">
+              <div class="p-d-flex p-ai-center p-jc-between">
+                   <!-- {{(clientList ? clientList.length : 0) | i18nPlural: cantidadMap}} -->
+              </div>
+         </ng-template>
+    </p-table>
+</div>

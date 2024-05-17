@@ -26,6 +26,7 @@ import { AnularPedidosHubComponent } from './pages/anular-pedidos-hub/anular-ped
 
 import { LibroReclamacionesComponent } from './pages/reporte-libro-reclamaciones/reporte-libro-reclamaciones.component';
 import { DerechosArcoComponent } from './pages/reporte-derechos-arco/reporte-derechos-arco.component';
+import { ReporteKdsComponent } from './pages/reporte-kds/reporte-kds.component';
 
 const routes: Routes = [
   { path: '',  children: 
@@ -47,6 +48,7 @@ const routes: Routes = [
       { path: 'reporte-control-ventas', component: ReporteControlVentasComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_REP_CON_VENTAS']} },
       { path: 'reporte-control-crm', component: ReporteControlCrmComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_REP_CON_CRM']} },
       { path: 'reporte-control-vales', component: ReporteControlValesComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_REP_CON_VALE_ALIMENTO']} },
+      { path: 'reporte-kds', component: ReporteKdsComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_REP_CON_VALE_ALIMENTO']} },
       { path: 'reporte-control-comparativo-horas', component: ReporteControlComparativoHoraComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_REP_CON_COMPARATIVO']} },
       { path: 'lista-reporte', component: ListaTransaccionComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_REP_EJECUTAR_CONSULTA']} },
       { path: 'reporte-redimido', component: ReporteRedimidoComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['ROL_SIAN_REP_CON_REDIMIDO']} },
