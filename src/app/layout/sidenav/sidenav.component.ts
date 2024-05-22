@@ -330,6 +330,10 @@ export class SidenavComponent implements OnInit {
         control.items?.push({ label: 'Ventas', icon: 'pi pi-fw pi-file', routerLink: '/home/reporte/reporte-control-ventas', routerLinkActiveOptions: { exact: true } });
       }
 
+      if (this.authService.hasRole('ROL_SIAN_REP_CON_VENTAS')) {
+        control.items?.push({ label: 'KDS', icon: 'pi pi-fw pi-file', routerLink: '/home/reporte/reporte-kds', routerLinkActiveOptions: { exact: true } });
+      }
+
       if (this.authService.hasRole('ROL_SIAN_REP_CON_CRM')) {
         control.items?.push({ label: 'CRM', icon: 'pi pi-fw pi-file', routerLink: '/home/reporte/reporte-control-crm', routerLinkActiveOptions: { exact: true } });
       }

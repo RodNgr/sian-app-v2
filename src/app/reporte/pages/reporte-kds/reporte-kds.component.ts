@@ -9,6 +9,8 @@ import { ParamDto } from '../../dto/param-dto';
 import { ReporteService } from '../../services/reporte.service';
 import { Console } from 'console';
 import { Tienda } from '../../entity/tienda';
+import { Cell, Workbook } from 'exceljs';
+import * as fs from 'file-saver';
 
 
 @Component({
@@ -30,7 +32,7 @@ export class ReporteKdsComponent implements OnInit {
 
   public isMobile: boolean = window.innerWidth < 641
   public tiendaList: Tienda[] = [];
-  public tiendaSeleccionada: Tienda[] = [];
+  public tiendaSeleccionada: Tienda;
   private pipe = new DatePipe("en-US");
   public feInicio: Date = new Date();
   public feFin: Date = new Date();
@@ -65,7 +67,7 @@ export class ReporteKdsComponent implements OnInit {
 
     dto.feInicio = this.pipe.transform(this.feInicio, 'yyyyMMdd') || '';  
     dto.feFin = this.pipe.transform(this.feFin, 'yyyyMMdd') || '';  
-    dto.tiendaList = this.tiendaSeleccionada;
+    dto.tiendaList.push(this.tiendaSeleccionada);
 
     this.spinner.show();
       this.reporteService.getReporteKDS(dto).subscribe(
@@ -81,6 +83,42 @@ export class ReporteKdsComponent implements OnInit {
       );
     
     
+  }
+
+  public exportar(): void {
+    if (!this.KdsList) {
+      swal.fire('Advertencia!', 'No hay información para exportar', 'warning');
+      return;
+    } 
+
+    let workbook = new Workbook();
+    let worksheet = workbook.addWorksheet('KDS');
+
+    worksheet.addRow(['']);
+    worksheet.addRow(['Reporte KDS']);
+    worksheet.addRow(['Fecha y Hora: ' + this.pipe.transform(new Date(), 'dd/MM/yyyy HH:mm:ss') ]);
+    worksheet.mergeCells('A2:K2');
+    worksheet.getCell('A2').font = { size: 12, bold: true,  name: 'Arial' };
+    worksheet.getCell('A2').alignment = { vertical: 'middle', horizontal: 'center' };
+
+    worksheet.mergeCells('A3:K3');
+    worksheet.getCell('A3').font = { size: 8, bold: true,  name: 'Arial' };
+    worksheet.getCell('A3').alignment = { vertical: 'middle', horizontal: 'center' };
+    worksheet.addRow(['']);
+
+    worksheet.addRow(['Fecha de venta', 'Canal de venta', 'Inicio de pedido', 'Fin de pedido', 'Tipo de venta', '# de venta', 'Cod. Producto', 'Producto', 'Packer 1', 'Packer 2', 'Counter']);
+    worksheet.columns = [{ width: 30 }, { width: 30 }, { width: 30 }, { width: 30 }, { width: 30 }, { width: 30 }, { width: 30 }, { width: 30 }, { width: 30 }, { width: 30 }, { width: 30 }, { width: 30 } ];
+
+
+      this.KdsList.forEach(kds => {
+        worksheet.addRow([kds.fecha,kds.canal,kds.iniciopedido,kds.finpedido,kds.tipoventa,kds.numeropedido,kds.codigoproducto,kds.producto,kds.packer1,kds.packer2,kds.counter]);
+      })
+
+      workbook.xlsx.writeBuffer().then((data) => {
+        let timestamp = this.pipe.transform(new Date(), 'yyyyMMddHHmmss');
+        let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        fs.saveAs(blob, 'KDS_' + timestamp + '.xlsx');
+      });
   }
 
 }
