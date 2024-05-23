@@ -72,10 +72,10 @@
          </ng-template>
          <ng-template pTemplate="body" let-kds>
               <tr>
-                   <td > {{kds.fecha | date:'dd/MM/yyyy' }}</td>
+                   <td > {{kds.fecha | uppercase }}</td>
                    <td > {{kds.canal | uppercase }}</td>
-                   <td > {{kds.iniciopedido | date:'dd/MM/yyyy HH:mm:ss' }}</td>
-                   <td > {{kds.finpedido | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+                   <td > {{kds.iniciopedido | uppercase }}</td>
+                   <td > {{kds.finpedido | uppercase }}</td>
                    <td > {{kds.tipoventa | uppercase }}</td>
                    <td > {{kds.numeropedido | uppercase }}</td>
                    <td > {{kds.codigoproducto | uppercase }}</td>
