@@ -328,10 +328,13 @@ export class SidenavComponent implements OnInit {
 
       if (this.authService.hasRole('ROL_SIAN_REP_CON_VENTAS')) {
         control.items?.push({ label: 'Ventas', icon: 'pi pi-fw pi-file', routerLink: '/home/reporte/reporte-control-ventas', routerLinkActiveOptions: { exact: true } });
+<<<<<<< HEAD
       }
 
       if (this.authService.hasRole('ROL_SIAN_REP_CON_VENTAS')) {
         control.items?.push({ label: 'KDS', icon: 'pi pi-fw pi-file', routerLink: '/home/reporte/reporte-kds', routerLinkActiveOptions: { exact: true } });
+=======
+>>>>>>> merge/feature/mejora_V1-apertura-tienda
       }
 
       if (this.authService.hasRole('ROL_SIAN_REP_CON_CRM')) {

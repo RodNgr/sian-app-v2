@@ -77,6 +77,14 @@ export class AperturaTiendaComponent implements OnInit {
       emailTienda: new FormControl('', [Validators.required, Validators.email]),
       inmuebleRP: new FormControl(),
       localRP: new FormControl(),
+      // Proceso Automatico
+      tipoPA: new FormControl(),
+      // Urbanova
+      idStore: new FormControl(),
+      dePrefijo: new FormControl(),
+      // Jockey
+      idMall: new FormControl(),
+      nuStore: new FormControl(),
     });
     this.aperturaService.getKeys().subscribe({
       next: (data) => {
@@ -102,6 +110,7 @@ export class AperturaTiendaComponent implements OnInit {
     const date = this.pipe.transform(fechaInicioOpera, 'MM/dd/yyyy') || '';
     const payload = {
       ...this.aperturaForm.value,
+      tipoProceso: this.tipoPA.value || '',
       codeEmpresa: this.codeEmpresas[idEmpresa],
       empresaSAP: this.marcasList.find((m) => m.idEmpresa === idEmpresa)
         ?.empresaSAP,
@@ -171,54 +180,6 @@ export class AperturaTiendaComponent implements OnInit {
     }, {});
   }
 
-  get idEmpresa() {
-    return this.aperturaForm.get('idEmpresa');
-  }
-
-  get MVFormato() {
-    return this.aperturaForm.get('MVFormato');
-  }
-
-  get tiendaSap() {
-    return this.aperturaForm.get('tiendaSap');
-  }
-
-  get tiendaPixel() {
-    return this.aperturaForm.get('tiendaPixel');
-  }
-
-  get ip() {
-    return this.aperturaForm.get('ip');
-  }
-
-  get codigoBase() {
-    return this.aperturaForm.get('codigoBase');
-  }
-
-  get centroBeneficio() {
-    return this.aperturaForm.get('centroBeneficio');
-  }
-
-  get nombreTienda() {
-    return this.aperturaForm.get('nombreTienda');
-  }
-
-  get fechaInicioOpera() {
-    return this.aperturaForm.get('fechaInicioOpera');
-  }
-
-  get emailTienda() {
-    return this.aperturaForm.get('emailTienda');
-  }
-
-  get inmuebleRP() {
-    return this.aperturaForm.get('inmuebleRP');
-  }
-
-  get localRP() {
-    return this.aperturaForm.get('localRP');
-  }
-
   validateTiendaSapInput(event: KeyboardEvent) {
     const inputElement = event.target as HTMLInputElement;
     const value = inputElement.value;
@@ -274,4 +235,135 @@ export class AperturaTiendaComponent implements OnInit {
 
     // Si se desea, aquí también se podrían eliminar caracteres no válidos después de la 'T'
   }
+
+  get idEmpresa() {
+    return this.aperturaForm.get('idEmpresa');
+  }
+
+  get MVFormato() {
+    return this.aperturaForm.get('MVFormato');
+  }
+
+  get tiendaSap() {
+    return this.aperturaForm.get('tiendaSap');
+  }
+
+  get tiendaPixel() {
+    return this.aperturaForm.get('tiendaPixel');
+  }
+
+  get ip() {
+    return this.aperturaForm.get('ip');
+  }
+
+  get codigoBase() {
+    return this.aperturaForm.get('codigoBase');
+  }
+
+  get centroBeneficio() {
+    return this.aperturaForm.get('centroBeneficio');
+  }
+
+  get nombreTienda() {
+    return this.aperturaForm.get('nombreTienda');
+  }
+
+  get fechaInicioOpera() {
+    return this.aperturaForm.get('fechaInicioOpera');
+  }
+
+  get emailTienda() {
+    return this.aperturaForm.get('emailTienda');
+  }
+
+  get inmuebleRP() {
+    return this.aperturaForm.get('inmuebleRP');
+  }
+
+  get localRP() {
+    return this.aperturaForm.get('localRP');
+  }
+
+<<<<<<< HEAD
+  validateTiendaSapInput(event: KeyboardEvent) {
+    const inputElement = event.target as HTMLInputElement;
+    const value = inputElement.value;
+
+    // Permitir backspace, tab, end, home, left arrow, right arrow
+    if ([8, 9, 27, 13, 37, 39].indexOf(event.keyCode) !== -1 ||
+        // Permitir: Ctrl+A
+        (event.keyCode === 65 && (event.ctrlKey || event.metaKey)) ||
+        // Permitir: Ctrl+C
+        (event.keyCode === 67 && (event.ctrlKey || event.metaKey)) ||
+        // Permitir: Ctrl+V
+        (event.keyCode === 86 && (event.ctrlKey || event.metaKey)) ||
+        // Permitir: Ctrl+X
+        (event.keyCode === 88 && (event.ctrlKey || event.metaKey))) {
+        // let it happen, don't do anything
+        return;
+    }
+
+    // Asegurar que es un dígito o la letra 't' si es el primer carácter y está vacío
+    if (value.length === 0 && event.key === 'T' || value.length === 0 && event.key === 't' || value.length > 0 && event.key.match(/\d/)) {
+      if (value.length >= 5) {  // No permitir más de 5 caracteres
+        event.preventDefault();
+      }
+    } else {
+      // Si no, prevenir la escritura del carácter
+      event.preventDefault();
+    }
+  }
+
+  validateNumericInput(event: KeyboardEvent) {
+    // Permitir teclas de control especiales como backspace, tab, end, home, left arrow, right arrow
+    if (event.key === 'Backspace' || event.key === 'Tab' || event.key === 'End' || event.key === 'Home' || event.key === 'ArrowLeft' || event.key === 'ArrowRight' ||
+        // Permitir: Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
+        (['a', 'c', 'v', 'x'].includes(event.key) && (event.ctrlKey || event.metaKey))) {
+        return; // Deja que estas teclas funcionen normalmente
+    }
+  
+    // Validar que solo se ingresen números
+    if (!event.key.match(/^[0-9]$/)) {
+      event.preventDefault(); // Previene el ingreso de no-numéricos
+    }
+  }
+
+  onTiendaSapInput(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    let value = inputElement.value;
+
+    // Comprobar si el primer carácter es 't' y convertirlo a 'T'
+    if (value.length > 0 && value[0] === 't') {
+      value = 'T' + value.slice(1);
+      inputElement.value = value; // Asignar el valor convertido al campo de entrada
+    }
+
+    // Si se desea, aquí también se podrían eliminar caracteres no válidos después de la 'T'
+  }
+=======
+  get tipoPA() {
+    return this.aperturaForm.get('tipoPA');
+  }
+
+  get idStore() {
+    return this.aperturaForm.get('idStore');
+  }
+
+  get dePrefijo() {
+    return this.aperturaForm.get('dePrefijo');
+  }
+
+  get prefijo() {
+    return this.aperturaForm.get('prefijo');
+  }
+
+  get idMall() {
+    return this.aperturaForm.get('idMall');
+  }
+
+  get nuStore() {
+    return this.aperturaForm.get('nuStore');
+  }
+
+>>>>>>> merge/feature/mejora_V1-apertura-tienda
 }
