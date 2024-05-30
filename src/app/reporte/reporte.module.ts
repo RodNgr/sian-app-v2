@@ -40,10 +40,7 @@ import { DetalleProcesoAutomaticoComponent } from './components/detalle-procesoa
 import { AnularPedidosHubComponent } from './pages/anular-pedidos-hub/anular-pedidos-hub.component';
 import { LibroReclamacionesComponent } from './pages/reporte-libro-reclamaciones/reporte-libro-reclamaciones.component';
 import { DerechosArcoComponent } from './pages/reporte-derechos-arco/reporte-derechos-arco.component';
-<<<<<<< HEAD
 import { ReporteKdsComponent } from './pages/reporte-kds/reporte-kds.component';
-=======
->>>>>>> merge/feature/mejora_V1-apertura-tienda
 
 @NgModule({
   declarations: [
@@ -80,12 +77,8 @@ import { ReporteKdsComponent } from './pages/reporte-kds/reporte-kds.component';
     DetalleProcesoAutomaticoComponent,
     AnularPedidosHubComponent,
     LibroReclamacionesComponent,
-<<<<<<< HEAD
     DerechosArcoComponent,
     ReporteKdsComponent
-=======
-    DerechosArcoComponent
->>>>>>> merge/feature/mejora_V1-apertura-tienda
   ],
   imports: [
     CommonModule,

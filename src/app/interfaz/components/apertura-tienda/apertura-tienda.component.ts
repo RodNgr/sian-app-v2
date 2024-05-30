@@ -284,63 +284,6 @@ export class AperturaTiendaComponent implements OnInit {
     return this.aperturaForm.get('localRP');
   }
 
-<<<<<<< HEAD
-  validateTiendaSapInput(event: KeyboardEvent) {
-    const inputElement = event.target as HTMLInputElement;
-    const value = inputElement.value;
-
-    // Permitir backspace, tab, end, home, left arrow, right arrow
-    if ([8, 9, 27, 13, 37, 39].indexOf(event.keyCode) !== -1 ||
-        // Permitir: Ctrl+A
-        (event.keyCode === 65 && (event.ctrlKey || event.metaKey)) ||
-        // Permitir: Ctrl+C
-        (event.keyCode === 67 && (event.ctrlKey || event.metaKey)) ||
-        // Permitir: Ctrl+V
-        (event.keyCode === 86 && (event.ctrlKey || event.metaKey)) ||
-        // Permitir: Ctrl+X
-        (event.keyCode === 88 && (event.ctrlKey || event.metaKey))) {
-        // let it happen, don't do anything
-        return;
-    }
-
-    // Asegurar que es un dígito o la letra 't' si es el primer carácter y está vacío
-    if (value.length === 0 && event.key === 'T' || value.length === 0 && event.key === 't' || value.length > 0 && event.key.match(/\d/)) {
-      if (value.length >= 5) {  // No permitir más de 5 caracteres
-        event.preventDefault();
-      }
-    } else {
-      // Si no, prevenir la escritura del carácter
-      event.preventDefault();
-    }
-  }
-
-  validateNumericInput(event: KeyboardEvent) {
-    // Permitir teclas de control especiales como backspace, tab, end, home, left arrow, right arrow
-    if (event.key === 'Backspace' || event.key === 'Tab' || event.key === 'End' || event.key === 'Home' || event.key === 'ArrowLeft' || event.key === 'ArrowRight' ||
-        // Permitir: Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
-        (['a', 'c', 'v', 'x'].includes(event.key) && (event.ctrlKey || event.metaKey))) {
-        return; // Deja que estas teclas funcionen normalmente
-    }
-  
-    // Validar que solo se ingresen números
-    if (!event.key.match(/^[0-9]$/)) {
-      event.preventDefault(); // Previene el ingreso de no-numéricos
-    }
-  }
-
-  onTiendaSapInput(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    let value = inputElement.value;
-
-    // Comprobar si el primer carácter es 't' y convertirlo a 'T'
-    if (value.length > 0 && value[0] === 't') {
-      value = 'T' + value.slice(1);
-      inputElement.value = value; // Asignar el valor convertido al campo de entrada
-    }
-
-    // Si se desea, aquí también se podrían eliminar caracteres no válidos después de la 'T'
-  }
-=======
   get tipoPA() {
     return this.aperturaForm.get('tipoPA');
   }
@@ -365,5 +308,4 @@ export class AperturaTiendaComponent implements OnInit {
     return this.aperturaForm.get('nuStore');
   }
 
->>>>>>> merge/feature/mejora_V1-apertura-tienda
 }

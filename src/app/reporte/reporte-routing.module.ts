@@ -26,10 +26,7 @@ import { AnularPedidosHubComponent } from './pages/anular-pedidos-hub/anular-ped
 
 import { LibroReclamacionesComponent } from './pages/reporte-libro-reclamaciones/reporte-libro-reclamaciones.component';
 import { DerechosArcoComponent } from './pages/reporte-derechos-arco/reporte-derechos-arco.component';
-<<<<<<< HEAD
 import { ReporteKdsComponent } from './pages/reporte-kds/reporte-kds.component';
-=======
->>>>>>> merge/feature/mejora_V1-apertura-tienda
 
 const routes: Routes = [
   { path: '',  children: 
