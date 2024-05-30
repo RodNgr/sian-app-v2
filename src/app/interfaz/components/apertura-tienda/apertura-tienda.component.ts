@@ -67,8 +67,11 @@ export class AperturaTiendaComponent implements OnInit {
       ip: new FormControl('', [
         Validators.pattern(new RegExp(/\..*\..*\..*/i)),
       ]),
-      codigoBase: new FormControl('', []),
-      centroBeneficio: new FormControl('', [Validators.maxLength(10)]),
+      codigoBase: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(5)
+      ]),
+      centroBeneficio: new FormControl('', [Validators.maxLength(9)]),
       nombreTienda: new FormControl('', [
         Validators.required,
         Validators.maxLength(50),
@@ -117,10 +120,16 @@ export class AperturaTiendaComponent implements OnInit {
       fechaInicioOpera: date,
       tiendaSapPadre: this.tiendaPadreSeleccionada?.clienteSAP,
       idEmpresa,
+      mvFormato: this.aperturaForm.get('MVFormato').value,
     };
 
     if (!CrearApertura.validate(payload)) {
       swal.fire('Informacion', 'Debe completar los datos', 'warning');
+      return;
+    }
+    if (!CrearApertura.validatePA(payload)) {
+      swal.fire('Informacion', 'Debe completar los datos de jockey o urbanova', 'warning');
+      return;
     }
     this.aperturaService.create(CrearApertura.format(payload)).subscribe({
       next: (data) => {
@@ -130,6 +139,8 @@ export class AperturaTiendaComponent implements OnInit {
           'success'
         );
         this.aperturaForm.reset();
+        this.aperturaForm.get('idEmpresa')
+          .setValue(this.empresaService.getEmpresaSeleccionada().idEmpresa);
       },
       error: () => {
         swal.fire('Error', 'Error al crear apertura de tienda.', 'error');

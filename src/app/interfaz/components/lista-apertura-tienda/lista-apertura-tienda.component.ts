@@ -77,8 +77,8 @@ export class ListaAperturaTiendaComponent implements OnInit {
   public edit() {    
     this.ref = this.dialogService.open(EditarAperturaTiendaComponent, {
       header: this.tiendaSeleccionada.nombreTienda,
-      width: '25%',
-      contentStyle: { 'max-height': '360px', overflow: 'auto' },
+      width: '75%',
+      contentStyle: { 'max-height': '750px', overflow: 'auto' },
       data: {
         tiendaSAP: this.tiendaSeleccionada.tiendaSAP,
         nombreTienda: this.tiendaSeleccionada.nombreTienda

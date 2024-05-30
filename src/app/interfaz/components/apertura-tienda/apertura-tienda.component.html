@@ -100,6 +100,7 @@
             formControlName="tiendaPixel"
             required
             name="tiendaPixel"
+            maxlength="5"
             [placeholder]="this.keys['tiendaPixel']?.label_placeholder || ''"
             (keydown)="validateNumericInput($event)"
           />
@@ -158,7 +159,7 @@
             *ngIf="
               codigoBase.invalid && (codigoBase.dirty || codigoBase.touched)
             "
-            >Campo Obligatorio</small
+            >Campo Obligatorio y máximo 5 caracteres</small
           >
         </div>
         <div class="p-field p-col-3 p-lg-3 p-md-3 p-sm-12">
@@ -171,7 +172,7 @@
             aria-describedby="centroBene-help"
             formControlName="centroBeneficio"
             required
-            maxlength="10"
+            maxlength="9"
             name="centroBene"
             [placeholder]="this.keys['centroBeneficio']?.label_placeholder || ''"
             (keydown)="validateNumericInput($event)"
@@ -311,13 +312,14 @@
           >
         </div>
 
+        <div class="p-field p-grid p-col-12 p-lg-12 p-md-12 p-sm-12">
         <!-- Proceso Automatico -->
-        <div class="p-field-radiobutton">
+        <div class="p-field-radiobutton p-col-6 p-lg-6 p-md-6 p-sm-12">
           <p-radioButton name="tipoPA" value="1" formControlName="tipoPA" inputId="count-times1">
           </p-radioButton>
           <label for="only">Jockey Plaza</label>
         </div>
-        <div class="p-field-radiobutton ">
+        <div class="p-field-radiobutton p-col-6 p-lg-6 p-md-6 p-sm-12">
           <p-radioButton name="tipoPA" value="2" formControlName="tipoPA" inputId="count-times2">
           </p-radioButton>
           <label for="more">Urbanova</label>
@@ -348,7 +350,7 @@
               aria-describedby="idMall-help"
               formControlName="idMall"
               name="idMall"
-              type="text"
+              type="number"
               placeholder="Ejm: 194"
             />      
           </div>
@@ -376,7 +378,7 @@
               aria-describedby="idStore-help"
               formControlName="idStore"
               name="idStore"
-              type="text"
+              type="number"
               placeholder="Ejm: 194"
             />       
           </div>
@@ -406,11 +408,12 @@
               aria-describedby="idStore-help"
               formControlName="idStore"
               name="idStore"
-              type="text"
+              type="number"
               placeholder="Ejm: 194"
             />
           </div>
         </ng-container>
+        </div>
       </form>
 
       <div class="p-d-flex p-jc-end p-mt-3">

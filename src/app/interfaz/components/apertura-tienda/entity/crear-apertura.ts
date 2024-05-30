@@ -43,6 +43,17 @@ export class CrearApertura {
     return true;
   }
 
+  static validatePA(body: CrearApertura) {
+    if (+body.tipoPA === 1 && (!body.dePrefijo || !body.idMall || !body.idStore || !body.nuStore)) {
+        return false;
+    }
+    if (+body.tipoPA === 2 && (!body.dePrefijo || !body.idStore )) {
+        return false;
+    }
+
+    return true;
+  }
+
   static format(body): CrearApertura {
     const [first, second, third] = body.ip.split('.');
     const newIp = `${first}.${second}.${third}`;
