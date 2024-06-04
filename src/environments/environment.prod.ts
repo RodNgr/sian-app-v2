@@ -11,7 +11,7 @@ export const environment = {
   urlInterfazBB: 'http://VSRVPRDAPP07.ngr.com.pe:9841',
   urlInterfazDB: 'http://VSRVPRDAPP07.ngr.com.pe:9843',
   urlInterfazPP: 'http://VSRVPRDAPP07.ngr.com.pe:9844',
-  urlInterfazCW: 'http://VSRVPRDAPP07.ngr.com.pe:9845',
+  urlInterfazCW: 'http://VSRVPRDAPP07.ngr.com.pe:9846',
   urlInterfazPJ: 'http://VSRVPRDAPP07.ngr.com.pe:9847',
   urlInterfazDD: 'http://VSRVPRDAPP07.ngr.com.pe:9848',
   urlReporte: 'http://VSRVPRDAPP07.ngr.com.pe:9811',
