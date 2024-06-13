@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  path: '/SIAN',
   //PRODUCCION
   urlSecurity: 'http://VSRVPRDAPP07.ngr.com.pe:9999',
   urlCupones: 'http://VSRVPRDAPP07.ngr.com.pe:9837',

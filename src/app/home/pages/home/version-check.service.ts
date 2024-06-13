@@ -21,7 +21,7 @@ export class VersionCheckService {
   }
 
   public loadCurrentVersion() {
-    this.http.get<{ version: string }>('/assets/version.json')
+    this.http.get<{ version: string }>(environment.path + '/assets/version.json')
       .subscribe(
         response => {
           this.currentVersion = response.version;
@@ -55,8 +55,11 @@ export class VersionCheckService {
           //  this.currentVersion = response.version;
           //  this.promptUser();
           //}
+          console.log("Versión Servidor: " + response.version);
+          console.log("Versión Cliente: " + this.currentVersion);
 
           if (isVersionGreater(this.currentVersion, response.version)) {
+            
             this.promptUser();
           }
 
@@ -68,10 +71,14 @@ export class VersionCheckService {
   }
 
   private promptUser() {
+    console.log("Borra cache");
     // Mostrar un mensaje al usuario para recargar la página
-    if (confirm('Hay una nueva versión disponible. ¿Deseas recargar la página para obtener la última versión?')) {
+    //if (confirm('Hay una nueva versión disponible. ¿Deseas recargar la página para obtener la última versión?')) {
       window.location.reload();
-    }
+      //window.location.reload(true); 
+      //window.location.href = window.location.href + '?nocache=' + new Date().getTime();
+      window.location.href = window.location.href.split('?')[0] + '?nocache=' + new Date().getTime();
+    //}
   }
 
 }

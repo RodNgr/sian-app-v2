@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-
+  path: '/SIAN',
   // LOCAL
   // urlSecurity: 'http://localhost:9999',
   // urlCupones: 'http://localhost:9837',
@@ -18,7 +18,7 @@ export const environment = {
   urlSecurityShared: 'http://localhost:4201', 
   urlInterfaz: 'http://localhost:9842',*/
   // urlCupones: 'http://localhost:9837',
-  urlInterfazProducto: 'http://localhost:9838',
+  //urlInterfazProducto: 'http://localhost:9838',
   // urlCuadratura: 'http://localhost:9839',
   // urlEjecutor: 'http://localhost:9845',
   // urlEjecutorSybase: 'http://localhost:9753',
@@ -46,9 +46,9 @@ export const environment = {
   // urlAmauta: 'https://api.dev.amauta.api-ngr.com',
 
   // DESARROLLO
-  // urlSecurity: 'http://vsrvdevapp07.ngr.com.pe:9999',
+  urlSecurity: 'http://vsrvdevapp07.ngr.com.pe:9999',
   urlCupones: 'http://VSRVDEVAPP07.ngr.com.pe:9837',
-  // urlInterfazProducto: 'http://VSRVDEVAPP07.ngr.com.pe:9838',
+  urlInterfazProducto: 'http://VSRVDEVAPP07.ngr.com.pe:9838',
   urlCuadratura: 'http://VSRVDEVAPP07.ngr.com.pe:9839',
   urlEjecutor: 'http://VSRVDEVAPP07.ngr.com.pe:9845',
   urlEjecutorSybase: 'http://VSRVDEVAPP07.ngr.com.pe:9753',
@@ -77,7 +77,7 @@ export const environment = {
   urlAmauta: 'https://api.dev.amauta.api-ngr.com',
 
   // PRODUCCION
-  urlSecurity: 'http://VSRVPRDAPP07.ngr.com.pe:9999',
+  // urlSecurity: 'http://VSRVPRDAPP07.ngr.com.pe:9999',
   // urlCupones: 'http://VSRVPRDAPP07.ngr.com.pe:9837',
   // urlInterfazProducto: 'http://VSRVPRDAPP07.ngr.com.pe:9838',
   // urlCuadratura: 'http://VSRVPRDAPP07.ngr.com.pe:9839',
