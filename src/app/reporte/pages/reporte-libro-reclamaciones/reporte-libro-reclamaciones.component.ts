@@ -14,12 +14,12 @@ import { EmpresaService } from '../../../shared/services/empresa.service';
   styleUrls: ['./reporte-libro-reclamaciones.component.css']
 })
 export class LibroReclamacionesComponent implements OnInit {
-  public stbuscar:String='';
+  public stbuscar: String = '';
   public objAll: LibroReclamaciones[] = [];
   public obj: LibroReclamaciones[] = [];
   public reporteSelected!: LibroReclamaciones;
   public rangeDates: Date[] = [];
-  bodetalle:boolean=false;
+  bodetalle: boolean = false;
   public cantidadMap = {
     '=0': 'No existen registros',
     '=1': 'En total hay 1 registro',
@@ -50,11 +50,12 @@ export class LibroReclamacionesComponent implements OnInit {
       // Convertir los valores de los campos a minúsculas para que la búsqueda sea insensible a mayúsculas y minúsculas
       const codigoMinusculas = item.codigo.toLowerCase();
       const nombreMinusculas = item.nombre.toLowerCase();
+      const apellidoMinusculas = item.apellido.toLowerCase();
       const dniMinusculas = item.nrodoc.toLowerCase();
-  
+
       // Concatenar los valores de los campos en una sola cadena para realizar la búsqueda
-      const camposConcatenados = `${codigoMinusculas} ${nombreMinusculas} ${dniMinusculas}`;
-  
+      const camposConcatenados = `${codigoMinusculas} ${nombreMinusculas} ${apellidoMinusculas} ${dniMinusculas}`;
+
       // Verificar si la cadena concatenada incluye el filtro
       return camposConcatenados.includes(this.stbuscar.toLowerCase());
     });
@@ -68,7 +69,7 @@ export class LibroReclamacionesComponent implements OnInit {
     this.libroReclamacionesService.get(this.empresaService.getEmpresaSeleccionada().idEmpresa, desde, hasta).subscribe(
       data => {
         this.objAll = data.respuesta;
-        this.obj =this.objAll;
+        this.obj = this.objAll;
         this.filterList();
         this.spinner.hide();
       },
@@ -80,13 +81,17 @@ export class LibroReclamacionesComponent implements OnInit {
   }
 
   public detalleReporte(): void {
-    if(this.reporteSelected !== undefined){
-      this.bodetalle=true;
+    if (this.reporteSelected !== undefined) {
+      this.bodetalle = true;
     }
   }
 
   public Regresar(): void {
-    this.bodetalle=false;
+    this.bodetalle = false;
+  }
+
+  isNombreArchivoValido(): boolean {
+    return !!(this.reporteSelected?.nombrearchivo && this.reporteSelected.nombrearchivo.trim().length > 0);
   }
 
   downloadFile() {
@@ -111,22 +116,36 @@ export class LibroReclamacionesComponent implements OnInit {
       "Marca",
       "Codigo",
       "Nombre",
+      "Apellido",
       "Departamento",
+      "Provincia",
+      "Distrito",
       "Dirección",
+      "EsMenor",
       "Tipo Doc.",
       "N° Doc.",
       "Teléfono",
       "Email",
-      "Datos Padres",
+      "Padres o Representante",
+      "Padres o Representante Telef",
+      "Padres o Representante Direccion",
+      "Padres o Representante Correo",
       "Bien del Contrato",
       "Monto Reclamado",
-      "Motivo Reclamado",
+      "Descripción",
+      "Tienda Departamento",
+      "Código Tienda",
       "Tienda",
+      "Canal",
       "Tipo",
       "Tipo de Alcance",
+      "Motivo",
+      "SubMotivo",
+      "Descripción",
       "Numero de Pedido",
+      "Fecha de Pedido",
       "Nombre de Archivo",
-      "Observaciones y Acciones",
+      //"Observaciones y Acciones",
       "Fecha"
     ]);
     /* worksheet.columns = [{ width: 15 }, { width: 40 }, { width: 15 }, { width: 15 }, { width: 40 }, { width: 15 }, { width: 30 }, { width: 15 }, { width: 15 }]; */
@@ -135,22 +154,36 @@ export class LibroReclamacionesComponent implements OnInit {
       { width: 15 },   // ID Marca
       { width: 15 },   // Codigo
       { width: 40 },   // Nombre
+      { width: 40 },   // Apellido
       { width: 40 },   // Departamento
+      { width: 40 },   // Provincia
+      { width: 40 },   // Distrito
       { width: 40 },   // Dirección
+      { width: 20 },   // EsMenor
       { width: 20 },   // Tipo Docum
       { width: 20 },   // DNI
       { width: 20 },   // Teléfono
       { width: 40 },   // Email
-      { width: 40 },   // Datos Padres
+      { width: 40 },   // Padres o Representante
+      { width: 40 },   // Padres o Representante Telef
+      { width: 40 },   // Padres o Representante Direccion
+      { width: 40 },   // Padres o Representante Correo
       { width: 20 },   // Bien del Contrato
       { width: 20 },   // Monto Reclamado
-      { width: 40 },   // Motivo Reclamado
+      { width: 40 },   // Descripción
+      { width: 40 },   // Tienda Departamento
+      { width: 40 },   // Código Tienda
       { width: 40 },   // Tienda
+      { width: 40 },   // Canal
       { width: 20 },   // Tipo
-      { width: 20 },   // Tipo de Alcance
+      { width: 40 },   // Tipo de Alcance
+      { width: 40 },   // Motivo
+      { width: 40 },   // Submotivo
+      { width: 40 },   // Descripción
       { width: 20 },   // Numero de Pedido
+      { width: 20 },   // Fecha de Pedido
       { width: 40 },   // Nombre de Archivo
-      { width: 40 },   // Observaciones y Acciones
+      //{ width: 40 },   // Observaciones y Acciones
       { width: 15 },   // Fecha
     ];
     worksheet.getRow(1).eachCell(function (cell: Cell, _colNumber: number) {
@@ -163,33 +196,48 @@ export class LibroReclamacionesComponent implements OnInit {
     // Contenido del archivo
     let contador: number = 2;
     this.obj.forEach(obj => {
+      let link = obj.nombrearchivo ? { text: 'Descargar', hyperlink: obj.nombrearchivo } : '';
       worksheet.addRow([
-      obj.marca,
-      obj.codigo,
-      obj.nombre,
-      obj.departamento,
-      obj.direccion,
-      obj.tipodocumento,
-      obj.nrodoc,
-      obj.telefono,
-      obj.email,
-      obj.datospadres,
-      obj.biendelcontrato,
-      obj.montoreclamado,
-      obj.motivoreclamado,
-      obj.tienda,
-      obj.tipo,
-      obj.tipodealle,
-      obj.numeropedido,
-      { text: 'Descargar', hyperlink: obj.nombrearchivo },
-      obj.observacionesyacciones,
-      this.pipe.transform(obj.fecha, "dd/MM/yyyy HH:mm:ss") || ''
-    ]);
+        obj.marca,
+        obj.codigo,
+        obj.nombre,
+        obj.apellido,
+        obj.departamento,
+        obj.provincia,
+        obj.distrito,
+        obj.direccion,
+        obj.esmenordeedad,
+        obj.tipodocumento,
+        obj.nrodoc,
+        obj.telefono,
+        obj.email,
+        obj.datospadres,
+        obj.datospadrestelefono,
+        obj.datospadresdireccion,
+        obj.datospadrescorreo,
+        obj.biendelcontrato,
+        obj.montoreclamado,
+        obj.motivoreclamado,
+        obj.tiendadepartamento,
+        obj.codigotienda,
+        obj.tienda,
+        obj.canaldesc,
+        obj.tipo,
+        obj.tipodealle,
+        obj.motivo,
+        obj.submotivo,
+        obj.tipodealleconcreto,
+        obj.numeropedido,
+        obj.fechapedido,
+        link,
+        //obj.observacionesyacciones,
+        this.pipe.transform(obj.fecha, "dd/MM/yyyy HH:mm:ss") || ''
+      ]);
 
-    worksheet.getRow(contador).eachCell(function (cell: Cell, colNumber: number) {
-      cell.border = { top: { style: 'thin', color: { argb: '000000' } }, left: { style: 'thin', color: { argb: '000000' } }, bottom: { style: 'thin', color: { argb: '000000' } }, right: { style: 'thin', color: { argb: '000000' } } };
-      cell.font = { size: 8, name: 'Arial' };
-    });
+      worksheet.getRow(contador).eachCell(function (cell: Cell, colNumber: number) {
+        cell.border = { top: { style: 'thin', color: { argb: '000000' } }, left: { style: 'thin', color: { argb: '000000' } }, bottom: { style: 'thin', color: { argb: '000000' } }, right: { style: 'thin', color: { argb: '000000' } } };
+        cell.font = { size: 8, name: 'Arial' };
+      });
 
       contador++;
     })
@@ -218,22 +266,36 @@ export class LibroReclamacionesComponent implements OnInit {
       "Marca",
       "Codigo",
       "Nombre",
+      "Apellido",
       "Departamento",
+      "Provincia",
+      "Distrito",
       "Dirección",
+      "EsMenor",
       "Tipo Doc.",
       "N° Doc.",
       "Teléfono",
       "Email",
-      "Datos Padres",
+      "Padres o Representante",
+      "Padres o Representante Telef",
+      "Padres o Representante Direccion",
+      "Padres o Representante Correo",
       "Bien del Contrato",
       "Monto Reclamado",
-      "Motivo Reclamado",
+      "Descripción",
+      "Tienda Departamento",
+      "Código Tienda",
       "Tienda",
+      "Canal",
       "Tipo",
       "Tipo de Alcance",
+      "Motivo",
+      "SubMotivo",
+      "Descripción",
       "Numero de Pedido",
+      "Fecha de Pedido",
       "Nombre de Archivo",
-      "Observaciones y Acciones",
+      //"Observaciones y Acciones",
       "Fecha"
     ]);
     worksheet.columns = [
@@ -241,22 +303,36 @@ export class LibroReclamacionesComponent implements OnInit {
       { width: 15 },   // ID Marca
       { width: 15 },   // Codigo
       { width: 40 },   // Nombre
+      { width: 40 },   // Apellido
       { width: 40 },   // Departamento
+      { width: 40 },   // Provincia
+      { width: 40 },   // Distrito
       { width: 40 },   // Dirección
+      { width: 20 },   // EsMenor
       { width: 20 },   // Tipo Docum
-      { width: 20 },   // nrdoc
+      { width: 20 },   // DNI
       { width: 20 },   // Teléfono
       { width: 40 },   // Email
-      { width: 40 },   // Datos Padres
+      { width: 40 },   // Padres o Representante
+      { width: 40 },   // Padres o Representante Telef
+      { width: 40 },   // Padres o Representante Direccion
+      { width: 40 },   // Padres o Representante Correo
       { width: 20 },   // Bien del Contrato
       { width: 20 },   // Monto Reclamado
-      { width: 40 },   // Motivo Reclamado
+      { width: 40 },   // Descripción
+      { width: 40 },   // Tienda Departamento
+      { width: 40 },   // Código Tienda
       { width: 40 },   // Tienda
+      { width: 40 },   // Canal
       { width: 20 },   // Tipo
-      { width: 20 },   // Tipo de Alcance
+      { width: 40 },   // Tipo de Alcance
+      { width: 40 },   // Motivo
+      { width: 40 },   // SubMotivo
+      { width: 40 },   // Descripción
       { width: 20 },   // Numero de Pedido
+      { width: 20 },   // Fecha de Pedido
       { width: 40 },   // Nombre de Archivo
-      { width: 40 },   // Observaciones y Acciones
+      //{ width: 40 },   // Observaciones y Acciones
       { width: 15 },   // Fecha
     ];
 
@@ -266,49 +342,42 @@ export class LibroReclamacionesComponent implements OnInit {
       cell.alignment = { vertical: 'middle', horizontal: 'center' };
       cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'CCCCCC' } };
     });
-
-    // Contenido del archivo
-    /*  let contador: number = 2;
-     this.obj.forEach(obj => {
-       worksheet.addRow([obj.codigo.toUpperCase(),
-       obj.nombre.toUpperCase(),
-       obj.dni,
-       this.pipe.transform(obj.fecha, "dd/MM/yyyy") || '',
-       obj.tienda,
-       obj.telefono,
-       obj.email.toUpperCase(),
-       obj.tipo,
-       obj.biendelcontrato]);
- 
-       worksheet.getRow(contador).eachCell(function (cell: Cell, colNumber: number) {
-         cell.border = { top: { style: 'thin', color: { argb: '000000' } }, left: { style: 'thin', color: { argb: '000000' } }, bottom: { style: 'thin', color: { argb: '000000' } }, right: { style: 'thin', color: { argb: '000000' } } };
-         cell.font = { size: 8, name: 'Arial' };
-       });
- 
-       contador++;
-     })
-  */
+    let link = this.reporteSelected.nombrearchivo ? { text: 'Descargar', hyperlink: this.reporteSelected.nombrearchivo } : '';
     worksheet.addRow([
       //this.reporteSelected.id,
       this.reporteSelected.marca,
       this.reporteSelected.codigo,
       this.reporteSelected.nombre,
+      this.reporteSelected.apellido,
       this.reporteSelected.departamento,
+      this.reporteSelected.provincia,
+      this.reporteSelected.distrito,
       this.reporteSelected.direccion,
+      this.reporteSelected.esmenordeedad,
       this.reporteSelected.tipodocumento,
       this.reporteSelected.nrodoc,
       this.reporteSelected.telefono,
       this.reporteSelected.email,
       this.reporteSelected.datospadres,
+      this.reporteSelected.datospadrestelefono,
+      this.reporteSelected.datospadresdireccion,
+      this.reporteSelected.datospadrescorreo,
       this.reporteSelected.biendelcontrato,
       this.reporteSelected.montoreclamado,
       this.reporteSelected.motivoreclamado,
+      this.reporteSelected.tiendadepartamento,
+      this.reporteSelected.codigotienda,
       this.reporteSelected.tienda,
+      this.reporteSelected.canaldesc,
       this.reporteSelected.tipo,
       this.reporteSelected.tipodealle,
+      this.reporteSelected.motivo,
+      this.reporteSelected.submotivo,
+      this.reporteSelected.tipodealleconcreto,
       this.reporteSelected.numeropedido,
-      { text: 'Descargar', hyperlink: this.reporteSelected.nombrearchivo },
-      this.reporteSelected.observacionesyacciones,
+      this.reporteSelected.fechapedido,
+      link,
+      //this.reporteSelected.observacionesyacciones,
       this.pipe.transform(this.reporteSelected.fecha, "dd/MM/yyyy HH:mm:ss") || ''
     ]);
 
