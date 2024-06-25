@@ -145,7 +145,7 @@ export class ReprocesarInterfaceComponent implements OnInit {
       
         this.mensajeList = [];   
         
-        this.interfaztiendaService.getResultadosProcesoInterfazNew(dto, marca).subscribe(
+        this.interfaztiendaService.getResultadosProcesoInterfaz(dto).subscribe(
           resultado => {
             resultado.forEach(mensaje => {
               mensaje.fecDate = new Date(parseInt(mensaje.fecha.substring(0, 4)), parseInt(mensaje.fecha.substring(4, 6)) - 1, parseInt(mensaje.fecha.substring(6, 8)));
