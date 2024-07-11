@@ -51,12 +51,12 @@ export class InterfazTiendaService {
 
   insertarLogStatusNew(logInterfaz: InterfazLog, marca: number): Observable<any>{
     let servicio = this.urlEndPoint;
-    if (marca == 2) servicio = this.urlEndPointBB;
+   /*  if (marca == 2) servicio = this.urlEndPointBB;
     else if (marca == 3) servicio = this.urlEndPointDB;
     else if (marca == 4) servicio = this.urlEndPointPP;
     else if (marca == 5) servicio = this.urlEndPointCW;
     else if (marca == 7) servicio = this.urlEndPointPJ;
-    else if (marca == 8) servicio = this.urlEndPointDD;
+    else if (marca == 8) servicio = this.urlEndPointDD; */
     return this.http.post<any>(`${servicio}/api/interface/insertarLogInterfaces`, logInterfaz);
   }
 
